@@ -1,0 +1,71 @@
+#banner { width: 1000px; height: 400px; background: url(../images/banner.png) no-repeat center top; position: relative;}
+#banner > h2, #banner > h3 { margin: 0; }
+#banner a.ir { position: absolute; width: 288px; height: 52px; background: url(../images/btn-create_website.png) no-repeat; right: 28px; bottom: 30px; }
+
+#search { background: #383838 url(../images/bg-search.png) repeat-x;}
+#search h3 { width: 185px; height: 30px; background: url(../images/hd-search_map.png) no-repeat; display: block; float: left; margin: 9px 28px 0; }
+#search p:nth-child(2) { float: right; white-space: nowrap; padding-right: 25px; margin: 15px 0 ; }
+#search p:nth-child(2) img { margin-right: 5px; position: relative;  }
+#search p:nth-child(2) input[type=text] { width: 175px; height: 23px; padding: 2px 5px 0; background: url(../images/bg-input2.png) no-repeat; border: none;  }
+#search p:nth-child(2) input[value=SEARCH] { width: 63px; height: 25px; background: url(../images/btn-search.png) no-repeat; display: inline-block; position: relative; top: -2px; }
+#search p:nth-child(2) input[value='Advance Search'] { width: 98px; height: 25px; background: url(../images/btn-advance_search.png) no-repeat; display: inline-block; position: relative; top: -2px; }
+#list { background: #e5e5e5; padding: 5px 0px 0 25px; clear: both; }
+#list > li { white-space: nowrap;   }
+#list li > a  { padding-left: 29px; background: url(../images/icon.png) no-repeat; height: 30px; line-height: 25px; float: none; color: #000; text-decoration: none; width: 135px; }
+#list li > a:hover { text-decoration: underline; }
+#list li.wide a { width: 250px; }
+#list li.narrow a { width: 100px; }
+#list li:nth-child(1) > a { background-position: -450px 0;  }
+#list li:nth-child(2) > a { background-position: -420px -30px;  }
+#list li:nth-child(3) > a { background-position: -390px -60px;  }
+#list li:nth-child(4) > a { background-position: -360px -90px;  }
+#list li:nth-child(5) > a { background-position: -330px -120px;  }
+#list li:nth-child(6) > a { background-position: -300px -150px;  }
+#list li:nth-child(7) > a { background-position: -270px -180px;  }
+#list li:nth-child(8) > a { background-position: -240px -210px;  }
+#list li:nth-child(9) > a { background-position: -210px -240px;  }
+#list li:nth-child(10) > a { background-position: -180px -270px;  }
+#list li:nth-child(11) > a { background-position: -150px -300px;  }
+#list li:nth-child(12) > a { background-position: -120px -330px;  }
+#list li:nth-child(13) > a { background-position: -90px -360px;  }
+#list li:nth-child(14) > a { background-position: -60px -390px;  }
+#list li:nth-child(15) > a { background-position: -30px -420px;  }
+#list li:nth-child(16) > a { background-position: 0 -450px;  }
+
+article > section p { padding: 5px 10px; margin: 0; line-height: 18px; height: 61px;}
+article > section p > a  { color: #444; text-decoration: none;display: block; }
+article > section p > a:hover  { color: #444; text-decoration: underline; }
+article > section { color: #0070a4; background-color: #f2f2f2; display: block; float: left; }
+
+article { margin: 10px 0 0; }
+article#line1 > section:nth-child(1), article#line1 > section:nth-child(3) { width: 250px; }
+article#line1 > section:nth-child(2) { width: 472px;margin: 0 14px; }
+
+article#line2 > section:nth-child(1) { width: 336px; background: transparent;}
+article#line2 > section:nth-child(1) iframe { height: 248px!Important; width: 336px!Important; }
+article#line2 > section:nth-child(1) div { background: #f2f2f2; }
+article#line2 > section:nth-child(1) div:nth-child(1) { margin-bottom: 10px; }
+article#line2 > section:nth-child(2) { width: 300px; margin: 0 14px; }
+article#line2 > section:nth-child(3) { width: 336px; }
+
+article#line3  { padding: 10px 10px 0; background: url(../images/bg-wood.jpg) no-repeat; }
+article#line3 > section { background: transparent; width: 480px; color: #fff; }
+article#line3 > section:nth-child(2) { margin-left: 10px; }
+article#line3 > section:nth-child(2) iframe { width: 480px!important; height: 263px!important; }
+article#line3 > section p a { color: #fff; }
+
+article#line4 > section { width: 240px; margin-right: 12px; }
+article#line4 > section:nth-child(4) { margin: 0; }
+
+.ie7 #list { min-height: 90px; }
+.ie7 #search p:nth-child(2) input[type=text] { position: relative; top: 1px; height: 25px; padding-top: 5px;  }
+.ie8 #search p:nth-child(2) input[type=text] { position: relative; top: -2px; height: 25px; padding-top: 4px;  }
+.safari #search p:nth-child(2) input[type=text] { position: relative; top: -2px;   }
+.searchclass2{
+    background: url("../images/btn-advance_search.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 25px;
+    position: relative;
+    top: -2px;
+    width: 98px;
+}

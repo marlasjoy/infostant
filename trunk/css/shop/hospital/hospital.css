@@ -1,0 +1,21 @@
+/* Hospital Page */
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #b6be59 }
+header #color { background-color: #b6be59; } 
+header #color h2 { background-image: url(../../../images/shop/hospital/hd-hospital.png);  }
+#main h3 { color: #b6be59;  }
+#main h3 cufon { top: -7px; }
+#main #five { margin-bottom: 10px; }
+#main #five h3 { margin-bottom: 0; height: 35px; }
+a.black1 { margin-top: 10px; }
+section#three a.black1 { margin-top: 28px; }
+section#three #social ul { margin-bottom: 50px; }
+.d-220x160:nth-child(4n+1) { margin-right: 0; }
+#one { padding: 0 0 20px; position: relative; }
+.d-220x90 { position: absolute; top: 5px; left: 50%; margin-left: -120px; }
+.d-820x50 { margin-bottom: 10px; }
+article.quote { background: url(../../../images/shop/hospital/bg-quote-left.png) no-repeat left top; }
+article.quote .inner { background: url(../../../images/shop/hospital/bg-quote-right.png) no-repeat right bottom;  }
+.d-940x440 { margin-top: 5px; }
+a.button.black1, a.button.black2 { background-image: url(../../../images/shop/bg-button-black2.png); }
+#three td { padding-right: 18px; }
+#three td:nth-child(4n) { padding-right: 0; }

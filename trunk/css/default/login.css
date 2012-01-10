@@ -1,0 +1,81 @@
+#main { background: url(../images/bg-aside.png) repeat-y;  }
+#main > aside { width: 220px; padding: 10px; display: block; float: left; }
+#main > aside h3 { background: url(../images/bg-side-h3.png) no-repeat; width: 220px; height: 29px; line-height: 29px; text-indent: 10px; font-size: 14px; margin-bottom: 10px; }
+#main > aside li { background: url(../images/bg-dot.png) repeat-x bottom left;padding-bottom: 1px;  }
+#main > aside li a { color: #000; font-size: 14px; height: 40px; line-height: 40px; padding-left: 40px; background: url(../images/icon-side.png) no-repeat; margin-left: 3px;  }
+#main > aside li:nth-child(1) a { background-position: -250px 4px; }
+#main > aside li:nth-child(2) a { background-position: -200px -45px; }
+#main > aside li:nth-child(3) a { background-position: -150px -95px; }
+#main > aside li:nth-child(4) a { background-position: -100px -146px; }
+#main > aside li:nth-child(5) a { background-position: -50px -197px; }
+#main > aside li:nth-child(6) a { background-position: 0 -245px; }
+
+#main > article { display: block; float: left; width: 735px; margin-left: 15px; padding: 15px 0 0;}
+#main > article > section { margin-top: 30px; }
+#main > article > h2 a, #main > article > h2  { color: #414141; display: inline; font-size: 18px; }
+a.edit_profile { padding: 0 0 0 35px; background: url(../images/icon-edit_profile.png) no-repeat; height: 30px; line-height: 24px; color: #545456; display: inline-block; font-size: 11px; margin-left: 10px;}
+#main > article > h3 { font-size: 14px; margin-bottom: 5px; }
+#recent { border-bottom: solid 1px #dcdcdc; padding-bottom: 10px; margin: 0; }
+#recent a { margin-right: 23px;  }
+#recent a:last-child { margin-right: 0px;  }
+#main > article h4 { font-size: 14px; border-bottom: solid 1px #dcdcdc; line-height: 250%; margin-bottom: 25px; margin-top:0;}
+
+
+#calendar { float: left; }
+#calendar, #calendar table { width: 435px; background: #fff; border: solid 1px #e4e4e4; position: relative; }
+#calendar table  { border-spacing: 20px 12px; border-collapse: separate; left: -3px; top: -3px;  }
+#calendar table td, #calendar table tbody th { background-color: #edeeee; width: 38px; height: 28px; border: solid 1px #dadbdb; text-align: center; vertical-align: middle; color: #585858; }
+#calendar table td.other { background: #fff; border: solid 1px #ebebeb; color: #999898; }
+#calendar table td.event { background: #3ac6fc; border: solid 1px #35b6e8; color: #fff; cursor: pointer; }
+#calendar table td.active { background: #f46541; border: solid 1px #e15d3c; color: #fff; }
+
+#calendar table thead th a { width: 20px; height: 20px; background: url(../images/btn-calendar.png) no-repeat 0 -20px; display: block; }
+#calendar table thead th:first-child a { background-position:  0 -20px;  }
+#calendar table thead th:last-child a { background-position: -20px -20px; float: right; }
+#calendar table thead th:first-child a:hover { background-position: 0 0; }
+#calendar table thead th:last-child a:hover { background-position: -20px 0; }
+
+
+#search { width: 220px; display: block; float: left; margin: 5px 0 0 40px; }
+#search dt { background: url(../images/hd-search_catalog.png) no-repeat; height: 41px; font-size: 14px; color: #f3d654; font-weight: bold; text-indent: 5px; line-height: 56px;}
+#search dd { margin: 0; padding: 5px 0 0 0;} 
+#search dd li { margin: 0; padding: 0; display: block; float: left; margin-top: 5px;}
+#search dd a { width: 54px; height: 60px; overflow: hidden; text-indent: -1000em; margin: 0; padding: 0; background: url(../images/icon-search_by_map.png) no-repeat;}
+#search dd li:nth-child(4n-1) { width: 55px;  }
+#search dd li:nth-child(4n) { width: 56px;  }
+
+#search dd li:nth-child(1) a { background-position: 0 0; }
+#search dd li:nth-child(2) a { background-position: -52px 0; }
+#search dd li:nth-child(3) a { background-position: -110px 0; }
+#search dd li:nth-child(4) a { background-position: -165px 0; }
+#search dd li:nth-child(5) a { background-position: 0 -64px; }
+#search dd li:nth-child(6) a { background-position: -52px -64px; }
+#search dd li:nth-child(7) a { background-position: -110px -64px; }
+#search dd li:nth-child(8) a { background-position: -165px -64px; }
+#search dd li:nth-child(9) a { background-position: 0 -128px; }
+#search dd li:nth-child(10) a { background-position: -52px -128px; }
+#search dd li:nth-child(11) a { background-position: -110px -128px; }
+#search dd li:nth-child(12) a { background-position: -165px -128px; }
+#search dd li:nth-child(13) a { background-position: 0 -192px; }
+#search dd li:nth-child(14) a { background-position: -52px -192px; }
+#search dd li:nth-child(15) a { background-position: -110px -192px; }
+#search dd li:nth-child(16) a { background-position: -165px -192px; }
+
+
+#event dt { font-size: 14px; color: #f46541; font-weight: bold; padding-bottom: 15px; }
+#event dd { padding: 0; margin: 0; }
+#event dd table { width: 100%;  }
+#event dd td { border-top: solid 1px #dcdcdc; padding: 10px 0px; color: #1c1c1c; }
+#event dd tbody tr td:nth-child(1) { background: url(../images/bg-number.png) no-repeat center 10px; width: 35px; text-align: center; padding: 17px 0 0; font-weight: bold; }
+#event dd tr td:nth-child(2) { padding-left: 30px; padding-right: 10px; font-weight: bold;  }
+#event dd tr td:nth-child(3) { width: 100px; padding-right: 20px;  }
+#event dd tr td:nth-child(4) { color: #707070; width: 260px; padding-right: 10px; }
+#event dd tr td:nth-child(4) strong { color: #1c1c1c; }
+#event dd tr td:nth-child(5) { width: 120px; } 
+#event dd tr td:nth-child(5) a { display: block; font-size: 11px; height: 30px; line-height: 30px; padding-left: 30px; background: url(../images/icon-tool.png) no-repeat; }
+#event dd tr td:nth-child(5) a:nth-child(2) { background-position: 0 -29px; }
+#event dd tfoot td { color: #555; text-align: right;  }
+#event dd tfoot td label, #event dd tfoot td a { height: 25px; line-height: 25px; background: #d9d7d7; display: inline-block; padding: 0 10px; color: #555; border-radius: 3px; font-size: 11px; font-weight: bold;  }
+#event dd tfoot td a.active { background: #ffc536; color: #fff; }
+
+.ie7 a.edit_profile { position: relative; top: 5px; }

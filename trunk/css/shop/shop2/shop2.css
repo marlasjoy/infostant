@@ -1,0 +1,20 @@
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #d20000 }
+header #color { background-color: #d20000; color: #000; } 
+header #color h2 { background-image: url(../../../images/shop/shop2/hd-shop2.png); }
+#main h3 { color: #d20000;  }
+.d-220x90 { margin: 0 15px 0 0; float: left; background: url(../../../images/shop/bg-220x90-2.png) no-repeat; padding: 10px 30px; }
+#social ul { float: right; margin: 25px 0 0; width: 330px; }
+a.button.black1 { margin-top: 25px; margin-right: 5px; }
+.d-676x316 { float: left; margin: 0 20px 20px 0; }
+#topic { color: #d20000;  }
+#social ul { background: url(../../../images/shop/bg-social2.png) no-repeat; width: 270px; }
+#social ul li { margin-right: 8px; }
+a.button.black1, a.button.black2 { background-image: url(../../../images/shop/bg-button-black2.png); }
+a.button.black2 { margin-left: 60px; }
+.d-306x550 { float: left; }
+.d-306x550:nth-child(2) { margin: 0 10px; }
+#four td { padding-right: 18px; }
+#four td:nth-child(4n) { padding-right: 0; }
+
+span.new { background-image: url(../../../images/shop/icon-new-red.png); }
+.d-820x50 { margin-bottom: 10px; }

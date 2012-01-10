@@ -1,0 +1,22 @@
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #249612 }
+header #color { background-color: #249612; } 
+header #color h2 { background-image: url(../../../images/shop/sport/hd-sport.png); }
+#main h3 { color: #249612; }
+
+#social ul { margin: 30px 0 20px 60px;}
+#topic { color: #249612;  }
+article.quote { background: url(../../../images/shop/other/bg-quote-left.png) no-repeat left top; }
+article.quote .inner { background: url(../../../images/shop/other/bg-quote-right.png) no-repeat right bottom; padding: 20px 60px; }
+a.button.black1, a.button.black2 { background: url(../../../images/shop/bg-button-green.png) no-repeat; color: #fff; }
+a.button.black2 { margin: 20px 0 0 60px; }
+#three a.button.black1 { margin: 20px 0 0;}
+#three a.button:nth-child(2) { margin-left: 60px; }
+#one .d-220x160:nth-child(4) { margin-right: 0;  }
+.d-676x316 { float: left; margin-right: 20px; }
+#two .d-220x160 { margin-right: 0; }
+
+#main #one { padding-top: 20px; }
+#main #one td { padding-bottom: 8px; }
+.d-220x90 { float: left; position: absolute; left: -10px; top: 10px; z-index: 4; }
+.d-220x160 { float: none; margin-bottom: 0; margin-right: 18px; }
+.d-220x160 a.edit.img { right: 4px; }

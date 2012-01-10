@@ -1,0 +1,150 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>DIGITDI : Digital Directory</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+     <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+	    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script> -->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+
+    <script src="jquery.css3finalize.min.js"></script>
+
+
+    <script src="cookie.js"></script>
+
+    <script>
+    var webdir="http://www.infostant.com";
+    var  domain="digitidi.com"; 
+
+    function jsonpCallback2(myObject){
+             var areaid=""; 
+
+             for (variable in myObject)
+             {   
+          //   alert(variable) ;
+             var obj = myObject[variable]; 
+                                              
+
+                                        
+             $('#searchResult').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li>');
+             
+             }
+            // setgalleryimg(); 
+            }
+     function setgalleryimg()
+     {
+    $("a.thumb").fancybox({'centerOnScroll':true});
+    }
+    function getUrlVars2() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }       
+    function ucfirst (str) {
+    // Makes a string's first character uppercase  
+    // 
+    // version: 1109.2015
+    // discuss at: http://phpjs.org/functions/ucfirst    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // +   bugfixed by: Onno Marsman
+    // +   improved by: Brett Zamir (http://brett-zamir.me)
+    // *     example 1: ucfirst('kevin van zonneveld');
+    // *     returns 1: 'Kevin van zonneveld'    str += '';
+    var f = str.charAt(0).toUpperCase();
+    return f + str.substr(1);
+    }         
+    $(document).ready(function() { 
+       // $('#restaurant').change(changeShippingForm).trigger('change');
+     //   onDeviceReady();              
+
+
+
+        
+    $("#searchTxt").bind( "change", function(event, ui) {
+    $('#searchResult').html('');
+                          $.ajax({
+                                                      data: {searchTxt: $(this).val()},                                                            
+                                                      url: webdir+'/ajax/getallshopbyname2',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'jsonpCallback2', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                                                    }); 
+});    
+
+        
+    }); 
+
+
+
+
+
+    
+    </script>
+</head> 
+                        <header>
+                      </header>
+<body >
+<!-- 	First Page  -->
+           <article>
+
+<!-- End of First Page -->
+<!-- 	Sub Page  -->
+
+<!-- End of Sub Page -->
+<!--     Sub Page  -->
+<div data-role="page" id="search"> 
+        <div data-role="header">
+            <a data-ajax="false" href="index.html" >Back</a>
+            <h3 id="cattitle">Search</h3>
+        
+        </div> 
+        <div data-role="content" class="subpage">
+             <div class="ui-body ui-body-b"> 
+                    
+                    <div data-role="fieldcontain">
+    <label for="search">Search Input:</label>
+    <input type="search" name="searchTxt" id="searchTxt" value="" />
+</div>  
+                    
+                </div>
+            <ul id="searchResult" class="v">
+                
+            </ul>
+        </div> 
+        <div data-position="fixed" data-role="footer">
+            <nav>
+                <ul class="h">
+                                        <li><a data-ajax="false" id="searchlink"  href="search.html">Search</a></li>
+                    <li><a data-ajax="false" id="registerlink"  href="register.html">Login</a></li>
+                    <li><a href="javascript:void(0);">Alert</a></li>
+                                       <li><a data-ajax="false" id="helplink"  href="help.html">FAQ</a></li>  
+                </ul>
+            </nav>
+        </div> 
+    </div>
+<!-- End of Sub Page -->
+<!--     Sub Page  -->
+ <!-- End of Sub Page -->
+<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.touchOverflowEnabled = true;
+      $.mobile.ajaxLinksEnabled = false;
+	});
+</script>
+           </article>
+</body>
+</html>

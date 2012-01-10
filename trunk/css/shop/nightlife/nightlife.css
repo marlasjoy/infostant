@@ -1,0 +1,23 @@
+/* Hotel Page */
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #7a04d3 }
+header #color { background-color: #7a04d3; } 
+header #color h2 { background-image: url(../../../images/shop/nightlife/hd-nightlife.png);  }
+#main h3 { color: #7a04d3;  }
+#main h3 cufon { top: -7px; }
+#main #five { margin-bottom: 10px; }
+#main #five h3 { margin-bottom: 0; height: 35px; }
+a.black1 { margin-top: 10px; }
+section#three a.black1 { margin-top: 28px; }
+section#three #social ul { margin-bottom: 50px; }
+td:nth-child(4n) .d-220x160 { margin-right: 0; }
+#one { padding: 0 0 20px; position: relative; }
+.d-220x90 { position: absolute; bottom: 0; left: 50%; margin-left: -120px; }
+.d-820x50 { margin-bottom: 10px; }
+article.quote { background: url(../../../images/shop/nightlife/bg-quote-left2.png) no-repeat left top; }
+article.quote .inner { background: url(../../../images/shop/nightlife/bg-quote-right2.png) no-repeat right bottom;  }
+a.button.black1, a.button.black2 { background-image: url(../../../images/shop/bg-button-black2.png); }
+
+#main section { padding: 0 0 10px; }
+.d-220x160 { margin-bottom: 0; margin-right: 17px;   }
+#three table tr:nth-child(2n) td { color: #fff; font-size: 16px; padding: 10px 5px 15px; }
+#one { margin-bottom: 30px; }
