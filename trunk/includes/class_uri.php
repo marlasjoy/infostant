@@ -140,6 +140,8 @@ class class_uri {
                 $this->arraydata['username']=$this->arrayuri['1']; 
                 $this->arraydata['class']='profile';
                 $this->arraydata['function']=$this->arrayuri['2']; 
+                $this->arraydata['pagenumber']=$this->arrayuri['3'];
+                
              }
            
            }

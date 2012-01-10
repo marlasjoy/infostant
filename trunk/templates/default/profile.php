@@ -4,35 +4,16 @@
                   <a href="javascript:void(0);"><img src="images/img-avatar.jpg" alt="img-avatar" /></a>
                   <h3>Feature</h3>
                   <ul class="v">
-                      <li><a href="javascript:showitenary();" class="icon">Itenary</a></li>
-                      <li><a href="javascript:showfav();" class="icon">Favorite</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Shop</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Send to Friend</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Share to Facebook</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>
+                      <?=$this->data['leftmenu'];?> 
                   </ul>
               </aside>
               
               <article>
-                  <h2><a href="javascript:void(0);">Pongneng Naruk</a></h2>
+                  <h2><a href="javascript:void(0);"><?=$this->data['username'];?></a></h2>
                   <a href="javascript:void(0);" class="icon edit_profile">Edit Profile</a>
-                  <h3>Recent Views</h3>
                   
-                  <p id="recent">
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-01.jpg" alt="thumb-01" width="100" height="80" /></a>
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-02.jpg" alt="thumb-02" width="100" height="80" /></a>
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-03.jpg" alt="thumb-03" width="100" height="80" /></a>
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-04.jpg" alt="thumb-04" width="100" height="80" /></a>
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-05.jpg" alt="thumb-05" width="100" height="80" /></a>
-                      <a href="javascript:void(0);">
-                          <img src="images/thumb-06.jpg" alt="thumb-06" width="100" height="80" /></a>
-                  </p>
+                  
+                  <?=$this->data['recent'];?> 
                   
                   <section class="clearfix" id="itenary">
                       <h4>Itenary</h4>

@@ -5,11 +5,12 @@
 #main > aside li a { color: #000; font-size: 14px; height: 40px; line-height: 40px; padding-left: 40px; background: url(../images/icon-side.png) no-repeat; margin-left: 3px;  }
 #main > aside li:nth-child(1) a { background-position: -250px 4px; }
 #main > aside li:nth-child(2) a { background-position: -200px -45px; }
-#main > aside li:nth-child(3) a { background-position: -150px -95px; }
-#main > aside li:nth-child(4) a { background-position: -100px -146px; }
-#main > aside li:nth-child(5) a { background-position: -50px -197px; }
-#main > aside li:nth-child(6) a { background-position: 0 -245px; }
-
+#main > aside li:nth-child(3) a { background-position: -150px -85px;}
+#main > aside li:nth-child(4) a { background-position: -120px -120px; }
+#main > aside li:nth-child(5) a { background-position: -120px -120px; }
+#main > aside li:nth-child(6) a { background-position: -87px -146px; }
+#main > aside li:nth-child(7) a { background-position: -50px -195px; }
+#main > aside li:nth-child(8) a { background-position: 0 -245px; }
 #main > article { display: block; float: left; width: 735px; margin-left: 15px; padding: 15px 0 0;}
 #main > article > section { margin-top: 30px; }
 #main > article > h2 a, #main > article > h2  { color: #414141; display: inline; font-size: 18px; }

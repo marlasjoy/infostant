@@ -87,6 +87,34 @@
           $databird['color']= $databird['shop']['color'];
           $databird['catname_en']= $databird['shop']['catname_en'];
           
+          if($_COOKIE['userlogin'])
+          {
+          if($_COOKIE['recentsid'])
+          {
+           $arrayrecentsid=explode("&",$_COOKIE['recentsid']);  
+           
+           $arrayrecentsid[]=$databird['shop']['sid'];
+           
+           $strsid=join("&",$arrayrecentsid);
+            
+           setcookie("recentsid", $strsid, time()+3600000, "/", ".".domain);
+           
+           
+           $arrayrecentshopurl=explode("&",$_COOKIE['recentshopurl']);  
+           
+           $arrayrecentshopurl[]=$this->info['subdomain'];
+           
+           $strshopurl=join("&",$arrayrecentshopurl);
+            
+           setcookie("recentshopurl", $strshopurl, time()+3600000, "/", ".".domain);   
+          }else
+          {
+          setcookie("recentshopurl", $this->info['subdomain'], time()+3600000, "/", ".".domain);     
+          setcookie("recentsid", $databird['shop']['sid'], time()+3600000, "/", ".".domain);    
+          }    
+          
+              
+          }
           
          list($width,$height)= explode('x',$databird['shop']['size']); 
           $databird['width']=$width; 
