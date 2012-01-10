@@ -1,0 +1,208 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>DIGITDI : Digital Directory</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 	
+          <script type="text/javascript" src="http://www.infostant.com/js/default/google-stat.js"></script> 
+	<link rel="stylesheet" href="http://www.infostant.com/templates/mobile/css/jquery.mobile-1.0.min.css" />
+	<link rel="stylesheet" href="http://www.infostant.com/templates/mobile/css/style.css" />
+	
+<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script> -->
+	<script type="text/javascript" src="http://www.infostant.com/templates/mobile/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.infostant.com/templates/mobile/jquery.mobile-1.0.min.js"></script>
+	<script>
+    var webdir='http://www.infostant.com';
+    function getUrlVars() {
+        var full = window.location.host
+//window.location.host is subdomain.domain.com
+var parts = full.split('.')
+var sub = parts[0]
+var domain = parts[1]
+var type = parts[2]
+//sub is 'subdomain', 'domain', type is 'com'
+    return    sub;
+    }
+
+    </script> 
+    <script type="text/javascript" src="http://www.infostant.com/plugins/slide/js/sliderman.1.3.6.js"></script> 
+    <script src="http://www.infostant.com/templates/mobile/jquery.css3finalize.min.js"></script> 
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+    <link rel="stylesheet" type="text/css" href="http://www.infostant.com/plugins/slide/css/sliderman.css" />
+    <div id="shopurl" style="display: none;"></div>
+</head> 
+
+<body>
+	<div data-role="page" style="display: none;" id="landing"> 
+		<div data-role="header">
+			<a href="javascript:void(0);" data-rel="back" >Back</a>
+			<h3 id="shopname">Restaurant</h3>
+			<a href="index.html#restaurant" id="catlink" data-direction="reverse">Restaurant</a>
+		</div> 
+		<div data-role="content" class="detail">
+			<img src="http://www.infostant.com/templates/mobile/images/logo-shop.png" alt="Logo Shop" class="logo" />
+			<img src="http://www.infostant.com/templates/mobile/images/img-intro.jpg" alt="Photo Intro" class="intro" />
+			<p><strong id="title">Our Breakfasts Cereal, Muffins Side Plates Tasty Alternatives Beverages & Juices Lunch & Dinner</strong></p>
+			<p id="description">Beautiful, stylish, modern, luxurious are just some of the words that do not do justice to this fabulous restaurant. Serving a range of up-market Thai and Chinese specialities,</p>
+			<p id="share"><a href="javascript:void(0);" class="favorite" data-role="button">Add to Favorite</a> <a href="javascript:void(0);" class="send-friend" data-role="button">Send to Friend</a></p>
+			
+			<section data-role="gallery">
+				<h4>Photo Gallery</h4>
+                <div style="  margin: 0 auto; width:284px">
+                <div id="galleryimg">
+				<a href="javascript:void(0);"><img src="http://www.infostant.com/templates/mobile/images/img-gallery.jpg" alt="Photo Gallery" /></a>
+                </div>
+                </div> 
+                <div id="SliderNameNavigation_2"></div>
+			</section>
+			<section id="clipvideo" data-role="clip">
+				<h4>Clip Review</h4>
+				<div class="lazy">
+                <div id="video">
+<!--					<iframe width="284" height="174"  src="http://www.youtube.com/embed/2H-_m_SNW00" frameborder="0" allowfullscreen></iframe>  -->
+                    </div>
+				</div>
+			</section>
+			<section data-role="time">
+				<h4>Time Work</h4>
+				<p id="time">Day : Monday -Sunday <br />
+					Time : 10.30 - 24.00</p>
+			</section>
+			<section data-role="address">
+				<h4>Address</h4>
+				Address: <span id="address">135/1 SOi Chaloemprakiat 25 <br />
+				Sukhumvit 103 Road, Nongbon, Pravet, <br />
+				Bangkok</span> <br />
+				Tel: <span id="tel">66 (0) 2234 4567</span> to 9 <br />
+				Email : <span id="emailshop"><a href="mailto:info@restaurant.com">info@restaurant.com</a> </span><br />
+				Website : <span id="website"><a href="http://www.restaurant.com" target="_blank">www.restaurant.com</a></span> <br />
+				
+			</section>
+			<section data-role="map" >
+				<h4>Map</h4>
+				<div class="lazy" >
+                <div id="mapgoogle" style="width: 277px; height: 188px; margin:0 auto;"></div>
+                <div style="text-align:center">
+                <a href="javascript:void(window.open($('#shopurl').html()));" data-role="button" class="no-icon">Full Map</a>    </div>
+					<!--<iframe width="277" height="188" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Chaloemprakiat+25&amp;aq=&amp;sll=13.840608,100.585178&amp;sspn=0.060837,0.065489&amp;vpsrc=0&amp;ie=UTF8&amp;hq=Chaloemprakiat+25&amp;hnear=&amp;t=m&amp;ll=13.758727,100.621033&amp;spn=0.125385,0.190887&amp;z=11&amp;output=embed"></iframe>
+				--></div>
+			</section>
+		</div> 
+		<div data-position="fixed" data-role="footer">
+			<nav>
+				<ul class="h">
+					<li><a data-ajax="false" href="http://www.infostant.com/index.html#search">Search</a></li>
+					<li><a href="javascript:void(0);">Login</a></li>
+					<li><a href="javascript:void(0);">Alert</a></li>
+					<li><a href="javascript:void(0);">FAQ</a></li>
+				</ul>
+			</nav>
+		</div> 
+	</div>
+<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.touchOverflowEnabled = true;
+	});
+        function jsonpCallback2(myObject){
+             var areaid=""; 
+
+ 
+          //   alert(variable) ;
+             
+              if(myObject.shopname) {$('#shopname').html(myObject.shopname)}
+              if(myObject.logo) {$('.logo').attr('src',myObject.logo)} 
+              if(myObject.pic1) {$('.intro').attr('src',myObject.pic1)}  
+              if(myObject.title) {$('#title').html(myObject.title)}
+              if(myObject.description) {$('#description').html(myObject.description)}  
+              $('#galleryimg').html('');                             
+              for (variable in myObject.gallery)
+             {
+                 
+                     $('#galleryimg').append('<img src="'+myObject.gallery[variable]+'" alt="Photo Gallery" />')
+                 
+             }
+                                        
+             effectsDemo2 = 'rain,stairs,fade';
+                    var demoSlider_2 = Sliderman.slider({container: 'galleryimg', width: 284, height: 180, effects: effectsDemo2,
+                        display: {
+                            autoplay: 3000,
+                            loading: {background: '#000000', opacity: 0.5, image: 'http://www.infostant.com/plugins/slide/img/loading.gif'},
+                            buttons: {hide: true, opacity: 1, prev: {className: 'SliderNamePrev_2', label: ''}, next: {className: 'SliderNameNext_2', label: ''}},
+                            description: {hide: true, background: '#000000', opacity: 0.4, height: 50, position: 'bottom'},
+                            navigation: {container: 'SliderNameNavigation_2', label: '<img src="http://www.infostant.com/plugins/slide/img/clear.gif" />'}
+                        }
+                    });
+              if(myObject.video){$('#video').html('<iframe width="284" height="174"  src="'+myObject.video+'" frameborder="0" allowfullscreen></iframe>')}else
+            {
+                $('#clipvideo').hide();
+                
+            }
+              if(myObject.daterange){$('#time').html(myObject.daterange)}
+              if(myObject.address){$('#address').html(myObject.address)} 
+              if(myObject.tel){$('#tel').html(myObject.tel)} 
+              if(myObject.emailshop){$('#emailshop').html('<a href="mailto:'+myObject.emailshop+'">'+myObject.emailshop+'</a>')} 
+              if(myObject.website){$('#website').html(myObject.website)} 
+              
+              
+              var myOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(myObject.lat, myObject.lng),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+   map = new google.maps.Map(document.getElementById("mapgoogle"),
+                                myOptions);
+                                
+    var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
+      // This marker is 20 pixels wide by 32 pixels tall.
+      new google.maps.Size(myObject.width, myObject.height),
+      // The origin for this image is 0,0.
+      new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      new google.maps.Point(0, 35)); 
+       var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+   var myLatLng = new google.maps.LatLng(myObject.lat, myObject.lng);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: myObject.shopname,
+        zIndex: 0
+    });                                 
+
+ // setMarkers(map, beaches);
+              
+            $('#landing').show();  
+          
+            }
+    $(document).ready(function() { 
+        
+                    $('#shopurl').html('http://'+getUrlVars()+'.infostant.com/map');
+                    $.ajax({
+                                                      data: {shopurl: getUrlVars()},                                                            
+                                                      url: webdir+'/ajax/getshopbysub',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'jsonpCallback2', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                            });
+                // alert(getUrlVars());
+                
+                
+                
+    });
+        $(document).bind("mobileinit", function(){
+      $.mobile.touchOverflowEnabled = true;
+      $.mobile.ajaxLinksEnabled = false;
+    });
+</script>
+</body>
+</html>

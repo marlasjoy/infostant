@@ -1,0 +1,173 @@
+<html>
+<head>
+    <title>Shop</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="jquery-1.6.4.min.js"></script>
+    <script src="cookie.js"></script> 
+    <link rel="stylesheet" href="jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.css" /> 
+    <script src="jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+    <style>
+    .dsocial{
+float: left;
+padding-left: 5px;
+}
+#social
+{
+text-align: center;
+padding-left: 30px;
+}
+    </style>
+    <script>
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value  
+    document.addEventListener("deviceready", onDeviceReady, false);   
+    var webdir="http://www.infostant.com";
+    function PictureSourceType() {};
+             PictureSourceType.PHOTO_LIBRARY = 0;
+             PictureSourceType.CAMERA = 1;
+    function onDeviceReady() {
+                 //?navigator.notification.alert('');  
+                 navigator.network.isReachable('phonegap.com', reachableCallback);
+                 pictureSource=navigator.camera.PictureSourceType;
+                 destinationType=navigator.camera.DestinationType;
+                 
+             }
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+    function reachableCallback(reachability) {
+                 
+                 // There is no consistency on the format of reachability
+                 
+                 var networkState = reachability.code || reachability;
+                 
+                 var states = {};
+                 
+                 states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+                 
+                 states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+                 
+                 states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+                 
+                // navigator.notification.alert('Connection type: ' + states[networkState]);
+                 
+             }
+             $(document).ready(function() {
+
+              
+             // alert(getCookie('userid'));  
+             });
+    </script>
+</head>
+<body>
+             <div data-role="page" id="home2"> 
+             <input id="userid"  type="hidden" value="">
+            <div data-role="header"> 
+                
+                <h1>สถานที่</h1> 
+                 <a href="javascript:void(0);" onclick="history.back(0)" id="recentButton" data-role="button">กลับไปหน้าหลัก</a>   
+            </div> 
+            
+    
+            <div data-role="content">
+                
+              <div style="width: auto; height: auto; overflow: auto; position: relative; background: white"><div style="width:330px;" id="powerbeebee">
+<div style=" display: block; font-family: Tahoma; font-size: 12px;  color: black;">
+
+<div>
+ <img src="http://flood.infostant.com/images/default/header/header-map.jpg"> 
+ <div id="shopurl" style="display: none;">http://xn--72c6afetwebbet1a9lzahg3cyi9a.infostant.com</div>
+</div>
+<div style="padding-left: 14px; padding-right: 15px;">
+<div style="padding-bottom: 5px">
+<span style="color:#029fc1 ;font-weight: bold;">ผู้โพสต์ :</span>
+<span style="color:#ea9a01 ;font-weight: bold;" class="namepost"></span>
+</div>
+<div style="padding-bottom: 5px;font-weight: bold;">
+<span id="title">โรงเรียนลพบุรีวิทยา1</span>
+</div>
+<div style="padding-bottom: 5px">
+<span id="description">โรงเรียนลพบุรีวิทยา3</span>
+</div>
+<div style="padding-bottom: 5px">
+<img width="100%" src="http://maps.googleapis.com/maps/api/staticmap?&amp;sensor=false&amp;center=14.90057,100.59624&amp;zoom=17&amp;size=301x220&amp;sensor=false&amp;markers=icon:http://flood.infostant.com/images/default/icons/black.png|14.90057,100.59624&amp;format=png" id="mapimage">
+</div>
+<div style="padding-bottom: 5px;font-weight: bold;">
+   สถานที่ต้องการความช่วยเหลือ
+</div>
+<div style="padding-bottom: 10px; color:#029fc1; line-height: 160%;">
+ชื่อผู้ติดต่อ : <span class="namepost" style="color: black;"></span> <br>
+ชื่อสถานที่ : <span id="shopname" style="color: black;">โรงเรียนลพบุรีวิทยา</span><br>
+ที่อยู่ : <span id="address" style="color: black;">โรงเรียนลพบุรีวิทยา ลพบุรี</span><br>
+เบอร์โทร:<span id="tel" style="color: black;">027331470</span> <br>
+อีเมล์ :<span id="emailshop" style="color: black;">nongdark46@hotmail.com</span><br>
+</div>
+<div style="padding-bottom: 10px">
+<img width="100%" src="http://flood.infostant.com/images/default/powerbee/302-220.jpg" id="mapimage2">
+</div>
+ <div style="padding-bottom: 10px" id="social">
+
+                        <div class="dsocial"><a href="javascript:void(window.open('http://www.facebook.com/sharer/sharer.php?v=4&amp;src=bm&amp;u='+encodeURIComponent($('#shopurl').html()),'Facebook','height=450,width=550').focus())"><img width="29" height="29" alt="Facebook" src="http://flood.infostant.com/images/shop/icon-social-01.png"></a></div>
+                        <div class="dsocial"><a href="javascript:void(window.open('http://twitter.com/intent/tweet?source=webclient&amp;text='+encodeURIComponent($('#shopurl').html()),'Twitter','height=450,width=550').focus())"><img width="29" height="29" alt="Twitter" src="http://flood.infostant.com/images/shop/icon-social-02.png"></a></div>
+                        <div class="dsocial"><a href="javascript:void(0);"><img width="29" height="29" alt="RSS Feed" src="http://flood.infostant.com/images/shop/icon-social-03.png"></a></div>
+                        <div class="dsocial"><a href="javascript:void(window.open('http://www.myspace.com/Modules/PostTo/Pages/?u='+encodeURIComponent($('#shopurl').html()),'My Space','height=450,width=550').focus())"><img width="29" height="29" alt="My Space" src="http://flood.infostant.com/images/shop/icon-social-04.png"></a></div>
+                        <div class="dsocial"><a href="javascript:void(window.open('http://www.linkedin.com/shareArticle?mini=true&amp;url=CONTENT-URL&amp;title=web&amp;summary=web&amp;source='+encodeURIComponent($('#shopurl').html()),'Linkedin','height=450,width=550').focus())"><img width="29" height="29" alt="Linkedin" src="http://flood.infostant.com/images/shop/icon-social-05.png"></a></div>
+                        <div class="dsocial"><a href="javascript:void(window.open('https://m.google.com/app/plus/x/?v=compose&amp;content='+encodeURIComponent($('#shopurl').html()),'Google +','height=450,width=550').focus())"><img width="29" height="29" alt="Google +" src="http://flood.infostant.com/images/shop/icon-social-06.png"></a></div>
+                        <div class="dsocial"><a href="mailto:?subject=&amp;body=Link="><img width="29" height="29" alt="Email" src="http://flood.infostant.com/images/shop/icon-social-07.png"></a></div>
+
+</div>
+<div style="padding-bottom: 10px">&nbsp;
+</div>
+
+  </div>
+</div></div></div>
+                
+            </div> 
+            
+        </div> 
+        <script>
+
+                       var shopurl2 = getUrlVars()["shopurl"];
+             //var second = getUrlVars()["page"];
+                $.post(webdir+'/ajax/getdatafromiphone',{
+                shopurl:shopurl2    
+                }, function(data) {
+                             //alert(data) ;
+                   var dataset = eval('(' + data + ')');           
+    $("#title").html(dataset.title);
+    $(".namepost").html(dataset.namepost);
+    $("#description").html(dataset.description);
+    $("#emailshop").html(dataset.emailshop);
+    $("#tel").html(dataset.tel);
+    $("#address").html(dataset.address); 
+    $("#shopname").html(dataset.shopname); 
+    $("#shopurl").html(dataset.shopurl);   
+    var src3=dataset.pic;
+    $("#mapimage2").attr("src",src3);
+    var postion=dataset.lat+','+dataset.lng;
+   // alert(lat);
+  //  var lng=marker.getPosition().lng();
+    var src="http://maps.googleapis.com/maps/api/staticmap?&sensor=false&center="+postion+"&zoom=17&size=301x220&sensor=false&markers=icon:"+webdir+"/images/default/icons/black.png|"+postion+"&format=png";
+    $("#mapimage").attr("src",src);         
+                             
+                });
+    //alert(first);
+ 
+             // Handler for .ready() called.
+              if(checkCookie('userid'))
+              {
+                $("#userid").val(getCookie('userid'));  
+               //  $("#member1").hide();  
+              }else
+              {
+             //     $("#member1").show();
+              }
+        </script>
+</body>
+</html>

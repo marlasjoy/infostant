@@ -1,0 +1,249 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>DIGITDI : Digital Directory</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+      
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/royal-slider-6.0.min.css">
+    <link href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
+<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script> -->
+	    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+    <script type="text/javascript" src="jquery.easing.1.3.min.js"></script>
+        <script type="text/javascript" src="royal-slider-6.0.min.js"></script>  
+        <script src="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js"></script> 
+	<script>
+    var webdir='http://www.infostant.com';
+    function getUrlVars() {
+        var full = window.location.host
+//window.location.host is subdomain.domain.com
+var parts = full.split('.')
+var sub = parts[0]
+var domain = parts[1]
+var type = parts[2]
+//sub is 'subdomain', 'domain', type is 'com'
+    return    sub;
+    }
+    function testUrlForMedia(pastedData) {
+var success = false;
+var media   = {};
+if (pastedData.match('http://(www.)?youtube|youtu\.be')) {
+    if (pastedData.match('embed')) { youtube_id = pastedData.split(/embed\//)[1].split(/[?&]/)[0]; }
+    else { youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
+    media.type  = "youtube";
+    media.id    = youtube_id;
+    success = true;
+}
+else if (pastedData.match('http://(player.)?vimeo\.com')) {
+    vimeo_id = pastedData.split(/video\/|http:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
+    media.type  = "vimeo";
+    media.id    = vimeo_id;
+    success = true;
+}
+else if (pastedData.match('http://player\.soundcloud\.com')) {
+    soundcloud_url = unescape(pastedData.split(/value="/)[1].split(/["]/)[0]);
+    soundcloud_id = soundcloud_url.split(/tracks\//)[1].split(/[&"]/)[0];
+    media.type  = "soundcloud";
+    media.id    = soundcloud_id;
+    success = true;
+}
+if (success) { return media; }
+else { alert("No valid media id detected"); }
+return false;
+}
+    function getUrlVars2() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    </script> 
+
+    <script src="jquery.css3finalize.min.js"></script> 
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+
+    <div id="shopurl" style="display: none;"></div>
+</head> 
+
+<body>
+	<div data-role="page" style="display: none;" id="landing"> 
+		<div data-role="header">
+			<a href="javascript:void(0);" data-rel="back" >Back</a>
+			<h3 id="shopname">Restaurant</h3>
+
+		</div> 
+		<div data-role="content" class="detail">
+			<img src="images/logo-shop.png" alt="Logo Shop" class="logo" />
+			<img src="images/img-intro.jpg" alt="Photo Intro" class="intro" />
+			<p><strong id="title">Our Breakfasts Cereal, Muffins Side Plates Tasty Alternatives Beverages & Juices Lunch & Dinner</strong></p>
+			<p id="description">Beautiful, stylish, modern, luxurious are just some of the words that do not do justice to this fabulous restaurant. Serving a range of up-market Thai and Chinese specialities,</p>
+			<p id="share"><a href="javascript:void(0);" class="favorite" data-role="button">Add to Favorite</a> <a href="javascript:void(0);" class="send-friend" data-role="button">Send to Friend</a></p>
+			
+			<section data-role="gallery">
+				<h4>Photo Gallery</h4>
+                <div style="  margin: 0 auto; width:100%">
+                <div id="myGallery2" class="royalSlider clearfix" style="width: 300px;            
+        height: 300px;margin: 0 auto;">
+                    <div class="royalLoadingScreen"><p>Loading slider&hellip;<br>Click and drag to navigate</p></div>
+                <ul class="royalSlidesContainer" id="testId">
+                 
+                </ul> 
+                    
+                    </div>
+			</section>
+			<section id="clipvideo" data-role="clip">
+				<h4>Clip Review</h4>
+				<div class="lazy">
+                <div id="video">
+					<iframe id="videoiframe" width="284" height="174"  frameborder="0" allowfullscreen></iframe>
+                    </div>
+				</div>
+			</section>
+			<section data-role="time">
+				<h4>Time Work</h4>
+				<p id="time">Day : Monday -Sunday <br />
+					Time : 10.30 - 24.00</p>
+			</section>
+			<section data-role="address">
+				<h4>Address</h4>
+				Address: <span id="address">135/1 SOi Chaloemprakiat 25 <br />
+				Sukhumvit 103 Road, Nongbon, Pravet, <br />
+				Bangkok</span> <br />
+				Tel: <span id="tel">66 (0) 2234 4567</span> <br />
+				Email : <span id="emailshop"><a href="mailto:info@restaurant.com">info@restaurant.com</a> </span><br />
+				Website : <span id="website"><a href="http://www.restaurant.com" target="_blank">www.restaurant.com</a></span> <br />
+				
+			</section>
+			<section data-role="map" >
+				<h4>Map</h4>
+				<div class="lazy" >
+                <div id="mapgoogle" style="width: 277px; height: 188px; margin:0 auto;"></div>
+                <div style="text-align:center">
+                <a data-ajax="false" id="maplink"  href="map.html"  data-role="button" class="no-icon">Get Direction</a>    </div>
+					<!--<iframe width="277" height="188" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Chaloemprakiat+25&amp;aq=&amp;sll=13.840608,100.585178&amp;sspn=0.060837,0.065489&amp;vpsrc=0&amp;ie=UTF8&amp;hq=Chaloemprakiat+25&amp;hnear=&amp;t=m&amp;ll=13.758727,100.621033&amp;spn=0.125385,0.190887&amp;z=11&amp;output=embed"></iframe>
+				--></div>
+			</section>
+		</div> 
+		<div data-position="fixed" data-role="footer">
+			<nav>
+				<ul class="h">
+				     <li><a data-ajax="false" id="searchlink"  href="search.html">Search</a></li>
+                    <li><a data-ajax="false" id="registerlink"  href="register.html">Login</a></li>
+                    <li><a href="javascript:void(0);">Alert</a></li>
+                    <li><a data-ajax="false" id="helplink"  href="help.html">FAQ</a></li>  
+				</ul>
+			</nav>
+		</div> 
+	</div>
+<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.touchOverflowEnabled = true;
+	});
+        function jsonpCallback2(myObject){
+             var areaid=""; 
+
+ 
+          //   alert(variable) ;
+             
+              if(myObject.shopname) {$('#shopname').html(myObject.shopname)}
+              if(myObject.logo) {$('.logo').attr('src',myObject.logo)} 
+              if(myObject.pic1) {$('.intro').attr('src',myObject.pic1)}  
+              if(myObject.title) {$('#title').html(myObject.title)}
+              if(myObject.description) {$('#description').html(myObject.description)}  
+              $('#testId').html('');                             
+              for (variable in myObject.gallery)
+             {
+                 
+                     $('#testId').append('<li class="royalSlide" ><a rel="external" href="'+myObject.gallery[variable]+'" class="linkImage"><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></a></li>')
+                 
+             }
+               var mySliderInstance =  $('#myGallery2').royalSlider({               
+                removeCaptionsOpacityInIE8:true,
+                slideshowEnabled :true,
+                imageAlignCenter:true
+            }).data("royalSlider");         
+            var mySliderInstance = $("#myGallery2").data("royalSlider");              
+             mySliderInstance.updateSliderSize();
+              if(myObject.video){$('#video').html('<iframe width="284" height="174" onclick="location.href=\''+myObject.video+'\'"  src="'+myObject.video+'" frameborder="0" allowfullscreen></iframe>')}else
+              {
+                 // var htmlstr ='<iframe width="284" height="174" src="http://www.youtube.com/embed/OoJj0YW4MU8" frameborder="0" allowfullscreen></iframe>';
+            $('#clipvideo').hide(); 
+                  
+              }
+              if(myObject.daterange){$('#time').html(myObject.daterange)}
+              if(myObject.address){$('#address').html(myObject.address)} 
+              if(myObject.tel){$('#tel').html(myObject.tel)} 
+              if(myObject.emailshop){$('#emailshop').html('<a href="mailto:'+myObject.emailshop+'">'+myObject.emailshop+'</a>')} 
+              if(myObject.website){$('#website').html(myObject.website)} 
+              
+              
+              var myOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(myObject.lat, myObject.lng),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+   map = new google.maps.Map(document.getElementById("mapgoogle"),
+                                myOptions);
+    $('.linkImage').fancybox();                            
+    var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
+      // This marker is 20 pixels wide by 32 pixels tall.
+      new google.maps.Size(myObject.width, myObject.height),
+      // The origin for this image is 0,0.
+      new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      new google.maps.Point(0, 35)); 
+       var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+   var myLatLng = new google.maps.LatLng(myObject.lat, myObject.lng);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: myObject.shopname,
+        zIndex: 0
+    });                                 
+    
+   $('#maplink').attr('href','map.html?shopurl='+getUrlVars2()['shopurl']) ; 
+ // setMarkers(map, beaches);
+              
+                $('#landing').show();           
+          
+            }
+    $(document).ready(function() { 
+        
+                    $('#shopurl').html('http://'+getUrlVars2()['shopurl']+'.infostant.com/map');
+                    $.ajax({
+                                                      data: {shopurl: getUrlVars2()['shopurl']},                                                            
+                                                      url: webdir+'/ajax/getshopbysub',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'jsonpCallback2', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                            });
+                // alert(getUrlVars());
+                
+                
+                
+    });
+        $(document).bind("mobileinit", function(){
+      $.mobile.touchOverflowEnabled = true;
+      $.mobile.ajaxLinksEnabled = false;
+    });
+</script>
+</body>
+
+
+</html>

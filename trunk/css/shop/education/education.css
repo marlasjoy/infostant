@@ -1,0 +1,10 @@
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #836eb1 }
+header #color { background-color: #836eb1; } 
+header #color h2 { background-image: url(../../../images/shop/education/hd-education.png); }
+#main h3 { color: #836eb1; }
+.d-220x90 { margin: 0 15px 0 -20px; float: left; }
+#social ul { float: right; margin: 25px 0 0; width: 330px; }
+a.button.black1 { margin-top: 25px; }
+.d-676x316 { float: left; margin: 0 20px 20px 0; }
+.d-220x160:nth-child(2n) { margin-right: 0; }
+#topic { color: #836eb1;  }

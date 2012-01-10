@@ -1,0 +1,161 @@
+<html><head>
+<meta content="initial-scale=1.0, user-scalable=no" name="viewport">
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>PhoneGap</title>
+        <link type="text/css" rel="stylesheet" href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css">  
+        <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <link rel="stylesheet" href="jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.css" /> 
+         <script src="cookie.js"></script> 
+        <script src="jquery-1.6.4.min.js"></script> 
+         <script>
+         var pictureSource;   // picture source
+         var destinationType; // sets the format of returned value  
+         var imageURI="";
+         var webdir="http://www.infostant.com";
+         document.addEventListener("deviceready", onDeviceReady, false);  
+             function PictureSourceType() {};
+             PictureSourceType.PHOTO_LIBRARY = 0;
+             PictureSourceType.CAMERA = 1;
+
+               function reachableCallback(reachability) {
+                 
+                 // There is no consistency on the format of reachability
+                 
+                 var networkState = reachability.code || reachability;
+                 
+                 var states = {};
+                 
+                 states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+                 
+                 states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+                 
+                 states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+                 
+                // navigator.notification.alert('Connection type: ' + states[networkState]);
+                 
+             }
+              function responseformserver(myObject)
+             {
+                 navigator.notification.alert(myObject.title); 
+             }
+
+            
+      
+             
+             // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+             
+             function onDeviceReady() {
+                 //?navigator.notification.alert('');  
+                 navigator.network.isReachable('phonegap.com', reachableCallback);
+                 pictureSource=navigator.camera.PictureSourceType;
+                 destinationType=navigator.camera.DestinationType;
+                 
+             }
+             $( function() {
+               
+               $('#searchButton').click(function() {
+                                        loadajax();
+                                        });
+               $('#search2Button').click(function() {
+                                         $('.ui-listview').html('');
+                                         $('#searchBox').val(''); 
+                                         });                         
+               $('#recentButton').click(function() {
+                                        $('#searchBox').val('');
+                                        loadajax();
+                                        });                         
+               
+               
+               
+               });
+             function getPicture(sourceType)
+             {
+                 var options = { quality: 30 };
+                 if (sourceType != undefined) {
+                     options["sourceType"] = sourceType;
+                     
+                 }
+                 // if no sourceType specified, the default is CAMERA 
+                 navigator.camera.getPicture(getPicture_Success, onFail, options);
+             }
+             function getPicture_Success(imageData)
+             {
+                 imageURI=imageData;
+                 //alert("getpic success");
+                 document.getElementById("test_img").src = "data:image/jpeg;base64," + imageData;
+                 
+                 
+             }
+             function capturePhoto() {
+                 // Take picture using device camera and retrieve image as base64-encoded string
+                 navigator.camera.getPicture(getPicture_Success, onFail, { quality: 50 });
+             }
+             function onFail(message) {
+                 navigator.notification.alert('Failed because: ' + message);
+             }
+
+             $(document).ready(function() {
+             // Handler for .ready() called.
+              if(checkCookie('userid'))
+              {
+                $("#userid").val(getCookie('userid'));  
+                 $("#member1").hide();  
+              }else
+              {
+                  $("#member1").show();
+              }
+              
+            //  alert(getCookie('userid'));  
+             });
+
+     
+         </script>
+        <script src="jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+        
+        <script src="flood.js"></script> 
+
+
+        
+    </head>
+    
+    <body >
+                      <header>
+                      </header> 
+           <article>             
+             <div data-role="page" id="search"> 
+            
+            <div data-role="header" data-position="fixed"> 
+                
+                <h1>ค้นหาข้อมูล</h1> 
+                <a href="javascript:void(0);" onclick="location.href='index.html'" id="recentButton" data-role="button">กลับไปหน้าหลัก</a> 
+                
+                <div class="class= ui-body ui-body-b"> 
+                    
+                    <input type="text" name="search" id="searchBox" value="" data-theme="a" /> 
+                    
+                    <button type="submit" data-theme="a" id="searchButton">Search</button>     
+                    
+                </div>
+                
+            </div>
+            
+            <div data-role="content"> 
+                
+                  <div class="content-primary">
+                  <ul data-role="listview" class="ui-listview">
+          
+                </ul>
+                </div>
+                
+            </div> 
+            
+        </div>
+            </article> 
+            
+            <footer>  
+
+    </footer>
+    </body>
+    
+</html>

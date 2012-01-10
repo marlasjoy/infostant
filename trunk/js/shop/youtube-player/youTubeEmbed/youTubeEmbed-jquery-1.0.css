@@ -1,0 +1,49 @@
+.flashContainer {
+    overflow: hidden;
+    position: relative;
+}
+
+.progressBar {
+    background-color: #141414;
+    bottom: 20px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    display: none;
+    height: 8px;
+    left: 20px;
+    overflow: hidden;
+    position: absolute;
+    right: 105px;
+    width: auto;
+}
+.progressBar .elapsed {
+    background-color: #1FA2F6;
+    border-right: 1px solid #49AFF0;
+    height: 100%;
+    position: absolute;
+    width: 0;
+}
+.controlDiv {
+    cursor: pointer;
+    height: 120px;
+    left: 50%;
+    margin: -60px 0 0 -60px;
+    position: absolute;
+    top: 50%;
+    width: 120px;
+}
+.controlDiv.play {
+    background: url("img/play.png") no-repeat scroll center center transparent;
+}
+.controlDiv.replay {
+    background: url("img/replay.png") no-repeat scroll center center transparent;
+}
+.controlDiv.pause {
+    background: url("img/pause.png") no-repeat scroll -99999px 50% transparent;
+}
+.flashContainer:hover .controlDiv.pause {
+    background-position: center center;
+}
+.flashContainer.playing:hover .progressBar {
+    display: block;
+}

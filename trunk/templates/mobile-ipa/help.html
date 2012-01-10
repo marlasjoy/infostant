@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+    <title>DIGITDI : Digital Directory</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+     <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.0.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+<!--     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script> -->
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+
+    <script src="jquery.css3finalize.min.js"></script>
+
+
+
+
+
+</head> 
+                        <header>
+                      </header>
+<body >
+<!--     First Page  -->
+           <article>
+
+<!-- End of First Page -->
+<!--     Sub Page  -->
+
+<!-- End of Sub Page -->
+<!--     Sub Page  -->
+<div data-role="page" id="search"> 
+        <div data-role="header">
+            <a data-ajax="false" href="index.html" >Back</a>
+            <h3 id="cattitle">Help</h3>
+        
+        </div> 
+        <div data-role="content" class="subpage">
+         <img width="100%" src="images/1.jpg">
+          <img width="100%" src="images/2.jpg">  
+          <img width="100%" src="images/3.jpg"> 
+        </div> 
+        <div data-position="fixed" data-role="footer">
+            <nav>
+                <ul class="h">
+                   <li><a data-ajax="false" id="searchlink"  href="search.html">Search</a></li>
+                    <li><a data-ajax="false" id="registerlink"  href="register.html">Login</a></li>
+                    <li><a href="javascript:void(0);">Alert</a></li>
+                    <li><a data-ajax="false" id="helplink"  href="help.html">FAQ</a></li>
+                </ul>
+            </nav>
+        </div> 
+    </div>
+<!-- End of Sub Page -->
+<!--     Sub Page  -->
+ <!-- End of Sub Page -->
+<script>
+    $(document).bind("mobileinit", function(){
+      $.mobile.touchOverflowEnabled = true;
+      $.mobile.ajaxLinksEnabled = false;
+    });
+</script>
+           </article>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/* Fix Outline dotted on Firefox */
+:-moz-any-link:focus { outline: none; } 
+a:active, a:focus { outline: 0;}
+
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+ul.h:before, ul.h:after { content: "\0020"; display: block; height: 0; visibility: hidden; }
+ul.h:after { clear: both; }
+/* fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+ul.h { zoom: 1; margin: 0; padding: 0; }
+ul.h li, ul.h li a { display: block; float: left; margin: 0; list-style: none; }
+ul.v { list-style: none; margin: 0; padding: 0; }
+
+.ui-tabs-hide { display: none; } 

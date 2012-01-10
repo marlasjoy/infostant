@@ -1,0 +1,39 @@
+/* Hospital Page */
+#topic { color: #00adef; }
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #00adef }
+header #color { background-color: #00adef; } 
+header #color h2 { background-image: url(../../../images/shop/seminar/hd-seminar.png);  }
+#main h3 { color: #00adef;  }
+#main h3 cufon { top: -7px; }
+#main #five { margin-bottom: 10px; }
+#main #five h3 { margin-bottom: 0; height: 35px; }
+a.black1 { margin-top: 10px; }
+section#three a.black1 { margin-top: 28px; }
+section#three #social ul { margin-bottom: 50px; }
+.d-220x160:nth-child(4n+1) { margin-right: 0; }
+#main #one { padding: 0 0 10px; position: relative; }
+.d-220x90 { position: absolute; top: 0px; left: -20px; }
+.d-820x50 { margin-bottom: 10px; }
+.d-940x440 { margin-top: 5px; }
+a.button.black1, a.button.black2 { background-image: url(../../../images/shop/bg-button-black2.png); }
+#three td { padding-right: 18px; }
+#three td:nth-child(4n) { padding-right: 0; }
+
+a.button.black2 { margin: 30px 0 50px 56px; }
+#social { margin-top: 60px; }
+#social ul {  background: url(../../../images/shop/bg-social2.png) no-repeat; width: 270px; margin: 20px auto; }
+#social ul li { margin-right: 8px; }
+#four td, #four th { background: #c9c8c8; }
+#four table { margin: 10px 50px; }
+#four table th { color: #000; font-size: 12px; font-weight: bold; height: 30px; vertical-align: middle; }
+#four table tr:nth-child(2n+1) td { background: #e0e0e0; }
+#four table td { height: 30px; vertical-align: center; border-top: solid 1px #262626; }
+#four td:nth-child(1), #four th:nth-child(1) { width: 135px;  }
+#four td:nth-child(3), #four th:nth-child(3)  { width: 170px; }
+#four td:nth-child(2), #four th:nth-child(2) { border-left: solid 1px #fff; border-right: solid 1px #fff; width: 510px;  }
+#four table td:nth-child(4), #four table th:nth-child(4) { background: transparent!important; padding: 0 5px; vertical-align: middle; }
+#four td div { position: relative;  min-height: 30px; height: auto!Important; height: 30px; padding-right: 30px; }
+#four td:nth-child(1) div { width: 100px; padding-left: 5px;}
+#four td:nth-child(2) div { width: 475px; padding-left: 5px;}
+#four td:nth-child(3) div { width: 135px; padding-left: 5px;}
+#four td div a.edit { position: absolute; right: 2px; bottom: 2px;  }

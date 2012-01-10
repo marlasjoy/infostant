@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>DIGITDI : Digital Directory</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 	
+
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	
+<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script> -->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+	</script>
+</head> 
+
+<body>
+	<div data-role="page" id="restaurant"> 
+		<div data-role="header">
+			<a href="javascript:void(0);" data-rel="back" >Back</a>
+			<h3>Restaurant</h3>
+			<a href="index.html#restaurant" data-direction="reverse">Restaurant</a>
+		</div> 
+		<div data-role="content" class="detail">
+			<img src="images/logo-shop.png" alt="Logo Shop" class="logo" />
+			<img src="images/img-intro.jpg" alt="Photo Intro" class="intro" />
+			<p><strong>Our Breakfasts Cereal, Muffins Side Plates Tasty Alternatives Beverages & Juices Lunch & Dinner</strong></p>
+			<p>Beautiful, stylish, modern, luxurious are just some of the words that do not do justice to this fabulous restaurant. Serving a range of up-market Thai and Chinese specialities,</p>
+			<p id="share"><a href="javascript:void(0);" class="favorite" data-role="button">Add to Favorite</a> <a href="javascript:void(0);" class="send-friend" data-role="button">Send to Friend</a></p>
+			
+			<section data-role="gallery">
+				<h4>Photo Gallery</h4>
+				<a href="javascript:void(0);"><img src="images/img-gallery.jpg" alt="Photo Gallery" /></a>
+			</section>
+			<section data-role="clip">
+				<h4>Clip Review</h4>
+				<div class="lazy">
+					<iframe width="284" height="174" src="http://www.youtube.com/embed/2H-_m_SNW00" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</section>
+			<section data-role="time">
+				<h4>Time Work</h4>
+				<p>Day : Monday -Sunday <br />
+					Time : 10.30 - 24.00</p>
+			</section>
+			<section data-role="address">
+				<h4>Address</h4>
+				Address: 135/1 SOi Chaloemprakiat 25 <br />
+				Sukhumvit 103 Road, Nongbon, Pravet, <br />
+				Bangkok <br />
+				Tel: <a href="tel:+662 234 4567">66 (0) 2234 4567</a> to 9 <br />
+				Email : <a href="mailto:info@restaurant.com">info@restaurant.com</a> <br />
+				Website : <a href="http://www.restaurant.com" target="_blank">www.restaurant.com</a> <br />
+				<a href="javascript:void(0);" data-role="button" class="no-icon">Branch</a>
+			</section>
+			<section data-role="map">
+				<h4>Map</h4>
+				<div class="lazy">
+					<iframe width="277" height="188" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Chaloemprakiat+25&amp;aq=&amp;sll=13.840608,100.585178&amp;sspn=0.060837,0.065489&amp;vpsrc=0&amp;ie=UTF8&amp;hq=Chaloemprakiat+25&amp;hnear=&amp;t=m&amp;ll=13.758727,100.621033&amp;spn=0.125385,0.190887&amp;z=11&amp;output=embed"></iframe>
+				</div>
+			</section>
+		</div> 
+		<div data-role="footer">
+			<nav>
+				<ul class="h">
+					<li><a href="javascript:void(0);">Search</a></li>
+					<li><a href="javascript:void(0);">Login</a></li>
+					<li><a href="javascript:void(0);">Alert</a></li>
+					<li><a href="javascript:void(0);">FAQ</a></li>
+				</ul>
+			</nav>
+		</div> 
+	</div>
+<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.touchOverflowEnabled = true;
+	});
+</script>
+</body>
+</html>

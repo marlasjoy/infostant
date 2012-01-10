@@ -1,0 +1,18 @@
+header #login a:hover, .dk_container a.dk_toggle:hover { color: #d20000 }
+header #color { background-color: #d20000; color: #fff; } 
+header #color h2 { background-image: url(../../../images/shop/shop/hd-shop.png); }
+#main h3 { color: #d20000; margin: 20px 0 10px; }
+.d-220x90 { margin: 0; float: left; background: url(../../../images/shop/bg-220x90-2.png) no-repeat; padding: 10px 30px; float: left; }
+a.button.black1 {  margin-right: 5px; float: right; margin: 0; position: relative; right: -5px; height: 57px;}
+#social ul { position: relative; top: 20px;}
+#topic { color: #d20000;  }
+a.button.black1 { background-image: url(../../../images/shop/bg-button-black2.png);  }
+#one td { padding-right: 18px; padding-bottom: 10px; }
+#one td:nth-child(2n) { padding-right: 0; }
+a.button.black2 { margin: 20px 0 0 60px; background-image: url(../../../images/shop/bg-button-black2.png); }
+
+.d-460x309 { margin-top: 18px; }
+.d-100x110:nth-child(4n) { margin-right: 20px; }
+#one .d-100x110:nth-child(5n) { margin-right: 0px; }
+.d-100x110 { margin-top: 20px; margin-bottom: 10px; }
+span.new { background-image: url(../../../images/shop/icon-new-red.png); }
