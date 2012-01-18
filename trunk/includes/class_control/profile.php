@@ -307,6 +307,113 @@
             $this->db->closedb();       
                return   $str; 
       }
+      function getmemorylist()
+      {
+         $sql='SELECT
+                    tb_memory.meid
+                    FROM
+                    tb_memory
+                    INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
+                    where  tb_member.username="'.$this->info['username'].'"
+                    order by tb_memory.createdate desc  ';
+                    
+                    
+
+           $this->limit = 10;   
+           
+            
+           $this->db->get_connect(); 
+           $this->db->db_set_recordset($sql);
+          // $dataarea=$this->db->db_get_recordset();
+           $this->total=$this->db->db_get_count(); 
+           $this->db->destory(); 
+
+           if(isset($this->info['pagenumber'])&&$this->info['pagenumber']!=1)
+           {
+              $pagenext=($this->limit*($this->info['pagenumber']-1)); 
+              $row=$pagenext;
+           }else
+           {
+               $pagenext=0;
+               $row=$pagenext;
+           }
+          $sql='  SELECT
+                    *
+                    FROM
+                    tb_memory
+                    
+                    INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
+                    where  tb_member.username="'.$this->info['username'].'"
+                    order by tb_memory.createdate desc
+                    limit  '.$pagenext.','.$this->limit;
+
+
+                     
+                     $this->db->db_set_recordset($sql);
+                     $datashop=$this->db->db_get_recordset();
+                     $this->db->destory(); 
+                     
+           if(count($datashop))
+           {
+               $str="";
+           $k=1;    
+           foreach($datashop as $valueshop)
+           {
+                   if(is_file(rootpath.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg'))
+                    {
+                      $pic=imginfo.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg';  
+                    }else
+                    {
+                       if(is_file(rootpath.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/original.jpg'))
+                    {
+
+                      $thumbfile7=fullpathimages.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['username'] . '/'.$valueshop['meid'].'/resize/original.jpg',$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $pic=imginfo.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg'; 
+                     } 
+                    }else
+                    {
+                       $pic=imginfo.'/images/default/no-image/100-80.jpg';  
+                    } 
+                        
+                        
+                        
+                         
+                    }
+           $mktime=strtotime($valueshop['createdate']) ;
+          $row++;
+           $str.='<tr>
+                      <td>'.$row.'</td>
+                                          <td>
+                                              '.date('l',$mktime).' <br />
+                                              '.date('d F Y',$mktime).' <br />
+                                              '.date('H:i:s',$mktime).'
+                                          </td>
+                                          <td>
+                                              <a target="_blank" href="'.homeinfo.'/'.$valueshop['username'].'/memory/'.$valueshop['memoryurl'].'"><img src="'.$pic.'" alt="thumb-01" /></a>
+                                          </td>
+                                          <td>
+                                              <strong>Title:</strong> '.strip_tags($valueshop['title']).' <br />
+                                              <strong>Description:</strong>  '.strip_tags($valueshop['description']).'  <br />
+                                          </td>
+                                          <td>
+                                              <a href="javascript:void(0);" class="btn-edit">Edit</a>
+                                              <a href="javascript:void(0);" class="btn-delete">Delete</a>
+                                          </td>
+                                      </tr>';
+            
+            
+            
+            
+            
+            $k++;
+           }
+           }
+            $this->db->closedb();       
+               return   $str; 
+      }
       function shop()
       {
                    $databird['noindexcss']=1;
@@ -347,23 +454,119 @@
                      $str=' <li><a href="'.homeinfo.'/'.$this->info['username'].'" class="icon">Itenary</a></li>
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon">Favorite</a></li>
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/shop" class="icon">Shop</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memory" class="icon">Memory</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Send to Friend</a></li>
+                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memory" class="icon">Personal Memory</a></li>
+                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memorylist" class="icon">Personal Memory List</a></li>
                       <li><a href="javascript:void(0);" class="icon">Share to Facebook</a></li>
                       <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>
                       <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>';
                       
                       return $str;
       }
-      function memory()
+       function memorylist()
       {
-          
-            $databird['noindexcss']=1;
+                   $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
         $databird['noheader']=1;
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+       $databird['tableshop']=$this->getmemorylist(); 
+        $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('memoryprofile');
+        
+        
+        $this->footer->get_footer();
+      }
+       function gettemplate()
+      {
+          
+          $this->db->get_connect();
+          $this->db->db_set_recordset('SELECT temid FROM `tb_template` where temid<>8');
+          $datatemplate=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb();
+          
+          return $datatemplate;
+          
+      }
+      function memory()
+      {
+          
+          
+          if($this->info['page'])
+          {
+               include(includepath.'/ajax.php');
+               $this->ajax=new ajax($this->db,$this->header,$this->footer);
+               
+               $data=$this->ajax->getmemory($this->info['page'],$this->info['username']);
+              if(count($data))
+              {
+                  
+
+                  $databird['fulljs'][]='http://maps.googleapis.com/maps/api/js?sensor=false';
+          
+          $databird['js'][]='jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js';
+          $databird['js'][]='jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js';
+          $databird['js'][]='youtube-player/jquery.swfobject.1-1-1.min.js';
+          $databird['js'][]='youtube-player/youTubeEmbed/youTubeEmbed-jquery-1.0.js';
+          
+          $databird['meid']=$data['0']['meid'];
+          $databird['title']=$data['0']['title'];
+          $databird['description']=$data['0']['description'];
+          $databird['daterange']=$data['0']['daterange'];
+          $databird['lat']=$data['0']['lat'];
+          $databird['lng']=$data['0']['lng'];
+          
+          $databird['address']=$data['0']['address'];
+          $databird['tel']=$data['0']['tel'];
+          $databird['email']=$data['0']['email'];
+          $databird['website']=$data['0']['website'];
+          $databird['pricerange']=$data['0']['pricerange'];
+          $databird['status']=$data['0']['status'];
+          $databird['video']=trim($data['0']['video']);
+          $databird['color']=$data['0']['color'];
+          
+           if($data['0']['status']==1)
+              {
+                  $databird['datavdo']=$this->ajax->insertgallery($databird['meid'],$this->info['username']);
+              }else  if($data['0']['status']==2)
+              {
+                  $databird['datavdo']='<iframe width="446" height="300" id="video"  src="http://www.youtube.com/embed/'.$databird['video'].'?wmode=transparent" frameborder="0" allowfullscreen></iframe>';
+              }
+              
+
+          $databird['js'][]='googlejs.js';
+          $databird['fullcss'][]=homeinfo.'/js/shop/youtube-player/youTubeEmbed/youTubeEmbed-jquery-1.0.css';
+          $databird['fullcss'][]=homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css';
+        //   $databird['probody']='onload="load()" onunload="GUnload()"';
+          $this->set_folder('user_c/'.$this->info['username'].'/'.$data['0']['meid']);
+          $this->set_data($databird);
+
+          $this->load($data['0']['tempath']); 
+                  
+                  
+              }else
+              {
+                 header("Location:".homeinfo.'/'.$this->info['username']); 
+              }
+            
+          }else
+          {
+          
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['noheader']=1;
+       $databird['js'][]='jquery.validate.js';
+       $databird['js'][]='scriptajaxregister4.js';
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+        $databird['template']=$this->gettemplate();
        $databird['leftmenu']=$this->getleftmenu();
         $databird['recent']=$this->getrecent();
 
@@ -375,6 +578,7 @@
         
         
         $this->footer->get_footer();
+          }
           
       }
       
