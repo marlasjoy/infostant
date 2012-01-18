@@ -139,8 +139,17 @@ class class_uri {
              {
                 $this->arraydata['username']=$this->arrayuri['1']; 
                 $this->arraydata['class']='profile';
-                $this->arraydata['function']=$this->arrayuri['2']; 
-                $this->arraydata['pagenumber']=$this->arrayuri['3'];
+                $this->arraydata['function']=$this->arrayuri['2'];
+                
+                if(is_numeric($this->arrayuri['3']))
+                {
+                  $this->arraydata['pagenumber']=$this->arrayuri['3'];  
+                }else
+                {
+                   $this->arraydata['page']=$this->arrayuri['3']; 
+                }
+                 
+                
                 
              }
            

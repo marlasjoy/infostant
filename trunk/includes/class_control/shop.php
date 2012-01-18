@@ -40,7 +40,7 @@
               
           }
           
-          $databird['fulljs'][]='http://maps.googleapis.com/maps/api/js?sensor=false&key='.googleapikey;
+          $databird['fulljs'][]='http://maps.googleapis.com/maps/api/js?sensor=false';
           
           $databird['js'][]='jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js';
           $databird['js'][]='jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js';
@@ -125,7 +125,7 @@
           $databird['landingpage']=$data['0']['tempath'].'_'.$this->info['lang'];
          //$databird['langnow']=$this->info['lang']; 
           
-          
+
          // $databird['shopurl']=$this->info['subdomain'];
           $this->set_data($databird);
 

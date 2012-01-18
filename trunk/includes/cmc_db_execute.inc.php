@@ -124,7 +124,7 @@ class db_execute extends db_config {
               foreach($data as $key=>$value)
               {
                   
-                 $datavalue[]=" $key = '$value' "; 
+                 $datavalue[]=" `$key` = '$value' "; 
               }
               
               $strkeyvalue= join(",", $datavalue); 
@@ -133,15 +133,15 @@ class db_execute extends db_config {
               SET $strkeyvalue
               WHERE $where";
               
-             // echo $sql;
+             //echo $sql;
            
            }else
            {
            $this->escape_str($data);  
            $strvalue= "'".join("','", $data). "'";
            $data=array_keys($data);
-           $strkey= join(",", $data);  
-           $sql="INSERT INTO $table ($strkey)
+           $strkey= join("`,`", $data);  
+           $sql="INSERT INTO $table (`$strkey`)
                  VALUES ($strvalue)";
                  
            }

@@ -12,6 +12,27 @@
        private $post;
        private $idna_convert;
        private $get;
+       private $rolearray=array('webboard','www','shop','infostant','digidai','flood','kuy','manage','register'
+,'registermember'
+,'registershop'
+,'editmap'
+,'powerbeemap'
+,'ajax','search'
+,'popup'
+,'popup2'
+,'popup3'
+,'popup4'
+,'popup5'
+,'service'
+,'package'
+,'promotion'
+,'package'
+,'profile'
+,'forgetpassword'
+,'setpassword'
+,'setaccept'
+,'aboutus'
+,'contact','admin') ;
        function ajax($db,$header,$footer,$info='')
       {
           $this->db=$db;
@@ -656,6 +677,39 @@
           return $datafile;
             
         }
+        function getmemory($str,$username)
+        {
+            $sql='SELECT
+tb_template.temname,
+tb_template.tempath,
+tb_memory.meid,
+tb_memory.lng,
+tb_memory.lat,
+tb_memory.daterange,
+tb_memory.description,
+tb_memory.title,
+tb_memory.address,
+tb_memory.tel,
+tb_memory.email,
+tb_memory.website,
+tb_memory.pricerange,
+tb_memory.status,
+tb_memory.video,
+tb_memory.color,
+tb_memory.memoryurl
+FROM
+tb_memory
+INNER JOIN tb_template ON tb_memory.temid = tb_template.temid
+INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
+where tb_member.username="'.$username.'" 
+and  tb_memory.memoryurl="'.$str.'" ';
+$this->db->get_connect();
+$this->db->db_set_recordset($sql);
+$data=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb(); 
+          return $data;
+        }
         function getshop($str,$table="tb_shop")
         {
           $this->db->get_connect();
@@ -784,6 +838,30 @@
           
           
       }
+      function savebg2()
+      {
+          if($this->post['meid'])
+          {
+          
+          $this->db->get_connect();
+          $data['color']=$this->post['color'];
+         
+           $this->db->db_set($data,'tb_memory'," tb_memory.meid='".$this->post['meid']."'  " );
+          
+          $this->db->destory();
+          $this->db->closedb(); 
+          $arraydata['resposne']=1;
+          echo array2json($arraydata); 
+          
+          }
+         // $data=$this->getshopbymid($_COOKIE['userid']);
+          
+
+          //$this->post['setdata']
+          //$this->post;
+          
+          
+      }
       function checkuserwithshop($shopurl,$userid='')
       {
          if($userid)
@@ -853,6 +931,29 @@
           }
           
       }
+      function savemap2()
+      {
+            
+
+
+          $this->db->get_connect();
+          list($lat,$lng,$proid,$disid,$tumid)=explode("pp",$this->post['setdata']);
+          $data['lat']=$lat;
+          $data['lng']=$lng;
+         // if($proid)$data['proid']=$proid;
+         // if($disid)$data['disid']=$disid;
+          //if($tumid)$data['tumid']=$tumid;
+          
+          $this->db->db_set($data,'tb_memory'," tb_memory.meid='".$this->post['meid']."'  " );
+          
+          $this->db->destory();
+          $this->db->closedb(); 
+          $arraydata['resposne']=1;
+          echo array2json($arraydata); 
+          
+    
+          
+      }
       function savevideo()
       {
              if($this->post['mid'])
@@ -872,6 +973,27 @@
           $arraydata['resposne']=1;
           echo array2json($arraydata); 
           }
+      }
+      function savevideo2()
+      {
+           if($this->post['meid'])
+           {
+               
+              $this->db->get_connect();
+           $data['video']=$this->post['value'];
+           $data['status']=2;
+           $table="tb_memory";
+           $this->db->db_set($data,$table,' meid='.$this->post['meid']);
+             $this->db->destory();
+             $this->db->closedb();  
+             $arraydata['resposne']=1;
+             echo array2json($arraydata);   
+               
+           }
+         
+          
+          
+         
       }
       
       function savetext()
@@ -928,6 +1050,49 @@
           $arraydata['resposne']=1;
           echo array2json($arraydata); 
           }
+      }
+      function savetext2()
+      {
+          if($this->post['mid'])
+          {
+         
+           $this->db->get_connect();
+           $data[$this->post['target']]=$this->post['value'];
+           $table="tb_memory";
+           $this->db->db_set($data,$table,' mid='.$this->post['mid'].' and meid='.$this->post['meid']);
+             $this->db->destory();
+             $this->db->closedb(); 
+          
+     
+          $arraydata['resposne']=1;
+          echo array2json($arraydata); 
+          
+          }
+         
+      }
+      function savetext3()
+      {
+          if($this->post['mid'])
+          {
+         
+           $this->db->get_connect();
+           $data['address']=$this->post['address'];
+           $data['tel']=$this->post['tel'];
+           $data['email']=$this->post['email'];
+           $data['website']=$this->post['website'];
+           $data['pricerange']=$this->post['pricerange'];
+           
+           $table="tb_memory";
+           $this->db->db_set($data,$table,' mid='.$this->post['mid'].' and meid='.$this->post['meid']);
+             $this->db->destory();
+             $this->db->closedb(); 
+          
+     
+          $arraydata['resposne']=1;
+          echo array2json($arraydata); 
+          
+          }
+         
       }
       function getlang($selected)
       {
@@ -1039,8 +1204,371 @@
                  echo array2json($arraydata); 
                
       }
+       function getimagebymeid($meid,$username)
+      {
+          
+          $arrayfiles=getFilesFromDir2(rootpath.'/images/user_c/'.$username.'/'.$meid);
+          return $arrayfiles;
+       
+
+      }
+      function gettablefile2($meid,$username)
+      {
+         $imagearray= $this->getimagebymeid($meid,$username);
+         $str='';
+         $k=1;
+         if(count($imagearray)&&isset($imagearray))
+         {
+         foreach($imagearray as $valueimage) 
+         {
+         list($name,$fileext)=explode(".",$valueimage); 
+         $str.='<li><a class="thumb" name="leaf" href="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'500x500.'.$fileext.'" title="Title #0">
+                                    <img src="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'75x75.'.$fileext.'" alt="Title #0" />
+                                </a>
+                                <div class="caption">
+                                    <div class="image-title">ชื่อรูป:'.$name.'</div>
+                                    <div class="image-desc">ชนิดรูปภาพ   image/jpeg</div>
+                                    <div class="image-desc">คำอธิบาย: <input type="text" value="" name="alt-'.$k.'" id="alt-'.$k.'" style="width: 150px;"></div>
+                                    <div class="image-desc">ทำรูปนี้เป็น Thumbnail <input type="checkbox" value="'.$k.'" name="check-'.$k.'" id="check-'.$k.'"></div>
+                                    <div class="image-desc">ทำรูปนี้เป็น Gallery <input type="checkbox" value="'.$k.'" name="check2-'.$k.'" id="check2-'.$k.'"></div>
+                                    <div class="image-desc"><input type="button" value="ใส่รูปภาพ" class="button" onclick="insertimage(\''.$name.'.'.$fileext.'\',\''.$k.'\' )" id="button'.$k.'"><input type="button" value="ลบรูปภาพนี้" class="button" onclick="deleteimage(\''.$name.'.'.$fileext.'\',\''.$k.'\' )" id="button'.$k.'"></div>
+                                </div>
+                            </li>';
+        $k++;
+         }
+         }
+         return $str;
+          
+      }
+      function insertgallery($meid='',$username='')
+      {
+          if($this->post['meid'])
+          {
+              
+              $meid=$this->post['meid'];
+          }if($this->post['username'])
+          {
+              $username=$this->post['username'];
+          }
+          $imagearray= $this->getimagebymeid($meid.'/gallery',$username);
+          
+                  if(count($imagearray)&&isset($imagearray))
+         {  
+             $str='<div id="myGallery3" class="royalSlider clearfix" style="width: 446px;height: 300px;margin: 0 auto;">
+              <div class="royalLoadingScreen"><p>Loading slider&hellip;<br>Click and drag to navigate</p></div>
+                <ul class="royalSlidesContainer" id="testId">';
+              foreach($imagearray as $valueimage) 
+         {
+                   list($name,$fileext)=explode(".",$valueimage); 
+                    $str.='<li class="royalSlide">  
+                   <a class="galleryimg" rel="group5" href="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/gallery/'.$name.'.'.$fileext.'"><img src="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'446x300.'.$fileext.'" alt="Title #0" /></a>
+                     </li>';
+                     
+         }
+              $str.='</ul></div>';       
+         
+         
+         }
+                     
+                    
+               
+                  
+                  
+                  if($this->post['calback'])
+                  {
+                       
+                       
+                       $this->db->get_connect();
+                       $arraydata['status']=1;
+                       $this->db->db_set($arraydata,'tb_memory',' meid='.$this->post['meid']);
+                       $this->db->destory();
+                       $this->db->closedb();
+                       $arraydata['table']=$str;
+                       
+                       
+                       echo array2json($arraydata); 
+                  }else
+                  {
+                      
+                      
+                      return $str;
+                  }
+          
+          
+      }
+      function gettablefile3($meid,$username)
+      {
+         $imagearray= $this->getimagebymeid($meid.'/gallery',$username);
+         $str='';
+         $k=1;
+         if(count($imagearray)&&isset($imagearray))
+         {
+         foreach($imagearray as $valueimage) 
+         {
+         list($name,$fileext)=explode(".",$valueimage); 
+         $str.='<li><a class="thumb" name="leaf" href="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'500x500.'.$fileext.'" title="Title #0">
+                                    <img src="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'75x75.'.$fileext.'" alt="Title #0" />
+                                </a>
+                                <div class="caption">
+                                    <div class="image-title">ชื่อรูป:'.$name.'</div>
+                                    <div class="image-desc">ชนิดรูปภาพ   image/jpeg</div>
+                                    
+                                    <div class="image-desc"><a  href="javascript:deleteimage(\''.$name.'.'.$fileext.'\',\''.$k.'\' );" class="button">ลบรูปภาพนี้</a>
+                                    </div>
+
+                                </div>
+                            </li>';
+        $k++;
+         }
+         }
+         return $str;
+          
+      }
+      function uploadfile2()
+      {      
+         if($_FILES['Filedata']["name"])
+         {
+         $uploads_dir=rootpath . $this->post['folder'] ;
+         $arrayfolder=explode('/',$this->post['folder']);
+         $name = $_FILES["Filedata"]["name"];
+         if(is_file("$uploads_dir/$name"))
+         {
+             $i=1;
+             $k=1;
+             $arrayfile=explode(".",$name);
+             $filename=$arrayfile[0];
+             $ext=$arrayfile[count($arrayfile)-1];
+             while ($i <= 10) {
+                 if(is_file("$uploads_dir/$filename$k".'.'.$ext))
+                 {
+                     
+                 }else
+                 {
+                     $name=$filename.$k.'.'.$ext;
+                     break;
+                 }
+               $k++;
+            }
+
+         }   
+         if(move_uploaded_file($_FILES["Filedata"]["tmp_name"], "$uploads_dir/$name"))
+         {
+             
+         chmod( "$uploads_dir/$name",0777);    
+           
+           
+         include(pluginpath.'/simpleimage.php');
+         
+         $arrayfile=explode(".",$name);
+         $filename=$arrayfile[0];
+         $ext=$arrayfile[count($arrayfile)-1];
+         
+         $image = new SimpleImage();
+         $image->load( "$uploads_dir/$name");
+         
+         
+         
+         $image->resizeToWidth(500);
+         $newfile=$filename.'500x500'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         
+         chmod(  "$uploads_dir/resize/$newfile",0777); 
+         
+         $image->resize(75,75);
+         $newfile=$filename.'75x75'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         chmod(  "$uploads_dir/resize/$newfile",0777);
+         
+
+         $arraydata['table']=$this->gettablefile2($arrayfolder[4],$arrayfolder[3]);
+         echo array2json($arraydata); 
+         
+          } 
+         
+         }  
+
+               
+      }
+      function uploadfile3()
+      {      
+         if($_FILES['Filedata']["name"])
+         {
+         $uploads_dir=rootpath . $this->post['folder'] ;
+         $arrayfolder=explode('/',$this->post['folder']);
+         $name = $_FILES["Filedata"]["name"];
+         if(is_file("$uploads_dir/gallery/$name"))
+         {
+             $i=1;
+             $k=1;
+             $arrayfile=explode(".",$name);
+             $filename=$arrayfile[0];
+             $ext=$arrayfile[count($arrayfile)-1];
+             while ($i <= 10) {
+                 if(is_file("$uploads_dir/gallery/$filename$k".'.'.$ext))
+                 {
+                     
+                 }else
+                 {
+                     $name=$filename.$k.'.'.$ext;
+                     break;
+                 }
+               $k++;
+            }
+
+         }   
+         if(move_uploaded_file($_FILES["Filedata"]["tmp_name"], "$uploads_dir/gallery/$name"))
+         {
+             
+         chmod( "$uploads_dir/gallery/$name",0777);    
+           
+           
+         include(pluginpath.'/simpleimage.php');
+         
+         $arrayfile=explode(".",$name);
+         $filename=$arrayfile[0];
+         $ext=$arrayfile[count($arrayfile)-1];
+         
+         $image = new SimpleImage();
+         $image->load( "$uploads_dir/gallery/$name");
+         
+         
+         
+         $image->resizeToWidth(500);
+         $newfile=$filename.'500x500'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         
+         chmod(  "$uploads_dir/resize/$newfile",0777); 
+         
+         $image->resize(75,75);
+         $newfile=$filename.'75x75'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         chmod(  "$uploads_dir/resize/$newfile",0777);
+         
+         
+         $newfile=$filename.'446x300'.'.'.$ext;
+         
+                   if(copy(homeinfo.'/plugins/showimages.php?width='.'446'.'&height='.'300'.'&source='.homeinfo.$this->post['folder'].'/gallery/'.$name, "$uploads_dir/resize/$newfile"))
+                     {
+                       chmod( "$uploads_dir/resize/$newfile",0777);
+                    }
+         
+         
+
+         $arraydata['table']=$this->gettablefile3($arrayfolder[4],$arrayfolder[3]);
+         echo array2json($arraydata); 
+         
+          } 
+         
+         }  
+
+               
+      }
      
-      function resizefile()
+      function saveimagefile2()
+      {
+          list($name,$fileext)=explode(".",$this->post['filename']); 
+          list($width,$height)=explode("x",$this->post['resize']); 
+          $resize=$width.'x'.$height;
+          $dir_dest = rootpath . $this->post['folder'] . '/resize/';
+          $newfile=$dir_dest.$name.$resize.'.'.$fileext;
+          
+          if(is_file($newfile))
+          {
+            $arraydata['filedata']=$name.$resize.'.'.$fileext;  
+            $arraydata['width']=$width;
+            $arraydata['height']=$height;
+            $arraydata['fileorigi']=$this->post['filename'];
+          }else
+          {
+               //list($width,$height)= explode("x",$resize);
+             if(copy(homeinfo.'/plugins/showimages.php?width='.$width.'&height='.$height.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$newfile))
+                     {
+                       chmod($newfile,0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata['filedata']=$name.$resize.'.'.$fileext;  
+                       $arraydata['width']=$width;
+                       $arraydata['height']=$height;
+                       $arraydata['fileorigi']=$this->post['filename'];
+                     } 
+                     
+          }
+         $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
+         $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
+         $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
+         $thumbfile4=$dir_dest.'thumb4'.'.'.$fileext;
+         $thumbfile5=$dir_dest.'thumb5'.'.'.$fileext;
+         $thumbfile6=$dir_dest.'original'.'.'.$fileext;
+         $thumbfile7=$dir_dest.'thumb7'.'.'.$fileext;
+         $access=0;
+         if(is_file($thumbfile1))
+         {
+               if($this->post['thumb']=="1")
+               {
+                   $access=1;
+               }
+             
+         }else
+         {
+          $access=1;    
+         }  
+          if($access)
+          {
+          //if(copy(homeinfo.'/plugins/showimages.php?width='.'269'.'&height='.'218'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile1))
+//                     {
+//                       chmod($thumbfile1,0777);
+//                     }
+//         if(copy(homeinfo.'/plugins/showimages.php?width='.'176'.'&height='.'95'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile2))
+//                     {
+//                       chmod($thumbfile2,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'120'.'&height='.'90'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile3))
+//                     {
+//                       chmod($thumbfile3,0777);
+//                     }
+          //if(copy(homeinfo.'/plugins/showimages.php?width='.'302'.'&height='.'220'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile4))
+//                     {
+//                       chmod($thumbfile4,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile5))
+//                     {
+//                       chmod($thumbfile5,0777);
+//                     }
+          if(copy(homeinfo.$this->post['folder'] . '/'.$this->post['filename'],$thumbfile6))
+                     {
+                       chmod($thumbfile6,0777);
+                     }
+           //if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$thumbfile7))
+//                     {
+//                       chmod($thumbfile7,0777);
+//                     }
+          }
+          
+          $arrayfolder=explode('/',$this->post['folder']);
+          
+          $file=fullpathtemp2.$arrayfolder[3].'/'.$arrayfolder[4].'/index.php';
+          
+          
+          $html=file_get_html($file);
+          $strcode='<div style="width: '.$width.'px;height: '.$height.'px;background-image: url('.homeinfo.$this->post['folder'].'/resize/'.$arraydata['filedata'].');background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">
+          <a class="galleryimg" rel="'.$this->post['group'].'" href="'.homeinfo.$this->post['folder'].'/'.$arraydata['fileorigi'].'"><img style="opacity:0" alt="'.$this->post['alt'].'"  src="'.homeinfo.$this->post['folder'].'/resize/'.$arraydata['filedata'].'"></a></div>';
+          $html->find('div#'.$this->post['resize'].'', 0)->innertext=$strcode;
+          $html->find('div[id=textx'.$this->post['resize'].']', 0)->innertext=$this->post['alt'];
+          $fp = fopen($file, 'w');
+          fwrite($fp, $html);
+          fclose($fp);
+          $arraydata['resposne']=1;
+          $arraydata['imgstr']=$strcode;
+          $arraydata['alt']=$this->post['alt'];
+          
+          //$arraydata['html']=$html;
+          echo array2json($arraydata); 
+          
+          
+          
+
+      
+      }
+      function resizefile ()
       {
           list($name,$fileext)=explode(".",$this->post['filename']); 
           list($width,$height)=explode("x",$this->post['resize']); 
@@ -1170,6 +1698,66 @@
           echo array2json($arraydata); 
           
       }
+      function deletefile2()
+      {
+          //$this->isloginandmyshop();
+          $dir_dest = rootpath . $this->post['folder'] . '/'.$this->post['filename'];
+          $dir_resize = rootpath . $this->post['folder'] . '/resize/';
+          if(unlink($dir_dest))
+          {
+           $arraysize=explode("&",size);  
+           list($name,$fileext)=explode(".",$this->post['filename']); 
+           foreach($arraysize as $valuesize)
+           {
+               
+            if(@unlink($dir_resize.$name.$valuesize.'.'.$fileext))
+            {
+                
+            }       
+           
+           }   
+           $arrayfolder=explode('/',$this->post['folder']);
+          
+           $arraydata['table']=$this->gettablefile2($arrayfolder[4],$arrayfolder[3]);   
+           $arraydata['resposne']="ลบสำเร็จ";
+          }else
+          {
+            $arraydata['resposne']="ลบไม่สำเร็จ";  
+          }
+          
+          echo array2json($arraydata); 
+          
+      }
+      function deletefile3()
+      {
+          //$this->isloginandmyshop();
+          $dir_dest = rootpath . $this->post['folder'] . '/gallery/'.$this->post['filename'];
+          $dir_resize = rootpath . $this->post['folder'] . '/resize/';
+          if(unlink($dir_dest))
+          {
+           $arraysize=explode("&",size);  
+           list($name,$fileext)=explode(".",$this->post['filename']); 
+           foreach($arraysize as $valuesize)
+           {
+               
+            if(@unlink($dir_resize.$name.$valuesize.'.'.$fileext))
+            {
+                
+            }       
+           
+           }   
+           $arrayfolder=explode('/',$this->post['folder']);
+          
+           $arraydata['table']=$this->gettablefile3($arrayfolder[4],$arrayfolder[3]);   
+           $arraydata['resposne']="ลบสำเร็จ";
+          }else
+          {
+            $arraydata['resposne']="ลบไม่สำเร็จ";  
+          }
+          
+          echo array2json($arraydata); 
+          
+      }
       
       function getimagebyshop($shopurl)
       {
@@ -1284,6 +1872,40 @@
           return $check;
           
        }
+       function checkmemoryexit($str)
+       {
+        //   echo 'SELECT meid FROM `tb_memory` where memoryurl="'.$str.'" and mid="'.$mid.'" ';
+            //    if(preg_match('/^[a-zก-๙0-9เ]+$/i',$str))$str=$this->changeidn($str);
+           $this->db->get_connect();
+          if($_COOKIE['userid'])
+          {
+              $mid=$_COOKIE['userid'];
+          }else
+          {
+              $mid=$this->post['userid'];
+          }
+          
+          $this->db->db_set_recordset('SELECT meid FROM `tb_memory` where memoryurl="'.$str.'" and mid="'.$mid.'" ');
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+          
+            if(count($data)!=0)
+          {
+              $check=0;  
+          }else
+          {
+              $check=1;  
+              
+        
+              
+               
+          }
+         
+          
+          
+          return $check;
+          
+       }
        
        function  getshopcat($str)
        {
@@ -1308,7 +1930,7 @@
        {
           $str= $this->post['shopurl'];  
         //  echo $str;
-         $role=array('webboard','www','shop','infostant','digidai','flood') ;       
+         $role=$this->rolearray;       
            
         if(preg_match('/^[a-zก-๙0-9เ]+$/i',$str)&&!in_array($str,$role)){
           $check=$this->checkshopexit($str);
@@ -1328,9 +1950,33 @@
            
        }
        
+       function checkmemoryurl($noecho="")
+       {
+          $str= $this->post['memoryurl'];  
+        //  echo $str;
+         $role=$this->rolearray ;       
+           
+        if(preg_match('/^[a-zก-๙0-9เ]+$/i',$str)&&!in_array($str,$role)&&!is_numeric($str)){
+          $check=$this->checkmemoryexit($str);
+          }else{
+         //  if(preg_match('/^[a00-9]+$/i',$str))   
+          $check=0;
+         }
+         
+         
+         
+          if($check){if($noecho) return true; else echo "true";}
+          else{ if($noecho) return false; else echo "false";}
+          
+          
+          
+
+           
+       }
+       
        function checkusername($noecho="")
        {
-          $role=array('webboard','www','shop','infostant','digidai','flood','kuy') ;  
+          $role=$this->rolearray ;  
           $str= $this->post['username'];  
         if(preg_match('/^[a-z0-9]+$/i',$str)&&!in_array($str,$role)){
             
@@ -1364,6 +2010,97 @@
            
            $decode_url = $this->idna_convert->encode($subdomain);
            return $decode_url;
+       }
+       function savememory()
+       {
+            $arraydata=array();
+
+
+         
+         if(is_array($this->post))
+         {
+             foreach($this->post as $key => $value)
+             {
+                          if($value=="") 
+                          $arraydata[]=$key;   
+                          
+             }
+
+         }
+         if(count($arraydata)>0)
+         {
+             
+             $arraydata['error']="กรอกข้อมูลไม่ครบ";
+             echo array2json($arraydata);
+             exit();
+         }
+         
+      
+         if(!$this->checkmemoryurl(1))
+        {
+            $arraydata['error']=" ชื่ออัลบั้ม ซ้ำ หรือ มีตัวอักษรพิเศษ";
+            echo array2json($arraydata); 
+            exit();
+        }
+        $arraymemmory['createdate']=date("Y-m-d H:i:s");
+        $arraymemmory['updatedate']=date("Y-m-d H:i:s");
+        $arraymemmory['temid']=$this->post['template'];
+        $arraymemmory['mid']=$this->post['mid'];
+        $arraymemmory['memoryurl']=$this->post['memoryurl'];
+        
+        
+       
+        
+       // $arraymember['ip']=$_SERVER['REMOTE_ADDR'];
+        $this->db->get_connect();
+        $this->db->db_set($arraymemmory,'tb_memory');
+        $meid= $this->db->db_get_last_number();
+     //   $arraymember['mid']=$mid;
+        $this->db->destory();
+        $this->db->closedb();
+        
+        
+        
+         if(!is_dir(fullpathtemp2.$this->post['username']))
+         {
+             mkdir(fullpathtemp2.$this->post['username']);
+             chmod(fullpathtemp2.$this->post['username'],0777);
+         }
+         if(!is_dir(fullpathimages2.$this->post['username']))
+         {
+             mkdir(fullpathimages2.$this->post['username']);
+             chmod(fullpathimages2.$this->post['username'],0777);
+         }
+        
+         if(!is_dir(fullpathtemp2.$this->post['username'].'/'.$meid))
+         {
+             mkdir(fullpathtemp2.$this->post['username'].'/'.$meid);
+             chmod(fullpathtemp2.$this->post['username'].'/'.$meid,0777);
+         }
+         if(!is_dir(fullpathimages2.$this->post['username'].'/'.$meid))
+         {
+             mkdir(fullpathimages2.$this->post['username'].'/'.$meid);
+             chmod(fullpathimages2.$this->post['username'].'/'.$meid,0777);
+         }
+         if(!is_dir(fullpathimages2.$this->post['username'].'/'.$meid.'/resize'))
+         {
+             mkdir(fullpathimages2.$this->post['username'].'/'.$meid.'/resize');
+             chmod(fullpathimages2.$this->post['username'].'/'.$meid.'/resize',0777);
+         }
+         $data=$this->getmemory($this->post['memoryurl'],$this->post['username']);
+         
+         if(copy(fullpathtemplates2.$data['0']['temname'].'/'.$data['0']['tempath'].'.php',fullpathtemp2.$this->post['username'].'/'.$meid.'/'.$data['0']['tempath'].'.php')){
+             $file=fullpathtemp2.$this->post['username'].'/'.$meid.'/'.$data['0']['tempath'].'.php';
+             chmod($file,0777);
+         }
+         
+         $arraydata['memoryurl']=$this->post['memoryurl'];
+         $arraydata['username']=$this->post['username'];
+            echo array2json($arraydata); 
+            exit();
+         
+       
+        
        }
        function savemember()
        {
@@ -2808,12 +3545,19 @@
                        if($this->checkuserwithshop($shopurl,$this->post['mid']))
                       {   
                        // echo  "no";
-                               
-                           $html=file_get_html('http://'.$shopurl.'.'.domain);
+                            $opts = array(
+  'http'=>array(
+    'user_agent'=>"Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
+  )
+);
+
+$context = stream_context_create($opts);   
+                           $html=file_get_html('http://'.$shopurl.'.'.domain,false,$context);
                            $html->find('#checklogin',0)->innertext=1;
                            $html->find('#access',0)->innertext=1;
                            $html->find('div.inner',0)->innertext='';
                            $html->find('p',1)->innertext='';
+                           $html->find('#videotext',0)->innertext='';
                            foreach($html->find('a.ir') as $ele)
                            {
                              //  echo   $ele->href."<br>";
@@ -2850,6 +3594,7 @@
                                {
                                     $ele->href="javascript:void(0);";
                                }
+                              
                                
                            }
                          $arraydata['bodyclass']   = $html->find('body',0)->class;   
@@ -2925,53 +3670,54 @@ where tb_shop.shopurl="'.$shopurl.'"');
                        $arraydata['fileorigi']=$filenow;
                      }
                      
-              $resize2='200x128';       
-              $newfile2=$dir_dest.$filename.$resize2.'.'.$fileext;
-          
+           //   $resize2='200x128';       
+            //  $newfile2=$dir_dest.$filename.$resize2.'.'.$fileext;
+              $thumbfile6=$dir_dest.'original'.'.'.$fileext; 
+
           
                //list($width,$height)= explode("x",$resize);
-             if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'128'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$newfile2))
-                     {
-                       chmod($newfile2,0777);
+           //  if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'128'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$newfile2))
+//                     {
+//                       chmod($newfile2,0777);
 
-                     }          
+//                     }          
                      
 
               
               
              // $thumbfile0=$dir_dest.$filename.'200x128'.'.'.$fileext;
-              $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
-              $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
-              $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
-              $thumbfile4=$dir_dest.'thumb4'.'.'.$fileext;
-              $thumbfile5=$dir_dest.'thumb5'.'.'.$fileext;
-              $thumbfile6=$dir_dest.'original'.'.'.$fileext; 
+          //    $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
+           //   $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
+         //     $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
+          //    $thumbfile4=$dir_dest.'thumb4'.'.'.$fileext;
+          //    $thumbfile5=$dir_dest.'thumb5'.'.'.$fileext;
               
-         if(copy(homeinfo.'/plugins/showimages.php?width='.'269'.'&height='.'218'.'&source='.homeinfo .'/'.$this->post['folder'].'/'.$filenow,$thumbfile1))
-                     {
-                       @chmod($thumbfile1,0777);
-                     }
-         if(copy(homeinfo.'/plugins/showimages.php?width='.'176'.'&height='.'95'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile2))
-                     {
-                       @chmod($thumbfile2,0777);
-                     }
-          if(copy(homeinfo.'/plugins/showimages.php?width='.'120'.'&height='.'90'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile3))
-                     {
-                       @chmod($thumbfile3,0777);
-                     }
-          if(copy(homeinfo.'/plugins/showimages.php?width='.'302'.'&height='.'220'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile4))
-                     {
-                       @chmod($thumbfile4,0777);
-                     }
-          if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'. $this->post['folder'].'/'.$filenow,$thumbfile5))
-                     {
-                       @chmod($thumbfile5,0777);
-                     }
+  
+//         if(copy(homeinfo.'/plugins/showimages.php?width='.'269'.'&height='.'218'.'&source='.homeinfo .'/'.$this->post['folder'].'/'.$filenow,$thumbfile1))
+//                     {
+//                       @chmod($thumbfile1,0777);
+//                     }
+//         if(copy(homeinfo.'/plugins/showimages.php?width='.'176'.'&height='.'95'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile2))
+//                     {
+//                       @chmod($thumbfile2,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'120'.'&height='.'90'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile3))
+//                     {
+//                       @chmod($thumbfile3,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'302'.'&height='.'220'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile4))
+//                     {
+//                       @chmod($thumbfile4,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'. $this->post['folder'].'/'.$filenow,$thumbfile5))
+//                     {
+//                       @chmod($thumbfile5,0777);
+//                     }
           if(copy(homeinfo .'/'. $this->post['folder'] . '/'.$filenow,$thumbfile6))
                      {
                        @chmod($thumbfile6,0777);
                      }
-                     
+         
                      
                       $file=fullpathtemp.$this->post['shopurl'].'/'.$this->post['filename'].'.php';
                      $this->post['width']=$width;

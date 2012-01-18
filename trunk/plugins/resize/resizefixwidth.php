@@ -1,5 +1,5 @@
 <?php
-define('rootdir','/home/ibuy/public_html');
+//define('rootdir','/home/ibuy/public_html');
 //setup template engine
 require_once rootdir.'/includes/resize/ThumbLib.inc.php';
 $thumb = PhpThumbFactory::create($_GET['images']);

@@ -26,6 +26,7 @@ $pageconfig=array('register'
 ,'setaccept'
 ,'aboutus'
 ,'contact'
+,'manage'=>'manage'
 );
 $subconfig=array('map'=>'map');
 $pageobj=array('ajax');
@@ -50,6 +51,14 @@ define('fullpathtemp',rootpath.'/templates/shop_c/');
 define('fullpathimages',rootpath.'/images/shop_c/');  
 define('fullpathtemplates',rootpath.'/templates/shop/'); 
 
+
+
+define('fullpathtemp2',rootpath.'/templates/user_c/'); 
+define('fullpathimages2',rootpath.'/images/user_c/');
+define('fullpathtemplates2',rootpath.'/templates/user/');   
+
+
+
 define('charset','UTF-8');
 
 //$mobile =mobile_device_detect();
@@ -68,6 +77,9 @@ if($info['sub']=="flood")
 {
     define('homeinfo','http://www.infostant.com'); 
 }
+
+
+define('imginfo','http://www.infostant.com');
 if($mobile&&$info['class']!='ajax'&&$info['class']!='map')
 {
   $info['mobile']=1;
