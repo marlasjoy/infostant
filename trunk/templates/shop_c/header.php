@@ -22,25 +22,9 @@
     <form name="login" method="post" action="<?=homeinfo?>/ajax/logoutuser">
     <section id="login">
     <p style="padding-top: 10px;">
-       <div id="divuser" onmouseover="$('#at15s').show()"  style="padding-right: 10px; float: left;"><? echo $_COOKIE['userlogin']?></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div>
+       <div id="divuser"   style="padding-right: 10px; float: left;"><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>"><? echo $_COOKIE['userlogin']?></a></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div>
       </p>
-      <div id="at15s"    style="z-index: 1000000; position: absolute; visibility: visible; top: 50px; left: 754px; width: 250px;color: black; display: none; " >
-<div id="at15s_inner">
-<div id="at15s_head" style="padding-bottom: 10px"><span id="at15ptc"><strong> รายชื่อเว็บที่ได้ขอความช่วยเหลือไว้</strong></span><span id="at15s_brand" class="at15s_brandx"></span><a onclick="$('#at15s').hide()" href="#" id="at15sptx">X</a></div>
-<?
-if(count($this->data['listshop']))
-{
-foreach($this->data['listshop'] as $listshop)
-{
-    ?>
-    <div style="padding-top: 10px"><a style="color:black;" href="http://<?=$listshop['shopurl']?>.<?=domain?>"><?=$listshop['shopname']?></a></div>
-    <?
-}
-}
-?>
-<div style="padding-bottom: 10px;padding-top: 10px"><a style="color:red;" href="<?=homeinfo?>/register">สมัครเพิ่ม</a></div>
-</div>
-</div>
+
     </section>
     </form>
     <?}?>

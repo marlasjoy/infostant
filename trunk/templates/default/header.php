@@ -67,25 +67,9 @@ foreach($this->data['option'] as $value){ ?>
                 <?}else{?>
                              <form name="login" method="post" action="<?=homeinfo?>/ajax/logoutuser">    
                                 <section id="login"> 
-                                <p><div onmouseover="$('#at15s').show()" style="padding-right: 10px; float: left;"><? echo $_COOKIE['userlogin']?></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div></p>
-                                 <div id="at15s"    style="z-index: 1000000; position: absolute; visibility: visible; top:20px; left: -200px; width: 250px;color: black; display: none; " >
-<div id="at15s_inner">
-<div id="at15s_head" style="padding-bottom: 10px"><span id="at15ptc"><strong><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>"> หน้าโปรไฟล์ของคุณ</a></strong></span><span id="at15s_brand" class="at15s_brandx"></span><a href="javascript:void(0);" onclick="$('#at15s').hide()"   id="at15sptx">X</a></div>
-<?
-if(count($this->data2['listshop']))
-{
-foreach($this->data2['listshop'] as $listshop)
-{
-    ?>
-    <div style="padding-top: 10px"><a style="color:black;text-decoration: none;" href="http://<?=$listshop['shopurl']?>.<?=domain?>"><?=$listshop['shopname']?></a></div>
-    <?
-}
-}
-?>
-<div style="padding-bottom: 10px;padding-top: 10px"><a style="color:red; text-decoration: none;" href="<?=homeinfo?>/register">สมัครเพิ่ม</a></div>
-</div>
-</div>
-                                </section>  
+                                <p><div  style="padding-right: 10px; float: left;"><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>"><? echo $_COOKIE['userlogin']?></a></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div></p>
+                                 
+                                                                 </section>  
                                       </form>      
           <?}?>
               

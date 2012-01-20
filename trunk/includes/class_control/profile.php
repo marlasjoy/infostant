@@ -367,8 +367,8 @@
                        if(is_file(rootpath.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/original.jpg'))
                     {
 
-                      $thumbfile7=fullpathimages.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg';  
-                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['username'] . '/'.$valueshop['meid'].'/resize/original.jpg',$thumbfile7))
+                      $thumbfile7=fullpathimages2.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/user_c/'. $valueshop['username'] . '/'.$valueshop['meid'].'/resize/original.jpg',$thumbfile7))
                      {
                        chmod($thumbfile7,0777);
                        $pic=imginfo.'/images/user_c/'.$valueshop['username'].'/'.$valueshop['meid'].'/resize/thumb7.jpg'; 
