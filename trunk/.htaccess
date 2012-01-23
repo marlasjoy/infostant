@@ -10,3 +10,7 @@ RewriteRule ^ - [L]
 RewriteRule . index.php [L]
 
 
+# sample for a file .htaccess in your www root directory
+AddType text/html .html
+AddHandler server-parsed .html
+Options Indexes FollowSymLinks Includes
