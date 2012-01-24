@@ -3152,6 +3152,144 @@ $data=$this->db->db_get_recordset();
           exit();  
            
        }
+        function getallshopbyname3()
+       {
+           header("content-type: text/javascript");
+         //  if(isset($_GET['name']) && isset($_GET['callback']))
+//    {
+//        $obj->name = $_GET['name'];
+//        $obj->message = "Hello " . $obj->name;
+// 
+//        echo $_GET['callback']. '(' . json_encode($obj) . ');';
+//    }
+          // exit();
+          $where="";
+          if($_GET['searchTxt'])
+          {
+             $keyword=$_GET['searchTxt']; 
+              $where[]=" ( tb_shop.title like '%$keyword%'   or
+           tb_shop.shopname like '%$keyword%'   or
+           tb_shop.description like '%$keyword%'  or
+           tb_shop.keyword like '%$keyword%' )
+            ";
+          }
+          if($_GET['proid'])
+          {
+             $proid=$_GET['proid']; 
+              $where[]="  tb_shop.proid = '$proid' 
+            ";
+          }
+          if($_GET['disid'])
+          {
+             $disid=$_GET['disid']; 
+              $where[]="  tb_shop.disid = '$disid' 
+            ";
+          }
+          if($_GET['tumid'])
+          {
+             $tumid=$_GET['tumid']; 
+              $where[]="  tb_shop.tumid = '$tumid' 
+            ";
+          }
+          if($_GET['catid'])
+          {
+             $catid=$_GET['catid']; 
+              $where[]="  tb_shop.catid = '$catid' 
+            ";
+          }
+          if($_GET['subcatid'])
+          {
+             $subcatid=$_GET['subcatid']; 
+              $where[]="  tb_shop.subcatid = '$subcatid' 
+            ";
+          }
+          
+              $this->db->get_connect();
+          $this->db->db_set_recordset('
+                                    SELECT
+                                                tb_shop.shopname,
+                                                tb_shop.shopurl,
+                                                tb_shop.title,
+                                                tb_shop.description,
+                                                tb_shop.namepost,
+                                                tb_shop.tel,
+                                                tb_shop.emailshop,
+                                                tb_shop.address,
+                                                tb_shop.daterange,
+                                                tb_province.proname
+                                    FROM
+                                    tb_shop
+                                    INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
+                                    INNER JOIN tb_cat ON tb_shop.catid = tb_cat.catid
+                                    where  
+                                    '.join("and",$where).'
+                                     
+                                    order by    tb_shop.createdate desc
+                                    
+                                    ');
+                              
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb(); 
+          $datafile=array();
+          if(count($data))
+          {
+              $k=1;
+              foreach($data as $value)
+              {
+                //  $arraylat[]=$value['lat'];
+                //  $arraylng[]=$value['lng'];
+                  //$str[]="['".$value['shopname']."',".$value['lat'].",".$value['lng'].",".$k."]";
+                  $arraydata[$k]['title']=$value['title'];
+                  $arraydata[$k]['description']=strip_tags($value['description']); 
+                  $arraydata[$k]['shopurl']= 'landing.html?shopurl='.$value['shopurl'];   
+                  $arraydata[$k]['shopname']=$value['shopname']; 
+                  $arraydata[$k]['namepost']=$value['namepost'];
+                  $arraydata[$k]['emailshop']=$value['emailshop'];
+                  $arraydata[$k]['address']=$value['address'];
+                  $arraydata[$k]['daterange']=$value['daterange'];
+                  $arraydata[$k]['proname']=$value['proname'];    
+                  $arraydata[$k]['tel']=$value['tel'];
+                //  $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
+            //      $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+                   if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg'))
+                    {
+                   // if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/thumb4.jpg',$thumbfile5))
+//                     {
+//                       chmod($thumbfile5,0777);
+//                     }
+                      $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';
+                      if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg'))
+                    {
+                        $arraydata[$k]['pic2']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg';       
+                      
+                    }else
+                    {
+                        
+                       $arraydata[$k]['pic2']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg'; 
+                    }  
+                    
+                    }else
+                    {
+                      $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';    
+                    }   
+                  $k++;
+                  
+              }
+              //$datafile['latnew']=array_sum($arraylat)/count($arraylat);
+              //$datafile['lngnew']=array_sum($arraylng)/count($arraylng);
+              
+          //   $newjson= join(",",$str);
+            // $datafile['json']=$newjson;
+           ///  $datafile['json2']=array2json($arraydata);
+              
+          }
+          
+          
+          echo        $_GET['callback'].'(' . json_encode($arraydata) . ');'; 
+          exit();  
+           
+       }
        function submitformiphone()
        { 
 
