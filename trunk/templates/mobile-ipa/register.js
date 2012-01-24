@@ -126,7 +126,7 @@ $( function() {
                                                     });
     
           }); 
-    $('#cat').change(function() {
+       $('#cat').change(function() {
 
 
                    $.ajax({

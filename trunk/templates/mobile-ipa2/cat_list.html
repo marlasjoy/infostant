@@ -1,35 +1,17 @@
-<!DOCTYPE html> 
-<html> 
-    <head> 
-    <title>Infostant</title> 
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
-    
-    <link rel="stylesheet" href="jquery.mobile.min.css" />
-    <link rel="stylesheet" href="jquery.mobile.structure.min.css" />
-    
-      <script src="jquery-1.7.1.min.js"></script>
-    <script src="jquery.animate-enhanced.min.js"></script>
-    <script src="plugins.js"></script>
-    <script src="jquery.mobile.min.js"></script>
-
-</head> 
-<body> 
-
-<div id="index" data-role="page">
-
-    <div data-role="header" data-position="fixed">
-        <div>
+<div id="cat_list" data-role="page">
+<div data-role="header" id="headerfile" data-position="fixed">
+<div>
+            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
             <h1><a href="index.html" data-transition="flip">infostant</a></h1>
             <nav>
                 <ul class="h">
                     <li><a href="search.html" data-transition="slide">search</a></li>
-                    <li><a class="functionlink" href="#">function</a></li>
+                    <li><a class="functionclick" href="#">function</a></li>
                     <li><a href="directory.html" data-transition="slide">directory</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="functionclass" id="function">
+        <div  id="function">
             <ul class="v">
                 <li><a href="setting.html"><span>Settings</span></a></li>
                 <li><a href="directory.html"><span>Directory</span></a></li>
@@ -47,27 +29,20 @@
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
-    </div><!-- /header -->
-    
-
+</div>
     <div data-role="content">    
-            <!-- <img src="images/img-intro2.jpg" alt="img-intro2" /> -->
-    </div><!-- /content -->
-
-    <div data-role="footer" data-position="fixed">
-        <ul class="h">
-            <li><a href="#"><img src="images/img-group-01.jpg" alt="img-group-01" /></a></li>
-            <li><a href="#"><img src="images/img-group-02.jpg" alt="img-group-01" /></a></li>
+        <h2>Recent view <a href="#" class="button share"></a></h2>
+        <ul id="share" class="h">
+            <li><a href="#">infotstant</a></li>
+            <li><a href="#">facebook</a></li>
+            <li><a href="#">twitter</a></li>
+            <li><a href="#">google+</a></li>
+            <li><a href="#">email</a></li>
         </ul>
-    </div><!-- /footer -->
+        <div class="subpage">
+            <ul class="v" id="searchresulthtml">
+              
+            </ul>
+        </div>
+    </div><!-- /content -->
 </div><!-- /page -->
-
-<script type="text/javascript">
-$(document).bind("mobileinit", function(){
-  $.mobile.touchOverflowEnabled = true;
-
-});   
-
-</script>
-</body>
-</html>
