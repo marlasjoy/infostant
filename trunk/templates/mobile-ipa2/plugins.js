@@ -59,6 +59,33 @@ window.log = function(){
      catid="";
      searchTxt="";
  }
+  function getWidth()
+  {
+    xWidth = null;
+    if(window.screen != null)
+      xWidth = window.screen.availWidth;
+ 
+    if(window.innerWidth != null)
+      xWidth = window.innerWidth;
+ 
+    if(document.body != null)
+      xWidth = document.body.clientWidth;
+ 
+    return xWidth;
+  }
+function getHeight() {
+  xHeight = null;
+  if(window.screen != null)
+    xHeight = window.screen.availHeight;
+ 
+  if(window.innerHeight != null)
+    xHeight =   window.innerHeight;
+ 
+  if(document.body != null)
+    xHeight = document.body.clientHeight;
+ 
+  return xHeight;
+}
  function indexfunction(){
       //alert('');
  }
@@ -295,7 +322,7 @@ $.mobile.showPageLoadingMsg();
               for (variable in myObject.gallery)
              {
                  
-                     $('#testId').append('<li class="royalSlide" ><a rel="external" href="'+myObject.gallery[variable]+'" class="linkImage"><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></a></li>')
+                     $('#testId').append('<li class="royalSlide" ><a data-ajax="false" rel="external" href="'+myObject.gallery[variable]+'" class="linkImage"><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></a></li>')
                  
              }
                var mySliderInstance =  $('#myGallery2').royalSlider({               
@@ -326,7 +353,7 @@ $.mobile.showPageLoadingMsg();
   }
    map = new google.maps.Map(document.getElementById("mapgoogle"),
                                 myOptions);
-    $('.linkImage').fancybox();                            
+    $('a.linkImage').fancybox();                            
     var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
       new google.maps.Size(myObject.width, myObject.height),
@@ -373,6 +400,11 @@ $.mobile.showPageLoadingMsg();
                                                       }
                             });
  }
+ function accesspage()
+ {
+     
+ }
+  
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -407,6 +439,11 @@ case "cat_list":
   break;
 case "landing":
   landingfunction();
+  break;
+  case "map":
+  $('#map_canvas').css('width' , getWidth());
+  $('#map_canvas').css('height' , getHeight());
+  setMap();
   break;
 default:
   
