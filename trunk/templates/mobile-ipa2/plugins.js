@@ -8,6 +8,25 @@ var disid;
 var tumid;
 var catid;
 var subcatid;
+var myCat=new Array();
+myCat[1]="Home";       // argument to control array's size)
+myCat[2]="Hotel";
+myCat[4]="Restaurant";
+myCat[5]="Coffee";
+myCat[6]="Shop";
+myCat[7]="Fashion";
+myCat[8]="Hospital";
+myCat[9]="Spa Beauty";
+myCat[10]="Service";
+myCat[11]="Commu";
+myCat[12]="Sport";
+myCat[17]="Seminar";
+myCat[14]="Travel";
+myCat[13]="Education";
+myCat[15]="Other";
+
+
+
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
   log.history.push(arguments);
@@ -30,6 +49,15 @@ window.log = function(){
             vars[key] = value;
         });
         return vars;
+ }
+ function resetvalue()
+ {
+     subcatid="";
+     proid="";
+     disid="";
+     tumid="";
+     catid="";
+     searchTxt="";
  }
  function indexfunction(){
       //alert('');
@@ -69,7 +97,7 @@ window.log = function(){
          myselect[0].selectedIndex = 0;
          myselect.selectmenu("refresh");
          }
-
+$.mobile.hidePageLoadingMsg();
 
            
 }
@@ -101,6 +129,7 @@ window.log = function(){
          myselect[0].selectedIndex = 0;
          myselect.selectmenu("refresh");
          }
+         $.mobile.hidePageLoadingMsg();
 }
  function searchresultlist(myObject)
  {
@@ -179,10 +208,13 @@ $.mobile.showPageLoadingMsg();
          myselect[0].selectedIndex = 0;
          myselect.selectmenu("refresh");
          }
+           $.mobile.hidePageLoadingMsg();
 }
  function searchfunction() {
      //alert('');
+    
      $('#province').change(function() {
+         $.mobile.showPageLoadingMsg();
                             $.ajax({
                                                       data: {proid: $(this).val()},                                                            
                                                       url: webdir+'/ajax/getdistrict',
@@ -199,7 +231,7 @@ $.mobile.showPageLoadingMsg();
                                                     });
      });
      $('#cat').change(function() {
-
+    $.mobile.showPageLoadingMsg();
 
                    $.ajax({
                                                       data: {catid: $(this).val()},                                                            
@@ -218,6 +250,7 @@ $.mobile.showPageLoadingMsg();
     
           }); 
      $('#district').change(function(){
+         $.mobile.showPageLoadingMsg();
      $.ajax({
                                                       data: {disid: $(this).val()},                                                            
                                                       url: webdir+'/ajax/gettumbon',
@@ -238,6 +271,7 @@ $.mobile.showPageLoadingMsg();
         
     $("#btn-search").click(function()
     {
+         resetvalue();
         searchTxt=$('#input-search').val();
         proid=$('#province').val();
         disid=$('#district').val();
@@ -248,6 +282,96 @@ $.mobile.showPageLoadingMsg();
     });
         
      
+ }
+ function setlanding(myObject)
+ { 
+
+            if(myObject.shopname) {$('#shopname').html(myObject.shopname)}
+             
+              if(myObject.pic1) {$('.intro').attr('src',myObject.pic1)}  
+              if(myObject.title) {$('#title').html(myObject.title)}
+              if(myObject.description) {$('#description').html(myObject.description)}  
+              $('#testId').html('');                             
+              for (variable in myObject.gallery)
+             {
+                 
+                     $('#testId').append('<li class="royalSlide" ><a rel="external" href="'+myObject.gallery[variable]+'" class="linkImage"><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></a></li>')
+                 
+             }
+               var mySliderInstance =  $('#myGallery2').royalSlider({               
+                removeCaptionsOpacityInIE8:true,
+                slideshowEnabled :true,
+                imageAlignCenter:true
+            }).data("royalSlider");         
+            var mySliderInstance = $("#myGallery2").data("royalSlider");              
+             mySliderInstance.updateSliderSize();
+              if(myObject.video){$('#video').html('<a href=\''+myObject.video+'\'" target="_blank">'+myObject.video+'</a>')}else
+              {
+                 // var htmlstr ='<iframe width="284" height="174" src="http://www.youtube.com/embed/OoJj0YW4MU8" frameborder="0" allowfullscreen></iframe>';
+            $('#clipvideo').hide(); 
+                  
+              }
+              if(myObject.daterange){$('#time').html(myObject.daterange)}
+              if(myObject.address){$('#address').html(myObject.address)} 
+              if(myObject.tel){$('#tel').html(myObject.tel)} 
+              if(myObject.emailshop){$('#emailshop').html('<a href="mailto:'+myObject.emailshop+'">'+myObject.emailshop+'</a>')} 
+              if(myObject.website){$('#website').html('<a href="'+myObject.website+'" target="_blank">'+myObject.website+'</a>')} 
+              if(myObject.pricerange){$('#pricerange').html(myObject.pricerange)} 
+              
+   
+ var myOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(myObject.lat, myObject.lng),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+   map = new google.maps.Map(document.getElementById("mapgoogle"),
+                                myOptions);
+    $('.linkImage').fancybox();                            
+    var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
+      // This marker is 20 pixels wide by 32 pixels tall.
+      new google.maps.Size(myObject.width, myObject.height),
+      // The origin for this image is 0,0.
+      new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      new google.maps.Point(0, 35)); 
+       var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+   var myLatLng = new google.maps.LatLng(myObject.lat, myObject.lng);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: myObject.shopname,
+        zIndex: 0
+    });                                 
+
+   $('#maplink').attr('href','map.html?shopurl='+getUrlVars2()['shopurl']) ; 
+ // setMarkers(map, beaches);
+              
+                $('#landing').show();  
+                $.mobile.hidePageLoadingMsg();  
+ }
+ function landingfunction()
+ {
+    $.mobile.showPageLoadingMsg();
+
+     $.ajax({
+                                                      data: {shopurl: getUrlVars2()['shopurl']},                                                            
+                                                      url: webdir+'/ajax/getshopbysub',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'setlanding', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                            });
  }
 jQuery(document).ready(function($){ 
 	
@@ -272,7 +396,17 @@ case "search":
   searchfunction();
   break;
 case "searchresult":
+  if(searchTxt)$('#wordTxt').html('คำค้นหา '+searchTxt); 
   searchresultfunction();
+  break;
+case "cat_list":
+  resetvalue();
+  catid=getUrlVars2()['catid'];
+  $('#wordTxt').html(myCat[catid]);
+  searchresultfunction();
+  break;
+case "landing":
+  landingfunction();
   break;
 default:
   

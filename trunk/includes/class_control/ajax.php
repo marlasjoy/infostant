@@ -3532,6 +3532,7 @@ $data=$this->db->db_get_recordset();
           tb_shop.emailshop,
           tb_shop.address,
           tb_shop.daterange,
+          tb_shop.pricerange,
           tb_cat.icon,
           tb_cat.size,
           tb_shop.website   
@@ -3566,6 +3567,7 @@ $data=$this->db->db_get_recordset();
                   $arraydata['website']=$value['website']; 
                   $arraydata['tel']=$value['tel'];
                   $arraydata['icon']= $value['icon'];
+                  $arraydata['pricerange']= $value['pricerange'];
                   list($width,$height)= explode('x',$value['size']); 
                   $arraydata['width']=$width; 
                   $arraydata['height']=$height;
