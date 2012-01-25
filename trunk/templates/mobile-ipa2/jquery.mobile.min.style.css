@@ -1,0 +1,19 @@
+/*******Login**********/
+#login .ui-content p {height: 52px;margin: 10px 0;padding: 0 10px;}
+#login .social{}
+#login .ui-radio{ width:49%}
+#login .ui-radio .ui-btn{ width:97%}
+#profile{ background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#profile .ui-btn{ margin:3px;}
+#profile .ui-btn-inner{ padding:0px 10px;;}
+#profile .alignbox{ display:block;margin-left:-60px;}
+#profile .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 40px;text-shadow: 1px 0 1px #333;}
+#profile .icon-profile{ background:url(images/icon_profile.png) no-repeat 0 -30px;}
+#profile .ui-focus .icon-profile, #profile  .ui-btn-active .icon-profile{ background-position: 0px 0px;}
+#profile .icon-shop{ background:url(images/icon_profile.png) no-repeat -30px -30px;}
+#profile .ui-focus .icon-shop,  #profile  .ui-btn-active .icon-shop { background-position: -30px 0px;}
+#profile .ui-btn-hidden{ opacity: 1;}
+#profile .ui-btn-text{line-height: 30px;display:block;text-align:center;}
+#profile .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
+#profile .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
+#profile .ui-btn-hover-c{ border:none;}
