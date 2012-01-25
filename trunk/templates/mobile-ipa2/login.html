@@ -1,0 +1,111 @@
+      
+  <div data-role="page" id="login"> 
+  <div data-role="header" id="headerfile" data-position="fixed">
+<div>
+            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
+            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+            <nav>
+                <ul class="h">
+                    <li><a href="search.html" data-transition="slide">search</a></li>
+                    <li><a class="functionclick" href="#">function</a></li>
+                    <li><a href="directory.html" data-transition="slide">directory</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div  id="function">
+            <ul class="v">
+                <li><a href="setting.html"><span>Settings</span></a></li>
+                <li><a href="directory.html"><span>Directory</span></a></li>
+                <li><a href="recent.html"><span>Recent View</span></a></li>
+                <li><a href="favarite.html"><span>Favorite</span></a></li>
+                <li><a href="calendar.html"><span>Calendar / Itenary</span></a></li>
+                <li><a href="memory.html"><span>Personal Memory</span></a></li>
+                <li><a href="add_friend.html"><span>Add Friend</span></a></li>
+                <li><a href="notification.html"><span>Notification</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="qr.html"><span>QR Reader</span></a></li>
+                <li><a href="location.html"><span>Show Location</span></a></li>
+                <li><a href="shop.html"><span>Shop</span></a></li>
+                <li><a href="help.html"><span>Help</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+</div>      
+  <div data-role="content" class="subpage">
+  <div  id="profile">
+         
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                         <input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+                         <label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
+                         <input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
+                         <label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
+                </fieldset>
+                
+        </div>
+                         <h2>Login Profile</h2>
+         <form name="registersummit" id="registersummit" onsubmit="return loginserver()">
+         <div id="member1" class="ui-body ui-body-c">
+
+
+
+                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <label for="switch-c" id="switch-c-label" class="ui-slider">Username</label>
+                    <input type="text" value="" id="username" name="username" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">  
+                </div>
+                
+                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <label for="switch-c" id="switch-c-label" class="ui-slider">Password</label>
+                    <input type="password" value="" id="password1" name="password1" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">  
+                </div>
+                
+         <div class="social">
+            <p>
+            <a href="javascript:void(0);"><img src="images/icon_social_facebook.png" width="174" height="52" /></a>
+            <a href="javascript:void(0);"><img src="images/icon_social_twitter.png" width="174" height="52" /></a>
+            </p>
+        </div>
+                
+             <div class="ui-body ui-body-c">
+                  <fieldset class="ui-grid-a">
+                  <input type="hidden" id="userid" name="userid" value="">
+                <div class="ui-block-a"><button data-theme="d" type="button" class="ui-btn-hidden" aria-disabled="false">Cancel</button></div>
+                <div class="ui-block-b"><button data-theme="a" id="buttonSave" name="buttonSave" onclick="loginserver()"  type="button" class="ui-btn-hidden" aria-disabled="false">Submit</button></div>
+                </fieldset>
+                </div>
+
+                </div> 
+                
+                <div id="member2" style="display: none;" class="ui-body ui-body-c">
+                <h2>Member Information</h2>
+
+
+                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <label for="switch-c" id="switch-c-label" class="ui-slider">ชื่อสมาชิก</label>
+                     <label  for="switch-c" id="switch-c-label" class="ui-slider"><span id="showname"></span></label>
+                </div>
+                
+    
+                
+             <div class="ui-body ui-body-c">
+                  <fieldset class="ui-grid-a">
+                  <input type="hidden" id="userid" name="userid" value="">
+                <div class="ui-block-a"><button data-theme="d" type="button" class="ui-btn-hidden" aria-disabled="false">Cancel</button></div>
+                <div class="ui-block-b"><button data-theme="a" id="buttonSave" name="buttonSave" onclick="logoutserver()"  type="button" class="ui-btn-hidden" aria-disabled="false">Logout</button></div>
+                </fieldset>
+                </div>
+                 <h2>Shop Information</h2>   
+                 <div class="ui-body ui-body-c">
+                 <ul  id="shopdata">
+                    <li><a data-ajax="false" id="searchlink"  href="search.html">Search</a></li>
+
+                </ul>
+                </div>
+
+                </div>
+                
+         </form>
+               
+        
+        </div> 
+   </div>
+         
