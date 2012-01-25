@@ -448,18 +448,20 @@ $.mobile.showPageLoadingMsg();
  }
  function accesspage()
  {
-    localStorage.setItem("userId",'');
-    localStorage.setItem("username",''); 
+  //  localStorage.setItem("userId",'');
+ //   localStorage.setItem("username",''); 
      if(localStorage.getItem("userId"))
               {
            
-              
+              return true;
                   
               }else
               {
               lastpage=$('.ui-page-active').attr('id');     
+              
               $.mobile.changePage("login.html", "flip", true, true);    
               }
+              return false;
  }
  function settingfunction()
  {
@@ -511,16 +513,23 @@ case "landing":
   landingfunction();
   break;
   case "shop":
-  accesspage();
-  shopfunction();
+  if(accesspage())
+  {
+    shopfunction();  
+  }
+  
   break;
   case "setting":
   accesspage();
   settingfunction();
   break;
   case "shopedit":
-  accesspage();
-  setShopEdit();
+   if(accesspage())
+  {
+    setShopEdit(); 
+  }
+
+  
   break;
   case "registershop":
   accesspage();
