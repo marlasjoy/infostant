@@ -3203,6 +3203,12 @@ $data=$this->db->db_get_recordset();
               $where[]="  tb_shop.subcatid = '$subcatid' 
             ";
           }
+          if($_GET['mid'])
+          {
+             $mid=$_GET['mid']; 
+              $where[]="  tb_shop.mid = '$mid' 
+            ";
+          }
           
               $this->db->get_connect();
           $this->db->db_set_recordset('
@@ -3248,7 +3254,8 @@ $data=$this->db->db_get_recordset();
                   $arraydata[$k]['emailshop']=$value['emailshop'];
                   $arraydata[$k]['address']=$value['address'];
                   $arraydata[$k]['daterange']=$value['daterange'];
-                  $arraydata[$k]['proname']=$value['proname'];    
+                  $arraydata[$k]['proname']=$value['proname'];   
+                  $arraydata[$k]['shopurl2']= 'shopedit.html?shopurl='.$value['shopurl'];    
                   $arraydata[$k]['tel']=$value['tel'];
                 //  $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
             //      $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 

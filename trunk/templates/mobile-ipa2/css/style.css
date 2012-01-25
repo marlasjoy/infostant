@@ -22,3 +22,7 @@ a.send-friend .ui-btn-text { padding: 3px 0 3px 28px; background: url(../images/
 .detail a.no-icon.ui-btn .ui-btn-inner { padding: 0 30px; }
 .detail a.no-icon.ui-btn { margin: 10px 0; }
 
+.shoptoplink{float: right;
+    font-weight: bold;
+    padding-right: 10px;
+    text-decoration: none;}

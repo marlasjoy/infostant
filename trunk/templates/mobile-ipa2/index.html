@@ -11,17 +11,17 @@
     <link rel="stylesheet" href="css/royal-slider-6.0.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
-      <script src="jquery-1.7.1.min.js"></script>
-    <script src="jquery.animate-enhanced.min.js"></script>
+      <script src="jquery-1.7.1.min.js" charset="utf-8"></script>
+    <script src="jquery.animate-enhanced.min.js" charset="utf-8"></script>
     
-    <script src="jquery.mobile.min.js"></script>
-    <script src="jquery.easing.1.3.min.js"></script>
-    <script src="royal-slider-6.0.min.js"></script>  
+    <script src="jquery.mobile.min.js" charset="utf-8"></script>
+    <script src="jquery.easing.1.3.min.js" charset="utf-8"></script>
+    <script src="royal-slider-6.0.min.js" charset="utf-8"></script>  
     <script src="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
-    <script src="plugins.js"></script> 
-    <script src="phonegap-1.2.0.js"></script>  
-    <script type="text/javascript">
+    <script src="plugins.js" charset="utf-8"></script> 
+    <script src="phonegap-1.2.0.js" charset="utf-8"></script>  
+    <script type="text/javascript" charset="utf-8">
 
 
 
@@ -37,6 +37,260 @@ var toend;
 var setnow=0;
 var nowcenter=0;
 var nowzoom=0;
+
+var webdir="http://www.infostant.com";
+var pictureSource;   // picture source
+var destinationType; // sets the format of returned value  
+var size2;
+var shopurl2;
+var group2;
+
+function setShopEdit()
+{
+    //document.addEventListener("deviceready",onDeviceReady2,false);  
+ onDeviceReady2();
+}
+function setyoutube(val){
+    $('#videotext').html('<iframe width="446" height="300" id="video"  src="http://www.youtube.com/embed/'+$.trim(val)+'?wmode=transparent" frameborder="0" allowfullscreen></iframe>');
+   
+    
+    }
+function getUrlVars2() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+function onDeviceReady2() {
+
+    //   pictureSource=navigator.camera.PictureSourceType;
+     //  destinationType=navigator.camera.DestinationType;
+     
+           if(localStorage.getItem("userId"))
+              {
+                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId") }, function(data) {
+                            
+                            var myObject = eval('(' + data + ')');
+                            
+                             setdata2(myObject);
+
+                            
+                   });  
+                   $('#savetext').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:$('#target').val(),setdata:$('#textarea').val(),filename:'index_th' }, function(data) {
+                            
+                          //  var myObject = eval('(' + data + ')');
+                            
+                         //    setdata(myObject);
+                            $('#'+$('#target').val()).html($('#textarea').val());
+                            $.fancybox.close();
+                            
+                            
+                   });
+                       }); 
+                   
+                   $('#savetext2').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',''+$('#file-form').serialize()+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=address-tel-emailshop-website&mid='+localStorage.getItem("userId"), function(data) {
+                                    $('#address').html( $('#text-address').val());
+                                    $('#tel').html($('#text-tel').val()); 
+                                    $('#emailshop').html($('#text-emailshop').val()); 
+                                    $('#website').html($('#text-website').val()); 
+                            $.fancybox.close();
+                            
+                   });    
+                       
+                    
+                       
+                   });
+                   
+                    $('#savevideo').click(function() {
+        var embed=testUrlForMedia($('#youtube').val());
+        //alert(embed.id);
+       if(embed.id)
+        {
+        
+        $.post(webdir+'/ajax/savevideo','setdata='+embed.id+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)         
+         {
+         eval("var obj1="+reposnse); 
+          if(obj1.resposne){
+              setyoutube(embed.id);   
+              $.fancybox.close();
+          }
+
+          }); 
+        }  
+    
+              
+              });
+                     
+          
+              }
+        
+    }
+function testUrlForMedia(pastedData) {
+var success = false;
+var media   = {};
+if (pastedData.match('http://(www.)?youtube|youtu\.be')) {
+    if (pastedData.match('embed')) { youtube_id = pastedData.split(/embed\//)[1].split(/[?&]/)[0]; }
+    else { youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
+    media.type  = "youtube";
+    media.id    = youtube_id;
+    success = true;
+}
+else if (pastedData.match('http://(player.)?vimeo\.com')) {
+    vimeo_id = pastedData.split(/video\/|http:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
+    media.type  = "vimeo";
+    media.id    = vimeo_id;
+    success = true;
+}
+else if (pastedData.match('http://player\.soundcloud\.com')) {
+    soundcloud_url = unescape(pastedData.split(/value="/)[1].split(/["]/)[0]);
+    soundcloud_id = soundcloud_url.split(/tracks\//)[1].split(/[&"]/)[0];
+    media.type  = "soundcloud";
+    media.id    = soundcloud_id;
+    success = true;
+}
+if (success) { return media; }
+else {
+ //alert("No valid media id detected");
+}
+return false;
+}
+function setdata2(myObject){
+              $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
+                            $('#main').html(myObject.html);
+                            $('#setdata').html(myObject.setdata); 
+                            $('.galleryimg').fancybox();
+                            
+                            $('#bodydiv').attr('class',myObject.bodyclass);
+                            $(".ir.edit.map").click(function() {
+                                
+                            $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'google.html',
+                                   'type':'iframe' ,
+                                   'width':'100%',
+                                   'height':'100%'
+                            
+                            
+                            }); 
+                                 
+                            });
+                            $(".ir.edit.vdo").click(function() {
+                            if($('#video').attr("src"))
+                            {  
+           
+       var embed=testUrlForMedia($('#video').attr("src"));       
+      if(embed)
+        {
+            $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
+        }            
+         $.fancybox({
+                                   'href':'#youtubedata','type':'inline'
+                       });   
+           
+       }
+                            
+                             
+                            });
+
+                            
+                            
+                            
+                            $(".ir.edit.text").click(function() {
+                                if($(this).attr('title')=="popup5")
+                                {
+                                    $('#text-address').val($('#address').html());
+                                    $('#text-tel').val($('#tel').html()); 
+                                    $('#text-emailshop').val($('#emailshop').html()); 
+                                    $('#text-website').val($('#website').html()); 
+                                        $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext2','type':'inline'}); 
+                                }else
+                                {
+                                $('#target').val($(this).attr('title'));
+                               $('#textarea').val($('#'+$(this).attr('title')).html());
+                              // $("#datatext").fancybox().trigger('click');
+
+                               $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext','type':'inline'}); 
+                                }
+                                
+                            });
+                   onLoadMaps();
+                                         var viewport = $("head meta[name=viewport]"); 
+                                         
+                                         
+                                         
+                                         if (navigator.userAgent.toLowerCase().match(/android/)) {
+                                       
+                                       //  document.write('<script charset="utf-8" src="android\/phonegap-1.2.0.js"><\/script>');
+                                         viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         } else if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
+                                       //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+                                   
+                                          viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                       
+                                         }
+                                         else if (navigator.userAgent.toLowerCase().match(/ipad/) ) {
+                                         //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+                              
+                                         viewport.attr('content', 'width=1024, initial-scale=0.8, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         }
+                                         
+                                         
+                                        // viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                  
+    }
+function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+    //  imageURI2=imageData;
+      $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
+      $.post(webdir+'/ajax/submitpicformiphone',{
+                     pic1:imageData
+                     ,size:size2
+                     ,shopurl:shopurl2
+                     ,mid:localStorage.getItem("userId")
+                     ,filename:'index_th'
+                     ,group:group2
+                     
+      }, function(data) {
+                      var myObject = eval('(' + data + ')');    
+
+                            setdata(myObject);  
+                   });
+       
+
+    }
+function capturePhoto(size,shopurl,group) {
+               size2=size;
+               shopurl2=shopurl;
+               group2=group; 
+              // var sizearray = explode("x", size, 3);
+               var sizearray=size.split("x");
+               
+               //   navigator.notification.alert(sizearray[0]);
+               //   navigator.notification.alert(sizearray[1]);
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality : 100, 
+  destinationType : Camera.DestinationType.DATA_URL, 
+  sourceType : Camera.PictureSourceType.CAMERA, 
+  allowEdit : true,
+  encodingType: Camera.EncodingType.JPEG,
+  targetWidth: sizearray[0],
+  targetHeight: sizearray[1] });
+               // navigator.notification.alert(size);     
+    }
+function onFail(message) {
+      navigator.notification.alert('Failed because: ' + message);
+    }
 
 
 function setMap()
@@ -64,7 +318,6 @@ beaches=[eval(temp)];
 
 });
 }
-
 function getlocation(position)
 {
    initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);

@@ -8,6 +8,8 @@ var disid;
 var tumid;
 var catid;
 var subcatid;
+var lastpage;
+var mid;
 var myCat=new Array();
 myCat[1]="Home";       // argument to control array's size)
 myCat[2]="Hotel";
@@ -58,6 +60,7 @@ window.log = function(){
      tumid="";
      catid="";
      searchTxt="";
+     mid="";
  }
   function getWidth()
   {
@@ -158,8 +161,7 @@ $.mobile.hidePageLoadingMsg();
          }
          $.mobile.hidePageLoadingMsg();
 }
- function searchresultlist(myObject)
- {
+ function searchresultlist(myObject){
       var areaid=""; 
       $('#searchresulthtml').html('');
              for (variable in myObject)
@@ -168,7 +170,7 @@ $.mobile.hidePageLoadingMsg();
              var obj = myObject[variable]; 
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');
     
     
 
@@ -192,7 +194,7 @@ $.mobile.hidePageLoadingMsg();
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
                    $.ajax({
-                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid},                                                            
+                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid},                                                            
                                                       url: webdir+'/ajax/getallshopbyname3',
                                                       dataType: "jsonp",
                                                       jsonp: 'callback',
@@ -310,6 +312,50 @@ $.mobile.showPageLoadingMsg();
         
      
  }
+ function loginserver()
+ {
+     var errorcode='';
+             if(localStorage.getItem("userId")=="")
+                     {
+                        if($('#username').val()=="")
+                         {
+ 
+                          errorcode='โปรดกรอก Username';  
+                         }
+                        else  if($('#password1').val()=="")
+                         {
+                          errorcode='โปรดกรอก Password';    
+                         }
+                      
+
+                     }
+                if(errorcode!="")
+                         {
+                             alert(errorcode); 
+                             return false;
+                         } 
+                $.post(webdir+'/ajax/loginformiphone',{username:$('#username').val(),password1:$('#password1').val() }, function(data) {
+                var myObject = eval('(' + data + ')');             
+                    if(myObject.error)
+                           {
+                              //navigator.notification.alert(myObject.error);
+                              alert(myObject.error);
+                              //    $('#buttonSave').attr("disabled", "false"); 
+                                // return false;
+                           }else  if(myObject.mid)
+                           {
+                               if(!localStorage.getItem("userId")){
+                               localStorage.setItem("userId",myObject.mid);
+                               localStorage.setItem("username",myObject.username); 
+                               }
+                             //  navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
+                                alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
+                                
+                              // location.href="login.html";
+                               $.mobile.changePage(lastpage+".html", "flip", true, true);
+                           }
+                });
+ }
  function setlanding(myObject)
  { 
 
@@ -402,9 +448,35 @@ $.mobile.showPageLoadingMsg();
  }
  function accesspage()
  {
+    localStorage.setItem("userId",'');
+    localStorage.setItem("username",''); 
+     if(localStorage.getItem("userId"))
+              {
+           
+              
+                  
+              }else
+              {
+              lastpage=$('.ui-page-active').attr('id');     
+              $.mobile.changePage("login.html", "flip", true, true);    
+              }
+ }
+ function settingfunction()
+ {
      
  }
-  
+ function setshoplist(myObject)
+ {
+     
+ }
+ function shopfunction()
+ {
+       
+        resetvalue();
+        mid=localStorage.getItem("userId")
+        searchresultfunction();
+ }
+
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -416,7 +488,6 @@ jQuery(document).ready(function($){
 	/******* EOS ********/
 });
 $('div').live( 'pageshow',function(event, ui){
-    
   
   switch ($('.ui-page-active').attr('id'))
 {
@@ -424,7 +495,6 @@ case "index":
   indexfunction();
   break;
 case "search":
-
   searchfunction();
   break;
 case "searchresult":
@@ -440,6 +510,21 @@ case "cat_list":
 case "landing":
   landingfunction();
   break;
+  case "shop":
+  accesspage();
+  shopfunction();
+  break;
+  case "setting":
+  accesspage();
+  settingfunction();
+  break;
+  case "shopedit":
+  accesspage();
+  setShopEdit();
+  break;
+  case "registershop":
+  accesspage();
+  break;
   case "map":
   $('#map_canvas').css('width' , getWidth());
   $('#map_canvas').css('height' , getHeight());
@@ -448,7 +533,8 @@ case "landing":
 default:
   
 }
-  
+  var viewport = $("head meta[name=viewport]");   
+  viewport.attr('content', 'width=device-width, initial-scale=1, user-scalable=no'); 
   try
   {
       $('.ui-page-active nav li:nth-child(2) a').click(function() { 

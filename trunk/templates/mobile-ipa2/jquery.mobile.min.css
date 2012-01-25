@@ -135,12 +135,13 @@ a[data-rel="back"] { width: 44px; height: 26px; display: block;text-indent: -100
 .subpage > ul.v > li > a { display: inline-block; }
 .subpage ul.h { clear: both; position: relative; left: -80px; padding-top: 10px; min-width: 320px; }
 .subpage ul.h > li { float: left; height: 29px; line-height: 29px; margin-right: 14px; }
-.subpage ul.h > li:last-child { margin-right: 0; padding-left: 35px; height: 30px; background: url(images/icon-function-li.png) no-repeat -423px -199px; background-size: 650px 650px; font-weight: bold; }
+.subpage ul.h > li:last-child { margin-right: 0;  height: 30px;  font-weight: bold; }
 .subpage ul.h > li:last-child strong { font-size: 18px; color: #424242; position: relative; top: 2px; font-weight: normal; }
 .subpage li a.ui-link { color: #424242!important; font-weight: bold!important; padding: 0; font-size: 13px; white-space: nowrap; }
 a.button.delete, a.button.go { display: block; text-indent: -1000em; background: url(images/btn-delete.png) no-repeat; background-size: 100% 100%; width: 29px; height: 29px;  }
 a.button.go { background: url(images/btn-go.png) no-repeat; background-size: 100% 100% }
 a.button.favorite { background: url(images/icon-function-li.png) no-repeat -471px -148px; background-size: 650px 650px; width: 30px; height: 28px; text-indent: -1000em; }
+a.button.calendar { background: url(images/icon-function-li.png) no-repeat -423px -199px; background-size: 650px 650px; width: 30px; height: 28px; text-indent: -1000em; }
 a.button.share { width: 45px; height: 26px; display: block; float: right; text-indent: -1000em; background: url(images/btn-share.png) no-repeat; background-size: 100% 100%; position: relative; top: 7px; right: 10px; }
 #share { position: absolute; z-index: 5; width: 228px; height: 60px; background: url(images/bg-share.png) no-repeat; background-size: 240px 81px; top: 28px; right: 0px; padding: 25px 0 0 12px; display: none; }
 #share li { float: left; }
