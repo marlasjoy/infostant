@@ -1,6 +1,8 @@
-      
-  <div data-role="page" id="shop"> 
-  <div data-role="header" id="headerfile" data-position="fixed">
+
+
+<div id="forgot" data-role="page">
+
+<div data-role="header" id="headerfile" data-position="fixed">
 <div>
             <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
             <h1><a href="index.html" data-transition="flip">infostant</a></h1>
@@ -30,25 +32,33 @@
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
-</div>      
-  <div data-role="content" class="subpage">
-    <div  id="profile">
+</div>
+	<div data-role="content">
+    
+        <div  id="profile">
          
-                <fieldset data-role="controlgroup" data-type="horizontal">
-                         <input type="radio" name="radio-choice-b" id="radio-choice-c" value="off"/>
-                         <label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
-                         <input type="radio" name="radio-choice-b" id="radio-choice-d" value="on" checked="checked" />
-                         <label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
-                </fieldset>
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="off"  />
+			         	<label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="on" checked="checked" />
+			         	<label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
+			    </fieldset>
                 
         </div>
-    <h2>My Shop <a class="shoptoplink" href="registershop.html">Add shop</a></h2>
-    <div class="subpage">
-            <ul class="v" id="searchresulthtml">
-              
-            </ul>
-        </div>         
+            
+		<h2>Forgot Password</h2>
+		<p>
+			<label for="input-email">E-mail</label>
+			<input type="text" name="email" id="input-email" />
+		</p><br />
+
+        <p>
+			<input type="submit" value="Send" id="" data-inline="" />
+        </p>
         
-        </div> 
-   </div>
-         
+		
+        
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
