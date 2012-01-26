@@ -26,7 +26,14 @@ myCat[17]="Seminar";
 myCat[14]="Travel";
 myCat[13]="Education";
 myCat[15]="Other";
-
+ var shopname;
+ var shopurl;
+ var lat;
+ var lng;
+ var  mySliderInstance;
+ var temid;
+ var errorset=0;
+ var refcode;
 
 
 window.log = function(){
@@ -61,6 +68,13 @@ window.log = function(){
      catid="";
      searchTxt="";
      mid="";
+     shopname="";
+     shopurl="";
+     lat="";
+     lng="";
+     temid="";
+     errorset=0;
+     refcode="";
  }
   function getWidth()
   {
@@ -331,6 +345,7 @@ $.mobile.showPageLoadingMsg();
                      }
                 if(errorcode!="")
                          {
+                            // navigator.notification.alert(errorcode);
                              alert(errorcode); 
                              return false;
                          } 
@@ -448,8 +463,8 @@ $.mobile.showPageLoadingMsg();
  }
  function accesspage()
  {
-  //  localStorage.setItem("userId",'');
- //   localStorage.setItem("username",''); 
+   // localStorage.setItem("userId",'');
+ //  localStorage.setItem("username",''); 
      if(localStorage.getItem("userId"))
               {
            
@@ -478,6 +493,206 @@ $.mobile.showPageLoadingMsg();
         mid=localStorage.getItem("userId")
         searchresultfunction();
  }
+ function registershopfunction()
+ {
+     initialize();
+     $('#province').change(function() {
+         if($(this).val())
+    {
+      
+        showAddress($("#province option[value='"+$(this).val()+"']").text());
+    }
+         $.mobile.showPageLoadingMsg();
+                            $.ajax({
+                                                      data: {proid: $(this).val()},                                                            
+                                                      url: webdir+'/ajax/getdistrict',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'setdistrict', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                                                    });
+     });
+     $('#cat').change(function() {
+    $.mobile.showPageLoadingMsg();
+
+                   $.ajax({
+                                                      data: {catid: $(this).val()},                                                            
+                                                      url: webdir+'/ajax/getsubcat',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'setcat', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                                                    });
+    
+          }); 
+     $('#district').change(function(){
+             if($(this).val())
+    {
+      
+        showAddress($("#province option[value='"+$('#province').val()+"']").text()+' '+$("#district option[value='"+$('#district').val()+"']").text());
+    }
+         $.mobile.showPageLoadingMsg();
+     $.ajax({
+                                                      data: {disid: $(this).val()},                                                            
+                                                      url: webdir+'/ajax/gettumbon',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'settumbon', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+     });
+    
+    
+        });
+    $('#tumbon').change(function(){
+             if($(this).val())
+                {
+                  
+                    showAddress($("#province option[value='"+$('#province').val()+"']").text()+' '+$("#district option[value='"+$('#district').val()+"']").text()+' '+$("#tumbon option[value='"+$('#tumbon').val()+"']").text());
+                }   
+            });
+ }
+
+ function nextstep1()
+{
+        resetvalue();
+        if($('#shopurl').val()=="")
+        {
+           errorset=1; 
+        }else if($('#shopname').val()=="")
+        {
+          errorset=1;  
+        }else if($('#province').val()=="")
+        {
+          errorset=1;  
+        }else if($('#district').val()=="")
+        {
+          errorset=1;  
+        }else if($('#tumbon').val()=="")
+        {
+          errorset=1;  
+        }else if($('#cat').val()=="")
+        {
+          errorset=1;  
+        }
+        else if($('#subcat').val()=="")
+        {
+          errorset=1;  
+        }
+        
+        if(errorset==1)
+        {
+        // navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
+          alert("ท่านกรอกข้อมูลไม่ครบ");   
+          return false;
+        }
+        else{
+            
+        
+        $.post(webdir+'/ajax/checkshopurl',{shopurl:$('#shopurl').val() }, function(data3) {
+                         if(!eval(data3))
+                         {
+                         // navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
+                         alert("url ที่ท่านกรอกซ้ำ"); 
+                         }else
+                         {
+                            
+                             
+                             
+                             
+                             
+                         proid=$('#province').val();
+                         disid=$('#district').val();
+                         tumid=$('#tumbon').val();
+                         catid=$('#cat').val();
+                         subcatid=$('#subcat').val();
+                         shopname=$('#shopname').val();
+                         shopurl=$('#shopurl').val();
+                         lat=$('#lat').val();
+                         lng=$('#lng').val();
+                         refcode=$('#refcode').val();
+                         $.mobile.changePage("templatesshop.html", "flip", true, true); 
+                         
+                         
+                         }
+                         
+                                
+        });
+        
+        
+        
+        }
+        
+}
+ function nextstep2()
+ {
+     $.mobile.showPageLoadingMsg();
+     $('#buttonSave').attr("disabled", "true"); 
+     $('#buttonSave').html('Loading');
+     $.post(webdir+'/ajax/submitformiphone',{
+       mid:localStorage.getItem("userId"),catid:catid
+     ,subcatid:subcatid,shopname:encodeURIComponent(shopname),shopurl:shopurl
+     ,proid:proid,disid:disid,tumid:tumid,temid:$('#temid').val()
+     ,refcode:refcode,lat:lat,lng:lng
+     }, function(data) {
+         var myObject = eval('(' + data + ')');
+          if(myObject.error)
+                           {
+                                 //navigator.notification.alert(myObject.error);
+                                 alert(myObject.error); 
+                                 $('#buttonSave').attr("disabled", "false"); 
+                                 $('#buttonSave').html('Submit');
+                                // return false;
+                                $.mobile.hidePageLoadingMsg();
+                           } if(myObject.shopurl)
+                           {
+
+                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                               alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
+                               $.mobile.hidePageLoadingMsg();
+                               $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
+                           }
+                           
+     });
+ }
+function checktemplate()
+{
+            var id=mySliderInstance.currentSlideId;
+           // alert(id);
+           var temp= $('.royalImage-'+id).attr('id');
+           temid=temp.replace('tem-', '');
+           $('#temid').val(temid);
+           
+           //alert(temid);
+          
+     }
+function templatesshopfunction()
+{
+     mySliderInstance =  $('#myGallery2').royalSlider({               
+                removeCaptionsOpacityInIE8:true,
+                imageAlignCenter:true,
+                beforeSlideChange:checktemplate,
+                afterSlideChange:checktemplate
+
+            }).data("royalSlider");
+}
 
 jQuery(document).ready(function($){ 
 	
@@ -520,8 +735,18 @@ case "landing":
   
   break;
   case "setting":
-  accesspage();
-  settingfunction();
+   if(accesspage())
+  {
+    settingfunction();
+  }
+  
+  break;
+    case "templatesshop":
+   if(accesspage())
+  {
+    templatesshopfunction();
+  }
+  
   break;
   case "shopedit":
    if(accesspage())
@@ -532,7 +757,10 @@ case "landing":
   
   break;
   case "registershop":
-  accesspage();
+    if(accesspage())
+  {
+  registershopfunction();
+  }
   break;
   case "map":
   $('#map_canvas').css('width' , getWidth());
