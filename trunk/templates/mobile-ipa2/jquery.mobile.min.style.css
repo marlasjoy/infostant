@@ -22,10 +22,11 @@
 
 
 #myshop {}
-a.button.edit, a.button.promotion, a.button.member{ display: block; text-indent: 35px; background: url(images/btn-delete.png) no-repeat; background-size: 50% 50%; width: 30px; height: 30px;  }
-a.button.edit { background: url(images/icon_myshop_edit.png) no-repeat; background-size: 100%; margin-right:30px;}
-a.button.promotion { background: url(images/icon_myshop_star.png) no-repeat; background-size: 100%; margin-right:80px;}
-a.button.member { background: url(images/icon_myshop_m.png) no-repeat; background-size: 100%; margin-right:60px;}
+a.button.edit, a.button.promotion, a.button.member ,a.button.delete { display: block; text-indent: 35px; background: url(images/btn-delete.png) no-repeat; background-size: 50% 50%; width: 30px; height: 30px; text-indent: -1000em;  }
+a.button.edit { background: url(images/icon_myshop_edit.png) no-repeat; background-size: 100%; /*margin-right:30px;*/}
+a.button.delete {background-size: 100%; /*margin-right:30px;*/}
+a.button.promotion { background: url(images/icon_myshop_star.png) no-repeat; background-size: 100%;/* margin-right:80px;*/}
+a.button.member { background: url(images/icon_myshop_m.png) no-repeat; background-size: 100%; /*margin-right:60px;*/}
 
 
 
