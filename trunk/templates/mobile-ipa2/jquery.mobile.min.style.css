@@ -32,3 +32,11 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #profile-myprofile{}
 #profile-myprofile .myprofile strong{ padding:0;}
 #profile-myprofile a.button.edit { background: url(images/icon_myshop_edit.png) no-repeat; background-size: 100%; margin:0;}
+
+
+
+#function{}
+#function li:nth-child(14) a {
+	
+    background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
+}
