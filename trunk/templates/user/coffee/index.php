@@ -26,7 +26,7 @@
                    <div id="100x110x0"></div>
                      <div id="textx100x110x0" style="display: none;" class="portfolioItemInfo"></div>
                     <span class="label">100 X 110</span>
-                    <a href="javascript:changeimage('100x110x1','group1')"  class="ir edit img">Edit Image</a>
+                    <a href="javascript:changeimage('100x110x0','group1')"  class="ir edit img">Edit Image</a>
                 </div>
                 <div class="d-100x110">
                     <div id="100x110x1"></div>
