@@ -1,4 +1,7 @@
-<div id="profile-myprofile" data-role="page">
+
+
+<div id="profile-forgot" data-role="page">
+
 <div data-role="header" id="headerfile" data-position="fixed">
 <div>
             <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
@@ -30,43 +33,32 @@
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
 </div>
-	<div data-role="content">	
+	<div data-role="content">
+    
         <div  id="profile">
-             
-                    <fieldset data-role="controlgroup" data-type="horizontal">
-                             <input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
-                             <label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
-                             <input type="radio" name="radio-choice-b" id="radio-choice-d" value="off"/>
-                             <label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
-                    </fieldset>
-                    
-       </div>
-		<h2>My Profile<a href="#" class="link">Edit Profile</a></h2>
-		<ul id="share" class="h">
-			<li><a href="#">infotstant</a></li>
-			<li><a href="#">facebook</a></li>
-			<li><a href="#">twitter</a></li>
-			<li><a href="#">google+</a></li>
-			<li><a href="#">email</a></li>
-		</ul>
-        <div class="subpage myprofile">
-			<ul class="v">
-				<li>
-					<a href="detail.html" class="thumb">
-						<img src="images/thumb-sub-01.jpg" alt="Sub-Category Name" />
-					</a>
-                   		 Username<br />
-						<strong><a id="username" href="detail.html">Pongneng ^.^</a></strong><br />
-						 E-mail<br />
-                        <strong><a id="emailprofile" href="detail.html">k.pongneng@hotmail.com</a></strong><br />
-				</li>
-              </ul>
+         
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+			         	<label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off"  />
+			         	<label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
+			    </fieldset>
+                
         </div>
-        <h2>My Memory<a href="addmemory.html" class="link">Add Personal Memory</a></h2>
-		<div class="subpage">
-			<ul id="searchresulthtml" class="v">
-			
-			</ul>
-		</div>
+            
+		<h2>Forgot Password</h2>
+		<p>
+			<label for="input-email">E-mail</label>
+			<input type="text" name="email" id="input-email" />
+		</p><br />
+
+        <p>
+			<input type="submit" value="Send" id="" data-inline="" />
+        </p>
+        
+		
+        
 	</div><!-- /content -->
 </div><!-- /page -->
+
+
