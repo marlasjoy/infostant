@@ -185,7 +185,7 @@ $.mobile.hidePageLoadingMsg();
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
     {
-      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
+      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else
     {
     $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');    
@@ -219,6 +219,87 @@ $.mobile.showPageLoadingMsg();
                                                       dataType: "jsonp",
                                                       jsonp: 'callback',
                                                       jsonpCallback: 'searchresultlist', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                           }); 
+     
+ }
+ function deletememory(meid)
+ {
+   //  alert(meid);
+     $('#deleteid'+meid).simpledialog({
+    'mode' : 'bool',
+    'prompt' : 'คุณต้องการลบรูปหรือไม่ ?',
+    'useModal': true,
+    'buttons' : {
+    'OK': {
+        click: function () {
+            $.mobile.showPageLoadingMsg();
+           $.post(webdir+'/ajax/deletemorybymeid',{meid:meid }, function(data) {
+               alert('ลบเรียบร้อยแล้ว');
+               memoryresultfunction();
+            $.mobile.hidePageLoadingMsg();   
+           });
+        }
+      },
+      'Cancel': {
+        click: function () {
+
+        },
+        icon: "delete",
+        theme: "c"
+      }
+    }
+  });
+     
+     
+     
+ }
+  function memoryresultlist(myObject){
+      var areaid=""; 
+      $('#searchresulthtml').html('');
+             for (variable in myObject)
+             {   
+          //   alert(variable) ;
+             var obj = myObject[variable]; 
+     //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
+
+    $('#searchresulthtml').append('<li><a href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.memoryurl+'" class="button edit"></a></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
+
+    
+    
+    
+
+             }
+                 $('.button.share').toggle(function() { 
+        $('#share').fadeIn(200);
+        $('#share').animate({ top: '32px' }, 300);
+    }, 
+    function() { 
+        $('#share').fadeOut(300);
+        $('#share').animate({ top: '28px'}, 300);
+    })
+    /* Close Share button */
+    $('#share a').click(function() { 
+        $('#share').fadeOut(300);
+        $('#share').animate({ top: '28px'}, 300);
+    })
+             $.mobile.hidePageLoadingMsg();
+             
+ }
+ function memoryresultfunction(){
+$.mobile.showPageLoadingMsg();
+                   $.ajax({
+                                                      data: {mid:localStorage.getItem("userId")},                                                            
+                                                      url: webdir+'/ajax/getallmemorybymid',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'memoryresultlist', 
                                                       crossDomain:true,
                                                       xhrFields: {
                                                       withCredentials: true
@@ -706,8 +787,45 @@ function myprofilefunction()
 
   $('#username').html(localStorage.getItem("username"));  
   $('#emailprofile').html(localStorage.getItem("emailprofile"));
+  memoryresultfunction();
 }
-
+function addmemoryfunction()
+{
+    templatesshopfunction();
+}
+function registerserver()
+{
+     $.mobile.showPageLoadingMsg();
+  //   $('#buttonSave').attr("disabled", ""); 
+  //   $('#buttonSave').html('Loading');
+     $.post(webdir+'/ajax/submitformregisteriphone',{email:$('#input-email').val(),
+     username:$('#username').val(),password1:$('#password1').val(),status:1
+       
+     }, function(data) {
+         var myObject = eval('(' + data + ')');
+          if(myObject.error)
+                           {
+                           // navigator.notification.alert(myObject.error);  
+                                 alert(myObject.error); 
+                                $.mobile.hidePageLoadingMsg();
+                           } 
+          if(myObject.mid)
+                           {
+                                 if(!localStorage.getItem("userId")){
+                               localStorage.setItem("userId",myObject.mid);
+                               localStorage.setItem("username",myObject.username); 
+                               localStorage.setItem("emailprofile",myObject.emailprofile);
+                               localStorage.setItem("picme",myObject.picme); 
+                               }
+                               
+                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                               alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
+                               $.mobile.hidePageLoadingMsg();
+                               $.mobile.changePage("profile_myprofile.html", "flip", true, true); 
+                           }
+                           
+     });
+}
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -740,6 +858,9 @@ case "cat_list":
   break;
 case "landing":
   landingfunction();
+  break;
+  case "addmemory":
+  addmemoryfunction();
   break;
   case "shop":
   if(accesspage())
