@@ -39,7 +39,7 @@ a[data-rel="back"] { width: 44px; height: 26px; display: block;text-indent: -100
 .ui-header { overflow: visible!important;  }
 .ui-header-fixed {  z-index: 1100!important;}
 #function { position: absolute; background: #ffc536 url(images/bg-header_shadow.png) top center no-repeat; background-size: 100% 5px;  height: auto; width: 100%;  z-index: 1101; top: 45px; top: -320px; }
-#function > ul.v { height: 310px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
+#function > ul.v { height:310px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
 #function li {  height: 38px; display: block; line-height: 38px;  margin: 0 20px 5px; border: solid 1px #000; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
 #function li > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
 #function li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }

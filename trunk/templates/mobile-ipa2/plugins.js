@@ -183,8 +183,14 @@ $.mobile.hidePageLoadingMsg();
           //   alert(variable) ;
              var obj = myObject[variable]; 
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
+    if($('.ui-page-active').attr('id')=="shop")
+    {
+      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
+    }else
+    {
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');    
+    }
     
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');
     
     
 
@@ -362,12 +368,14 @@ $.mobile.showPageLoadingMsg();
                                if(!localStorage.getItem("userId")){
                                localStorage.setItem("userId",myObject.mid);
                                localStorage.setItem("username",myObject.username); 
+                               localStorage.setItem("emailprofile",myObject.emailprofile);
+                               localStorage.setItem("picme",myObject.picme); 
                                }
                              //  navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 
                               // location.href="login.html";
-                               $.mobile.changePage(lastpage+".html", "flip", true, true);
+                               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
                            }
                 });
  }
@@ -693,6 +701,12 @@ function templatesshopfunction()
 
             }).data("royalSlider");
 }
+function myprofilefunction()
+{
+
+  $('#username').html(localStorage.getItem("username"));  
+  $('#emailprofile').html(localStorage.getItem("emailprofile"));
+}
 
 jQuery(document).ready(function($){ 
 	
@@ -756,11 +770,31 @@ case "landing":
 
   
   break;
+  
+  case "profile-myprofile":
+   if(accesspage())
+  {
+  
+      myprofilefunction();
+      
+  }
+
+  
+  break;
   case "registershop":
     if(accesspage())
   {
   registershopfunction();
   }
+  break;
+    case "logout":
+
+   localStorage.setItem("userId",'');
+   localStorage.setItem("username",'');
+   localStorage.setItem("emailprofile",'');
+   localStorage.setItem("picme",'');
+   $.mobile.changePage("index.html", "flip", true, true); 
+
   break;
   case "map":
   $('#map_canvas').css('width' , getWidth());
@@ -771,15 +805,56 @@ default:
   
 }
   var viewport = $("head meta[name=viewport]");   
-  viewport.attr('content', 'width=device-width, initial-scale=1, user-scalable=no'); 
+  viewport.attr('content', 'width=320, initial-scale=1, user-scalable=no'); 
   try
   {
+   
+      if($('.ui-page-active').attr('id')!="index")  
+      {
+          if(localStorage.getItem("userId"))
+          {
+             $('.ui-page-active #function .v').append('<li><a href="logout.html"><span>logout</span></a></li>'); 
+          }else
+          {
+             $('.ui-page-active #function .v').append('<li><a href="login.html"><span>login</span></a></li>');  
+          }
+          
+      }else
+      {
+          if(localStorage.getItem("userId"))
+          {
+               $('#logid').html('logout');
+               $('#loglink').attr('href','logout.html');
+               
+          }else
+          {
+              $('#logid').html('login');
+              $('#loglink').attr('href','login.html');
+          }
+         
+      }    
+
+      
       $('.ui-page-active nav li:nth-child(2) a').click(function() { 
-        $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 800);
+        $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
-        $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 800);
+        $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })
+
+       $(".alignbox").bind( "click", function(event, ui) {
+           if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
+           {
+               $.mobile.changePage("shop.html", "flip", true, true);
+           }else
+           {
+               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+           }
+});
+
+    
+    
+    
   }
 catch(err)
   {

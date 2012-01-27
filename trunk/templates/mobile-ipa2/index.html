@@ -3,7 +3,7 @@
     <head> 
     <title>Infostant</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+    <meta  name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
     
     <link rel="stylesheet" href="jquery.mobile.min.css" />
     <link rel="stylesheet" href="jquery.mobile.structure.min.css" />
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/royal-slider-6.0.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="jquery.mobile.simpledialog.min.css" />
       <script src="jquery-1.7.1.min.js" charset="utf-8"></script>
     <script src="jquery.animate-enhanced.min.js" charset="utf-8"></script>
     
@@ -22,8 +23,10 @@
     <script src="plugins.js" charset="utf-8"></script> 
     <script src="phonegap-1.2.0.js" charset="utf-8"></script> 
       <script src="googlemap.js" charset="utf-8"></script> 
-      <script  src="http://www.infostant.com/js/shop/libs/cufon-yui.js"></script>
-<script  src="http://www.infostant.com/js/shop/mylibs/DSNKaMon_400.font.js"></script>
+      <script src="js/cufon-yui.js" charset="utf-8"></script> 
+       <script src="jquery.mobile.simpledialog.js" charset="utf-8"></script>
+       
+
     <script type="text/javascript" charset="utf-8">
 
 
@@ -163,13 +166,25 @@ else {
 return false;
 }
 function setdata2(myObject){
+             var scriptjava='';
               $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
-                            $('#main').html(myObject.html);
-                            Cufon.replace('#main h3', { fontFamily: 'DSNKaMon', fontSize: '40px' });
-                            Cufon.now();
+              
+              if(myObject.fontjs){
+              scriptjava= '<script  src="mylibs/'+myObject.fontjs+'"><\/script>';
+              }
+              $('#main').html(scriptjava+myObject.html);
+              if(myObject.fontjs){
+              Cufon.replace('#main h3', { fontFamily:myObject.fonttext, fontSize: myObject.fontsize+'px' });
+              Cufon.now();
+              }
+
                             $('#main').removeClass('ui-content');
                             $('#setdata').html(myObject.setdata); 
                             $('.galleryimg').fancybox();
+                            
+                            $("#color h2").css('background-image',"url("+webdir+"/images/shop/"+myObject.catname_en+"/hd-"+myObject.catname_en+".png)");
+                            $("#main h3").css('color',"#"+myObject.color+"");
+                            $("#color").css('background-color',"#"+myObject.color+"");
                             
                             $('#bodydiv').attr('class',myObject.bodyclass);
                             $(".ir.edit.map").click(function() {
@@ -276,23 +291,71 @@ function onPhotoDataSuccess(imageData) {
        
 
     }
-function capturePhoto(size,shopurl,group) {
-               size2=size;
-               shopurl2=shopurl;
-               group2=group; 
-              // var sizearray = explode("x", size, 3);
-               var sizearray=size.split("x");
+function setcamera()
+{
+                   var sizearray=size2.split("x");
                
-               //   navigator.notification.alert(sizearray[0]);
-               //   navigator.notification.alert(sizearray[1]);
-                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality : 100, 
-  destinationType : Camera.DestinationType.DATA_URL, 
-  sourceType : Camera.PictureSourceType.CAMERA, 
-  allowEdit : true,
-  encodingType: Camera.EncodingType.JPEG,
-  targetWidth: sizearray[0],
-  targetHeight: sizearray[1] });
-               // navigator.notification.alert(size);     
+
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.CAMERA, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+}
+function setalbum()
+{
+           var sizearray=size2.split("x");
+               
+
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+    
+}
+function capturePhoto(size,shopurl,group) {
+    
+    size2=size;
+    shopurl2=shopurl;
+    group2=group;
+$('#'+size).simpledialog({
+    'mode' : 'bool',
+    'prompt' : 'Choose Form ?',
+    'useModal': true,
+    'buttons' : {
+      'Camera': {
+        click: function () {
+         // $('#dialogoutput').text('OK');
+         setcamera();
+        }
+      },
+      'Album': {
+        click: function () {
+        //  $('#dialogoutput').text('Cancel');
+        setalbum();
+        }
+      }
+    }
+  });
+    
+    
+    
+    
+    
+    
+                
+
+
+                
     }
 function onFail(message) {
       navigator.notification.alert('Failed because: ' + message);
@@ -685,6 +748,7 @@ function toggleBounce(marker) {
                 <li><a href="location.html"><span>Show Location</span></a></li>
                 <li><a href="shop.html"><span>Shop</span></a></li>
                 <li><a href="help.html"><span>Help</span></a></li>
+                <li ><a id="loglink" href="login.html"><span id="logid">login</span></a></li>
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
