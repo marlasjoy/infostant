@@ -3257,14 +3257,10 @@ $data=$this->db->db_get_recordset();
                   $arraydata[$k]['proname']=$value['proname'];   
                   $arraydata[$k]['shopurl2']= 'shopedit.html?shopurl='.$value['shopurl'];    
                   $arraydata[$k]['tel']=$value['tel'];
-                //  $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
-            //      $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+                  
                    if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg'))
                     {
-                   // if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/thumb4.jpg',$thumbfile5))
-//                     {
-//                       chmod($thumbfile5,0777);
-//                     }
+                  
                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';
                       if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg'))
                     {
@@ -3278,7 +3274,18 @@ $data=$this->db->db_get_recordset();
                     
                     }else
                     {
-                      $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';    
+                        $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
+                         $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+                       if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfile5))
+                     {
+                       chmod($thumbfile5,0777);
+                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';   
+                     }else
+                     {
+                     $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';       
+                     }  
+                        
+                       
                     }   
                   $k++;
                   
@@ -3300,115 +3307,29 @@ $data=$this->db->db_get_recordset();
        function submitformiphone()
        { 
 
-            if(is_array($this->post))
-                                {
-                                     foreach($this->post as $key => $value)
-                                     {
-                                                  if($this->post[$key]==""&&$key!='website'&&$key!='pic1'&&$key!='userid'&&$key!='refcode')
-                                                  {
-                                                  if($this->post['userid'])
-                                                  {
-                                                        if($key!='email'&&$key!='password1'&&$key!='repassword'&&$key!='username')
-                                                        {
-                                                         $arraydata[]=$key;      
-                                                        }
-                                                      
-                                                  }else
-                                                  {    
-                                                  $arraydata[]=$key;   
-                                                  }
-                                                  }
-                                     }
-                                      
-                                }
-            if(count($arraydata)>0)
-                                 {
-                                     
-                                     $arraydata['error']="กรอกข้อมูลไม่ครบ".$arraydata[0];
-                                     echo array2json($arraydata); 
-                                     exit();
-                                 }
-           
-           
-           if(empty($this->post['userid']))
-        {
-        if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
-        {
-            $arraydata['error']=" email ไม่ถูกต้อง ".$this->post['email'];
-            echo array2json($arraydata); 
-            exit();
-        }
-        
-        if(!$this->checkemail(1))
-        {
-             $arraydata['error']=" email ซ้ำ";
-            echo array2json($arraydata); 
-            exit();
-        }
-       
-        if(!$this->checkusername(1))
-        {
-            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
-            echo array2json($arraydata); 
-            exit();
-        }
-         if($this->post['password1']!=$this->post['repassword'])
-        {
-            $arraydata['error']=" password กรอก ไม่ตรงกัน";
-            echo array2json($arraydata); 
-            exit();
-        }
-        
-        }
+
         if(!$this->checkshopurl(1))
         {
             $arraydata['error']=" shopurl ซ้ำ หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
             exit();
         }
-        if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['emailshop']))
-        {
-            $arraydata['error']=" email ของชื่อสถานที่ ไม่ถูกต้อง";
-            echo array2json($arraydata); 
-            exit();
-        }
+
            
        $arraydata2=$this->post;       
 
                 
                 
-         if(empty($this->post['userid']))
-        {
-        $arraymember= $this->savemember();
-       
-        $arrayshop['mid']=$arraymember['mid'];
-        $arraydata['username']=$arraymember['username'];
-        $arraydata['mid']=$arraymember['mid']; 
-         }else
-         {
-          $arrayshop['mid']=$this->post['userid'];
-          $arraydata['username']=$arraymember['username'];
-          $arraydata['mid']=$this->post['userid'];    
-         }
-        
-        $arrayshop['catid']=$arraydata2['cat'];
-        $arrayshop['subcatid']=$arraydata2['subcat'];
+ 
+        $arrayshop['mid']=$arraydata2['mid'];
+        $arrayshop['catid']=$arraydata2['catid'];
+        $arrayshop['subcatid']=$arraydata2['subcatid'];
         $arrayshop['shopname']=urldecode($arraydata2['shopname']);
-
-        $arrayshop['website']=urldecode($arraydata2['website']);
-        $arrayshop['title']=urldecode($arraydata2['title']);
-        $arrayshop['keyword']=$arraydata2['keyword'];
-        $arrayshop['description']=urldecode($arraydata2['description']);
-        $arrayshop['proid']=$arraydata2['province'];
-        $arrayshop['disid']=$arraydata2['district'];
-        $arrayshop['tumid']=$arraydata2['tumbon'];
-        $arrayshop['postcode']=$arraydata2['postcode'];
-        $arrayshop['address']=urldecode($arraydata2['address']);
-        $arrayshop['tel']=$arraydata2['tel'];
+        $arrayshop['proid']=$arraydata2['proid'];
+        $arrayshop['disid']=$arraydata2['disid'];
+        $arrayshop['tumid']=$arraydata2['tumid'];
         $arrayshop['temid']=$arraydata2['temid'];
         $arrayshop['refcode']=$arraydata2['refcode'];
-        $arrayshop['emailshop']=$arraydata2['emailshop'];
-        $arrayshop['daterange']=urldecode($arraydata2['daterange']);
         $arrayshop['lat']=$arraydata2['lat'];
         $arrayshop['lng']=$arraydata2['lng'];
         $arrayshop['createdate']=date("Y-m-d H:i:s");
@@ -3465,6 +3386,7 @@ $data=$this->db->db_get_recordset();
                      
                
        }
+       
        function getdatafromiphone()
        {
              $this->db->get_connect();
@@ -3637,7 +3559,7 @@ $data=$this->db->db_get_recordset();
              $username=$arraydata['username'];
               $password=md5(strtolower($arraydata['username']) . $arraydata['password1']);
               $this->db->get_connect();
-              $this->db->db_set_recordset('SELECT mid,email  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" ');
+              $this->db->db_set_recordset('SELECT mid,email,pic  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" ');
               
               $data=$this->db->db_get_recordset();
           
@@ -3649,6 +3571,8 @@ $data=$this->db->db_get_recordset();
               {  $arraydata['error']=0;
                  $arraydata['mid']=$data[0]['mid'];
                  $arraydata['username']=$username;
+                 $arraydata['emailprofile']=$data[0]['email'];
+                 $arraydata['picme']=$data[0]['pic'];
               }else
               {
                  $arraydata['error']="ชื่อผู้ใช้หรือรหัสผ่านผิด"; 
@@ -3758,7 +3682,14 @@ $context = stream_context_create($opts);
                                                            <div style="display: none;" id="width">'.$html->find('#width',0)->innertext.'</div>
                                                            <div style="display: none;" id="height">'.$html->find('#height',0)->innertext.'</div>';
                          $arraydata['html']   = $html->find('#main',0)->innertext; 
-                         $arraydata['catename']   = $this->getcatebyshopurl($shopurl);
+                         $arraytem=$this->getcatebyshopurl($shopurl);
+                         $arraydata['catename']   = $arraytem['temname'];
+                         $arraydata['fontjs']   = $arraytem['fontjs'];
+                         $arraydata['fonttext']   = $arraytem['fonttext'];
+                         $arraydata['fontsize']   = $arraytem['fontsize'];
+                        // $data=$this->getshop($shopurl);
+                         $arraydata['catname_en']=$arraytem['catname_en'];
+                         $arraydata['color']=$arraytem['color'];
                          echo array2json($arraydata);       
                        }
                        
@@ -3767,18 +3698,19 @@ $context = stream_context_create($opts);
       {
              $this->db->get_connect();
               
-          $this->db->db_set_recordset(' SELECT
-tb_template.temname
+          $this->db->db_set_recordset(' SELECT 
+          *
 FROM
 tb_shop
 INNER JOIN tb_template ON tb_shop.temid = tb_template.temid
+INNER JOIN tb_cat ON tb_shop.catid = tb_cat.catid 
 where tb_shop.shopurl="'.$shopurl.'"');
               
           $arraydata=$this->db->db_get_recordset();
           
           $this->db->destory();
           $this->db->closedb();
-          return       $arraydata[0]['temname'] ;
+          return       $arraydata[0];
       }
       function submitpicformiphone()
       {
