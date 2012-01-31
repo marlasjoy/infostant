@@ -25,6 +25,7 @@
       <script src="googlemap.js" charset="utf-8"></script> 
       <script src="js/cufon-yui.js" charset="utf-8"></script> 
        <script src="jquery.mobile.simpledialog.js" charset="utf-8"></script>
+         <script src="ChildBrowser.js" charset="utf-8"></script>
        
 
     <script type="text/javascript" charset="utf-8">
@@ -50,10 +51,34 @@ var destinationType; // sets the format of returned value
 var size2;
 var shopurl2;
 var group2;
-
-function setShopEdit()
-{
-    //document.addEventListener("deviceready",onDeviceReady2,false);  
+ var childBrowser;
+document.addEventListener("deviceready",onDeviceOk,false);
+        function onDeviceOk()
+        {        
+         childBrowser = ChildBrowser.install();
+        }
+function setLoadBrowser(url)
+        {
+            var strpath=window.location;
+            alert(strpath);
+           
+            try {
+                //both of these should work...
+                //window.plugins.childBrowser.showWebPage(url);
+                // alert(url);
+           // childBrowser.showWebPage('http://google.co.th/');
+                //window.plugins.childBrowser.showWebPage("www/pdf/94556150.pdf");
+            window.plugins.childBrowser.showWebPage(strpath);
+                //alert('1.1');
+            }
+            catch (err)
+            {
+                // alert('2');
+                alert(err);
+            }
+        }
+function setShopEdit(){
+    
  onDeviceReady2();
 }
 function setyoutube(val){
@@ -75,7 +100,7 @@ function onDeviceReady2() {
      
            if(localStorage.getItem("userId"))
               {
-                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId") }, function(data) {
+                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:2 }, function(data) {
                             
                             var myObject = eval('(' + data + ')');
                             
@@ -291,8 +316,7 @@ function onPhotoDataSuccess(imageData) {
        
 
     }
-function setcamera()
-{
+function setcamera(){
                    var sizearray=size2.split("x");
                
 
@@ -306,8 +330,7 @@ function setcamera()
                 targetHeight: sizearray[1] }
                 );
 }
-function setalbum()
-{
+function setalbum(){
            var sizearray=size2.split("x");
                
 
@@ -330,6 +353,7 @@ function capturePhoto(size,shopurl,group) {
 $('#'+size).simpledialog({
     'mode' : 'bool',
     'prompt' : 'Choose Form ?',
+    'fullScreen':'true',
     'useModal': true,
     'buttons' : {
       'Camera': {
@@ -360,10 +384,7 @@ $('#'+size).simpledialog({
 function onFail(message) {
       navigator.notification.alert('Failed because: ' + message);
     }
-
-
-function setMap()
-{
+function setMap(){
     $('#hidden_link').fancybox({
      'width' : '310',
      'height' :'950',
@@ -387,8 +408,7 @@ beaches=[eval(temp)];
 
 });
 }
-function getlocation(position)
-{
+function getlocation(position){
    initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 
    calcRoute();   
@@ -396,8 +416,7 @@ function getlocation(position)
   //    myMarkers(map,initialLocation); 
       
 } 
-function getlocation2(position)
-{
+function getlocation2(position){
     $('#lat').val(position.coords.latitude);
     $('#lat').val(position.coords.longitude);
    //initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
@@ -414,9 +433,7 @@ function getlocation2(position)
   //    myMarkers(map,initialLocation); 
       
 } 
-
-function getdetect()
-{
+function getdetect(){
       
        if(navigator.geolocation) {
 
@@ -463,8 +480,7 @@ function getdetect()
   }
   //var t=setTimeout("getdetect()",5000) ; 
 }
-function getmylocation()
-{
+function getmylocation(){
      if(navigator.geolocation) {
 
            
@@ -500,8 +516,7 @@ function getmylocation()
   }
     
 } 
-function onDeviceReady()
- {
+function onDeviceReady(){
 
    directionsDisplay = new google.maps.DirectionsRenderer({preserveViewport: true });   
   var myOptions = {
@@ -534,8 +549,7 @@ function onDeviceReady()
                                 
   
 }
-function setMarkerPoint()
-{
+function setMarkerPoint(){
      if(beaches.length==1)
    {
    for (var i = 0; i < beaches.length; i++) { 
@@ -546,8 +560,7 @@ function setMarkerPoint()
    }
    }
 }
-function myMarkers()
-{
+function myMarkers(){
     
     var image = new google.maps.MarkerImage('http://www.infostant.com/images/default/icons/walk.png',
       // This marker is 20 pixels wide by 32 pixels tall.
@@ -612,7 +625,6 @@ function calcRoute() {
       }
     });
   }
-
 function setMarkers(map, locations) {
   // Add markers to the map
  // alert(locations);
@@ -662,9 +674,7 @@ function setMarkers(map, locations) {
    
   }
 }
-
-function setdata(marker)
-{
+function setdata(marker){
    map.setCenter(new google.maps.LatLng(marker.getPosition().lat(), marker.getPosition().lng())); 
     var postion=marker.getPosition().toUrlValue();
     var dataset=myObject[marker.getZIndex()];
@@ -686,8 +696,7 @@ function setdata(marker)
     $("#mapimage").attr("src",src);
     
 }
-function setevent(marker)
-{
+function setevent(marker){
         google.maps.event.addListener(marker, 'click', function() {
       //  alert(marker.getPosition().lat());
         setdata(marker);
@@ -697,8 +706,7 @@ function setevent(marker)
   });
     
 }
-function stopmarker(marker)
-{
+function stopmarker(marker){
     marker.setAnimation(null);
 }
 function toggleBounce(marker) {
@@ -714,13 +722,265 @@ function toggleBounce(marker) {
 
   }
 }
+function setMemoryEdit(){
+    //document.addEventListener("deviceready",onDeviceReady2,false);  
+ onDeviceReady3();
+}
+function onPhotoDataSuccess2(imageData) {
+      // Uncomment to view the base64 encoded image data
+    //  imageURI2=imageData;
+      $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
+      $.post(webdir+'/ajax/submitpicformiphone2',{
+                     pic1:imageData
+                     ,size:size2
+                     ,meid:getUrlVars2()['meid']
+                     ,mid:localStorage.getItem("userId")
+                     ,username:localStorage.getItem("username")
+                     ,group:group2
+                     
+      }, function(data) {
+                      var myObject = eval('(' + data + ')');    
+
+                            setdata3(myObject);  
+                   });
+       
+
+}
+function setcamera2(){
+                   var sizearray=size2.split("x");
+               
+
+                navigator.camera.getPicture(onPhotoDataSuccess2, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.CAMERA, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+}
+function setalbum2(){
+           var sizearray=size2.split("x");
+               
+
+                navigator.camera.getPicture(onPhotoDataSuccess2, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+    
+}
+function changeimage(size,group)
+{
+    size2=size;
+    group2=group;
+    $('#'+size).simpledialog({
+    'mode' : 'bool',
+    'prompt' : 'Choose Form ?',
+    'fullScreen':'true',
+    'useModal': true,
+    'buttons' : {
+      'Camera': {
+        click: function () {
+         // $('#dialogoutput').text('OK');
+         setcamera2();
+        }
+      },
+      'Album': {
+        click: function () {
+        //  $('#dialogoutput').text('Cancel');
+        setalbum2();
+        }
+      }
+    }
+  });
+}
+function setdata3(myObject){
+      var scriptjava='';
+      $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
+              
+              if(myObject.fontjs){
+              scriptjava= '<script  src="mylibs/'+myObject.fontjs+'"><\/script>';
+              }
+              $('#main').html(scriptjava+myObject.html);
+              if(myObject.fontjs){
+              Cufon.replace('#main h3', { fontFamily:myObject.fonttext, fontSize: myObject.fontsize+'px' });
+              Cufon.now();
+              }
+
+                            $('#main').removeClass('ui-content');
+                            $('#setdata').html(myObject.setdata); 
+                            $('.galleryimg').fancybox();
+                            
+                            $("#color h2").css('background-image',"none");
+                            $("#main h3").css('color',"#"+myObject.color+"");
+                            $("#color").css('background-color',"#"+myObject.color+"");
+                            
+                            $('#bodydiv').attr('class',myObject.bodyclass);
+                            $(".ir.edit.map").click(function() {
+                                
+                            $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'google.html',
+                                   'type':'iframe' ,
+                                   'width':'100%',
+                                   'height':'100%'
+                            
+                            
+                            }); 
+                                 
+                            });
+                            $(".ir.edit.vdo").click(function() {
+                            if($('#video').attr("src"))
+                            {  
+           
+       var embed=testUrlForMedia($('#video').attr("src"));       
+      if(embed)
+        {
+            $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
+        }            
+         $.fancybox({
+                                   'href':'#youtubedata','type':'inline','autoScale':'true'
+                       });   
+           
+       }
+                            
+                             
+                            });
+
+                            
+                            
+                            
+                            $(".ir.edit.text").click(function() {
+                                if($(this).attr('title')=="popup5")
+                                {
+                                    $('#text-address').val($('#address').html());
+                                    $('#text-tel').val($('#tel').html()); 
+                                    $('#text-emailshop').val($('#email').html()); 
+                                    $('#text-website').val($('#website').html()); 
+                                        $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext2','type':'inline'}); 
+                                }else
+                                {
+                                $('#target').val($(this).attr('title'));
+                               $('#textarea').val($('#'+$(this).attr('title')).html());
+                              // $("#datatext").fancybox().trigger('click');
+
+                               $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext',
+                                    'type':'inline',
+                                    'autoScale':'true'
+                               
+                               }); 
+                                }
+                                
+                            });
+                              onLoadMaps();
+                                         var viewport = $("head meta[name=viewport]"); 
+                                         
+                                         
+                                         
+                                         if (navigator.userAgent.toLowerCase().match(/android/)) {
+                                       
+                                       //  document.write('<script charset="utf-8" src="android\/phonegap-1.2.0.js"><\/script>');
+                                         //viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         } else if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
+                                       //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+                                   
+                                         // viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                       
+                                         }
+                                         else if (navigator.userAgent.toLowerCase().match(/ipad/) ) {
+                                         //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+                              
+                                      //   viewport.attr('content', 'width=1024, initial-scale=0.8, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         }
+}
+function onDeviceReady3() {
+
+    //   pictureSource=navigator.camera.PictureSourceType;
+     //  destinationType=navigator.camera.DestinationType;
+     
+           if(localStorage.getItem("userId"))
+              {
+                   $.post(webdir+'/ajax/getshopbymeidformobile',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId") }, function(data) {
+                            
+                            var myObject = eval('(' + data + ')');
+                            
+                             setdata3(myObject);
+
+                            
+                   });  
+                   $('#savetext').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:$('#target').val(),setdata:$('#textarea').val(),filename:'index_th' }, function(data) {
+                            
+                          //  var myObject = eval('(' + data + ')');
+                            
+                         //    setdata(myObject);
+                            $('#'+$('#target').val()).html($('#textarea').val());
+                            $.fancybox.close();
+                            
+                            
+                   });
+                       }); 
+                   
+                   $('#savetext2').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',''+$('#file-form').serialize()+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=address-tel-emailshop-website&mid='+localStorage.getItem("userId"), function(data) {
+                                    $('#address').html( $('#text-address').val());
+                                    $('#tel').html($('#text-tel').val()); 
+                                    $('#emailshop').html($('#text-emailshop').val()); 
+                                    $('#website').html($('#text-website').val()); 
+                            $.fancybox.close();
+                            
+                   });    
+                       
+                    
+                       
+                   });
+                   
+                    $('#savevideo').click(function() {
+        var embed=testUrlForMedia($('#youtube').val());
+        //alert(embed.id);
+       if(embed.id)
+        {
+        
+        $.post(webdir+'/ajax/savevideo','setdata='+embed.id+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)            
+         {
+         eval("var obj1="+reposnse); 
+          if(obj1.resposne){
+              setyoutube(embed.id);   
+              $.fancybox.close();
+          }
+
+          }); 
+        }  
+    
+              
+              });
+                     
+          
+              }
+        
+    }
 
 </script>
     
 </head> 
 <body> 
 
-<div id="index" data-role="page">
+<div id="index" data-role="page"  style="z-index:1100 !important">
 
     <div data-role="header" data-position="fixed">
         <div>
