@@ -9,7 +9,7 @@
 #profile .ui-btn{ margin:3px;}
 #profile .ui-btn-inner{ padding:0px 10px;;}
 #profile .alignbox{ display:block;margin-left:-60px;}
-#profile .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 40px;text-shadow: 1px 0 1px #333;}
+#profile .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333;}
 #profile .icon-profile{ background:url(images/icon_profile.png) no-repeat 0 -30px;}
 #profile .ui-focus .icon-profile, #profile  .ui-btn-active .icon-profile{ background-position: 0px 0px;}
 #profile .icon-shop{ background:url(images/icon_profile.png) no-repeat -30px -30px;}
@@ -46,3 +46,55 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 	
     background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
 }
+
+
+
+
+#social-contact {}
+#contact-bar .social{}
+#contact-bar .ui-radio{ width:33%}
+#contact-bar .ui-radio .ui-btn{ width:97%}
+#contact-bar { background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#contact-bar .ui-btn{ margin:3px;}
+#contact-bar .ui-btn-inner{ padding:0px 10px;;}
+#contact-bar .alignbox{ display:block;margin-left:-60px;}
+#contact-bar .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333; font-size:0.9em;}
+#contact-bar .icon-contact{ background:url(images/icon_profile.png) no-repeat -60px -30px;}
+#contact-bar .ui-focus .icon-contact, #contact-bar  .ui-btn-active .icon-contact{ background-position: -60px 0px;}
+#contact-bar .icon-refer{ background:url(images/icon_profile.png) no-repeat -90px -30px;}
+#contact-bar .ui-focus .icon-qr,  #contact-bar  .ui-btn-active .icon-refer { background-position: -90px 0px;}
+#contact-bar .icon-qr{ background:url(images/icon_profile.png) no-repeat -120px -30px;}
+#contact-bar .ui-focus .icon-qr,  #contact-bar  .ui-btn-active .icon-qr { background-position: -120px 0px;}
+#contact-bar .ui-btn-hidden{ opacity: 1;}
+#contact-bar .ui-btn-text{line-height: 30px;display:block;text-align:center;}
+#contact-bar .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
+#contact-bar .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
+#contact-bar .ui-btn-hover-c{ border:none;}
+
+#social-contact .ui-content > h2 span.link { font-size:11px; float:right; margin:0;}
+#social-contact .ui-content > h2 span.link a.magnifer{ background:url(images/icons/magnifer.png) no-repeat 50% 50%; }
+#social-contact .ui-content > h2 span.link a.pencil{ background:url(images/icons/pencil.png) no-repeat 50% 50%;}
+#social-contact .ui-content > h2 span.link a{ display:block; width:40px; height:40px; text-indent:2000em; background-size: 24px 24px !important; border-left:1px solid #666; margin:0;}
+
+#social-contact .subpage h3{ display:block; height:20px; background:#0CF; font-size:16px; line-height:20px; color:#FFF; text-shadow:none; padding:0 10px; margin:0 0 0px 0;}
+
+#social-contact .subpage > ul.v > li {
+    color: #747474;
+    font-size: 12px;
+    line-height: 135%;
+    min-height: 70px;
+    padding: 10px 10px 10px 90px;
+    position: relative;
+}
+
+#social-rfcode{}
+#social-rfcode .show-rfcode{ margin:20px; font-size:24px; font-weight:bold;}
+
+#social-qrcode{}
+#social-qrcode .show-qrcode{ margin:20px; border-radius: 10px 10px 10px 10px;}
+#social-qrcode .show-qrcode img{ width:80%;}
+
+
+
+
+
