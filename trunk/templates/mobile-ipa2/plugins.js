@@ -34,6 +34,8 @@ myCat[15]="Other";
  var temid;
  var errorset=0;
  var refcode;
+ var sids;
+ var fid;
 
 
 window.log = function(){
@@ -75,6 +77,8 @@ window.log = function(){
      temid="";
      errorset=0;
      refcode="";
+     sids="";
+     fid="";
  }
   function getWidth()
   {
@@ -186,7 +190,11 @@ $.mobile.hidePageLoadingMsg();
     if($('.ui-page-active').attr('id')=="shop")
     {
       $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
-    }else
+    }else if($('.ui-page-active').attr('id')=="favarite")
+    {
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li></ul></li>');    
+    }
+    else
     {
     $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');    
     }
@@ -214,7 +222,7 @@ $.mobile.hidePageLoadingMsg();
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
                    $.ajax({
-                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid},                                                            
+                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid},                                                            
                                                       url: webdir+'/ajax/getallshopbyname3',
                                                       dataType: "jsonp",
                                                       jsonp: 'callback',
@@ -464,6 +472,26 @@ $.mobile.showPageLoadingMsg();
  { 
 
             if(myObject.shopname) {$('#shopname').html(myObject.shopname)}
+          //  localStorage.setItem("recentview",''); 
+             var retrievedObject = localStorage.getItem('recentview');
+             var arraydata=new Array();
+             if (retrievedObject) {
+               //   alert(retrievedObject);
+                  var arraydata = retrievedObject.split(",");
+
+                  arraydata.push(myObject.sid); 
+                }else
+                {
+                    
+                    arraydata.push(myObject.sid);       // argument to control array's size)
+                    
+                    
+                    
+                }
+                //alert(arraydata.join(","));
+                localStorage.setItem("recentview",arraydata.join(",")); 
+
+
              
               if(myObject.pic1) {$('.intro').attr('src',myObject.pic1)}  
               if(myObject.title) {$('#title').html(myObject.title)}
@@ -849,6 +877,27 @@ function registerserver()
                            
      });
 }
+function recentfunction()
+{
+    var retrievedObject = localStorage.getItem('recentview');
+      if (retrievedObject) {
+                    resetvalue();
+                    sids=retrievedObject;
+                    
+                    searchresultfunction();
+               //   alert(retrievedObject);
+                //  var arraydata = retrievedObject.split(",");
+
+                 // arraydata.push(myObject.sid); 
+                }
+}
+function favaritefunction()
+{
+    resetvalue();
+    fid=1;
+    mid=localStorage.getItem('userId');;
+    searchresultfunction();
+}
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -865,6 +914,17 @@ $('div').live( 'pageshow',function(event, ui){
 {
 case "index":
   indexfunction();
+  break;
+  
+case "favarite":
+ if(accesspage())
+  {
+  favaritefunction();
+  }
+  break;  
+  
+case "recent":
+  recentfunction();
   break;
   case "memory":
      if(accesspage())
@@ -914,6 +974,14 @@ case "landing":
   
   break;
   case "memoryedit":
+   if(accesspage())
+  {
+ //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 
+  }
+
+  
+  break;
+    case "memoryedit":
    if(accesspage())
   {
  //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 

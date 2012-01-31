@@ -100,7 +100,7 @@ function onDeviceReady2() {
      
            if(localStorage.getItem("userId"))
               {
-                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:2 }, function(data) {
+                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId") }, function(data) {
                             
                             var myObject = eval('(' + data + ')');
                             
