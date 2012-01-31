@@ -772,6 +772,29 @@ function checktemplate()
            //alert(temid);
           
      }
+function addmemoryserver()
+{
+    $.post(webdir+'/ajax/savememory',{username:localStorage.getItem("username"),mid:localStorage.getItem("userId"),template:$('#temid').val(),memoryurl:$('#memoryurl').val()} ,function(data) {
+
+               
+               var myObject = eval('(' + data + ')');
+
+               if(myObject.error)
+               {
+                    alert(myObject.error);
+               }else{
+                  // alert();
+                   
+                   alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                  // alert(webdir+'/memory/'+myObject.username+'/'+myObject.memoryurl);
+                
+                   $.mobile.changePage("memoryedit.html?meid="+myObject.meid, "flip", true, true); 
+               }
+               
+              
+               
+           });
+}
 function templatesshopfunction()
 {
      mySliderInstance =  $('#myGallery2').royalSlider({               
@@ -843,6 +866,13 @@ $('div').live( 'pageshow',function(event, ui){
 case "index":
   indexfunction();
   break;
+  case "memory":
+     if(accesspage())
+  {
+      memoryresultfunction();
+  }
+  
+  break;
 case "search":
   searchfunction();
   break;
@@ -881,6 +911,14 @@ case "landing":
   {
     templatesshopfunction();
   }
+  
+  break;
+  case "memoryedit":
+   if(accesspage())
+  {
+ //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 
+  }
+
   
   break;
   case "shopedit":
@@ -962,8 +1000,26 @@ default:
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
         $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })
-
-       $(".alignbox").bind( "click", function(event, ui) {
+ if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
+                                       //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+                                   
+$("input[type='radio']").click(function() {
+  if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
+           {
+             
+                               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+                               
+          }else
+           {
+               $.mobile.changePage("shop.html", "flip", true, true);
+           }
+});
+                                       
+                                         }else
+                                         {
+                                             
+                                      
+       $("fieldset").click(function() {
            if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
            {
                $.mobile.changePage("shop.html", "flip", true, true);
@@ -972,6 +1028,9 @@ default:
                $.mobile.changePage("profile_myprofile.html", "flip", true, true);
            }
 });
+   }
+
+
 
     
     

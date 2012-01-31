@@ -31,9 +31,9 @@
         </div> <!-- #function -->
 </div>
 <div data-role="content" class="subpage">
- 	 <div  id="profile">
+<div  id="profile">
          
-                <fieldset data-role="controlgroup" data-type="horizontal">
+                <fieldset  data-role="controlgroup" data-type="horizontal">
                          <input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
                          <label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
                          <input type="radio" name="radio-choice-b" id="radio-choice-d" value="off"/>
@@ -42,18 +42,15 @@
                 
         </div>
          <h2>Create Memory</h2>
-         <form name="registersummit" id="registersummit" onsubmit="return loginserver()">
+         <form name="registersummit" id="registersummit" onsubmit="return addmemoryserver()">
 
 
 
            <p>
-            <label for="input-title">Title</label>
-            <input type="text" name="title" id="title" />
-              </p><br />
-              <p>
-            <label for="input-description">Description</label>
-            <input type="text" name="description" id="description" />
+            <label for="input-title">ชื่ออัลบั้ม</label>
+            <input type="text" name="memoryurl" id="memoryurl" />
               </p>
+
             <br />
             
          <h2>Select Template</h2>
@@ -86,14 +83,13 @@
                     </div>
 
           </div>
-
+            <input type="hidden" id="temid" name="temid" value="">
             <input type="submit" value="Create" id="" data-inline="" />
              
          </form>
          
        
                
-        
-        </div>
+
 	</div><!-- /content -->
 </div><!-- /page -->
