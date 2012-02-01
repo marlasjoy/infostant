@@ -10,7 +10,7 @@
 
 (function($) {
     var ids = {
-            container: "#calendar2",
+            container: "#calendar3",
             head: "#CalendarHead",
             body: "#CalendarBody"
     };
@@ -136,14 +136,14 @@
         
         // Create Previous link for later
         var prevMonth = d.getMonth() == 0 ? new Date(d.getFullYear()-1, 11, 1) : new Date(d.getFullYear(), d.getMonth()-1, 1);
-        var prevLink = jQuery('<th><a href="javascript:void(0);" class="ir btn-prev">&lsaquo;</a></th>').click(function() {
+        var prevLink = jQuery('<th><a href="javascript:void(0);" class="ir btn-prev button prev_month">&lsaquo;</a></th>').click(function() {
             jQuery.J.ChangeMonth(prevMonth);
             return false;
         });
         
         //Create Next link for later
         var nextMonth = d.getMonth() == 11 ? new Date(d.getFullYear()+1, 0, 1) : new Date(d.getFullYear(), d.getMonth()+1, 1);
-        var nextLink = jQuery('<th><a href="javascript:void(0);" class="ir btn-next">&rsaquo;</a></th>').click(function() {
+        var nextLink = jQuery('<th><a href="javascript:void(0);" class="ir btn-next button next_month">&rsaquo;</a></th>').click(function() {
             jQuery.J.ChangeMonth(nextMonth);
             return false;
         });
@@ -158,7 +158,7 @@
         //  Navigation
         var navRow = jQuery('<tr class="MonthNavigation"></tr>');
         navRow.append(prevLink);
-        navRow.append(jQuery('<th colspan="5">'+defaults.locale.months[d.getMonth()]+' '+d.getFullYear()+'</th>'));
+        navRow.append(jQuery('<th colspan="5" class="mounth">'+defaults.locale.months[d.getMonth()]+' '+d.getFullYear()+'</th>'));
         
         navRow.append(nextLink);
         navRow = jQuery("<thead></thead>").append(navRow);
@@ -209,14 +209,14 @@
                };
 
                 if (curDay < 0 || curDay >= maxDays) {
-                    atts['class'] = 'other';
+                    atts['class'] = 'other grey';
                 } else {
                     d.setDate(curDay+1);
                 }
                     
                 if (isCurrentMonth && curDay+1 == today.getDate()) {
                     dayStr = curDay+1;
-                    atts['class'] = 'event active';
+                    atts['class'] = 'event active event1';
                 }
                     
                 thisRow.append(jQuery("<td></td>").attr(atts).append( _currentDate.getDate()));
@@ -248,7 +248,7 @@
                 var ev = this;
                 if ((ev.Date >= _beginDate) && (ev.Date <= _endDate)) {
                     var cell = jQuery("#" + getDateId(ev.Date), jQuery(ids.container));
-                    var event = jQuery('<div class="Event"></div>').append('<a href="' + ev.URL + '">' + ev.Title + '</a>');
+                    var event = jQuery('<div class="Event event2"></div>').append('<a href="' + ev.URL + '">' + ev.Title + '</a>');
                     event.click(function() {
                         defaults.onEventClick(ev);
                     });
