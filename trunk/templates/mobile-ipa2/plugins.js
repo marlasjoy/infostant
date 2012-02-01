@@ -36,6 +36,7 @@ myCat[15]="Other";
  var refcode;
  var sids;
  var fid;
+ var myObject2;
 
 
 window.log = function(){
@@ -54,15 +55,14 @@ window.log = function(){
 
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
- function getUrlVars2() {
+function getUrlVars2() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
             vars[key] = value;
         });
         return vars;
  }
- function resetvalue()
- {
+function resetvalue(){
      subcatid="";
      proid="";
      disid="";
@@ -80,8 +80,7 @@ window.log = function(){
      sids="";
      fid="";
  }
-  function getWidth()
-  {
+function getWidth(){
     xWidth = null;
     if(window.screen != null)
       xWidth = window.screen.availWidth;
@@ -107,10 +106,10 @@ function getHeight() {
  
   return xHeight;
 }
- function indexfunction(){
+function indexfunction(){
       //alert('');
  }
- function setdistrict(myObject){
+function setdistrict(myObject){
        $("select#district").html('');
        var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
        var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
@@ -149,7 +148,7 @@ $.mobile.hidePageLoadingMsg();
 
            
 }
- function settumbon(myObject){
+function settumbon(myObject){
        $("select#tumbon").html('');
       // var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
        var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
@@ -179,7 +178,25 @@ $.mobile.hidePageLoadingMsg();
          }
          $.mobile.hidePageLoadingMsg();
 }
- function searchresultlist(myObject){
+function setdatetime(valueText,inst)
+{
+    alert(valueText);
+}
+function setcalendar(sid)
+{
+
+    $('#date'+sid).scroller('show');
+    //alert(shopurl);
+}
+function saveoffline()
+{
+//    $('#searchresulthtml').html();
+
+      localStorage.setItem("searchresulthtml",$('#searchresulthtml').html()); 
+      alert('บันทึกเรียบร้อยแล้ว');
+}
+function searchresultlist(myObject){
+    myObject2=myObject;
       var areaid=""; 
       $('#searchresulthtml').html('');
              for (variable in myObject)
@@ -192,32 +209,73 @@ $.mobile.hidePageLoadingMsg();
       $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li></ul></li>');    
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>');    
     }
     else
     {
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button calendar">calendar</a></li><li><a href="#" class="button favorite">Favorite</a></li></ul></li>');    
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="#" class="button favorite"></a></li></ul></li>');    
     }
     
     
     
 
              }
-                 $('.button.share').toggle(function() { 
-        $('#share').fadeIn(200);
-        $('#share').animate({ top: '32px' }, 300);
-    }, 
-    function() { 
-        $('#share').fadeOut(300);
-        $('#share').animate({ top: '28px'}, 300);
-    })
+                 
+    //$('.button.share').toggle(function() { 
+     //   $('#share').fadeIn(200);
+    //    $('#share').animate({ top: '32px' }, 300);
+ //   }, 
+ //   function() { 
+ //       $('#share').fadeOut(300);
+   //     $('#share').animate({ top: '28px'}, 300);
+ //   })
     /* Close Share button */
-    $('#share a').click(function() { 
-        $('#share').fadeOut(300);
-        $('#share').animate({ top: '28px'}, 300);
-    })
+  //  $('#share a').click(function() { 
+   //     $('#share').fadeOut(300);
+   //     $('#share').animate({ top: '28px'}, 300);
+    //})
+    
+              setshare2();
+    
              $.mobile.hidePageLoadingMsg();
              
+ }
+ function setshare2()
+ {
+       $('.button.share2').click(function(){
+                if ( $(this).parent().children('#share2').css("display") == "block" ){
+                
+                $(this).parent().children('#share2').fadeOut(300);
+                $(this).parent().children('#share2').animate({ top: '28px'}, 300);
+                
+               } else {
+                   
+                  $(this).parent().children('#share2').fadeIn(200);
+                  $(this).parent().children('#share2').animate({ top: '32px' }, 300);
+                
+               }
+            
+            
+        })
+        
+        $('#share2 a').click(function(){
+                if ( $(this).parent().parent().css("display") == "block" ){
+                
+                $(this).parent().parent().fadeOut(300);
+                $(this).parent().parent().animate({ top: '28px'}, 300);
+                
+               } else {
+                   
+                   $(this).parent().parent().fadeIn(200);
+                   $(this).parent().parent().animate({ top: '32px' }, 300);
+                
+               }
+        
+        })
+    
+    $('.datecalender').scroller('enable').scroller({dateFormat :'yy-mm-dd',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
+                     alert(dateText);
+                 }});
  }
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
@@ -896,7 +954,39 @@ function favaritefunction()
     resetvalue();
     fid=1;
     mid=localStorage.getItem('userId');;
-    searchresultfunction();
+    $.post(webdir + "/ajax/testconnect",
+                function(data) {
+                    if(!data) {
+                        $('#searchresulthtml').html('');
+                        $('#searchresulthtml').html(localStorage.getItem('searchresulthtml'));
+                        setshare2();
+                        return false;
+                    }else
+                    {
+                      searchresultfunction();  
+                    }
+                    // continue internet connection is OK
+                }).error(function() {
+                $('#searchresulthtml').html('');
+                $('#searchresulthtml').html(localStorage.getItem('searchresulthtml'));
+                setshare2();
+                
+                // alert('no online'); 
+                return false;
+                
+                });
+
+
+ //    alert(online) ;
+   //  if (online) {
+//    searchresultfunction();
+//  } else {
+//      alert('no online');
+    //document.getElementById('jquery_loader').src = '/javascripts/jquery.js';
+//  }
+
+    
+    
 }
 jQuery(document).ready(function($){ 
 	
