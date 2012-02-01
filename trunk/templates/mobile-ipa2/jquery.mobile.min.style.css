@@ -108,7 +108,7 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 
 
 #recent{}
-#recent .subpage{ padding-bottom:100px !important;}
+#recent .subpage{ padding-bottom:80px !important;}
 #recent a.button.calendar{
 	background-attachment: scroll;
     background-clip: border-box;
