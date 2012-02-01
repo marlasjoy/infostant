@@ -95,7 +95,8 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #social-qrcode .show-qrcode img{ width:80%;}
 
 /*a.button.share2 { width: 45px; height: 26px; display: block; float: right; text-indent: -1000em; background: url(images/btn-share.png) no-repeat; background-size: 100% 100%; position: relative; top: 7px; right: 10px; }
-*/#share2 { position: absolute; z-index: 6; width: 228px; height: 60px; background: url(images/bg-share2.png) no-repeat; background-size: 240px 81px; top: 28px; left: 25px; padding: 25px 0 0 12px; display: none; }
+*/
+#share2 { position: absolute; z-index: 6; width: 228px; height: 60px; background: url(images/bg-share2.png) no-repeat; background-size: 240px 81px; top: 28px; left: 25px; padding: 25px 0 0 12px; display: none; }
 #share2 li { float: left; }
 #share2 li a { width: 42px; height: 40px; text-indent: -1000em; background: url(images/icon-share.png) no-repeat; background-size: 216px 44px; margin-right: 2px; }
 #share2 li:nth-child(1) a { background-position: 0 0; }
