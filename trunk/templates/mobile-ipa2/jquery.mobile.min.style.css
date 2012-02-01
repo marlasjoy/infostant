@@ -107,5 +107,5 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 
 
 
-
-
+#recent{}
+#recent .subpage{ padding-bottom:100px !important;}
