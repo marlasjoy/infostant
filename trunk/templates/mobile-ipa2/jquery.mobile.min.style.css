@@ -155,3 +155,23 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 	background:none;
     padding-left: 0px;
 }
+
+
+#calendar .ui-content > table { margin: 5px 0 20px }
+#calendar table { width: 100%; font-size: 16px; font-weight: bold; text-align: center; border-collapse: separate; border-spacing: 1px; color: #000; }
+#calendar .ui-content > table > thead th {  width: 14%; }
+#calendar .ui-content > table > thead th:nth-child(2) { width:70%;  font-size: 20px; white-space: nowrap; }
+#calendar table th.mounth{ background:none; }
+#calendar table > thead th .prev_month, #calendar table > thead th .next_month { width: 41px; height: 41px; text-indent: -1000em; display: inline-block; background: url(images/btn-prev_month.png) no-repeat; background-size: 41px;  }
+#calendar table > thead th .next_month { background: url(images/btn-next_month.png) no-repeat; background-size: 41px; }
+#calendar table tr th { background: url(images/bg-day.png) no-repeat center center; background-size: 41px 41px; height: 41px; min-width: 40px; font-size: 13px; }
+#calendar table tr td { background: url(images/bg-date.png) no-repeat center center; background-size: 41px 41px; height: 41px; min-width: 40px; }
+
+#calendar table tr th.red { color: #b30101; }
+#calendar table tr th.grey, #calendar table td.grey { color: #545454; }
+#calendar table tr td.event1 { background: url(images/bg-event1.png) no-repeat center center; background-size: 41px 41px;  }
+#calendar table tr td.event2 { background: url(images/bg-event2.png) no-repeat center center; background-size: 41px 41px;  }
+#calendar table tr td.event3 { background: url(images/bg-event3.png) no-repeat center center; background-size: 41px 41px;  }
+.relative { position: relative; }
+#calendar .subpage ul.h > li:last-child { background: none; padding: 0; }
+#calendar .relative, #calendar .subpage { display: none; }
