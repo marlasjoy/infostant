@@ -109,3 +109,20 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 
 #recent{}
 #recent .subpage{ padding-bottom:100px !important;}
+#recent a.button.calendar{
+	background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("images/icon-function-li.png");
+    background-origin: padding-box;
+    background-position: -423px -199px;
+    background-repeat: no-repeat;
+    background-size: 650px 650px;
+    height: 28px;
+    text-indent: -1000em;
+    width: 30px;
+}
+#recent .subpage ul.h > li:last-child {
+	background:none;
+    padding-left: 0px;
+}
