@@ -126,3 +126,9 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 	background:none;
     padding-left: 0px;
 }
+
+
+.subpage ul.h > li:last-child {
+	background:none;
+    padding-left: 0px;
+}
