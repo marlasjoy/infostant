@@ -29,6 +29,7 @@
        <script src="js/mobiscroll-1.5.3.js" type="text/javascript"></script>
        <script src="lawnchair-0.6.1.js" type="text/javascript"></script>
        <script src="jquery.scrollTo.js" type="text/javascript"></script>
+       <script src="js/jMonthCalendar-1.0.0.js" type="text/javascript"></script>
 
     <link href="css/mobiscroll-1.5.3.css" rel="stylesheet" type="text/css" />
        
@@ -898,17 +899,17 @@ function setdata3(myObject){
                                          if (navigator.userAgent.toLowerCase().match(/android/)) {
                                        
                                        //  document.write('<script charset="utf-8" src="android\/phonegap-1.2.0.js"><\/script>');
-                                         //viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
                                          } else if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
                                        //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
                                    
-                                         // viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
                                        
                                          }
                                          else if (navigator.userAgent.toLowerCase().match(/ipad/) ) {
                                          //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
                               
-                                      //   viewport.attr('content', 'width=1024, initial-scale=0.8, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                                         viewport.attr('content', 'width=1024, initial-scale=0.8, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
                                          }
 }
 function onDeviceReady3() {

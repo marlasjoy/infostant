@@ -37,6 +37,7 @@ myCat[15]="Other";
  var sids;
  var fid;
  var myObject2;
+ var sid2;
 
 
 window.log = function(){
@@ -53,7 +54,35 @@ window.log = function(){
 (function(b){function c(){}for(var d="assert,clear,count,debug,dir,dirxml,error,exception,firebug,group,groupCollapsed,groupEnd,info,log,memoryProfile,memoryProfileEnd,profile,profileEnd,table,time,timeEnd,timeStamp,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c}})((function(){try
 {console.log();return window.console;}catch(err){return window.console={};}})());
 
-
+function array2json(arr)
+{  var parts = [];
+    var is_list = (Object.prototype.toString.apply(arr) === '[object Array]');
+ 
+    for(var key in arr) {
+        var value = arr[key];
+        if(typeof value == "object") { //Custom handling for arrays
+            if(is_list) parts.push(array2json(value));
+            else parts[key] = array2json(value);
+        } else {
+            var str = "";
+            if(!is_list) str = '"' + key + '":';
+ 
+            //Custom handling for multiple data types
+            if(typeof value == "number") str += value; //Numbers
+            else if(value === false) str += 'false'; //The booleans
+            else if(value === true) str += 'true';
+            else str += '"' + value + '"'; //All other things
+            // :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
+ 
+            parts.push(str);
+        }
+    }
+    var json = parts.join(",");
+     
+    if(is_list) return '[' + json + ']';//Return numerical JSON
+    return '{' + json +
+    '}';//Return associative JSON
+}
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
 function getUrlVars2() {
         var vars = {};
@@ -184,7 +213,7 @@ function setdatetime(valueText,inst)
 }
 function setcalendar(sid)
 {
-
+    sid2=sid;
     $('#date'+sid).scroller('show');
     //alert(shopurl);
 }
@@ -194,6 +223,19 @@ function saveoffline()
 
       localStorage.setItem("searchresulthtml",$('#searchresulthtml').html()); 
       alert('บันทึกเรียบร้อยแล้ว');
+}
+function setfav(sid)
+{
+        if(localStorage.getItem("userId"))
+        {
+        $.post(webdir+'/ajax/savefav2',{sid:sid,mid:localStorage.getItem("userId")} ,function(data) {
+            var myObject = eval('(' + data + ')');   
+            if(myObject.resposne)
+            {
+                alert('เพิ่ม favarite เรียบร้อยแล้ว');
+            }
+        });
+        }
 }
 function searchresultlist(myObject){
     myObject2=myObject;
@@ -213,7 +255,7 @@ function searchresultlist(myObject){
     }
     else
     {
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="#" class="button favorite"></a></li></ul></li>');    
+    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setfav(\''+obj.sid+'\')" class="button favorite"></a></li></ul></li>');    
     }
     
     
@@ -274,8 +316,33 @@ function searchresultlist(myObject){
         })
     
     $('.datecalender').scroller('enable').scroller({dateFormat :'yy-mm-dd',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
-                     alert(dateText);
-                 }});
+//alert(dateText);
+                 
+       
+       var setcalendar=localStorage.getItem('calendar');   
+       
+       if(setcalendar)
+       {
+          // alert(setcalendar);
+          var arraydata=jQuery.parseJSON(setcalendar);
+          
+         arraydata[''+dateText+'']=sid2;
+         var jsonstring= JSON.stringify(arraydata);
+         localStorage.setItem('calendar',jsonstring);   
+          
+       }else
+       {
+           var arraydata={};
+           arraydata[''+dateText+'']=sid2;
+           var jsonstring= JSON.stringify(arraydata);
+           localStorage.setItem('calendar',jsonstring);  
+         //alert(jsonstring);
+           
+       }
+    
+    //localStorage.setItem('calendar','');    
+    
+    }});
  }
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
@@ -988,6 +1055,16 @@ function favaritefunction()
     
     
 }
+function calendarfunction()
+{
+var options = {
+onMonthChanged: function(dateIn) {
+//this could be an Ajax call to the backend to get this months events
+return true;
+}
+};
+$.calendar.Initialize(options);
+}
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -1002,6 +1079,13 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
+    
+case "calendar":
+   if(accesspage())
+  {
+  calendarfunction();
+  }
+  break;    
 case "index":
   indexfunction();
   break;
@@ -1063,31 +1147,19 @@ case "landing":
   }
   
   break;
-  case "memoryedit":
-   if(accesspage())
-  {
- //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 
-  }
-
-  
-  break;
     case "memoryedit":
    if(accesspage())
   {
+      setMemoryEdit();
  //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 
   }
-
-  
   break;
   case "shopedit":
    if(accesspage())
   {
     setShopEdit(); 
   }
-
-  
   break;
-  
   case "profile-myprofile":
    if(accesspage())
   {
@@ -1095,8 +1167,6 @@ case "landing":
       myprofilefunction();
       
   }
-
-  
   break;
   case "registershop":
     if(accesspage())
