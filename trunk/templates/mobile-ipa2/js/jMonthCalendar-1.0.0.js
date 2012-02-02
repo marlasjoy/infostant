@@ -27,6 +27,7 @@
             },
             onMonthChanging: function(dateIn) { return true; },
             onMonthChanged: function(dateIn) { return true; },
+            onMonthChangedFinish: function(dateIn) { return true; },
             onEventClick: function(event) { return true; },
             locale: {
                 days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -248,13 +249,19 @@
                 var ev = this;
                 if ((ev.Date >= _beginDate) && (ev.Date <= _endDate)) {
                     var cell = jQuery("#" + getDateId(ev.Date), jQuery(ids.container));
-                    var event = jQuery('<div class="Event event2"></div>').append('<a href="' + ev.URL + '">' + ev.Title + '</a>');
-                    event.click(function() {
-                        defaults.onEventClick(ev);
-                    });
-                    event.hide();
-                    cell.append(event);
-                    event.fadeIn("normal");
+                //    alert(ev.Date);
+                 //   var event = jQuery('<div class="Event event2"></div>').append('<a href="' + ev.URL + '">' + ev.Title + '</a>');
+               //  var event = jQuery('<div class="Event event2"></div>');
+               var atts = {'class':""};
+                  atts['class'] = 'event active event2';
+                   // event.click(function() {
+//                        defaults.onEventClick(ev);
+//                    });
+                 
+               //     event.hide();
+                 //   cell.append(event);
+                     cell.attr(atts);
+                  //  event.fadeIn("normal");
                 }
                 
             });
@@ -292,6 +299,7 @@
         jQuery.J.DrawCalendar(dateIn);
         defaults.onMonthChanged(dateIn);
         DrawEventsOnCalendar();
+        defaults.onMonthChangedFinish(dateIn);
     }
     
     jQuery.J.Initialize = function(options, events) {

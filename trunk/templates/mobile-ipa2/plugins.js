@@ -38,7 +38,9 @@ myCat[15]="Other";
  var fid;
  var myObject2;
  var sid2;
-
+ var arraydata;
+  var arraydata2;
+  var events=[]; 
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -225,22 +227,36 @@ function saveoffline()
       alert('บันทึกเรียบร้อยแล้ว');
 }
 function setfav(sid)
-{
+{ 
+    $.mobile.showPageLoadingMsg();
         if(localStorage.getItem("userId"))
         {
         $.post(webdir+'/ajax/savefav2',{sid:sid,mid:localStorage.getItem("userId")} ,function(data) {
             var myObject = eval('(' + data + ')');   
-            if(myObject.resposne)
+            if(myObject.resposne==1)
             {
                 alert('เพิ่ม favarite เรียบร้อยแล้ว');
+            }else
+            {
+                alert(myObject.resposne);
             }
+            $.mobile.hidePageLoadingMsg();   
         });
         }
 }
+function clearsaveall()
+{
+                   localStorage.setItem('sidshop','');
+                   localStorage.setItem('calendar','');
+                   localStorage.setItem('searchresulthtml','');
+}
+//clearsaveall();
 function searchresultlist(myObject){
     myObject2=myObject;
       var areaid=""; 
+      var k=1;
       $('#searchresulthtml').html('');
+       var arraydata={};
              for (variable in myObject)
              {   
           //   alert(variable) ;
@@ -251,7 +267,16 @@ function searchresultlist(myObject){
       $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>');    
+           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
+           
+           
+           var strtext2= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletecalendar(\''+obj.sid+'\',\''+k+'\')" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li class="dateshowset" id="date-'+obj.sid+'-'+k+'"></li></ul></li>'; 
+           
+           
+            arraydata['text-'+obj.sid+'']=strtext2;
+           
+        
+    $('#searchresulthtml').append(strtext);    
     }
     else
     {
@@ -262,6 +287,13 @@ function searchresultlist(myObject){
     
 
              }
+             
+    if($('.ui-page-active').attr('id')=="favarite")
+    {    
+               var jsonstring= JSON.stringify(arraydata);
+               localStorage.setItem('sidshop',jsonstring);   
+           
+    }
                  
     //$('.button.share').toggle(function() { 
      //   $('#share').fadeIn(200);
@@ -315,10 +347,10 @@ function searchresultlist(myObject){
         
         })
     
-    $('.datecalender').scroller('enable').scroller({dateFormat :'yy-mm-dd',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
+    $('.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
 //alert(dateText);
                  
-       
+       $.mobile.showPageLoadingMsg();
        var setcalendar=localStorage.getItem('calendar');   
        
        if(setcalendar)
@@ -339,7 +371,8 @@ function searchresultlist(myObject){
          //alert(jsonstring);
            
        }
-    
+    alert('เพิ่ม วันที่ เรียบร้อยแล้ว');
+    $.mobile.hidePageLoadingMsg();  
     //localStorage.setItem('calendar','');    
     
     }});
@@ -367,7 +400,8 @@ $.mobile.showPageLoadingMsg();
    //  alert(meid);
      $('#deleteid'+meid).simpledialog({
     'mode' : 'bool',
-    'prompt' : 'คุณต้องการลบรูปหรือไม่ ?',
+    'fullScreen':'true',
+    'prompt' : 'คุณต้องการลบ Personal Memory นี้ หรือไม่ ?',
     'useModal': true,
     'buttons' : {
     'OK': {
@@ -1055,15 +1089,244 @@ function favaritefunction()
     
     
 }
-function calendarfunction()
+function deletecalendar(sid,k)
 {
-var options = {
-onMonthChanged: function(dateIn) {
+    
+    $('#date-'+sid+'-'+k).simpledialog({
+    'mode' : 'bool',
+    'fullScreen':'true',
+    'prompt' : 'คุณต้องการลบ activity นี้ หรือไม่ ?',
+    'useModal': true,
+    'buttons' : {
+    'OK': {
+        click: function () {
+            $.mobile.showPageLoadingMsg();
+           
+            var dateselected=$('#date-'+sid+'-'+k).html();
+          
+            delete arraydata[dateselected];
+            var jsonstring= JSON.stringify(arraydata);
+            localStorage.setItem('calendar',jsonstring);
+            var arraydate1= dateselected.split(" ");
+            setcalendarevent2(arraydate1[0]);
+            
+            
+            $.post(webdir + "/ajax/deleteitenary",{datetime:dateselected,mid:localStorage.getItem('userId')},
+                function(data) {
+                    
+                    
+                $.mobile.hidePageLoadingMsg();   
+                    
+                }).error(function() {
+              
+                
+                
+                $.mobile.hidePageLoadingMsg(); 
+                
+                });
+            
+            
+           
+           
+            
+          
+        }
+      },
+      'Cancel': {
+        click: function () {
+
+        },
+        icon: "delete",
+        theme: "c"
+      }
+    }
+  });
+    
+    
+
+    
+}
+function setcalendarevent2(datecheck)
+{
+     
+       
+//       var arraydate1= $(this).attr('date').split("/");
+  //     arraydate1[0];
+   //    arraydate1[1];
+    //   arraydate1[2];
+      var selectdate= datecheck;
+        $('#searchresulthtml').html('');
+        $('#activity').html('Activity '+selectdate);
+          
+           for(i in arraydata)
+            {
+                var arraydate1= i.split(" ");
+                
+               
+                if(arraydate1[0]==selectdate)
+                {
+                   // console.log(arraydata2['text-'+arraydata[i]]);
+                    console.log(i);
+                    $('#searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
+                    $(".dateshowset:last").html(i);
+
+                
+                }
+                
+                
+              //  var arraydate2=arraydate1[0].split("-"); 
+                
+            }
+       
+       
+       
+       
+         
+            $('.relative, .subpage').fadeIn(300);
+            $.scrollTo('#activity',800);
+            setshare2();
+    
+}
+function setcalendarevent()
+{
+          $('.event2').click(function() {
+       
+       var arraydate1= $(this).attr('date').split("/");
+  //     arraydate1[0];
+   //    arraydate1[1];
+    //   arraydate1[2];
+      var selectdate= arraydate1[2]+'-'+arraydate1[0]+'-'+arraydate1[1];
+        $('#searchresulthtml').html('');
+        $('#activity').html('Activity '+selectdate);
+          
+           for(i in arraydata)
+            {
+                var arraydate1= i.split(" ");
+                
+               
+                if(arraydate1[0]==selectdate)
+                {
+                   // console.log(arraydata2['text-'+arraydata[i]]);
+                   
+                    $('#searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
+                    $(".dateshowset:last").html(i);
+
+                
+                }
+                
+                
+              //  var arraydate2=arraydate1[0].split("-"); 
+                
+            }
+       
+       
+           
+       
+        
+            $('.relative, .subpage').fadeIn(300);
+            $.scrollTo('#activity',800);
+            setshare2();
+         });
+}
+function calendarset2()
+{
+    var options = {
+onMonthChangedFinish: function(dateIn) {
+  
+ setcalendarevent();   
 //this could be an Ajax call to the backend to get this months events
 return true;
 }
+
 };
+    
+    var sidshop=localStorage.getItem('sidshop');
+    var k=0;
+    arraydata2=jQuery.parseJSON(sidshop);  
+          for(i in arraydata)
+            {
+               
+                var arraydate1= i.split(" ");
+                var arraydate2=arraydate1[0].split("-"); 
+
+                events[k]={ EventID:k+1, "Date": new Date(arraydate2[0], arraydate2[1]-1, arraydate2[2])};
+                k++;
+            }
+    
+    
+    $.calendar.Initialize(options,events);
+    setcalendarevent();
+}
+function calendarfunction()
+{
+
+
+
+
+      var setcalendar=localStorage.getItem('calendar'); 
+ 
+
+      
+      
+       if(setcalendar)
+       {
+          
+          
+          
+          arraydata=jQuery.parseJSON(setcalendar);
+          
+          $.mobile.showPageLoadingMsg();
+          $.post(webdir + "/ajax/saveitenary",{calendar:arraydata,mid:localStorage.getItem('userId')},
+                function(data) {
+                    if(!data) {
+                      
+                      
+                      calendarset2();    
+                      $.mobile.hidePageLoadingMsg(); 
+                    }else
+                    {
+                      arraydata=jQuery.parseJSON(data);
+                      localStorage.setItem('calendar',data);
+                      calendarset2()
+                      $.mobile.hidePageLoadingMsg(); 
+                    }
+                    // continue internet connection is OK
+                }).error(function() {
+              
+                
+                calendarset2();
+                $.mobile.hidePageLoadingMsg(); 
+                
+                });
+          
+          
+          
+
+
+   
+          
+       }else
+       {
+           var options = {
+onMonthChangedFinish: function(dateIn) {
+  
+ //setcalendarevent();   
+//this could be an Ajax call to the backend to get this months events
+return true;
+}
+
+};
+
 $.calendar.Initialize(options);
+
+
+       }
+
+       
+
+
+
+
 }
 jQuery(document).ready(function($){ 
 	
