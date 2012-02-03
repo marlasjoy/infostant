@@ -138,7 +138,11 @@ var m = Math,
 		that.scroller.style[vendor + 'TransformOrigin'] = '0 0';
 		if (that.options.useTransition) that.scroller.style[vendor + 'TransitionTimingFunction'] = 'cubic-bezier(0.33,0.66,0.66,1)';
 		
-		if (that.options.useTransform) that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose;
+		if (that.options.useTransform)
+        { that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose+ ' scale(' + 1 + ')';;
+        
+         
+        }
 		else that.scroller.style.cssText += ';position:absolute;top:' + that.y + 'px;left:' + that.x + 'px';
 
 		if (that.options.useTransition) that.options.fixedScrollbar = true;
@@ -164,7 +168,7 @@ iScroll.prototype = {
 	x: 0,
 	y: 0,
 	steps: [],
-	scale: 1,
+	scale:1,
 	currPageX: 0, currPageY: 0,
 	pagesX: [], pagesY: [],
 	aniTime: null,
@@ -262,6 +266,7 @@ iScroll.prototype = {
 		y = this.vScroll ? y : 0;
 
 		if (this.options.useTransform) {
+            
 			this.scroller.style[vendor + 'Transform'] = trnOpen + x + 'px,' + y + 'px' + trnClose + ' scale(' + this.scale + ')';
 		} else {
 			x = mround(x);

@@ -264,10 +264,10 @@ function searchresultlist(myObject){
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
     {
-      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
+      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
-           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
+           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
            
            
            var strtext2= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletecalendar(\''+obj.sid+'\',\''+k+'\')" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li class="dateshowset" id="date-'+obj.sid+'-'+k+'"></li></ul></li>'; 
@@ -919,7 +919,8 @@ $.mobile.showPageLoadingMsg();
                               // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
                                alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
-                               $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
+                            //   $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
+                                location.href="shopedit.html?shopurl="+myObject.shopurl;
                            }
                            
      });
@@ -1467,14 +1468,52 @@ default:
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
         $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })
- if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
+ 
+ 
+ 
+ if($('.ui-page-active').attr('id')=="social-qrcode"||$('.ui-page-active').attr('id')=="social-contact"||$('.ui-page-active').attr('id')=="social-rfcode")
+ {
+    if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
+    {
+        $("input[type='radio']").click(function() {
+        if($("#radio-choice-a").attr("checked") != "undefined" &&$("#radio-choice-a").attr("checked") == "checked")
+           {
+             
+             $.mobile.changePage("contact.html", "flip", true, true);
+                               
+           }
+           else if($("#radio-choice-b").attr("checked") != "undefined" &&$("#radio-choice-b").attr("checked") == "checked")
+           {
+            $.mobile.changePage("rfcode.html", "flip", true, true);   
+               
+           }else
+           {
+               
+            $.mobile.changePage("qr.html", "flip", true, true);     
+               
+           }
+        
+        
+        });
+        
+        
+        
+    }
+    else
+    {
+        
+    }  
+ }else
+  {
+ if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
+ {
                                        //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
                                    
 $("input[type='radio']").click(function() {
   if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
            {
              
-                               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+             $.mobile.changePage("profile_myprofile.html", "flip", true, true);
                                
           }else
            {
@@ -1482,8 +1521,9 @@ $("input[type='radio']").click(function() {
            }
 });
                                        
-                                         }else
-                                         {
+                                         }
+else
+{
                                              
                                       
        $("fieldset").click(function() {
@@ -1496,7 +1536,8 @@ $("input[type='radio']").click(function() {
            }
 });
    }
-
+  
+  }
 
 
     

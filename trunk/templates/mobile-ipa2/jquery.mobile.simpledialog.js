@@ -50,7 +50,8 @@
         onCreated:null,
         onOpened:null,
         onClosed:null,
-        onShown:null
+        onShown:null,
+        onShowFinish:null
     },
     _eventHandler: function(event, payload) {
         // Handle all event triggers that have an internal effect
@@ -250,6 +251,7 @@
                     o.pickPageTheme + "'></div>");
                 ct.html(o.fullHTML);
                 $('[data-role=content]', pickPage).append(ct);
+                
             }
 
             pickPage.appendTo( $.mobile.pageContainer )
@@ -326,10 +328,21 @@
         }
     },
     _init: function() {
+
+        var self = this;
         if ( !this.options.sawOnce || this.options.allowReopen ) {
             this.options.sawOnce = true;
             this.open();
+            
+
         }
+             //    alert(this.options.onShowFinish);
+     //   self.options.isInit = true;
+
+        if (self.options.onShowFinish && typeof(self.options.onShowFinish) === "function") {
+            
+            self.options.onShowFinish(self);
+            }
     },
     _buildPage: function () {
         var self = this,
