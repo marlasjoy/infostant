@@ -15,7 +15,8 @@
       function view()
       {
 
-     
+        echo "<div align='center'><img src='http://www.infostant.com/images/comingsoon.jpg'> </div>";
+          exit();
         $this->header->set_data();
         $this->header->get_header(); 
         

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Infostant</title>
+		
+		<link rel="stylesheet" href="zoom.css" />
+  		<link rel="stylesheet" href="jquery.mobile.min.style.css" />
+  		<link rel="stylesheet" href="css/royal-slider-6.0.min.css">
+    	<link rel="stylesheet" href="css/style.css">
+    
+   
+    <link href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="jquery.mobile.simpledialog.min.css" />
+
+  		
+  		<script src="jquery-1.7.1.min.js"></script>
+    	<script src="jquery.animate-enhanced.min.js"></script>
+    	<script src="jquery.mobile.min.js"></script>
+		<script src="iscroll.js"></script>
+        <script src="http://www.infostant.com/js/shop/googlejs.js"></script>  
+
+<script type="text/javascript">
+	var myScroll;
+	function loaded() {
+		myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
+	}
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	document.addEventListener('DOMContentLoaded', loaded, false);
+	
+	jQuery(document).ready(function($){ 
+		/* Open/Close Function */
+		$('nav li:nth-child(2) a').click(function() { 
+			$('#function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 800);
+		})	
+		$('#function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
+			$('#function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 800);
+		})
+		/******* EOS ********/
+		
+
+	}); 
+    
+    function onDeviceReady2() {
+
+    //   pictureSource=navigator.camera.PictureSourceType;
+     //  destinationType=navigator.camera.DestinationType;
+     
+           if(localStorage.getItem("userId"))
+              {
+                   $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId") }, function(data) {
+                            
+                            var myObject = eval('(' + data + ')');
+                            
+                             setdata2(myObject);
+
+                            
+                   });  
+                   $('#savetext').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:$('#target').val(),setdata:$('#textarea').val(),filename:'index_th' }, function(data) {
+                            
+                          //  var myObject = eval('(' + data + ')');
+                            
+                         //    setdata(myObject);
+                            $('#'+$('#target').val()).html($('#textarea').val());
+                            $.fancybox.close();
+                            
+                            
+                   });
+                       }); 
+                   
+                   $('#savetext2').click(function() {   
+                    
+                    $.post(webdir+'/ajax/savetext',''+$('#file-form').serialize()+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=address-tel-emailshop-website&mid='+localStorage.getItem("userId"), function(data) {
+                                    $('#address').html( $('#text-address').val());
+                                    $('#tel').html($('#text-tel').val()); 
+                                    $('#emailshop').html($('#text-emailshop').val()); 
+                                    $('#website').html($('#text-website').val()); 
+                            $.fancybox.close();
+                            
+                   });    
+                       
+                    
+                       
+                   });
+                   
+                    $('#savevideo').click(function() {
+        var embed=testUrlForMedia($('#youtube').val());
+        //alert(embed.id);
+       if(embed.id)
+        {
+        
+        $.post(webdir+'/ajax/savevideo','setdata='+embed.id+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)            
+         {
+         eval("var obj1="+reposnse); 
+          if(obj1.resposne){
+              setyoutube(embed.id);   
+              $.fancybox.close();
+          }
+
+          }); 
+        }  
+    
+              
+              });
+                     
+          
+              }
+        
+    }       
+    function setdata2(myObject){
+             var scriptjava='';
+              $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
+              
+              if(myObject.fontjs){
+              scriptjava= '<script  src="mylibs/'+myObject.fontjs+'"><\/script>';
+              }
+              $('#main').html(scriptjava+myObject.html);
+              if(myObject.fontjs){
+              Cufon.replace('#main h3', { fontFamily:myObject.fonttext, fontSize: myObject.fontsize+'px' });
+              Cufon.now();
+              }
+
+                            $('#main').removeClass('ui-content');
+                            $('#setdata').html(myObject.setdata); 
+                            $('.galleryimg').fancybox();
+                            
+                            $("#color h2").css('background-image',"url("+webdir+"/images/shop/"+myObject.catname_en+"/hd-"+myObject.catname_en+".png)");
+                            $("#main h3").css('color',"#"+myObject.color+"");
+                            $("#color").css('background-color',"#"+myObject.color+"");
+                            
+                            $('#bodydiv').attr('class',myObject.bodyclass);
+                            $(".ir.edit.map").click(function() {
+                                
+                            $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'google.html',
+                                   'type':'iframe' ,
+                                   'width':'100%',
+                                   'height':'100%'
+                            
+                            
+                            }); 
+                                 
+                            });
+                            $(".ir.edit.vdo").click(function() {
+                            if($('#video').attr("src"))
+                            {  
+           
+       var embed=testUrlForMedia($('#video').attr("src"));       
+      if(embed)
+        {
+            $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
+        }            
+         $.fancybox({
+                                   'href':'#youtubedata','type':'inline'
+                       });   
+           
+       }
+                            
+                             
+                            });
+
+                            
+                            
+                            
+                            $(".ir.edit.text").click(function() {
+                                if($(this).attr('title')=="popup5")
+                                {
+                                    $('#text-address').val($('#address').html());
+                                    $('#text-tel').val($('#tel').html()); 
+                                    $('#text-emailshop').val($('#emailshop').html()); 
+                                    $('#text-website').val($('#website').html()); 
+                                        $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext2','type':'inline'}); 
+                                }else
+                                {
+                                $('#target').val($(this).attr('title'));
+                               $('#textarea').val($('#'+$(this).attr('title')).html());
+                              // $("#datatext").fancybox().trigger('click');
+
+                               $.fancybox({
+
+                                    'title'  : this.title,
+                                   'href':'#datatext','type':'inline'}); 
+                                }
+                                
+                            });
+                              onLoadMaps();
+
+                                         
+                                         
+                                         
+                                  //       if (navigator.userAgent.toLowerCase().match(/android/)) {
+//                                       
+                                       //  document.write('<script charset="utf-8" src="android\/phonegap-1.2.0.js"><\/script>');
+                                   //      viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+//                                         } else if (navigator.userAgent.toLowerCase().match(/iphone/) ) {
+                                       //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+//                                   
+                                  //        viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+//                                       
+//                                         }
+//                                         else if (navigator.userAgent.toLowerCase().match(/ipad/) ) {
+                                         //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
+//                              
+                                       //  viewport.attr('content', 'width=1024, initial-scale=0.8, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+//                                         }
+                                         
+   var myScroll;
+    function loaded() {
+        myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
+    }
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    document.addEventListener('DOMContentLoaded', loaded, false);
+                                         
+                                         
+                                        // viewport.attr('content', 'width=320, initial-scale=0.35, maximum-scale=10.0, minimum-scale=0.25, user-scalable=1'); 
+                  
+    }
+</script>
+
+
+</head>
+<body>
+<div id="shopedit" data-role="page">
+	<div id="header" class="ui-header">
+		<div>
+            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
+            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+            <nav>
+                <ul class="h">
+                    <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>
+                    <li><a class="functionclick" href="#">function</a></li>
+                    <li><a href="directory.html" data-transition="slide">directory</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div  id="function">
+            <ul class="v">
+                <li><a href="setting.html"><span>Settings</span></a></li>
+                <li><a href="directory.html"><span>Directory</span></a></li>
+                <li><a href="recent.html"><span>Recent View</span></a></li>
+                <li><a href="favarite.html"><span>Favorite</span></a></li>
+                <li><a href="calendar.html"><span>Calendar / Itenary</span></a></li>
+                <li><a href="memory.html"><span>Personal Memory</span></a></li>
+                <li><a href="add_friend.html"><span>Add Friend</span></a></li>
+                <li><a href="notification.html"><span>Notification</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="qr.html"><span>QR Reader</span></a></li>
+                <li><a href="location.html"><span>Show Location</span></a></li>
+                <li><a href="shop.html"><span>Shop</span></a></li>
+                <li><a href="help.html"><span>Help</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+	</div>
+	<div id="wrapper">
+		<div id="scroller" >
+<!-- 			 <link rel="stylesheet" href="http://www.infostant.com/css/shop/style.css"> -->
+<!--   			<link rel="stylesheet" href="http://www.infostant.com/css/shop/dropkick.css" media="all" /> -->
+  			<link rel="stylesheet" href="http://www.infostant.com/css/shop/default.css"> 
+        <header >
+			<section  id="color">
+            <div class="inner">
+                <h2 class="ir">Communication</h2>
+                <p>
+                    <label for="bg" >BG Colour</label>
+                    <a class="ir button white" href="javascript:void(0);" >White</a>
+                    <a class="ir button black" href="javascript:void(0);" >Black</a>
+                </p>
+            </div>
+			</section>
+		</header>
+      	<div data-role="content" id="main" >   
+      	       <section class="clearfix" id="one">             <article class="left">                 <div class="d-220x90">                    <div id="220x90x0"></div>                    <div class="portfolioItemInfo" style="display: none;" id="textx220x90x0"></div>                     <span class="label">220 X 90</span>                      <a onclick="capturePhoto('220x90x0','mesamiscafe','')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>             </article>             <article class="right">                 <div class="d-100x110">                    <div id="100x110x0"><div style="width: 100px;height: 110px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_7526391cc4f21fc202fa2383c882427e-500x336-wk100x110.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_7526391cc4f21fc202fa2383c882427e-500x336-wk.jpg" rel="group1" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_7526391cc4f21fc202fa2383c882427e-500x336-wk100x110.jpg" alt="" style="opacity:0"></a></div></div>                      <div class="portfolioItemInfo" style="display: none;" id="textx100x110x0"></div>                     <span class="label">100 X 110</span>                     <a onclick="capturePhoto('100x110x0','mesamiscafe','group1')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>                 <div class="d-100x110">                     <div id="100x110x1"><div style="width: 100px;height: 110px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_be59ee4da03e9975ca6b3f9cb089c170-500x336-wk100x110.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_be59ee4da03e9975ca6b3f9cb089c170-500x336-wk.jpg" rel="group1" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_be59ee4da03e9975ca6b3f9cb089c170-500x336-wk100x110.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" style="display: none;" id="textx100x110x1"></div>                     <span class="label">100 X 110</span>                     <a onclick="capturePhoto('100x110x1','mesamiscafe','group1')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>                 <div class="d-100x110">                     <div id="100x110x2"><div style="width: 100px;height: 110px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_ec3cc3b11e6bbd44500583241f3fc22b-236x350-wk100x110.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_ec3cc3b11e6bbd44500583241f3fc22b-236x350-wk.jpg" rel="group1" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_ec3cc3b11e6bbd44500583241f3fc22b-236x350-wk100x110.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" style="display: none;" id="textx100x110x2"></div>                     <span class="label">100 X 110</span>                     <a onclick="capturePhoto('100x110x2','mesamiscafe','group1')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>                 <div class="d-100x110">                     <div id="100x110x3"><div style="width: 100px;height: 110px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_28d40dc87ab293b73ce1641070136667-236x350-wk100x110.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_28d40dc87ab293b73ce1641070136667-236x350-wk.jpg" rel="group1" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_28d40dc87ab293b73ce1641070136667-236x350-wk100x110.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" style="display: none;" id="textx100x110x3"></div>                     <span class="label">100 X 110</span>                     <a onclick="capturePhoto('100x110x3','mesamiscafe','group1')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>             </article>         </section>    <!-- #one -->                      <section class="clearfix" id="two">             <article class="left quote">                 <div class="inner">                     <div class="d-340x70">                          <div class="font title black" id="title">เมซามีคาเฟ่</div>                         <span class="label" style="display: none;">Topic</span>                         <a title="title" class="ir edit text" href="javascript:void(0);">Edit Text</a>                     </div>                     <div class="d-340x190">                         <div class="font detail black" id="detail">Mesamis Cafe ภายในตกแต่งสไตล์ฝรั่งเศส เน้นสีอ่อนสบายตา เฟอร์นิเจอร์ส่วนใหญ่ใช้วัสดุที่ทำจากไม้สีเอิร์ธโทน เก้าอี้โซฟาแสนนุ่มนั่งสบาย ภายใต้บรรยากาศที่สงบ ร่มรื่น และบริเวณชั้นบนยังมีที่นั่งแบบเปิดโล่งให้รับลมเย็นสบายได้อีกด้วย</div>                         <span class="label" style="display: none;">Detail</span>                         <a title="detail" class="ir edit text" href="javascript:void(0);">Edit Text</a>                     </div>                 </div>             </article>             <article class="right">                 <div class="d-460x309">                     <div id="460x309x0"><div style="width: 460px;height: 309px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_a4e909e64e461b6f617041b570784347-500x336-wk460x309.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_a4e909e64e461b6f617041b570784347-500x336-wk.jpg" rel="group1" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_a4e909e64e461b6f617041b570784347-500x336-wk460x309.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" id="textx460x309x0"></div>                     <span class="label">460 X 309</span>                     <a onclick="capturePhoto('460x309x0','mesamiscafe','group1')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                 </div>             </article>         </section>    <!-- #two -->                      <section class="clearfix" id="three">             <article class="left">                 <h3 style="color: rgb(255, 155, 23);">Special Menu</h3>                 <div class="d-220x160">                      <div id="220x160x0"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_f023b3a8b34f86bec2e736e909cdcb87-500x336-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_f023b3a8b34f86bec2e736e909cdcb87-500x336-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_f023b3a8b34f86bec2e736e909cdcb87-500x336-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                      <div class="portfolioItemInfo" id="textx220x160x0"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x0','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>                 <div class="d-220x160">                     <div id="220x160x1"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_4a5e21478fc0ba9e9cfe55906d506876-500x336-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_4a5e21478fc0ba9e9cfe55906d506876-500x336-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_4a5e21478fc0ba9e9cfe55906d506876-500x336-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" id="textx220x160x1"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x1','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>                 <div class="d-220x160">                     <div id="220x160x2"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_1d38b21eedd03766e748e9e953c31c07-236x350-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_1d38b21eedd03766e748e9e953c31c07-236x350-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_1d38b21eedd03766e748e9e953c31c07-236x350-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                     <div class="portfolioItemInfo" id="textx220x160x2"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x2','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>                 <div class="d-220x160">                      <div id="220x160x3"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_9b8cc34174f6f5911d7eab90a9d17859-500x336-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_9b8cc34174f6f5911d7eab90a9d17859-500x336-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_9b8cc34174f6f5911d7eab90a9d17859-500x336-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                      <div class="portfolioItemInfo" id="textx220x160x3"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x3','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>                 <div class="d-220x160">                      <div id="220x160x4"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_21cd89366a46f3c3ebaf66ff53ad43aa-236x350-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_21cd89366a46f3c3ebaf66ff53ad43aa-236x350-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_21cd89366a46f3c3ebaf66ff53ad43aa-236x350-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                      <div class="portfolioItemInfo" id="textx220x160x4"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x4','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>                 <div class="d-220x160">                      <div id="220x160x5"><div style="width: 220px;height: 160px;background-image: url(http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_ea5cf4cea6d52de080d420db1eb70e57-500x336-wk220x160.jpg);background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">            <a href="http://www.infostant.com/images/shop_c/mesamiscafe/9406_ea5cf4cea6d52de080d420db1eb70e57-500x336-wk.jpg" rel="group2" class="galleryimg"><img src="http://www.infostant.com/images/shop_c/mesamiscafe/resize/9406_ea5cf4cea6d52de080d420db1eb70e57-500x336-wk220x160.jpg" alt="" style="opacity:0"></a></div></div>                      <div class="portfolioItemInfo" id="textx220x160x5"></div>                     <span class="label">220 X 160</span>                     <a onclick="capturePhoto('220x160x5','mesamiscafe','group2')" class="ir edit img" href="javascript:void(0);">Edit Image</a>                  </div>             </article>             <article class="right">                 <div id="social">                     <p>                         <a class="button black1" id="fav" href="javascript:void(0);">Add to Favorite</a>                         <a class="button black1" id="like" href="javascript:void(0);">Send to Friend</a>                     </p>                     <ul class="h">                         <li><a href="javascript:void(window.open('http://www.facebook.com/sharer/sharer.php?v=4&amp;src=bm&amp;u='+encodeURIComponent(document.location.toString()),'Facebook','height=450,width=550').focus())"><img width="29" height="29" alt="Facebook" src="http://www.infostant.com/images/shop/icon-social-01.png"></a></li>                         <li><a href="javascript:void(window.open('http://twitter.com/intent/tweet?source=webclient&amp;text='+encodeURIComponent(document.location.toString()),'Twitter','height=450,width=550').focus())"><img width="29" height="29" alt="Twitter" src="http://www.infostant.com/images/shop/icon-social-02.png"></a></li>                         <li><a href="javascript:void(0);"><img width="29" height="29" alt="RSS Feed" src="http://www.infostant.com/images/shop/icon-social-03.png"></a></li>                         <li><a href="javascript:void(window.open('http://www.myspace.com/Modules/PostTo/Pages/?u='+encodeURIComponent(document.location.toString()),'My Space','height=450,width=550').focus())"><img width="29" height="29" alt="My Space" src="http://www.infostant.com/images/shop/icon-social-04.png"></a></li>                         <li><a href="javascript:void(window.open('http://www.linkedin.com/shareArticle?mini=true&amp;url=CONTENT-URL&amp;title=web&amp;summary=web&amp;source='+encodeURIComponent(document.location.toString()),'Linkedin','height=450,width=550').focus())"><img width="29" height="29" alt="Linkedin" src="http://www.infostant.com/images/shop/icon-social-05.png"></a></li>                         <li><a href="javascript:void(window.open('https://m.google.com/app/plus/x/?v=compose&amp;content='+encodeURIComponent(document.location.toString()),'Google +','height=450,width=550').focus())"><img width="29" height="29" alt="Google +" src="http://www.infostant.com/images/shop/icon-social-06.png"></a></li>                         <li><a href="mailto:?subject=&amp;body=Link="><img width="29" height="29" alt="Email" src="http://www.infostant.com/images/shop/icon-social-07.png"></a></li>                     </ul>                 </div>                                  <h3 style="color: rgb(255, 155, 23);">Time work</h3>                 <div class="d-340x60">                     <div class="font time black" id="daterange">เปิดทุกวัน เวลา 06.00-22.00 น.</div>                     <a title="daterange" class="ir edit text" href="javascript:void(0);">Edit Text</a>                 </div>                                  <h3 style="color: rgb(255, 155, 23);">Contact</h3>                 <div class="d-340x113">                 <div class="font contact black" id="contact"> <span id="title-address">Address</span> :<span id="address">304 ซอยซอย สุขุมวิท 55 (ปากซอยทองหล่อ 8) อาคาร เซ็นเตอร์พอยท์ทองหล่อ ถนนสุขุมวิท แขวงคลองตันเหนือ เขตวัฒนา กรุงเทพฯ 10110</span> <br>                 <span id="title-tel">Tel</span>:<span id="tel">027138340</span><br>                <span id="title-emailshop">Email</span> : <span id="emailshop"></span><br>                 <span id="title-website">Website</span> : <span id="website">http://</span><br>                 <span id="title-pricerange">Price range</span> : <span id="pricerange"></span></div>                     <a title="popup5" class="ir edit text" href="javascript:void(0);">Edit Text</a>                 </div>                 <a class="button black2" href="javascript:void(0);" id="branch">Branch</a>             </article>         </section>    <!-- #three -->                  <section class="clearfix" id="four">             <article class="left">                 <h3 style="color: rgb(255, 155, 23);">Clip Review </h3>                 <div id="clip">                 <div id="videotext"></div>                     <span class="label">Upload Clip VDO</span>                     <a class="ir edit vdo" href="javascript:void(0);">Edit VDO</a>                 </div>             </article>                          <article class="right">                 <h3 style="color: rgb(255, 155, 23);">Map</h3>                 <div>                 <div id="map" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; cursor: url(&quot;http://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default;"><div style="z-index: 100; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: -134px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: 122px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: -134px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: 122px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -291px; top: -134px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -291px; top: 122px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 477px; top: -134px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 477px; top: 122px;"></div></div></div></div><div style="z-index: 101; position: absolute; left: 0px; top: 0px;"></div><div style="z-index: 102; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: 122px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: 122px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -291px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -291px; top: 122px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 477px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 477px; top: 122px;"></div></div></div></div><div style="z-index: 103; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -35px; top: 122px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: -134px;"><canvas style="position: absolute; left: 0px; top: 0px;" height="256" width="256"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 221px; top: 122px;"><canvas style="position: absolute; left: 0px; top: 0px;" height="256" width="256"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -291px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -291px; top: 122px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 477px; top: -134px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 477px; top: 122px;"></div></div></div></div><div style="z-index: 104; position: absolute; left: 0px; top: 0px;"></div><div style="z-index: 105; position: absolute; left: 0px; top: 0px;"></div><div style="z-index: 106; position: absolute; left: 0px; top: 0px;"><div style="display: none;"><div style="width: 107px; height: 137px; overflow: hidden; position: absolute; left: 21px; top: 26px;"><img style="position: absolute; left: -784px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"><div style="position: absolute; left: 7px; top: 5px; width: 94px; height: 75px; background-color: rgb(211, 211, 211); z-index: 1;"></div><div style="width: 95px; bottom: 38px; z-index: 1; left: 7px; font-family: Arial,sans-serif; font-size: 9px; color: gray; background-color: white; position: absolute;">กำลังโหลด...</div><img style="position: absolute; left: 7px; top: 5px; width: 94px; height: 75px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; opacity: 0.25;" src="http://maps.gstatic.com/mapfiles/transparent.png"></div><div style="width: 21px; height: 26px; overflow: hidden; position: absolute; left: 63px; top: 127px;"><img style="position: absolute; left: -441px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"></div></div></div><div style="position: absolute; z-index: 0; left: 0px; top: 0px;"><div style="overflow: hidden; width: 458px; height: 313px;"><img style="width: 458px; height: 313px;" src="http://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&amp;1i26151715&amp;2i15485318&amp;2e1&amp;3u17&amp;4m2&amp;1u458&amp;2u313&amp;5m3&amp;1e0&amp;2b1&amp;5sth-TH&amp;token=7278"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: -134px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt1.googleapis.com/vt?lyrs=m@169314784&amp;src=apiv3&amp;hl=th-TH&amp;x=102155&amp;s=&amp;y=60489&amp;z=17&amp;s=Ga&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: -35px; top: 122px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt1.googleapis.com/vt?lyrs=m@169314784&amp;src=apiv3&amp;hl=th-TH&amp;x=102155&amp;s=&amp;y=60490&amp;z=17&amp;s=Gal&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: -134px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt0.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102156&amp;s=&amp;y=60489&amp;z=17&amp;s=Galil&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: 221px; top: 122px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt0.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102156&amp;s=&amp;y=60490&amp;z=17&amp;s=Galile&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: -291px; top: -134px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt0.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102154&amp;s=&amp;y=60489&amp;z=17&amp;s=Galileo&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: -291px; top: 122px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt0.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102154&amp;s=&amp;y=60490&amp;z=17&amp;s=&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: 477px; top: -134px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt1.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102157&amp;s=&amp;y=60489&amp;z=17&amp;s=&amp;style=api%7Csmartmaps"></div><div style="width: 256px; height: 256px; position: absolute; left: 477px; top: 122px;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://mt1.googleapis.com/vt?lyrs=m@169000000&amp;src=apiv3&amp;hl=th-TH&amp;x=102157&amp;s=&amp;y=60490&amp;z=17&amp;s=G&amp;style=api%7Csmartmaps"></div></div></div></div></div><div style="margin: 2px 5px 2px 2px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a style="position: static; overflow: visible; float: none; display: inline;" title="คลิกเพื่อดูพื้นที่นี้ใน Google แผนที่" target="_blank" href="http://maps.google.com/maps?ll=13.72569,100.57992&amp;z=17&amp;t=m&amp;hl=th-TH"><div style="width: 62px; height: 24px; cursor: pointer;"><img style="position: absolute; left: 0px; top: 0px; width: 62px; height: 24px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://maps.gstatic.com/mapfiles/google_white.png"></div></a></div><div style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px;"><div style="height: 19px; -moz-user-select: none; line-height: 19px; padding-right: 2px; padding-left: 50px; background: -moz-linear-gradient(left center , rgba(255, 255, 255, 0) 0pt, rgba(255, 255, 255, 0.5) 50px) repeat scroll 0% 0% transparent; font-family: Arial,sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a style="color: rgb(68, 68, 68); text-decoration: underline; cursor: pointer; display: none;">ข้อมูลแผนที่</a><span style="">ข้อมูลแผนที่ &copy;2012 Tele Atlas</span><span style=""> - </span><a style="color: rgb(68, 68, 68); text-decoration: underline; cursor: pointer;" href="http://www.google.com/intl/th-TH_US/help/terms_maps.html" target="_blank">ข้อกำหนดในการใช้งาน</a></div></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Arial,sans-serif; color: rgb(34, 34, 34); box-shadow: 0pt 4px 16px rgba(0, 0, 0, 0.2); z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 79px; top: 67px;"><div style="padding: 0pt 0pt 10px; font-size: 16px;">ข้อมูลแผนที่</div><div style="font-size: 13px;">ข้อมูลแผนที่ &copy;2012 Tele Atlas</div><div style="width: 10px; height: 10px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img style="position: absolute; left: -18px; top: -44px; width: 68px; height: 67px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"></div></div><div class="gmnoprint" style="margin: 5px; -moz-user-select: none; position: absolute; left: 0px; top: 0px;" controlwidth="32" controlheight="84"><div style="cursor: url(&quot;http://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; position: absolute; left: 0px; top: 0px;" controlwidth="32" controlheight="40"><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -9px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px;"><img style="position: absolute; left: -107px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -58px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -205px; top: -102px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 1029px; height: 255px;" src="http://maps.gstatic.com/mapfiles/cb/mod_cb_scout/cb_scout_sprite_api_003.png"></div></div><div class="gmnoprint" style="opacity: 0.6; display: none; position: absolute;" controlwidth="0" controlheight="0"><img src="http://maps.gstatic.com/mapfiles/rotate2.png" style="-moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; cursor: pointer; width: 22px; height: 22px;" title="หมุนแผนที่ 90 องศา"></div><div class="gmnoprint" controlwidth="22" controlheight="39" style="position: absolute; left: 5px; top: 45px;"><img style="width: 22px; height: 39px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="http://maps.gstatic.com/mapfiles/szc4.png"><div style="position: absolute; left: 0px; top: 0px; width: 22px; height: 17px; cursor: pointer;" title="ขยาย"></div><div style="position: absolute; left: 0px; top: 18px; width: 22px; height: 17px; cursor: pointer;" title="ย่อ"></div></div></div><div class="gmnoprint" style="margin: 5px; z-index: 0; position: absolute; cursor: pointer; right: 0px; top: 0px;"><div style="float: left;"><div style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Arial,sans-serif; -moz-user-select: none; font-size: 13px; background-color: rgb(255, 255, 255); padding: 1px 6px; border: 1px solid rgb(113, 123, 135); box-shadow: 0pt 2px 4px rgba(0, 0, 0, 0.4); font-weight: bold; min-width: 40px;" title="แสดงแผนที่ถนน">แผนที่</div><div style="background-color: white; z-index: -1; padding-top: 2px; border-width: 0pt 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(113, 123, 135) rgb(113, 123, 135); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; box-shadow: 0pt 2px 4px rgba(0, 0, 0, 0.4); position: absolute; left: 0px; top: 24px; text-align: left; display: none;"><div style="color: rgb(184, 184, 184); font-family: Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap;" title="ย่อเพื่อดูแผนที่ถนนพร้อมภูมิประเทศ"><span role="checkbox" style="position: relative; line-height: 0; font-size: 0pt; margin: 0pt 5px 0pt 0pt; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(241, 241, 241); border-radius: 1px 1px 1px 1px; width: 13px; height: 13px; box-shadow: none; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"></div></span><label style="vertical-align: middle; cursor: pointer;">ภูมิประเทศ</label></div></div></div><div style="float: left;"><div style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(51, 51, 51); font-family: Arial,sans-serif; -moz-user-select: none; font-size: 13px; background-color: rgb(255, 255, 255); padding: 1px 6px; border-width: 1px 1px 1px 0pt; border-style: solid solid solid none; border-color: rgb(113, 123, 135) rgb(113, 123, 135) rgb(113, 123, 135) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; box-shadow: 0pt 2px 4px rgba(0, 0, 0, 0.4); font-weight: normal; min-width: 56px;" title="แสดงภาพจากดาวเทียม">ดาวเทียม</div><div style="background-color: white; z-index: -1; padding-top: 2px; border-width: 0pt 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(113, 123, 135) rgb(113, 123, 135); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; box-shadow: 0pt 2px 4px rgba(0, 0, 0, 0.4); position: absolute; right: 0px; top: 24px; text-align: left; display: none;"><div style="color: rgb(184, 184, 184); font-family: Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap; display: none;" title="ขยายเพื่อแสดงมุมมอง 45 องศา"><span role="checkbox" style="position: relative; line-height: 0; font-size: 0pt; margin: 0pt 5px 0pt 0pt; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(241, 241, 241); border-radius: 1px 1px 1px 1px; width: 13px; height: 13px; box-shadow: none; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"></div></span><label style="vertical-align: middle; cursor: pointer;">45°</label></div><div style="color: rgb(0, 0, 0); font-family: Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap;" title="แสดงภาพพร้อมชื่อถนน"><span role="checkbox" style="position: relative; line-height: 0; font-size: 0pt; margin: 0pt 5px 0pt 0pt; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px 1px 1px 1px; width: 13px; height: 13px; box-shadow: none; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="http://maps.gstatic.com/mapfiles/mv/imgs8.png"></div></span><label style="vertical-align: middle; cursor: pointer;">ป้ายกำกับ</label></div></div></div></div></div></div>                 <a class="ir edit map" href="javascript:void(0);">Edit Text</a>                 </div>             </article>         </section>    <!-- #four -->         <footer> 	<p id="copyright">&copy; 2011 2BSimple Co.,Ltd. | Everything It's easy</p> 	<p class="right"></p> </footer>          
+      	    </div><!-- /content -->
+      	<div style="display:none">
+      	<div  id="datatext">
+      	
+      	
+      	
+      	<h3 class="media-title">ใส่ข้อความ</h3>
+      	
+      	
+      	<div id="media-upload-notice">
+      	  <p>
+      	    <textarea rows="10" style=" width:100%" id="textarea" name="textarea">นั่งเล่นเอกมัย ผับแอนด์เรสเตอร</textarea>
+      	  </p>
+      	  <p>
+      	    <input type="hidden" value="" id="target" name="target"> 
+      	    
+      	    <a class="button black2" id="savetext" href="javascript:void(0);">Save</a>
+      	    <span class="media-upload-size"> </span></p>
+      	</div>
+      	
+      	</div>  </div>
+      	<div style="display:none">
+      	<div  id="datatext2">
+      	
+      	    <form method="post"  id="file-form">
+      	
+      	
+      	
+      	<h3 class="media-title">ใส่ข้อความ</h3>
+      	
+      	
+      	<div id="media-upload-notice">
+      	<table cellpadding="3" cellspacing="3">
+      	
+      	<tbody><tr>
+      	    <td><span id="span-address">Address</span></td><td>  <input type="text" id="text-address" name="text-address" style=" width:100%"> </td>
+      	    </tr>
+      	<tr>
+      	    <td><span id="span-tel">Tel</span></td><td>  <input type="text" id="text-tel" name="text-tel" style=" width:100%"> </td>
+      	    </tr>
+      	<tr>
+      	    <td><span id="span-emailshop">Email</span></td><td>  <input type="text" id="text-emailshop" name="text-emailshop" style=" width:100%"> </td>
+      	    </tr>
+      	<tr>
+      	    <td><span id="span-website">Website</span></td><td>  <input type="text" id="text-website" name="text-website" style=" width:100%"> </td>
+      	    </tr>
+      	    </tbody></table>   
+      	
+      	
+      	
+      	    <a class="button black2" id="savetext2" href="javascript:void(0);">Save</a>
+      	
+      	</div>
+      	
+      	</form>
+      	
+      	</div>  </div>
+      	<div style="display: none;" id="setdata"></div>
+      	<div style="display: none;"><div id="youtubedata">
+      	
+      	<p>
+      	    <input type="text" style=" width:100%" name="youtube" id="youtube" >
+      	  </p>
+      	  <p>
+      	 <span class="media-upload-size">ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span>
+      	  <a class="button black2" id="savevideo" href="javascript:void(0);">Save</a> 
+      	</p>
+      	
+      	</div>
+      	</div> 
+      	<link rel="stylesheet" id="csscode" href="css/coffee.css">  
+      	<style>.cufon-loading #main h3 { visibility: hidden!important; }</style>
+		</div> <!-- #scroll -->
+	</div> <!-- #wrapper -->
+</div> <!-- #shopedit -->
+
+</body>
+</html>

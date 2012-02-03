@@ -289,6 +289,24 @@ function date_diff($d1, $d2) {
      return $h1count;  
       
   }
+  function distance($lat1, $lon1, $lat2, $lon2, $unit) { 
+
+  $theta = $lon1 - $lon2; 
+  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
+  $dist = acos($dist); 
+  $dist = rad2deg($dist); 
+  $miles = $dist * 60 * 1.1515;
+  $unit = strtoupper($unit);
+
+  if ($unit == "K") {
+    return ($miles * 1.609344); 
+  } else if ($unit == "N") {
+      return ($miles * 0.8684);
+    } else {
+        return $miles;
+      }
+}
+
   function randtext($text,$array)
   {
       if(is_array($array))
@@ -306,6 +324,41 @@ function date_diff($d1, $d2) {
       }
      return $text; 
   }
+  function deleteAll($directory, $empty = false) {
+    if(substr($directory,-1) == "/") {
+        $directory = substr($directory,0,-1);
+    }
+
+    if(!file_exists($directory) || !is_dir($directory)) {
+        return false;
+    } elseif(!is_readable($directory)) {
+        return false;
+    } else {
+        $directoryHandle = opendir($directory);
+       
+        while ($contents = readdir($directoryHandle)) {
+            if($contents != '.' && $contents != '..') {
+                $path = $directory . "/" . $contents;
+               
+                if(is_dir($path)) {
+                    deleteAll($path);
+                } else {
+                    unlink($path);
+                }
+            }
+        }
+       
+        closedir($directoryHandle);
+
+        if($empty == false) {
+            if(!rmdir($directory)) {
+                return false;
+            }
+        }
+       
+        return true;
+    }
+} 
   function array2json($arr) 
   {
     if(function_exists('json_encode')) return json_encode($arr); //Lastest versions of PHP already has this functionality.

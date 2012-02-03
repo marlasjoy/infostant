@@ -64,6 +64,12 @@ class db_execute extends db_config {
         }
 
     }
+     function db_delete($sql) {
+        
+        $qry = $this->db_set_execute($sql);
+
+
+    }
     function db_get_recordset() {
         return $this->row;
     }

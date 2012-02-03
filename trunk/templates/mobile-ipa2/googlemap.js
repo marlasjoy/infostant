@@ -14,6 +14,20 @@ function initialize()
 
   setMarkers2(map2);
 }
+function initialize3()
+ {
+alert('111');
+  var myOptions = {
+    zoom: 15,
+    center: new google.maps.LatLng($('#lat').html(), $('#lng').html()),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+   geocoder = new google.maps.Geocoder();
+   map = new google.maps.Map(document.getElementById("maparea"),
+                                myOptions);
+   
+  setMarkers2(map);
+}
 function setMarkers2(map2) 
 {
   // Add markers to the map
