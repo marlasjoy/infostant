@@ -23,20 +23,35 @@
         <script src="jquery.animate-enhanced.min.js"></script>
         <script src="jquery.mobile.min.js"></script>
         <script src="iscroll.js"></script>
-        <script src="http://www.infostant.com/js/shop/googlejs.js"></script>  
+        <script src="googlejs.js"></script>  
         <script src="phonegap-1.2.0.js" charset="utf-8"></script> 
         <script src="jquery.mobile.simpledialog.js" charset="utf-8"></script>
+         <script src="js/cufon-yui.js" charset="utf-8"></script> 
 
 <script type="text/javascript">
     var myScroll;
     var marker;
     var geocoder;
     var map3;
+    var proid;
+    var disid;
+    var tumid;
+    var title;
+    var titleobj;
+    var detailobj;
+    var daterangeobj;
+    var popup5obj;
+
+    var strtitle= '<div><div  id="datatexttitle"><div class="ui-simpledialog-header"><h4>Save Topic</h4></div><div ><p><div data-role="fieldcontain"><label for="textareatitle">Textarea:</label><textarea cols="40" rows="8" name="textareatitle" id="textareatitle"></textarea></div></p><p><input type="hidden" value="" id="targetitle" name="targetitle"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+    var strdetail= '<div><div  id="datatextdetail"><div class="ui-simpledialog-header"><h4>Save Detail</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadetail">Textarea:</label><textarea cols="40" rows="8" name="textareadetail" id="textareadetail"></textarea></div></p><p><input type="hidden" value="" id="targedetail" name="targedetail"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata2()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+     var strdaterange= '<div><div  id="datatextdaterange"><div class="ui-simpledialog-header"><h4>Save Time Work</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadaterange">Textarea:</label><textarea cols="40" rows="8" name="textareadaterange" id="textareadaterange"></textarea></div></p><p><input type="hidden" value="" id="targedaterange" name="targedaterange"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata3()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+     var strpopup5='<div><div  id="datatext2"><div class="ui-simpledialog-header"><h4>Save Address</h4></div><div ><div data-role="fieldcontain"><label for="name">Address:</label><input type="text" name="text-address" id="text-address" value=""  /></div><div data-role="fieldcontain"><label for="name">Tel:</label><input type="text" name="text-tel" id="text-tel" value=""  /></div><div data-role="fieldcontain"><label for="name">Email:</label><input type="text" name="text-emailshop" id="text-emailshop" value=""  /></div><div data-role="fieldcontain"><label for="name">Website:</label><input type="text" name="text-website" id="text-website" value=""  /></div><div data-role="fieldcontain"><label for="name">Pricerange:</label><input type="text" name="text-pricerange" id="text-pricerange" value=""  /></div><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata4()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div></div>';
+     var stryoutube='<div ><div id="youtubedata"><div class="ui-simpledialog-header"><h4>Save Video</h4></div><div data-role="fieldcontain"><label for="name">Youtube Link:</label><input type="text" name="youtube" id="youtube" value=""  /></div><p><span >ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span></p><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata5()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div>';
     var webdir="http://www.infostant.com";
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     document.addEventListener('DOMContentLoaded', loaded, false); 
 
-    function loaded() {
+function loaded() {
       $('nav li:nth-child(2) a').click(function() { 
             $('#function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 800);
         })    
@@ -47,8 +62,115 @@
         onDeviceReady2();
         myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
     }
-    
-    function setdistrict(myObject){
+function savetextdata()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:'title',setdata:$('#textareatitle').val(),filename:'index_th' }, function(data) {
+                            
+        $('#title').html($('#textareatitle').val());
+        $.mobile.hidePageLoadingMsg();
+        $(titleobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata2()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:'detail',setdata:$('#textareadetail').val(),filename:'index_th' }, function(data) {
+                            
+        $('#detail').html($('#textareadetail').val());
+        $.mobile.hidePageLoadingMsg();
+        $(detailobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata3()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:'daterange',setdata:$('#textareadaterange').val(),filename:'index_th' }, function(data) {
+                            
+        $('#daterange').html($('#textareadaterange').val());
+        $.mobile.hidePageLoadingMsg();
+        $(daterangeobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata4()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:'address-tel-emailshop-website-pricerange','text-address':$('#text-address').val(),'text-tel':$('#text-tel').val(),'text-emailshop':$('#text-emailshop').val(),'text-website':$('#text-website').val(),'text-pricerange':$('#text-pricerange').val(),filename:'index_th' }, function(data) {
+                            
+
+        
+    $('#'+'address').html($('#text-address').val());
+    $('#'+'tel').html($('#text-tel').val());
+    $('#'+'emailshop').html($('#text-emailshop').val());
+    $('#'+'website').html($('#text-website').val());
+    $('#'+'pricerange').html($('#text-pricerange').val());
+        
+        
+        
+        
+        $.mobile.hidePageLoadingMsg();
+        $(popup5obj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata5()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+
+     var embed=testUrlForMedia($('#youtube').val());
+       if(embed.id)
+        {
+        
+        $.post(webdir+'/ajax/savevideo','setdata='+embed.id+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)            
+         {
+         eval("var obj1="+reposnse); 
+          if(obj1.resposne){
+       //   setyoutube(embed.id);   
+        $('#videotext').html('<a class="button black2" target="_blank" href="http://www.youtube.com/embed/'+$.trim(embed.id)+'" id="video">เปิดวิดีโอ</a>');
+         $.mobile.hidePageLoadingMsg();
+        $('.ir.edit.vdo').simpledialog('close');
+          }
+
+          }); 
+        }  
+   
+   
+
+}
+function setdistrict(myObject){
        $("select#district").html('');
        var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
        var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
@@ -87,7 +209,7 @@ $.mobile.hidePageLoadingMsg();
 
            
 }
-     function settumbon(myObject){
+function settumbon(myObject){
        $("select#tumbon").html('');
       // var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
        var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
@@ -117,19 +239,110 @@ $.mobile.hidePageLoadingMsg();
          }
          $.mobile.hidePageLoadingMsg();
 }
+function getmylocation(){
+     if(navigator.geolocation) {
+
+           
+           
+    browserSupportFlag = true;
+ //   var options =  { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
+   // alert('1');
+    navigator.geolocation.getCurrentPosition(getlocation2,handleNoGeolocation);
+  // Try Google Gears Geolocation
+  } else if (google.gears) {
+ 
+   //alert('2');
+  // Browser doesn't support Geolocation
+  } else {
+
+ //  alert('3');   
+      
+  } 
+  
+    function handleNoGeolocation(errorFlag) {
+
+     
+
+         alert('เปิด GPS ด้วยค่ะ');
+
+
+    //map.setCenter(initialLocation);
+  }
     
-    function getUrlVars2() {
+} 
+function getlocation2(position){
+
+    $('#lat:last').val(position.coords.latitude);
+    $('#lng:last').val(position.coords.longitude);
+
+   var myOptions = {
+    zoom: 15,
+    center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  map3.setOptions(myOptions);
+  var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  marker.setPosition(myLatLng);
+
+      
+}    
+function getUrlVars2() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
             vars[key] = value;
         });
         return vars;
     }
-    function onDeviceReady2() {
+function savemapdata()
+{
+$.mobile.showPageLoadingMsg();
+var setdata=$('#lat:last').val()+'pp'+$('#lng:last').val()+'pp'+proid+'pp'+disid+'pp'+tumid;
+
+setpont($('#lat:last').val(),$('#lng:last').val());
+    
+$.post(webdir+'/ajax/savemap','setdata='+setdata+'&filename=index_th&shopurl='+$('#shopurl').html()+'&mid='+localStorage.getItem("userId"), function(reposnse)
+{
+
+eval("var obj1="+reposnse);
+$.mobile.hidePageLoadingMsg();
+$('.ir.edit.map').simpledialog('close');
+
+});
+}
+function testUrlForMedia(pastedData) {
+var success = false;
+var media   = {};
+if (pastedData.match('http://(www.)?youtube|youtu\.be')) {
+    if (pastedData.match('embed')) { youtube_id = pastedData.split(/embed\//)[1].split(/[?&]/)[0]; }
+    else { youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
+    media.type  = "youtube";
+    media.id    = youtube_id;
+    success = true;
+}
+else if (pastedData.match('http://(player.)?vimeo\.com')) {
+    vimeo_id = pastedData.split(/video\/|http:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
+    media.type  = "vimeo";
+    media.id    = vimeo_id;
+    success = true;
+}
+else if (pastedData.match('http://player\.soundcloud\.com')) {
+    soundcloud_url = unescape(pastedData.split(/value="/)[1].split(/["]/)[0]);
+    soundcloud_id = soundcloud_url.split(/tracks\//)[1].split(/[&"]/)[0];
+    media.type  = "soundcloud";
+    media.id    = soundcloud_id;
+    success = true;
+}
+if (success) { return media; }
+else {
+ //alert("No valid media id detected");
+}
+return false;
+}
+function onDeviceReady2() {
 
     //   pictureSource=navigator.camera.PictureSourceType;
      //  destinationType=navigator.camera.DestinationType;
-     
+     $.mobile.showPageLoadingMsg();
            if(localStorage.getItem("userId"))
               {
                    $.post(webdir+'/ajax/getshopbyshopurlformobile',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId") }, function(data) {
@@ -140,51 +353,12 @@ $.mobile.hidePageLoadingMsg();
 
                             
                    });  
-                   $('#savetext').click(function() {   
-                    
-                    $.post(webdir+'/ajax/savetext',{shopurl:getUrlVars2()['shopurl'],mid:localStorage.getItem("userId"),target:$('#target').val(),setdata:$('#textarea').val(),filename:'index_th' }, function(data) {
-                            
-                          //  var myObject = eval('(' + data + ')');
-                            
-                         //    setdata(myObject);
-                            $('#'+$('#target').val()).html($('#textarea').val());
-                            $.fancybox.close();
-                            
-                            
-                   });
-                       }); 
+
                    
-                   $('#savetext2').click(function() {   
-                    
-                    $.post(webdir+'/ajax/savetext',''+$('#file-form').serialize()+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=address-tel-emailshop-website&mid='+localStorage.getItem("userId"), function(data) {
-                                    $('#address').html( $('#text-address').val());
-                                    $('#tel').html($('#text-tel').val()); 
-                                    $('#emailshop').html($('#text-emailshop').val()); 
-                                    $('#website').html($('#text-website').val()); 
-                            $.fancybox.close();
-                            
-                   });    
-                       
-                    
-                       
-                   });
+
                    
                     $('#savevideo').click(function() {
-        var embed=testUrlForMedia($('#youtube').val());
-        //alert(embed.id);
-       if(embed.id)
-        {
-        
-        $.post(webdir+'/ajax/savevideo','setdata='+embed.id+'&filename=index_th&shopurl='+getUrlVars2()['shopurl']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)            
-         {
-         eval("var obj1="+reposnse); 
-          if(obj1.resposne){
-              setyoutube(embed.id);   
-              $.fancybox.close();
-          }
-
-          }); 
-        }  
+      
     
               
               });
@@ -196,12 +370,16 @@ $.mobile.hidePageLoadingMsg();
         
     }       
 
-    function onchangeprovince(value)
-    {
+function onchangeprovince(value)
+{
       
          $.mobile.showPageLoadingMsg();
-         
-                            $.ajax({
+            if(value)
+             {
+        proid=value;
+        showAddress($("#province option[value='"+value+"']:last").text());
+    }
+           $.ajax({
                                                       data: {proid: value},                                                            
                                                       url: webdir+'/ajax/getdistrict',
                                                       dataType: "jsonp",
@@ -216,10 +394,20 @@ $.mobile.hidePageLoadingMsg();
                                                       }
                                                     });
    
-       }
-    function onchangedistrict(value)
-    {
+}
+function onchangedistrict(value)
+{
     $.mobile.showPageLoadingMsg();
+    
+         if(value)
+    {
+       disid=value;
+       
+        showAddress($("#province option[value='"+proid+"']:last").text()+' '+$("#district option[value='"+value+"']:last").text());
+    }
+    
+    
+    
      $.ajax({
                                                       data: {disid: value},                                                            
                                                       url: webdir+'/ajax/gettumbon',
@@ -237,8 +425,18 @@ $.mobile.hidePageLoadingMsg();
     
     
         }
-    function initialize4()
- {
+function onchangetumbon(value)
+{
+    $.mobile.showPageLoadingMsg();
+    if(value)
+    {
+        tumid=value;
+        showAddress($("#province option[value='"+proid+"']:last").text()+' '+$("#district option[value='"+disid+"']:last").text()+' '+$("#tumbon option[value='"+value+"']:last").text());
+    }
+    $.mobile.hidePageLoadingMsg();
+}
+function initialize4()
+{
 
   var myOptions = {
     zoom: 15,
@@ -285,10 +483,10 @@ function showAddress(address)
 
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        map2.setCenter(results[0].geometry.location);
+        map3.setCenter(results[0].geometry.location);
         marker.setPosition(results[0].geometry.location); 
         
-         if(($('#province').val()=="")||($('#district').val()=="")||($('#tumbon').val()==""))
+         if((proid=="")||(disid=="")||(tumid==""))
        {
         marker.setDraggable(false);   
 
@@ -297,13 +495,71 @@ function showAddress(address)
        {
          marker.setDraggable(true);  
        }
-        $('#lat').val(marker.getPosition().lat());
-        $('#lng').val(marker.getPosition().lng()); 
+        $('#lat:last').val(marker.getPosition().lat());
+        $('#lng:last').val(marker.getPosition().lng()); 
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
   });
   }
+function seteventtext()
+{
+  //  $('#targettitle:last').val('title');
+    
+    $('#textareatitle:last').val($('#'+'title').html());
+}
+function seteventtext2()
+{
+//    $('#targetdetail:last').val('detail');
+    
+    $('#textareadetail:last').val($('#'+'detail').html());
+}
+function seteventtext3()
+{
+  //  $('#targetdaterange:last').val('daterange');
+    
+    $('#textareadaterange:last').val($('#'+'daterange').html());
+}
+function seteventtext4()
+{
+ 
+    $('#text-address').val($('#'+'address').html());
+    $('#text-tel').val($('#'+'tel').html());
+    $('#text-emailshop').val($('#'+'emailshop').html());
+    $('#text-website').val($('#'+'website').html());
+    $('#text-pricerange').val($('#'+'pricerange').html());
+}
+function seteventtext5()
+{
+     var embed=testUrlForMedia($('#video').attr("href"));       
+                        if(embed)
+                        {
+                                    $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
+                        }            
+}
+function setcolor(color)
+{
+    $.post(webdir+'/ajax/savebg','mid='+localStorage.getItem("userId")+'&setdata='+color+'&shopurl='+getUrlVars2()['shopurl']+'&filename=index_th', function(reposnse)         {
+      $('body').removeClass($('body').attr('class').split(/\s+/).pop());
+      $('body').addClass(color);
+      
+      
+      $('#title').removeClass($('#title').attr('class').split(/\s+/).pop());
+      $('#title').addClass(color);
+      
+      
+      $('#detail').removeClass($('#detail').attr('class').split(/\s+/).pop());
+      $('#detail').addClass(color);
+      
+      
+      $('#daterange').removeClass($('#daterange').attr('class').split(/\s+/).pop());
+      $('#daterange').addClass(color);
+      
+      $('#contact').removeClass($('#contact').attr('class').split(/\s+/).pop());
+      $('#contact').addClass(color);
+      
+    });
+}
 function setdata2(myObject){
              var scriptjava='';
               $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
@@ -317,6 +573,8 @@ function setdata2(myObject){
               Cufon.now();
               }
 
+                         //   $('body').addclass(myObject.bodyclass);
+                                  $('body').addClass(myObject.bodyclass);
                             $('#main').removeClass('ui-content');
                             $('#setdata').html(myObject.setdata); 
                          //   $('.galleryimg').fancybox();
@@ -335,60 +593,87 @@ function setdata2(myObject){
                             'onShowFinish':function() { initialize4()},
                             'fullHTML':$('#datamap').html()
                           })
-                        })
-                            
-                        
-                            $(".ir.edit.vdo").click(function() {
-                            if($('#video').attr("src"))
-                            {  
-           
-       var embed=testUrlForMedia($('#video').attr("src"));       
-      if(embed)
-        {
-            $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
-        }            
-         $.fancybox({
-                                   'href':'#youtubedata','type':'inline'
-                       });   
-           
-       }
-                            
-                             
-                            });
-
-                            
-                            
-                            
-                            $(".ir.edit.text").click(function() {
-                                if($(this).attr('title')=="popup5")
+                        });
+                  $(document).delegate('.ir.edit.text', 'click', function() {
+                 
+                      if($(this).attr('title')=="popup5")
                                 {
-                                    $('#text-address').val($('#address').html());
-                                    $('#text-tel').val($('#tel').html()); 
-                                    $('#text-emailshop').val($('#emailshop').html()); 
-                                    $('#text-website').val($('#website').html()); 
-                                        $.fancybox({
-
-                                    'title'  : this.title,
-                                   'href':'#datatext2','type':'inline'}); 
-                                }else
+                                 popup5obj=this;
+                                   $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext4();
+                            },
+                            'fullHTML':strpopup5
+                            
+                            }); 
+                                }else if($(this).attr('title')=="title")
                                 {
-                                $('#target').val($(this).attr('title'));
-                               $('#textarea').val($('#'+$(this).attr('title')).html());
-                              // $("#datatext").fancybox().trigger('click');
-
-                               $.fancybox({
-
-                                    'title'  : this.title,
-                                   'href':'#datatext','type':'inline'}); 
+                                    titleobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext();
+                            },
+                            'fullHTML':strtitle
+                            
+                            }); 
+                                }else if($(this).attr('title')=="detail")
+                                {
+                                     
+                                    detailobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext2();
+                            },
+                            'fullHTML':strdetail
+                            
+                            }); 
                                 }
-                                
-                            });
+                                else if($(this).attr('title')=="daterange")
+                                {
+                                     
+                                    daterangeobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext3();
+                            },
+                            'fullHTML':strdaterange
+                            
+                            }); 
+                                }
+                      
+                      
+              });
+                  $(document).delegate('.ir.edit.vdo', 'click', function() {
+                    
+                     $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext5();
+                            },
+                            'fullHTML':stryoutube
+                            
+                            }); 
+                    
+                    
+                });            
+                        
+
+
                               onLoadMaps();
                              
-
+                             $.mobile.hidePageLoadingMsg();
                   
     }
-    function onPhotoDataSuccess(imageData) {
+function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64 encoded image data
     //  imageURI2=imageData;
       $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
@@ -408,7 +693,7 @@ function setdata2(myObject){
        
 
     }
-    function setcamera(){
+function setcamera(){
                    var sizearray=size2.split("x");
                
 
@@ -422,7 +707,7 @@ function setdata2(myObject){
                 targetHeight: sizearray[1] }
                 );
 }
-    function setalbum(){
+function setalbum(){
            var sizearray=size2.split("x");
                
 
@@ -437,7 +722,7 @@ function setdata2(myObject){
                 );
     
 }
-    function capturePhoto(size,shopurl,group) {
+function capturePhoto(size,shopurl,group) {
     
     size2=size;
     shopurl2=shopurl;
@@ -479,12 +764,28 @@ $('#'+size).simpledialog({
 
                 
     }
-    function onFail(message) {
+function onFail(message) {
       navigator.notification.alert('Failed because: ' + message);
     }
 </script>
 
-
+<style>
+.ui-body-c, .ui-overlay-c {
+   text-shadow:none ; 
+}
+.ui-btn-inner.ui-btn-corner-all.ui-corner-top
+{
+    display: none;
+}
+.ui-btn-inner.ui-btn-corner-all.ui-corner-top.ui-corner-bottom
+{
+    display:block;
+}
+#video {
+   
+    margin: 100px auto;
+}
+</style>
 </head>
 <body>
 <div id="shopedit" data-role="page">
@@ -513,7 +814,7 @@ $('#'+size).simpledialog({
                 <li><a href="promotion.html"><span>Promotion</span></a></li>
                 <li><a href="qr.html"><span>QR Reader</span></a></li>
                 <li><a href="location.html"><span>Show Location</span></a></li>
-                <li><a href="shop.html"><span>Shop</span></a></li>
+                <li><a href="index.html#shop"><span>Shop</span></a></li>
                 <li><a href="help.html"><span>Help</span></a></li>
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
@@ -530,86 +831,22 @@ $('#'+size).simpledialog({
                 <h2 class="ir">Communication</h2>
                 <p>
                     <label for="bg" >BG Colour</label>
-                    <a class="ir button white" href="javascript:void(0);" >White</a>
-                    <a class="ir button black" href="javascript:void(0);" >Black</a>
+                    <a class="ir button white" href="javascript:setcolor('white');" >White</a>
+                    <a class="ir button black" href="javascript:setcolor('black');" >Black</a>
                 </p>
             </div>
             </section>
         </header>
           <div data-role="content" id="main" ></div>
           <!-- /content -->
-          <div style="display:none">
-          <div  id="datatext">
-          
-          
-          
-          <h3 class="media-title">ใส่ข้อความ</h3>
-          
-          
-          <div id="media-upload-notice">
-            <p>
-              <textarea rows="10" style=" width:100%" id="textarea" name="textarea">นั่งเล่นเอกมัย ผับแอนด์เรสเตอร</textarea>
-            </p>
-            <p>
-              <input type="hidden" value="" id="target" name="target"> 
-              
-              <a class="button black2" id="savetext" href="javascript:void(0);">Save</a>
-              <span class="media-upload-size"> </span></p>
-          </div>
-          
-          </div>  </div>
-          <div style="display:none">
-          <div  id="datatext2">
-          
-              <form method="post"  id="file-form">
-          
-          
-          
-          <h3 class="media-title">ใส่ข้อความ</h3>
-          
-          
-          <div id="media-upload-notice">
-          <table cellpadding="3" cellspacing="3">
-          
-          <tbody><tr>
-              <td><span id="span-address">Address</span></td><td>  <input type="text" id="text-address" name="text-address" style=" width:100%"> </td>
-              </tr>
-          <tr>
-              <td><span id="span-tel">Tel</span></td><td>  <input type="text" id="text-tel" name="text-tel" style=" width:100%"> </td>
-              </tr>
-          <tr>
-              <td><span id="span-emailshop">Email</span></td><td>  <input type="text" id="text-emailshop" name="text-emailshop" style=" width:100%"> </td>
-              </tr>
-          <tr>
-              <td><span id="span-website">Website</span></td><td>  <input type="text" id="text-website" name="text-website" style=" width:100%"> </td>
-              </tr>
-              </tbody></table>   
-          
-          
-          
-              <a class="button black2" id="savetext2" href="javascript:void(0);">Save</a>
-          
-          </div>
-          
-          </form>
-          
-          </div>  </div>
+  
+
           <div style="display: none;" id="setdata"></div>
-          <div style="display: none;"><div id="youtubedata">
           
-          <p>
-              <input type="text" style=" width:100%" name="youtube" id="youtube" >
-            </p>
-            <p>
-           <span class="media-upload-size">ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span>
-            <a class="button black2" id="savevideo" href="javascript:void(0);">Save</a> 
-          </p>
-          
-          </div>
-          </div> 
           <div  id="datamap" style="display: none;">
 <p>
 <div class="ui-simpledialog-header"><h4>Select Location</h4></div>
+
                 <select size="1" name="province" id="province"  onchange="onchangeprovince(this.value)">
                     <option value="">เลือกจังหวัด</option>
                                                  <option value="101">กระบี่</option>
@@ -694,15 +931,17 @@ $('#'+size).simpledialog({
                     <option value="">เลือกอำเภอ/เขต</option>
                 </select>
 
-                <select size="1" name="tumbon" id="tumbon">
+
+                <select size="1" name="tumbon" id="tumbon" onchange="onchangetumbon(this.value)">
                     <option value="">เลือกตำบล/แขวง</option>
                 </select>
-                <a rel='GetDirection' data-role='button' href='#' id='GetDirection'>GetDirection</a>
+
+                <a rel='GetDirection' data-role='button' href='javascript:getmylocation()' id='GetDirection'>GetDirection</a>
                 <input type="hidden" value="" name="lat" id="lat">
                 <input type="hidden" value="" name="lng" id="lng">
-                   <div id="maparea" class="maparea" style="width: 100%; height: 250px;"></div>  
+                   <div id="maparea" class="maparea" style="width: 100%; height: 150px;"></div>  
 
-                 <a rel='save' data-role='button' href='#' id='save'>Save</a>
+                 <a rel='savemap' data-role='button' href='javascript:savemapdata()' id='savemap'>Save</a>
                  <a rel='close' data-role='button' href='#' id='simpleclose'>Close</a>
             </p> 
   </div>
