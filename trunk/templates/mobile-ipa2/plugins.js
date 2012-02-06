@@ -1020,7 +1020,7 @@ function registerserver()
   //   $('#buttonSave').attr("disabled", ""); 
   //   $('#buttonSave').html('Loading');
      $.post(webdir+'/ajax/submitformregisteriphone',{email:$('#input-email').val(),
-     username:$('#username').val(),password1:$('#password1').val(),status:1
+     username:$('#input-username').val(),password1:$('#password1').val(),status:1
        
      }, function(data) {
          var myObject = eval('(' + data + ')');
