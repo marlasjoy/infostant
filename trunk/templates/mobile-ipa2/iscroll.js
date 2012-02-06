@@ -139,7 +139,7 @@ var m = Math,
 		if (that.options.useTransition) that.scroller.style[vendor + 'TransitionTimingFunction'] = 'cubic-bezier(0.33,0.66,0.66,1)';
 		
 		if (that.options.useTransform)
-        { that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose+ ' scale(' + 1 + ')';;
+        { that.scroller.style[vendor + 'Transform'] = trnOpen + that.x + 'px,' + that.y + 'px' + trnClose+ ' scale(' + 0.35 + ')';;
         
          
         }
@@ -168,7 +168,7 @@ iScroll.prototype = {
 	x: 0,
 	y: 0,
 	steps: [],
-	scale:1,
+	scale:0.35,
 	currPageX: 0, currPageY: 0,
 	pagesX: [], pagesY: [],
 	aniTime: null,

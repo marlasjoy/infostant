@@ -1,17 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Infostant</title>
+            <link rel="stylesheet" href="jquery.mobile.min.css" />
 
-  <div data-role="page" id="memoryedit">
-  <link rel="stylesheet" href="http://www.infostant.com/css/shop/style.css">
-  <link rel="stylesheet" href="http://www.infostant.com/css/shop/dropkick.css" media="all" />
-  <link rel="stylesheet" href="http://www.infostant.com/css/shop/default.css"> 
+        <link rel="stylesheet" href="zoom.css" />
+          <link rel="stylesheet" href="jquery.mobile.min.style.css" />
+          <link rel="stylesheet" href="css/royal-slider-6.0.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    
+   
+   <link href="jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="jquery.mobile.simpledialog.min.css" />
 
-  <script src="http://www.infostant.com/js/shop/googlejs.js"></script>  
-  <div data-role="header" id="headerfile" data-position="fixed" style="padding-bottom:0px;">
-<div>
+          
+          <script src="jquery-1.7.1.min.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <script src="jquery.animate-enhanced.min.js"></script>
+        <script src="jquery.mobile.min.js"></script>
+        <script src="iscroll.js"></script>
+        <script src="googlejs.js"></script>  
+        <script src="phonegap-1.2.0.js" charset="utf-8"></script> 
+        <script src="jquery.mobile.simpledialog.js" charset="utf-8"></script>
+         <script src="js/cufon-yui.js" charset="utf-8"></script> 
+
+<script type="text/javascript">
+    var myScroll;
+    var marker;
+    var geocoder;
+    var map3;
+    var proid;
+    var disid;
+    var tumid;
+    var title;
+    var titleobj;
+    var detailobj;
+    var daterangeobj;
+    var popup5obj;
+
+    var strtitle= '<div><div  id="datatexttitle"><div class="ui-simpledialog-header"><h4>Save Topic</h4></div><div ><p><div data-role="fieldcontain"><label for="textareatitle">Textarea:</label><textarea cols="40" rows="8" name="textareatitle" id="textareatitle"></textarea></div></p><p><input type="hidden" value="" id="targetitle" name="targetitle"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+    var strdetail= '<div><div  id="datatextdetail"><div class="ui-simpledialog-header"><h4>Save Detail</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadetail">Textarea:</label><textarea cols="40" rows="8" name="textareadetail" id="textareadetail"></textarea></div></p><p><input type="hidden" value="" id="targedetail" name="targedetail"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata2()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+     var strdaterange= '<div><div  id="datatextdaterange"><div class="ui-simpledialog-header"><h4>Save Time Work</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadaterange">Textarea:</label><textarea cols="40" rows="8" name="textareadaterange" id="textareadaterange"></textarea></div></p><p><input type="hidden" value="" id="targedaterange" name="targedaterange"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata3()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
+     var strpopup5='<div><div  id="datatext2"><div class="ui-simpledialog-header"><h4>Save Address</h4></div><div ><div data-role="fieldcontain"><label for="name">Address:</label><input type="text" name="text-address" id="text-address" value=""  /></div><div data-role="fieldcontain"><label for="name">Tel:</label><input type="text" name="text-tel" id="text-tel" value=""  /></div><div data-role="fieldcontain"><label for="name">Email:</label><input type="text" name="text-emailshop" id="text-emailshop" value=""  /></div><div data-role="fieldcontain"><label for="name">Website:</label><input type="text" name="text-website" id="text-website" value=""  /></div><div data-role="fieldcontain"><label for="name">Pricerange:</label><input type="text" name="text-pricerange" id="text-pricerange" value=""  /></div><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata4()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div></div>';
+     var stryoutube='<div ><div id="youtubedata"><div class="ui-simpledialog-header"><h4>Save Video</h4></div><div data-role="fieldcontain"><label for="name">Youtube Link:</label><input type="text" name="youtube" id="youtube" value=""  /></div><p><span >ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span></p><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata5()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div>';
+    var webdir="http://www.infostant.com";
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    document.addEventListener('DOMContentLoaded', loaded, false); 
+
+function loaded() {
+      $('nav li:nth-child(2) a').click(function() { 
+            $('#function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 800);
+        })    
+        $('#function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
+            $('#function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 800);
+        })
+        /******* EOS ********/
+        onDeviceReady2();
+        myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
+    }
+function savetextdata()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext2',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),target:'title',value:$('#textareatitle').val(),filename:'index_th' }, function(data) {
+                            
+        $('#title').html($('#textareatitle').val());
+        $.mobile.hidePageLoadingMsg();
+        $(titleobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata2()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext2',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),target:'description',value:$('#textareadetail').val(),filename:'index_th' }, function(data) {
+                            
+        $('#detail').html($('#textareadetail').val());
+        $.mobile.hidePageLoadingMsg();
+        $(detailobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata3()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext2',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),target:'daterange',value:$('#textareadaterange').val(),filename:'index_th' }, function(data) {
+                            
+        $('#daterange').html($('#textareadaterange').val());
+        $.mobile.hidePageLoadingMsg();
+        $(daterangeobj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata4()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+        $.post(webdir+'/ajax/savetext3',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),'address':$('#text-address').val(),'tel':$('#text-tel').val(),'emailshop':$('#text-emailshop').val(),'website':$('#text-website').val(),'pricerange':$('#text-pricerange').val(),filename:'index_th' }, function(data) {
+                            
+
+        
+    $('#'+'address').html($('#text-address').val());
+    $('#'+'tel').html($('#text-tel').val());
+    $('#'+'emailshop').html($('#text-emailshop').val());
+    $('#'+'website').html($('#text-website').val());
+    $('#'+'pricerange').html($('#text-pricerange').val());
+        
+        
+        
+        
+        $.mobile.hidePageLoadingMsg();
+        $(popup5obj).simpledialog('close');
+                            
+                            
+        });
+   
+   
+   
+
+}
+function savetextdata5()
+{
+
+   $.mobile.showPageLoadingMsg(); 
+   
+
+     var embed=testUrlForMedia($('#youtube').val());
+       if(embed.id)
+        {
+        
+        $.post(webdir+'/ajax/savevideo2','value='+embed.id+'&filename=index_th&meid='+getUrlVars2()['meid']+'&target=video&mid='+localStorage.getItem("userId"), function(reposnse)            
+         {
+         eval("var obj1="+reposnse); 
+          if(obj1.resposne){
+       //   setyoutube(embed.id);   
+        $('#videotext').html('<a class="button black2" target="_blank" href="http://www.youtube.com/embed/'+$.trim(embed.id)+'" id="video">เปิดวิดีโอ</a>');
+         $.mobile.hidePageLoadingMsg();
+        $('.ir.edit.vdo').simpledialog('close');
+          }
+
+          }); 
+        }  
+   
+   
+
+}
+function setdistrict(myObject){
+       $("select#district").html('');
+       var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
+       var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
+      // var strtsubcat=$("select#subcat").html();
+        var options='';
+
+       
+        options +=strdistrict;
+         
+         if(typeof(myObject.error) == 'undefined')
+         {
+         $.each(myObject, function(index2,data) {
+                
+             options += '<option value="' + data.disid + '">' +data.disname + '</option>';
+        
+             });
+          }  
+
+         $("select#district").html(options);
+         //$("select option#district:first").attr( 'selected' , ''  ) ; 
+         $("select#tumbon").html(strtumbon);
+         var myselect = $("select#district");
+         if(jQuery.isFunction(myselect.selectmenu))
+         {
+         myselect[0].selectedIndex = 0;
+         myselect.selectmenu("refresh");
+         }
+         
+         var myselect = $("select#tumbon");
+         if(jQuery.isFunction(myselect.selectmenu))
+         {
+         myselect[0].selectedIndex = 0;
+         myselect.selectmenu("refresh");
+         }
+$.mobile.hidePageLoadingMsg();
+
+           
+}
+function settumbon(myObject){
+       $("select#tumbon").html('');
+      // var strdistrict='<option value="">เลือกอำเภอ/เขต</option>';
+       var strtumbon='<option value="">เลือกตำบล/แขวง</option>'; 
+      // var strtsubcat=$("select#subcat").html();
+        var options='';
+
+       
+        options +=strtumbon;
+         
+         if(typeof(myObject.error) == 'undefined')
+         {
+         $.each(myObject, function(index2,data) {
+                
+             options += '<option value="' + data.tumid + '">' +data.tumname + '</option>';
+        
+             });
+          }  
+
+        // $("select#district").html(strdistrict);
+         //$("select option#district:first").attr( 'selected' , ''  ) ; 
+         $("select#tumbon").html(options);
+         var myselect = $("select#tumbon");
+          if(jQuery.isFunction(myselect.selectmenu))
+         {
+         myselect[0].selectedIndex = 0;
+         myselect.selectmenu("refresh");
+         }
+         $.mobile.hidePageLoadingMsg();
+}
+function getmylocation(){
+     if(navigator.geolocation) {
+
+           
+           
+    browserSupportFlag = true;
+ //   var options =  { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
+   // alert('1');
+    navigator.geolocation.getCurrentPosition(getlocation2,handleNoGeolocation);
+  // Try Google Gears Geolocation
+  } else if (google.gears) {
+ 
+   //alert('2');
+  // Browser doesn't support Geolocation
+  } else {
+
+ //  alert('3');   
+      
+  } 
+  
+    function handleNoGeolocation(errorFlag) {
+
+     
+
+         alert('เปิด GPS ด้วยค่ะ');
+
+
+    //map.setCenter(initialLocation);
+  }
+    
+} 
+function getlocation2(position){
+
+    $('#lat:last').val(position.coords.latitude);
+    $('#lng:last').val(position.coords.longitude);
+
+   var myOptions = {
+    zoom: 15,
+    center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  map3.setOptions(myOptions);
+  var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  marker.setPosition(myLatLng);
+
+      
+}    
+function getUrlVars2() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+function savemapdata()
+{
+$.mobile.showPageLoadingMsg();
+var setdata=$('#lat:last').val()+'pp'+$('#lng:last').val()+'pp'+proid+'pp'+disid+'pp'+tumid;
+
+setpont2($('#lat:last').val(),$('#lng:last').val());
+    
+$.post(webdir+'/ajax/savemap2','setdata='+setdata+'&filename=index_th&meid='+getUrlVars2()['meid']+'&mid='+localStorage.getItem("userId"), function(reposnse)
+{
+
+eval("var obj1="+reposnse);
+$.mobile.hidePageLoadingMsg();
+$('.ir.edit.map').simpledialog('close');
+
+});
+}
+function testUrlForMedia(pastedData) {
+var success = false;
+var media   = {};
+if (pastedData.match('http://(www.)?youtube|youtu\.be')) {
+    if (pastedData.match('embed')) { youtube_id = pastedData.split(/embed\//)[1].split(/[?&]/)[0]; }
+    else { youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]; }
+    media.type  = "youtube";
+    media.id    = youtube_id;
+    success = true;
+}
+else if (pastedData.match('http://(player.)?vimeo\.com')) {
+    vimeo_id = pastedData.split(/video\/|http:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
+    media.type  = "vimeo";
+    media.id    = vimeo_id;
+    success = true;
+}
+else if (pastedData.match('http://player\.soundcloud\.com')) {
+    soundcloud_url = unescape(pastedData.split(/value="/)[1].split(/["]/)[0]);
+    soundcloud_id = soundcloud_url.split(/tracks\//)[1].split(/[&"]/)[0];
+    media.type  = "soundcloud";
+    media.id    = soundcloud_id;
+    success = true;
+}
+if (success) { return media; }
+else {
+ //alert("No valid media id detected");
+}
+return false;
+}
+function onDeviceReady2() {
+
+    //   pictureSource=navigator.camera.PictureSourceType;
+     //  destinationType=navigator.camera.DestinationType;
+     $.mobile.showPageLoadingMsg();
+           if(localStorage.getItem("userId"))
+              {
+                   $.post(webdir+'/ajax/getshopbymeidformobile',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId") }, function(data) {
+                            
+                            var myObject = eval('(' + data + ')');
+                            
+                             setdata2(myObject);
+
+                            
+                   });  
+
+                   
+
+                   
+                 
+                     
+
+              
+              
+              }
+        
+    }       
+
+function onchangeprovince(value)
+{
+      
+         $.mobile.showPageLoadingMsg();
+            if(value)
+             {
+        proid=value;
+        showAddress($("#province option[value='"+value+"']:last").text());
+    }
+           $.ajax({
+                                                      data: {proid: value},                                                            
+                                                      url: webdir+'/ajax/getdistrict',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'setdistrict', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                                                    });
+   
+}
+function onchangedistrict(value)
+{
+    $.mobile.showPageLoadingMsg();
+    
+         if(value)
+    {
+       disid=value;
+       
+        showAddress($("#province option[value='"+proid+"']:last").text()+' '+$("#district option[value='"+value+"']:last").text());
+    }
+    
+    
+    
+     $.ajax({
+                                                      data: {disid: value},                                                            
+                                                      url: webdir+'/ajax/gettumbon',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'settumbon', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+     });
+    
+    
+        }
+function onchangetumbon(value)
+{
+    $.mobile.showPageLoadingMsg();
+    if(value)
+    {
+        tumid=value;
+        showAddress($("#province option[value='"+proid+"']:last").text()+' '+$("#district option[value='"+disid+"']:last").text()+' '+$("#tumbon option[value='"+value+"']:last").text());
+    }
+    $.mobile.hidePageLoadingMsg();
+}
+function initialize4()
+{
+
+  var myOptions = {
+    zoom: 15,
+    center: new google.maps.LatLng($('#lat').html(), $('#lng').html()),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+   geocoder = new google.maps.Geocoder();
+   map3 = new google.maps.Map($('.maparea').get(1),
+                                myOptions);
+
+  setMarkers2(map3);
+}
+function setMarkers2(map2) 
+{
+
+  var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+
+
+    var myLatLng = new google.maps.LatLng($('#lat').html(), $('#lng').html());
+    marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map2,
+        shape: shape
+    });
+   setevent(marker);
+   
+
+}
+function setevent(marker)
+{
+        google.maps.event.addListener(marker, 'dragend', function() {
+
+        $('#lat').val(marker.getPosition().lat());
+        $('#lng').val(marker.getPosition().lng());  
+
+       });
+    
+}
+function showAddress(address)
+{
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map3.setCenter(results[0].geometry.location);
+        marker.setPosition(results[0].geometry.location); 
+        
+         if((proid=="")||(disid=="")||(tumid==""))
+       {
+        marker.setDraggable(false);   
+
+        
+       }else
+       {
+         marker.setDraggable(true);  
+       }
+        $('#lat:last').val(marker.getPosition().lat());
+        $('#lng:last').val(marker.getPosition().lng()); 
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+  });
+  }
+function seteventtext()
+{
+  //  $('#targettitle:last').val('title');
+    
+    $('#textareatitle:last').val($('#'+'title').html());
+}
+function seteventtext2()
+{
+//    $('#targetdetail:last').val('detail');
+    
+    $('#textareadetail:last').val($('#'+'detail').html());
+}
+function seteventtext3()
+{
+  //  $('#targetdaterange:last').val('daterange');
+    
+    $('#textareadaterange:last').val($('#'+'daterange').html());
+}
+function seteventtext4()
+{
+ 
+    $('#text-address').val($('#'+'address').html());
+    $('#text-tel').val($('#'+'tel').html());
+    $('#text-emailshop').val($('#'+'emailshop').html());
+    $('#text-website').val($('#'+'website').html());
+    $('#text-pricerange').val($('#'+'pricerange').html());
+}
+function seteventtext5()
+{
+     var embed=testUrlForMedia($('#video').attr("href"));       
+                        if(embed)
+                        {
+                                    $('#youtube').val('http://www.youtube.com/embed/'+embed.id);    
+                        }            
+}
+function setcolor(color)
+{
+    $.post(webdir+'/ajax/savebg2','mid='+localStorage.getItem("userId")+'&setdata='+color+'&meid='+getUrlVars2()['meid']+'&filename=index_th', function(reposnse)         {
+      $('body').removeClass($('body').attr('class').split(/\s+/).pop());
+      $('body').addClass(color);
+      
+      
+      $('#title').removeClass($('#title').attr('class').split(/\s+/).pop());
+      $('#title').addClass(color);
+      
+      
+      $('#detail').removeClass($('#detail').attr('class').split(/\s+/).pop());
+      $('#detail').addClass(color);
+      
+      
+      $('#daterange').removeClass($('#daterange').attr('class').split(/\s+/).pop());
+      $('#daterange').addClass(color);
+      
+      $('#contact').removeClass($('#contact').attr('class').split(/\s+/).pop());
+      $('#contact').addClass(color);
+      
+    });
+}
+function setdata2(myObject){
+             var scriptjava='';
+              $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
+              
+              if(myObject.fontjs){
+              scriptjava= '<script  src="mylibs/'+myObject.fontjs+'"><\/script>';
+              }
+              $('#main').html(scriptjava+myObject.html);
+              if(myObject.fontjs){
+              Cufon.replace('#main h3', { fontFamily:myObject.fonttext, fontSize: myObject.fontsize+'px' });
+              Cufon.now();
+              }
+
+                         //   $('body').addclass(myObject.bodyclass);
+                                  $('body').addClass(myObject.bodyclass);
+                            $('#main').removeClass('ui-content');
+                            $('#setdata').html(myObject.setdata); 
+                         //   $('.galleryimg').fancybox();
+                            
+                            $("#color h2").css('background-image',"url("+webdir+"/images/shop/"+myObject.catname_en+"/hd-"+myObject.catname_en+".png)");
+                            $("#main h3").css('color',"#"+myObject.color+"");
+                            $("#color").css('background-color',"#"+myObject.color+"");
+                            
+                           
+                      
+                            
+                  $(document).delegate('.ir.edit.map', 'click', function() {
+                            $(this).simpledialog({
+                            'mode' : 'blank',
+
+                            'fullScreen':'true',
+                            'onShowFinish':function() { initialize4()},
+                            'fullHTML':$('#datamap').html()
+                          })
+                        });
+                  $(document).delegate('.ir.edit.text', 'click', function() {
+                 
+                      if($(this).attr('title')=="popup5")
+                                {
+                                 popup5obj=this;
+                                   $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext4();
+                            },
+                            'fullHTML':strpopup5
+                            
+                            }); 
+                                }else if($(this).attr('title')=="title")
+                                {
+                                    titleobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext();
+                            },
+                            'fullHTML':strtitle
+                            
+                            }); 
+                                }else if($(this).attr('title')=="detail")
+                                {
+                                     
+                                    detailobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext2();
+                            },
+                            'fullHTML':strdetail
+                            
+                            }); 
+                                }
+                                else if($(this).attr('title')=="daterange")
+                                {
+                                     
+                                    daterangeobj=this;
+                                    $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext3();
+                            },
+                            'fullHTML':strdaterange
+                            
+                            }); 
+                                }
+                      
+                      
+              });
+                  $(document).delegate('.ir.edit.vdo', 'click', function() {
+                    
+                     $(this).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext5();
+                            },
+                            'fullHTML':stryoutube
+                            
+                            }); 
+                    
+                    
+                });            
+                        
+
+
+                              onLoadMaps2();
+                             
+                             $.mobile.hidePageLoadingMsg();
+                  
+    }
+function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+    //  imageURI2=imageData;
+      $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
+      $.post(webdir+'/ajax/submitpicformiphone2',{
+                     pic1:imageData
+                     ,size:size2
+                     ,meid:getUrlVars2()['meid']
+                     ,mid:localStorage.getItem("userId")
+                     ,username:localStorage.getItem("username")
+                     ,group:group2
+                     
+      }, function(data) {
+                      var myObject = eval('(' + data + ')');    
+
+                            setdata2(myObject);  
+                   });
+       
+
+    }
+function setcamera(){
+                   var sizearray=size2.split("x");
+               
+
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.CAMERA, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+}
+function setalbum(){
+           var sizearray=size2.split("x");
+               
+
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+                { quality : 100, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: sizearray[0],
+                targetHeight: sizearray[1] }
+                );
+    
+}
+function changeimage(size,group) {
+    
+    size2=size;
+    group2=group;
+$('#'+size).simpledialog({
+    'mode' : 'bool',
+    'prompt' : 'Choose Form ?',
+    'fullScreen':'true',
+    'useModal': true,
+    'buttons' : {
+      'Camera': {
+        click: function () {
+         // $('#dialogoutput').text('OK');
+         setcamera();
+        }
+      },
+      'Album': {
+        click: function () {
+        //  $('#dialogoutput').text('Cancel');
+        setalbum();
+        }
+      },
+       'Cancel': {
+        click: function () {
+
+            
+        }
+      }
+    }
+  });
+    
+    
+    
+    
+    
+    
+                
+
+
+                
+    }
+function onFail(message) {
+      navigator.notification.alert('Failed because: ' + message);
+    }
+</script>
+
+<style>
+.ui-body-c, .ui-overlay-c {
+   text-shadow:none ; 
+}
+.ui-btn-inner.ui-btn-corner-all.ui-corner-top
+{
+    display: none;
+}
+.ui-btn-inner.ui-btn-corner-all.ui-corner-top.ui-corner-bottom
+{
+    display:block;
+}
+#video {
+   
+    margin: 100px auto;
+}
+</style>
+</head>
+<body>
+<div id="shopedit" data-role="page">
+    <div id="header" class="ui-header">
+        <div>
             <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
             <h1><a href="index.html" data-transition="flip">infostant</a></h1>
             <nav>
                 <ul class="h">
-                    <li><a href="search.html" data-transition="slide">search</a></li>
+                    <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>
                     <li><a class="functionclick" href="#">function</a></li>
                     <li><a href="directory.html" data-transition="slide">directory</a></li>
                 </ul>
@@ -30,105 +810,142 @@
                 <li><a href="promotion.html"><span>Promotion</span></a></li>
                 <li><a href="qr.html"><span>QR Reader</span></a></li>
                 <li><a href="location.html"><span>Show Location</span></a></li>
-                <li><a href="shop.html"><span>Shop</span></a></li>
+                <li><a href="index.html#shop"><span>Shop</span></a></li>
                 <li><a href="help.html"><span>Help</span></a></li>
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
-</div>   
-<body id="bodydiv"  class="backend">   
-<header >
-<section  id="color">
+    </div>
+    <div id="wrapper">
+        <div id="scroller" style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0pt 0pt; -moz-transform: translate(0px, 0px) scale(0.35);" >
+<!--              <link rel="stylesheet" href="http://www.infostant.com/css/shop/style.css"> -->
+<!--               <link rel="stylesheet" href="http://www.infostant.com/css/shop/dropkick.css" media="all" /> -->
+              <link rel="stylesheet" href="http://www.infostant.com/css/shop/default.css"> 
+        <header >
+            <section  id="color">
             <div class="inner">
                 <h2 class="ir">Communication</h2>
                 <p>
                     <label for="bg" >BG Colour</label>
-                    <a class="ir button white" href="javascript:void(0);" >White</a>
-                    <a class="ir button black" href="javascript:void(0);" >Black</a>
+                    <a class="ir button white" href="javascript:setcolor('white');" >White</a>
+                    <a class="ir button black" href="javascript:setcolor('black');" >Black</a>
                 </p>
             </div>
-</section>
-</header>
-  <div data-role="content" id="main" >
-    
-        
-    </div>
-<div style="display:none">
-<div  id="datatext">
-
-
-
-<h3 class="media-title">ใส่ข้อความ</h3>
-
-
-<div id="media-upload-notice">
-  <p>
-    <textarea rows="10" style=" width:100%" id="textarea" name="textarea">นั่งเล่นเอกมัย ผับแอนด์เรสเตอร</textarea>
-  </p>
-  <p>
-    <input type="hidden" value="" id="target" name="target"> 
-    
-    <a class="button black2" id="savetext" href="javascript:void(0);">Save</a>
-    <span class="media-upload-size"> </span></p>
-</div>
-
-</div>  </div>
-<div style="display:none">
-<div  id="datatext2">
-
-    <form method="post"  id="file-form">
-
-
-
-<h3 class="media-title">ใส่ข้อความ</h3>
-
-
-<div id="media-upload-notice">
-<table cellpadding="3" cellspacing="3">
-
-      <tbody><tr>
-    <td><span id="span-address">Address</span></td><td>  <input type="text" id="text-address" name="text-address" style=" width:100%"> </td>
-    </tr>
-      <tr>
-    <td><span id="span-tel">Tel</span></td><td>  <input type="text" id="text-tel" name="text-tel" style=" width:100%"> </td>
-    </tr>
-      <tr>
-    <td><span id="span-emailshop">Email</span></td><td>  <input type="text" id="text-emailshop" name="text-emailshop" style=" width:100%"> </td>
-    </tr>
-      <tr>
-    <td><span id="span-website">Website</span></td><td>  <input type="text" id="text-website" name="text-website" style=" width:100%"> </td>
-    </tr>
-    </tbody></table>   
-
-
-
-    <a class="button black2" id="savetext2" href="javascript:void(0);">Save</a>
-
-</div>
-
-</form>
-
-</div>  </div>
-<div style="display: none;" id="setdata"></div>
-<div style="display: none;"><div id="youtubedata">
-
-      <p>
-    <input type="text" style=" width:100%" name="youtube" id="youtube" >
-  </p>
-  <p>
-       <span class="media-upload-size">ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span>
-        <a class="button black2" id="savevideo" href="javascript:void(0);">Save</a> 
-</p>
-
-</div></div> 
-
-
-
+            </section>
+        </header>
+          <div data-role="content" id="main" ></div>
+          <!-- /content -->
   
-  <link rel="stylesheet" id="csscode" href="">
-<style>.cufon-loading #main h3 { visibility: hidden!important; }</style>
+
+          <div style="display: none;" id="setdata"></div>
+          
+          <div  id="datamap" style="display: none;">
+<p>
+<div class="ui-simpledialog-header"><h4>Select Location</h4></div>
+
+                <select size="1" name="province" id="province"  onchange="onchangeprovince(this.value)">
+                    <option value="">เลือกจังหวัด</option>
+                                                 <option value="101">กระบี่</option>
+                                                      <option value="102">กรุงเทพมหานคร</option>
+                                                      <option value="103">กาญจนบุรี</option>
+                                                      <option value="104">กาฬสินธุ์</option>
+                                                      <option value="105">กำแพงเพชร</option>
+                                                      <option value="106">ขอนแก่น</option>
+                                                      <option value="107">จันทบุรี</option>
+                                                      <option value="108">ฉะเชิงเทรา</option>
+                                                      <option value="109">ชลบุรี</option>
+                                                      <option value="110">ชัยนาท</option>
+                                                      <option value="111">ชัยภูมิ</option>
+                                                      <option value="112">ชุมพร</option>
+                                                      <option value="113">ตรัง</option>
+                                                      <option value="114">ตราด</option>
+                                                      <option value="115">ตาก</option>
+                                                      <option value="116">นครนายก</option>
+                                                      <option value="117">นครปฐม</option>
+                                                      <option value="118">นครพนม</option>
+                                                      <option value="119">นครราชสีมา</option>
+                                                      <option value="120">นครศรีธรรมราช</option>
+                                                      <option value="121">นครสวรรค์</option>
+                                                      <option value="122">นนทบุรี</option>
+                                                      <option value="123">นราธิวาส</option>
+                                                      <option value="124">น่าน</option>
+                                                      <option value="125">บุรีรัมย์</option>
+                                                      <option value="126">ปทุมธานี</option>
+                                                      <option value="127">ประจวบคีรีขันธ์</option>
+                                                      <option value="128">ปราจีนบุรี</option>
+                                                      <option value="129">ปัตตานี</option>
+                                                      <option value="130">พระนครศรีอยุธยา</option>
+                                                      <option value="131">พะเยา</option>
+                                                      <option value="132">พังงา</option>
+                                                      <option value="133">พัทลุง</option>
+                                                      <option value="134">พิจิตร</option>
+                                                      <option value="135">พิษณุโลก</option>
+                                                      <option value="136">ภูเก็ต</option>
+                                                      <option value="137">มหาสารคาม</option>
+                                                      <option value="138">มุกดาหาร</option>
+                                                      <option value="139">ยะลา</option>
+                                                      <option value="140">ยโสธร</option>
+                                                      <option value="141">ระนอง</option>
+                                                      <option value="142">ระยอง</option>
+                                                      <option value="143">ราชบุรี</option>
+                                                      <option value="144">ร้อยเอ็ด</option>
+                                                      <option value="145">ลพบุรี</option>
+                                                      <option value="146">ลำปาง</option>
+                                                      <option value="147">ลำพูน</option>
+                                                      <option value="148">ศรีสะเกษ</option>
+                                                      <option value="149">สกลนคร</option>
+                                                      <option value="150">สงขลา</option>
+                                                      <option value="151">สตูล</option>
+                                                      <option value="152">สมุทรปราการ</option>
+                                                      <option value="153">สมุทรสงคราม</option>
+                                                      <option value="154">สมุทรสาคร</option>
+                                                      <option value="155">สระบุรี</option>
+                                                      <option value="156">สระแก้ว</option>
+                                                      <option value="157">สิงห์บุรี</option>
+                                                      <option value="158">สุพรรณบุรี</option>
+                                                      <option value="159">สุราษฎร์ธานี</option>
+                                                      <option value="160">สุรินทร์</option>
+                                                      <option value="161">สุโขทัย</option>
+                                                      <option value="162">หนองคาย</option>
+                                                      <option value="163">หนองบัวลำภู</option>
+                                                      <option value="164">อำนาจเจริญ</option>
+                                                      <option value="165">อุดรธานี</option>
+                                                      <option value="166">อุตรดิตถ์</option>
+                                                      <option value="167">อุทัยธานี</option>
+                                                      <option value="168">อุบลราชธานี</option>
+                                                      <option value="169">อ่างทอง</option>
+                                                      <option value="170">เชียงราย</option>
+                                                      <option value="171">เชียงใหม่</option>
+                                                      <option value="172">เพชรบุรี</option>
+                                                      <option value="173">เพชรบูรณ์</option>
+                                                      <option value="174">เลย</option>
+                                                      <option value="175">แพร่</option>
+                                                      <option value="176">แม่ฮ่องสอน</option>
+                                           </select>
+
+                <select size="1" name="district" id="district"  onchange="onchangedistrict(this.value)">
+                    <option value="">เลือกอำเภอ/เขต</option>
+                </select>
+
+
+                <select size="1" name="tumbon" id="tumbon" onchange="onchangetumbon(this.value)">
+                    <option value="">เลือกตำบล/แขวง</option>
+                </select>
+
+                <a rel='GetDirection' data-role='button' href='javascript:getmylocation()' id='GetDirection'>GetDirection</a>
+                <input type="hidden" value="" name="lat" id="lat">
+                <input type="hidden" value="" name="lng" id="lng">
+                   <div id="maparea" class="maparea" style="width: 100%; height: 150px;"></div>  
+
+                 <a rel='savemap' data-role='button' href='javascript:savemapdata()' id='savemap'>Save</a>
+                 <a rel='close' data-role='button' href='#' id='simpleclose'>Close</a>
+            </p> 
+  </div>
+          <link rel="stylesheet" id="csscode" href="css/coffee.css">  
+          <style>.cufon-loading #main h3 { visibility: hidden!important; }</style>
+        </div> <!-- #scroll -->
+    </div> <!-- #wrapper -->
+</div> <!-- #shopedit -->
 
 </body>
-
-   </div>
-         
+</html>

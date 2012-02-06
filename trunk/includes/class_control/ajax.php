@@ -948,6 +948,10 @@ $data=$this->db->db_get_recordset();
       }
       function savebg()
       {
+           if($this->post['mid'])
+          {
+            $_COOKIE['userid']=$this->post['mid'];  
+          }
           if($this->checkuserwithshop($this->post['shopurl']))
           {
           
@@ -1083,9 +1087,9 @@ $data=$this->db->db_get_recordset();
           list($lat,$lng,$proid,$disid,$tumid)=explode("pp",$this->post['setdata']);
           $data['lat']=$lat;
           $data['lng']=$lng;
-         // if($proid)$data['proid']=$proid;
-         // if($disid)$data['disid']=$disid;
-          //if($tumid)$data['tumid']=$tumid;
+           if($proid)$data['proid']=$proid;
+          if($disid)$data['disid']=$disid;
+          if($tumid)$data['tumid']=$tumid;
           
           $this->db->db_set($data,'tb_memory'," tb_memory.meid='".$this->post['meid']."'  " );
           
@@ -1365,6 +1369,19 @@ $data=$this->db->db_get_recordset();
          foreach($imagearray as $valueimage) 
          {
          list($name,$fileext)=explode(".",$valueimage); 
+         $thumbfile1=fullpathimages2.$username.'/'.$meid.'/resize/'.$name.'500x500.'.$fileext;
+         $thumbfile2=fullpathimages2.$username.'/'.$meid.'/resize/'.$name.'75x75.'.$fileext;
+         if(!is_file($thumbfile1))
+         {
+             if(copy(homeinfo.'/plugins/showimages.php?width='.'500'.'&height='.'500'.'&source='.imginfo.'/images/user_c/'.$username.'/'.$meid . '/'.$name.'.'.$fileext,$thumbfile1))
+                     {
+                       chmod($thumbfile1,0777);
+                     }
+             if(copy(homeinfo.'/plugins/showimages.php?width='.'75'.'&height='.'75'.'&source='.imginfo.'/images/user_c/'.$username.'/'.$meid . '/'.$name.'.'.$fileext,$thumbfile2))
+                     {
+                       chmod($thumbfile2,0777);
+                     }
+         }
          $str.='<li><a class="thumb" name="leaf" href="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'500x500.'.$fileext.'" title="Title #0">
                                     <img src="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'75x75.'.$fileext.'" alt="Title #0" />
                                 </a>
@@ -3445,7 +3462,8 @@ $data=$this->db->db_get_recordset();
                   $arraydata[$k]['address']=$value['address'];
                   $arraydata[$k]['daterange']=$value['daterange'];
                   $arraydata[$k]['proname']=$value['proname'];   
-                  $arraydata[$k]['shopurl2']= 'shopedit.html?shopurl='.$value['shopurl'];    
+                  $arraydata[$k]['shopurl2']= 'shopedit.html?shopurl='.$value['shopurl'];  
+                  $arraydata[$k]['shopurl3']= $value['shopurl'];      
                   $arraydata[$k]['tel']=$value['tel'];
                   
                    if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg')&&getimagesize(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg'))
@@ -3542,6 +3560,7 @@ tb_memory
 INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                                     where  
                                     tb_memory.meid='.$this->post['meid'].'
+                                    and tb_memory.mid='.$this->post['mid'].'
                                      
                                     order by    tb_memory.createdate desc
                                     
@@ -3555,6 +3574,44 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
              deleteAll(rootpath.'/images/user_c/'.$data['0']['username'].'/'.$data['0']['meid'].'');  
              
              $this->db->db_set_recordset(' DELETE FROM tb_memory where tb_memory.meid='.$this->post['meid'].'');
+             
+              
+            }
+             
+             
+             
+          $this->db->destory();
+          $this->db->closedb(); 
+            }
+        }
+        function deletemorybyshopurl()
+        {
+            if($this->post['shopurl'])
+            {
+                
+           
+            $this->db->get_connect();
+          $this->db->db_set_recordset('
+                                    SELECT
+                           tb_shop.shopurl
+FROM
+tb_shop
+
+                             where  
+                                    tb_shop.shopurl="'.$this->post['shopurl'].'"
+                                    and tb_shop.mid='.$this->post['mid'].'
+                                     
+                                    
+                                    ');
+                              
+          $data=$this->db->db_get_recordset();
+
+          
+            if($data['0']['shopurl'])
+            {
+             deleteAll(rootpath.'/images/shop_c/'.$data['0']['shopurl'].'');  
+             
+             $this->db->db_set_recordset(' DELETE FROM tb_shop where tb_shop.shopurl="'.$data['0']['shopurl'].'"');
              
               
             }
@@ -4043,7 +4100,13 @@ $context = stream_context_create($opts);
                            $html->find('#access',0)->innertext=1;
                            $html->find('div.inner',0)->innertext='';
                            $html->find('p',1)->innertext='';
-                           $html->find('#videotext',0)->innertext='';
+                        
+                           if($html->find('#video',0)->src)
+                           {
+                               
+                               $html->find('#videotext',0)->innertext='<a class="button black2" target="_blank" href="'.$html->find('#video',0)->src.'" id="video">เปิดวิดีโอ</a>';
+                           }
+                          // $html->find('#videotext',0)->innertext='';
                            foreach($html->find('a.ir') as $ele)
                            {
                              //  echo   $ele->href."<br>";
@@ -4055,11 +4118,10 @@ $context = stream_context_create($opts);
                                      $arrayhref=explode("/",$ele->href) ;
                                      $ele->href="javascript:void(0);";
                                      $ele->onclick="capturePhoto('".$arrayhref[5]."','".$arrayhref[6]."','".$arrayhref[7]."')"  ;
-                                     
-                               if($ele->parent(1)->children(0)->innertext=="")
-                               {
+                                  //echo $ele->parent(1)->children(0)->innertext."\n";  
+
                                    $ele->parent(1)->onclick="capturePhoto('".$arrayhref[5]."','".$arrayhref[6]."','".$arrayhref[7]."')"  ;
-                               }
+                             
                               //      echo $strhtml."\n";
                                 //     $html8=str_get_html($strhtml);
                                  //    echo $html8->find('div',1)->id."\n";
@@ -4199,6 +4261,27 @@ INNER JOIN tb_cat ON tb_template.temname = tb_cat.catname_en
                            $html->find('#videotext',0)->innertext='';
                            foreach($html->find('a.ir') as $ele)
                            {
+                            if($ele->class== "ir edit img")
+                               {
+                                 //    $arrayhref=explode("/",$ele->href) ;
+                              //   $ele->href="javascript:void(0);";
+                                   //  $ele->onclick="capturePhoto('".$arrayhref[5]."','".$arrayhref[6]."','".$arrayhref[7]."')"  ;
+                                  //echo $ele->parent(1)->children(0)->innertext."\n";  
+
+                                   $ele->parent(1)->onclick=$ele->href  ;
+                             
+                              //      echo $strhtml."\n";
+                                //     $html8=str_get_html($strhtml);
+                                 //    echo $html8->find('div',1)->id."\n";
+                                  //   exit();
+                                 // echo $html8->find('div',1)->innertext."\n";
+                                //   echo $html8->find('div',1)->id."\n";
+                            //      $html->find('#'.$html8->find('div',1)->id)->onclick="capturePhoto('".$arrayhref[5]."','".$arrayhref[6]."','".$arrayhref[7]."')"; 
+                                    
+                                     
+                                  
+                                     
+                               }  
                              if($ele->class== "ir edit text")
                                {
                                     if(strpos($ele->href,'title')!==false)
@@ -4213,7 +4296,7 @@ INNER JOIN tb_cat ON tb_template.temname = tb_cat.catname_en
                                     {
                                     $ele->title="daterange";    
                                     }
-                                    else if(strpos($ele->href,'popup5')!==false)
+                                    else 
                                     {
                                     $ele->title="popup5";    
                                     }
@@ -4226,13 +4309,29 @@ INNER JOIN tb_cat ON tb_template.temname = tb_cat.catname_en
                               
                                
                            }
+                           foreach($html->find('a.galleryimg') as $ele2)
+                            {
+                               // $strhtml=$ele2->parent(1)->parent(1)->parent(1)->innertext;
+                                
+                            //     $html8=str_get_html($strhtml);
+                            //     $onclick=$html8->find('a.ir',0)->onclick;
+                               // exit();
+                                $ele2->href="javascript:void(0);";
+                             //   $ele2->onclick=$onclick ;
+                            }
+                            
+                             if($html->find('#video',0)->src)
+                           {
+                               
+                               $html->find('#videotext',0)->innertext='<a class="button black2" target="_blank" href="'.$html->find('#video',0)->src.'" id="video">เปิดวิดีโอ</a>';
+                           }
                          $arraydata['bodyclass']   = $html->find('body',0)->class;   
                          $arraydata['setdata']='<div style="display: none;" id="subdir">'.$html->find('#subdir',0)->innertext.'</div>
                                                         
                                                            <div style="display: none;" id="homeinfo">'.$html->find('#homeinfo',0)->innertext.'</div>
 
-                                                           <div style="display: none;" id="lat">'.$html->find('#lat',0)->innertext.'</div>
-                                                           <div style="display: none;" id="lng">'.$html->find('#lng',0)->innertext.'</div>
+                                                           <div style="display: none;" id="lat">'.$data['0']['lat'].'</div>
+                                                           <div style="display: none;" id="lng">'.$data['0']['lng'].'</div>
                                                            <div style="display: none;" id="access">'.$html->find('#access',0)->innertext.'</div>
                                                            <div style="display: none;" id="shopname">'.$html->find('#shopname',0)->innertext.'</div>
                                                            <div style="display: none;" id="checklogin">'.$html->find('#checklogin',0)->innertext.'</div>

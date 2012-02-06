@@ -255,7 +255,7 @@ function searchresultlist(myObject){
     myObject2=myObject;
       var areaid=""; 
       var k=1;
-      $('#searchresulthtml').html('');
+      $('.ui-page-active #searchresulthtml').html('');
        var arraydata={};
              for (variable in myObject)
              {   
@@ -264,7 +264,7 @@ function searchresultlist(myObject){
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
     {
-      $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
+      $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
            var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
@@ -276,11 +276,11 @@ function searchresultlist(myObject){
             arraydata['text-'+obj.sid+'']=strtext2;
            
         
-    $('#searchresulthtml').append(strtext);    
+    $('.ui-page-active #searchresulthtml').append(strtext);    
     }
     else
     {
-    $('#searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setfav(\''+obj.sid+'\')" class="button favorite"></a></li></ul></li>');    
+    $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setfav(\''+obj.sid+'\')" class="button favorite"></a></li></ul></li>');    
     }
     
     
@@ -395,7 +395,7 @@ $.mobile.showPageLoadingMsg();
     'OK': {
         click: function () {
             $.mobile.showPageLoadingMsg();
-           $.post(webdir+'/ajax/deletemorybymeid',{meid:meid }, function(data) {
+           $.post(webdir+'/ajax/deletemorybymeid',{meid:meid,mid:localStorage.getItem("userId") }, function(data) {
                alert('ลบเรียบร้อยแล้ว');
                memoryresultfunction();
             $.mobile.hidePageLoadingMsg();   
@@ -415,16 +415,50 @@ $.mobile.showPageLoadingMsg();
      
      
  }
+  function deleteshop(shopurl)
+ {
+   //  alert(meid);
+     $('#deleteid'+shopurl).simpledialog({
+    'mode' : 'bool',
+    'fullScreen':'true',
+    'prompt' : 'คุณต้องการลบ ร้านค้า นี้ หรือไม่ ?',
+    'useModal': true,
+    'buttons' : {
+    'OK': {
+        click: function () {
+            $.mobile.showPageLoadingMsg();
+           $.post(webdir+'/ajax/deletemorybyshopurl',{shopurl:shopurl,mid:localStorage.getItem("userId") }, function(data) {
+               alert('ลบเรียบร้อยแล้ว');
+               searchresultfunction();
+            $.mobile.hidePageLoadingMsg();   
+           });
+        }
+      },
+      'Cancel': {
+        click: function () {
+
+        },
+        icon: "delete",
+        theme: "c"
+      }
+    }
+  });
+     
+     
+     
+ }
   function memoryresultlist(myObject){
       var areaid=""; 
-      $('#searchresulthtml').html('');
+      
+      $('.ui-page-active #searchresulthtml').html('');
              for (variable in myObject)
              {   
+                 
           //   alert(variable) ;
              var obj = myObject[variable]; 
      //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
 
-    $('#searchresulthtml').append('<li><a href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
+    $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
 
     
     
@@ -599,7 +633,7 @@ $.mobile.showPageLoadingMsg();
                                 alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 
                               // location.href="login.html";
-                               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+                               $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
                            }
                 });
  }
@@ -1008,7 +1042,7 @@ function registerserver()
                               // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
                                alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
-                               $.mobile.changePage("profile_myprofile.html", "flip", true, true); 
+                               $.mobile.changePage("index.html#profile-myprofile", "flip", true, true); 
                            }
                            
      });
@@ -1369,7 +1403,10 @@ case "landing":
   case "shop":
   if(accesspage())
   {
+   //  $(".ui-page-active #radio-choice-d").attr("checked","checked"); 
     shopfunction();  
+     $(".ui-page-active #radio-choice-d").attr("checked",true).checkboxradio("refresh"); 
+     $(".ui-page-active #radio-choice-c").attr("checked",false).checkboxradio("refresh"); 
   }
   
   break;
@@ -1387,25 +1424,13 @@ case "landing":
   }
   
   break;
-    case "memoryedit":
-   if(accesspage())
-  {
-      setMemoryEdit();
- //  setLoadBrowser('memoryeditframe.html?shopurl=tazushabuyaki'); 
-  }
-  break;
-  case "shopedit":
-   if(accesspage())
-  {
-    setShopEdit(); 
-  }
-  break;
   case "profile-myprofile":
    if(accesspage())
   {
   
       myprofilefunction();
-      
+      $(".ui-page-active #radio-choice-c").attr("checked",true).checkboxradio("refresh"); 
+           $(".ui-page-active #radio-choice-d").attr("checked",false).checkboxradio("refresh"); 
   }
   break;
   case "registershop":
@@ -1509,15 +1534,15 @@ default:
  {
                                        //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
                                    
-$("input[type='radio']").click(function() {
-  if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
+$(".ui-page-active input[type='radio']").click(function() {
+  if($(".ui-page-active #radio-choice-c").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-c").attr("checked") == "checked")
            {
              
-             $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+             $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
                                
           }else
            {
-               $.mobile.changePage("shop.html", "flip", true, true);
+               $.mobile.changePage("index.html#shop", "flip", true, true);
            }
 });
                                        
@@ -1526,13 +1551,21 @@ else
 {
                                              
                                       
-       $("fieldset").click(function() {
-           if($("#radio-choice-c").attr("checked") != "undefined" &&$("#radio-choice-c").attr("checked") == "checked")
+     $(".ui-page-active input[type='radio']").click(function() {
+  if($(".ui-page-active #radio-choice-c").attr("checked") == "checked")
            {
-               $.mobile.changePage("shop.html", "flip", true, true);
-           }else
+             //  alert('1');
+
+                    //     $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
+                         location.href="index.html#profile-myprofile";
+                               
+          }else 
            {
-               $.mobile.changePage("profile_myprofile.html", "flip", true, true);
+             //  alert('2');
+            //   $(".ui-page-active #radio-choice-d").attr("checked","checked");
+
+                        // $.mobile.changePage("index.html#shop", "flip", true, true);
+                        location.href="index.html#shop";
            }
 });
    }

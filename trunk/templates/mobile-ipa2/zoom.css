@@ -89,7 +89,7 @@ a { color: #a3a3a3; text-decoration: none;  }
 header a:hover { color: #f4d441; }
 #main a:hover { color: #fff;}
 body { background: #141414; font-family: Arial, Helvetica, Tahoma; font-size: 14px; line-height: 140%;  }
-.white { background: #f2f2f2; }
+.white {  }
 header { width: 100%; background: #fff; border-bottom: solid 1px #fff; position: relative; z-index: 5; }
 header div.inner { width: 940px; padding: 0 10px; margin: 0 auto; }
 header h1, header h2, header h3, header p { margin: 0; }
