@@ -95,7 +95,49 @@ function getUrlVars2()
         });
         return vars;
     }
-
+ function openshare(link,to)
+  {
+      var linkto;
+      if(to=="facebook")
+      {
+      linkto=    'http://www.facebook.com/sharer/sharer.php?v=4&src=bm&u=http://'+link+'.infostant.com';
+      }else if(to=="twitter")
+      {
+     linkto=    'http://twitter.com/intent/tweet?source=webclient&text=http://'+link+'.infostant.com';     
+      }
+      else if(to=="google")
+      {
+    linkto=    'https://m.google.com/app/plus/x/?v=compose&content=http://'+link+'.infostant.com';       
+      }
+      else if(to=="email")
+      {
+   linkto=    'mailto:?subject=&body=Link=http://'+link+'.infostant.com';         
+      }
+    
+      window.plugins.childBrowser.showWebPage(linkto);  
+  }
+  function openshare2(link,to)
+  {
+      var linkto; 
+      
+      if(to=="facebook")
+      {
+      linkto=    'http://www.facebook.com/sharer/sharer.php?v=4&src=bm&u=http://www.infostant.com/'+localStorage.getItem('username')+'/memory/'+link;
+      }else if(to=="twitter")
+      {
+     linkto=    'http://twitter.com/intent/tweet?source=webclient&text=http://www.infostant.com/'+localStorage.getItem('username')+'/memory/'+link;    
+      }
+      else if(to=="google")
+      {
+    linkto=    'https://m.google.com/app/plus/x/?v=compose&content=http://www.infostant.com/'+localStorage.getItem('username')+'/memory/'+link;      
+      }
+      else if(to=="email")
+      {
+   linkto=    'mailto:?subject=&body=Link=http://www.infostant.com/'+localStorage.getItem('username')+'/memory/'+link;        
+      }
+    
+      window.plugins.childBrowser.showWebPage(linkto);  
+  }
 
 
 function setMap(){
