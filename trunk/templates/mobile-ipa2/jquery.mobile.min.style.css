@@ -3,6 +3,12 @@
 .ui-content p.link{ line-height:1.5em;}
 .ui-content > h2 a.ui-link { font-size:11px; float:right; margin:0 5px;}
 
+
+.detail p { text-align: justify; height:auto; overflow:hidden; }
+.detail.ui-content {
+    padding: 40px 10px 10px 10px;
+}
+
 a.button.save {
     background-attachment: scroll;
     background-clip: border-box;
