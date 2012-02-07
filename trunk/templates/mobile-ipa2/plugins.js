@@ -1500,7 +1500,7 @@ default:
         $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
-        $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
+        $('.ui-page-active #function').animate({ top: '-=720px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })
  
  
