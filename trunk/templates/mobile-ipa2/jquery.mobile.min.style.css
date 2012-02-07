@@ -22,8 +22,8 @@ a.button.save {
     width: 45px;
 }
 
-
-#function > ul.v{ height:680px;}
+#function {top: -680px;}
+#function > ul.v{ height:660px;}
 
 #profile .social{}
 #profile .ui-radio{ width:49%}
