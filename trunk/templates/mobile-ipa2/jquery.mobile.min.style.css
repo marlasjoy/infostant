@@ -5,9 +5,7 @@
 
 
 .detail p { text-align: justify; height:auto; overflow:hidden; }
-.detail.ui-content {
-    margin-top: 20px;
-}
+.detail.ui-content { margin-top: 20px;}
 
 a.button.save {
     background-attachment: scroll;
