@@ -45,7 +45,7 @@
     var strtitle= '<div><div  id="datatexttitle"><div class="ui-simpledialog-header"><h4>Save Topic</h4></div><div ><p><div data-role="fieldcontain"><label for="textareatitle">Textarea:</label><textarea cols="40" rows="8" name="textareatitle" id="textareatitle"></textarea></div></p><p><input type="hidden" value="" id="targetitle" name="targetitle"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
     var strdetail= '<div><div  id="datatextdetail"><div class="ui-simpledialog-header"><h4>Save Detail</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadetail">Textarea:</label><textarea cols="40" rows="8" name="textareadetail" id="textareadetail"></textarea></div></p><p><input type="hidden" value="" id="targedetail" name="targedetail"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata2()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
      var strdaterange= '<div><div  id="datatextdaterange"><div class="ui-simpledialog-header"><h4>Save Time Work</h4></div><div ><p><div data-role="fieldcontain"><label for="textareadaterange">Textarea:</label><textarea cols="40" rows="8" name="textareadaterange" id="textareadaterange"></textarea></div></p><p><input type="hidden" value="" id="targedaterange" name="targedaterange"><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata3()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div></div></div>';
-     var strpopup5='<div><div  id="datatext2"><div class="ui-simpledialog-header"><h4>Save Address</h4></div><div ><div data-role="fieldcontain"><label for="name">Address:</label><input type="text" name="text-address" id="text-address" value=""  /></div><div data-role="fieldcontain"><label for="name">Tel:</label><input type="text" name="text-tel" id="text-tel" value=""  /></div><div data-role="fieldcontain"><label for="name">Email:</label><input type="text" name="text-emailshop" id="text-emailshop" value=""  /></div><div data-role="fieldcontain"><label for="name">Website:</label><input type="text" name="text-website" id="text-website" value=""  /></div><div data-role="fieldcontain"><label for="name">Pricerange:</label><input type="text" name="text-pricerange" id="text-pricerange" value=""  /></div><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata4()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div></div>';
+     var strpopup5='<div><div  id="datatext2"><div class="ui-simpledialog-header"><h4>Save Address</h4></div><div ><div data-role="fieldcontain"><label for="name">Address:</label><input type="text" name="text-address" id="text-address" value=""  /></div><div data-role="fieldcontain"><label for="name">Tel:</label><input type="text" name="text-tel" id="text-tel" value=""  /></div><div data-role="fieldcontain"><label for="name">Email:</label><input type="text" name="text-email" id="text-email" value=""  /></div><div data-role="fieldcontain"><label for="name">Website:</label><input type="text" name="text-website" id="text-website" value=""  /></div><div data-role="fieldcontain"><label for="name">Pricerange:</label><input type="text" name="text-pricerange" id="text-pricerange" value=""  /></div><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata4()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div></div>';
      var stryoutube='<div ><div id="youtubedata"><div class="ui-simpledialog-header"><h4>Save Video</h4></div><div data-role="fieldcontain"><label for="name">Youtube Link:</label><input type="text" name="youtube" id="youtube" value=""  /></div><p><span >ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span></p><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata5()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div>';
     var webdir="http://www.infostant.com";
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -121,13 +121,13 @@ function savetextdata4()
 
    $.mobile.showPageLoadingMsg(); 
    
-        $.post(webdir+'/ajax/savetext3',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),'address':$('#text-address').val(),'tel':$('#text-tel').val(),'emailshop':$('#text-emailshop').val(),'website':$('#text-website').val(),'pricerange':$('#text-pricerange').val(),filename:'index_th' }, function(data) {
+        $.post(webdir+'/ajax/savetext3',{meid:getUrlVars2()['meid'],mid:localStorage.getItem("userId"),'address':$('#text-address').val(),'tel':$('#text-tel').val(),'email':$('#text-email').val(),'website':$('#text-website').val(),'pricerange':$('#text-pricerange').val(),filename:'index_th' }, function(data) {
                             
 
         
     $('#'+'address').html($('#text-address').val());
     $('#'+'tel').html($('#text-tel').val());
-    $('#'+'emailshop').html($('#text-emailshop').val());
+    $('#'+'email').html($('#text-email').val());
     $('#'+'website').html($('#text-website').val());
     $('#'+'pricerange').html($('#text-pricerange').val());
         
@@ -521,7 +521,7 @@ function seteventtext4()
  
     $('#text-address').val($('#'+'address').html());
     $('#text-tel').val($('#'+'tel').html());
-    $('#text-emailshop').val($('#'+'emailshop').html());
+    $('#text-email').val($('#'+'email').html());
     $('#text-website').val($('#'+'website').html());
     $('#text-pricerange').val($('#'+'pricerange').html());
 }
@@ -555,6 +555,81 @@ function setcolor(color)
       $('#contact').addClass(color);
       
     });
+}
+function settitle()
+{
+    titleobj=".ir.edit.text[title='title']";
+     $(titleobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext();
+                            },
+                            'fullHTML':strtitle
+                            
+                            }); 
+}
+function setdetail()
+{
+     detailobj=".ir.edit.text[title='detail']";
+     $(detailobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext2();
+                            },
+                            'fullHTML':strdetail
+                            
+                            }); 
+}
+function setdaterange()
+{
+     daterangeobj=".ir.edit.text[title='daterange']";
+       $(daterangeobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext3();
+                            },
+                            'fullHTML':strdaterange
+                            
+                            }); 
+}
+function setvideo()
+{
+     
+        $('.ir.edit.vdo').simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext5();
+                            },
+                            'fullHTML':stryoutube
+                            
+                            }); 
+}
+function setmapdata()
+{
+       $('.ir.edit.map').simpledialog({
+                            'mode' : 'blank',
+
+                            'fullScreen':'true',
+                            'onShowFinish':function() { initialize4()},
+                            'fullHTML':$('#datamap').html()
+                          });
+}
+function setcontact()
+{
+       popup5obj=".ir.edit.text[title='popup5']";
+       $(popup5obj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext4();
+                            },
+                            'fullHTML':strpopup5
+                            
+                            }); 
 }
 function setdata2(myObject){
              var scriptjava='';
@@ -787,8 +862,8 @@ function onFail(message) {
 <div id="shopedit" data-role="page">
     <div id="header" class="ui-header">
         <div>
-            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
-            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+            <a href="index.html#profile-myprofile"  data-inline="true" data-ajax="false" class="backclass">Back</a>
+            <h1><a href="index.html" data-ajax="false" >infostant</a></h1>
             <nav>
                 <ul class="h">
                     <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>

@@ -221,9 +221,9 @@ function setcalendar(sid)
 }
 function saveoffline()
 {
-//    $('#searchresulthtml').html();
+//    $('.ui-page-active #searchresulthtml').html();
 
-      localStorage.setItem("searchresulthtml",$('#searchresulthtml').html()); 
+      localStorage.setItem("searchresulthtml",$('.ui-page-active #searchresulthtml').html()); 
       alert('บันทึกเรียบร้อยแล้ว');
 }
 function setfav(sid)
@@ -261,7 +261,7 @@ function searchresultlist(myObject){
              {   
           //   alert(variable) ;
              var obj = myObject[variable]; 
-     //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
+     //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
     {
       $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
@@ -456,7 +456,7 @@ $.mobile.showPageLoadingMsg();
                  
           //   alert(variable) ;
              var obj = myObject[variable]; 
-     //$('#searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
+     //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
 
     $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
 
@@ -593,14 +593,15 @@ $.mobile.showPageLoadingMsg();
  function loginserver()
  {
      var errorcode='';
+     
              if(localStorage.getItem("userId")=="")
                      {
-                        if($('#username').val()=="")
+                        if($('.ui-page-active #username').val()=="")
                          {
  
                           errorcode='โปรดกรอก Username';  
                          }
-                        else  if($('#password1').val()=="")
+                        else  if($('.ui-page-active #password1').val()=="")
                          {
                           errorcode='โปรดกรอก Password';    
                          }
@@ -613,7 +614,7 @@ $.mobile.showPageLoadingMsg();
                              alert(errorcode); 
                              return false;
                          } 
-                $.post(webdir+'/ajax/loginformiphone',{username:$('#username').val(),password1:$('#password1').val() }, function(data) {
+                $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').val(),password1:$('.ui-page-active #password1').val() }, function(data) {
                 var myObject = eval('(' + data + ')');             
                     if(myObject.error)
                            {
@@ -986,7 +987,8 @@ function addmemoryserver()
                    alert('บันทึกข้อมูลเรียบร้อยแล้ว');
                   // alert(webdir+'/memory/'+myObject.username+'/'+myObject.memoryurl);
                 
-                   $.mobile.changePage("memoryedit.html?meid="+myObject.meid, "flip", true, true); 
+                 //  $.mobile.changePage("memoryedit.html?meid="+myObject.meid, "flip", true, true); 
+                   location.href="memoryedit.html?meid="+myObject.meid;
                }
                
               
@@ -1006,7 +1008,7 @@ function templatesshopfunction()
 function myprofilefunction()
 {
 
-  $('#username').html(localStorage.getItem("username"));  
+  $('.ui-page-active #username').html(localStorage.getItem("username"));  
   $('#emailprofile').html(localStorage.getItem("emailprofile"));
   memoryresultfunction();
 }
@@ -1019,8 +1021,8 @@ function registerserver()
      $.mobile.showPageLoadingMsg();
   //   $('#buttonSave').attr("disabled", ""); 
   //   $('#buttonSave').html('Loading');
-     $.post(webdir+'/ajax/submitformregisteriphone',{email:$('#input-email').val(),
-     username:$('#input-username').val(),password1:$('#password1').val(),status:1
+     $.post(webdir+'/ajax/submitformregisteriphone',{email:$('.ui-page-active #input-email').val(),
+     username:$('.ui-page-active #username').val(),password1:$('.ui-page-active #password1').val(),status:1
        
      }, function(data) {
          var myObject = eval('(' + data + ')');
@@ -1029,6 +1031,7 @@ function registerserver()
                            // navigator.notification.alert(myObject.error);  
                                  alert(myObject.error); 
                                 $.mobile.hidePageLoadingMsg();
+                                return false;
                            } 
           if(myObject.mid)
                            {
@@ -1069,8 +1072,8 @@ function favaritefunction()
     $.post(webdir + "/ajax/testconnect",
                 function(data) {
                     if(!data) {
-                        $('#searchresulthtml').html('');
-                        $('#searchresulthtml').html(localStorage.getItem('searchresulthtml'));
+                        $('.ui-page-active #searchresulthtml').html('');
+                        $('.ui-page-active #searchresulthtml').html(localStorage.getItem('searchresulthtml'));
                         setshare2();
                         return false;
                     }else
@@ -1079,8 +1082,8 @@ function favaritefunction()
                     }
                     // continue internet connection is OK
                 }).error(function() {
-                $('#searchresulthtml').html('');
-                $('#searchresulthtml').html(localStorage.getItem('searchresulthtml'));
+                $('.ui-page-active #searchresulthtml').html('');
+                $('.ui-page-active #searchresulthtml').html(localStorage.getItem('searchresulthtml'));
                 setshare2();
                 
                 // alert('no online'); 
@@ -1166,7 +1169,7 @@ function setcalendarevent2(datecheck)
    //    arraydate1[1];
     //   arraydate1[2];
       var selectdate= datecheck;
-        $('#searchresulthtml').html('');
+        $('.ui-page-active #searchresulthtml').html('');
         $('#activity').html('Activity '+selectdate);
           
            for(i in arraydata)
@@ -1178,7 +1181,7 @@ function setcalendarevent2(datecheck)
                 {
                    // console.log(arraydata2['text-'+arraydata[i]]);
                     console.log(i);
-                    $('#searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
+                    $('.ui-page-active #searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
                     $(".dateshowset:last").html(i);
 
                 
@@ -1207,7 +1210,7 @@ function setcalendarevent()
    //    arraydate1[1];
     //   arraydate1[2];
       var selectdate= arraydate1[2]+'-'+arraydate1[0]+'-'+arraydate1[1];
-        $('#searchresulthtml').html('');
+        $('.ui-page-active #searchresulthtml').html('');
         $('#activity').html('Activity '+selectdate);
           
            for(i in arraydata)
@@ -1219,7 +1222,7 @@ function setcalendarevent()
                 {
                    // console.log(arraydata2['text-'+arraydata[i]]);
                    
-                    $('#searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
+                    $('.ui-page-active #searchresulthtml').append(arraydata2['text-'+arraydata[i]]);
                     $(".dateshowset:last").html(i);
 
                 
@@ -1253,6 +1256,7 @@ return true;
     
     var sidshop=localStorage.getItem('sidshop');
     var k=0;
+
     arraydata2=jQuery.parseJSON(sidshop);  
           for(i in arraydata)
             {
@@ -1378,6 +1382,8 @@ case "recent":
      if(accesspage())
   {
       memoryresultfunction();
+      $(".ui-page-active #radio-choice-c").attr("checked",true).checkboxradio("refresh"); 
+           $(".ui-page-active #radio-choice-d").attr("checked",false).checkboxradio("refresh"); 
   }
   
   break;
@@ -1445,6 +1451,7 @@ case "landing":
    localStorage.setItem("username",'');
    localStorage.setItem("emailprofile",'');
    localStorage.setItem("picme",'');
+   clearsaveall();
    $.mobile.changePage("index.html", "flip", true, true); 
 
   break;

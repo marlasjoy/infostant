@@ -560,6 +560,81 @@ function setcolor(color)
       
     });
 }
+function settitle()
+{
+    titleobj=".ir.edit.text[title='title']";
+     $(titleobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext();
+                            },
+                            'fullHTML':strtitle
+                            
+                            }); 
+}
+function setdetail()
+{
+     detailobj=".ir.edit.text[title='detail']";
+     $(detailobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext2();
+                            },
+                            'fullHTML':strdetail
+                            
+                            }); 
+}
+function setdaterange()
+{
+     daterangeobj=".ir.edit.text[title='daterange']";
+       $(daterangeobj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext3();
+                            },
+                            'fullHTML':strdaterange
+                            
+                            }); 
+}
+function setvideo()
+{
+     
+        $('.ir.edit.vdo').simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext5();
+                            },
+                            'fullHTML':stryoutube
+                            
+                            }); 
+}
+function setmapdata()
+{
+       $('.ir.edit.map').simpledialog({
+                            'mode' : 'blank',
+
+                            'fullScreen':'true',
+                            'onShowFinish':function() { initialize4()},
+                            'fullHTML':$('#datamap').html()
+                          });
+}
+function setcontact()
+{
+       popup5obj=".ir.edit.text[title='popup5']";
+       $(popup5obj).simpledialog({
+                            'mode' : 'blank',
+                            'fullScreen':'true',
+                            'onShowFinish':function() {  
+                               seteventtext4();
+                            },
+                            'fullHTML':strpopup5
+                            
+                            }); 
+}
 function setdata2(myObject){
              var scriptjava='';
               $('#csscode').attr('href','http://www.infostant.com/css/shop/'+myObject.catename+'/'+myObject.catename+'.css');
@@ -791,8 +866,8 @@ function onFail(message) {
 <div id="shopedit" data-role="page">
     <div id="header" class="ui-header">
         <div>
-            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
-            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+                        <a href="index.html#shop"  data-inline="true" data-ajax="false"   data-rel="back">Back</a>
+            <h1><a href="index.html" data-ajax="false" >infostant</a></h1>
             <nav>
                 <ul class="h">
                     <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>
