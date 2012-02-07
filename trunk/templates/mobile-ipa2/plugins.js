@@ -264,7 +264,7 @@ function searchresultlist(myObject){
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
     {
-      $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
+      $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'"  class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
            var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
@@ -458,7 +458,7 @@ $.mobile.showPageLoadingMsg();
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
 
-    $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
+    $('.ui-page-active #searchresulthtml').append('<li><a data-ajax="false" href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
 
     
     
@@ -701,7 +701,7 @@ $.mobile.showPageLoadingMsg();
   }
    map = new google.maps.Map(document.getElementById("mapgoogle"),
                                 myOptions);
-    $('a.linkImage').fancybox();                            
+                               
     var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
       new google.maps.Size(myObject.width, myObject.height),
@@ -726,7 +726,7 @@ $.mobile.showPageLoadingMsg();
    $('#maplink').attr('href','map.html?shopurl='+getUrlVars2()['shopurl']) ; 
  // setMarkers(map, beaches);
               
-                $('#landing').show();  
+           //     $('#landing').show();  
                 $.mobile.hidePageLoadingMsg();  
  }
  function landingfunction()
