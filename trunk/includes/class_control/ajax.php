@@ -417,6 +417,7 @@
         function saveitenary()
         {
          $this->db->get_connect();
+       
             foreach($this->post['calendar'] as $key =>$value)
             {
                  $datetime=$key;
@@ -467,7 +468,7 @@
           
           }else
           {
-           $arraydata['resposne']="ท่าน hack ระบบของเรา เหอๆ";
+       //    $arraydata['resposne']="ท่าน hack ระบบของเรา เหอๆ";
            echo array2json($arraydata);    
            $this->db->destory();
           $this->db->closedb();
@@ -4011,7 +4012,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
         }
         if(!$this->checkusername(1))
         {
-            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
+            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ".$this->post['username'];
             echo array2json($arraydata); 
             exit();
         }
@@ -4139,14 +4140,38 @@ $context = stream_context_create($opts);
                                     if(strpos($ele->href,'title')!==false)
                                     {
                                     $ele->title="title";    
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="settitle()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="settitle()";   
+                                    }     
+                                   
                                     }
                                     else if(strpos($ele->href,'detail')!==false)
                                     {
-                                    $ele->title="detail";    
+                                    $ele->title="detail";   
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="setdetail()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="setdetail()";   
+                                    }     
+
                                     }
                                     else if(strpos($ele->href,'daterange')!==false)
                                     {
-                                    $ele->title="daterange";    
+                                    $ele->title="daterange"; 
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="setdaterange()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="setdaterange()";   
+                                    }   
+                                    
                                     }
                                     else if(strpos($ele->href,'popup5')!==false)
                                     {
@@ -4157,6 +4182,7 @@ $context = stream_context_create($opts);
                                else if($ele->class== "ir edit map")
                                {
                                     $ele->href="javascript:void(0);";
+                                    $ele->parent(0)->onclick="setmapdata()";
                                }
                               
                                
@@ -4171,6 +4197,8 @@ $context = stream_context_create($opts);
                                 $ele2->href="javascript:void(0);";
                                 $ele2->onclick=$onclick ;
                             }
+                            $html->find('#contact',0)->onclick="setcontact()"; 
+                            $html->find('#clip',0)->onclick="setvideo()";
                          $arraydata['bodyclass']   = $html->find('body',0)->class;   
                          $arraydata['setdata']='<div style="display: none;" id="subdir">'.$html->find('#subdir',0)->innertext.'</div>
                                                           <div style="display: none;" id="shopurl">'.$html->find('#shopurl',0)->innertext.'</div>
@@ -4284,27 +4312,53 @@ INNER JOIN tb_cat ON tb_template.temname = tb_cat.catname_en
                                }  
                              if($ele->class== "ir edit text")
                                {
-                                    if(strpos($ele->href,'title')!==false)
+                                 if(strpos($ele->href,'title')!==false)
                                     {
                                     $ele->title="title";    
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="settitle()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="settitle()";   
+                                    }     
+                                   
                                     }
                                     else if(strpos($ele->href,'detail')!==false)
                                     {
-                                    $ele->title="detail";    
+                                    $ele->title="detail";   
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="setdetail()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="setdetail()";   
+                                    }     
+
                                     }
                                     else if(strpos($ele->href,'daterange')!==false)
                                     {
-                                    $ele->title="daterange";    
+                                    $ele->title="daterange"; 
+                                    if($ele->parent(0)->class)
+                                    {
+                                        $ele->parent(0)->onclick="setdaterange()";   
+                                    }else
+                                    {
+                                        $ele->parent(0)->parent(0)->onclick="setdaterange()";   
+                                    }   
+                                    
                                     }
                                     else 
                                     {
-                                    $ele->title="popup5";    
+                                    $ele->title="popup5";
+                                 //   $ele->parent(0)->onclick="setcontact()";     
                                     }
                                     $ele->href="javascript:void(0);";
                                }
                                else if($ele->class== "ir edit map")
                                {
                                     $ele->href="javascript:void(0);";
+                                    $ele->parent(0)->onclick="setmapdata()";
                                }
                               
                                
@@ -4324,7 +4378,10 @@ INNER JOIN tb_cat ON tb_template.temname = tb_cat.catname_en
                            {
                                
                                $html->find('#videotext',0)->innertext='<a class="button black2" target="_blank" href="'.$html->find('#video',0)->src.'" id="video">เปิดวิดีโอ</a>';
+                               
                            }
+                           $html->find('#contact',0)->onclick="setcontact()"; 
+                           $html->find('#clip',0)->onclick="setvideo()";
                          $arraydata['bodyclass']   = $html->find('body',0)->class;   
                          $arraydata['setdata']='<div style="display: none;" id="subdir">'.$html->find('#subdir',0)->innertext.'</div>
                                                         
@@ -4633,6 +4690,11 @@ where tb_shop.shopurl="'.$shopurl.'"');
               echo "http://www.infostant.com/uploads/test.png";
           }
           
+      }
+      function  testpassword()
+      {
+         
+         echo md5(strtolower( "weerasark") . "12345");  
       }
       
   }

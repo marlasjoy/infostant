@@ -31,7 +31,7 @@ nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center
 #index .ui-footer li:nth-child(2n) { padding-left: 0; }
 #index .ui-footer li a { height: 138px; display: block; }
 #index .ui-footer img { width: 152px; }
-a[data-rel="back"] { width: 44px; height: 26px; display: block;text-indent: -1000em; background: url(images/btn-back.png) no-repeat; float: left; background-size: 100%; margin: 9px 3px 0 5px; }
+a[data-rel="back"],.backclass { width: 44px; height: 26px; display: block;text-indent: -1000em; background: url(images/btn-back.png) no-repeat; float: left; background-size: 100%; margin: 9px 3px 0 5px; }
 
 .ui-header { overflow: visible!important;  }
 .ui-header-fixed {  z-index: 1100!important;}
