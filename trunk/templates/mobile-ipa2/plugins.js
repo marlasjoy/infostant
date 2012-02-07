@@ -251,6 +251,7 @@ function clearsaveall()
                    localStorage.setItem('searchresulthtml','');
 }
 //clearsaveall();
+
 function searchresultlist(myObject){
     myObject2=myObject;
       var areaid=""; 
@@ -267,20 +268,20 @@ function searchresultlist(myObject){
       $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'"  class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
-           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
+           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
            
            
-           var strtext2= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletecalendar(\''+obj.sid+'\',\''+k+'\')" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li class="dateshowset" id="date-'+obj.sid+'-'+k+'"></li></ul></li>'; 
+           var strtext2= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletecalendar(\''+obj.sid+'\',\''+k+'\')" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li class="dateshowset" id="date-'+obj.sid+'-'+k+'"></li></ul></li>'; 
            
            
             arraydata['text-'+obj.sid+'']=strtext2;
            
         
     $('.ui-page-active #searchresulthtml').append(strtext);    
-    }
+    }   
     else
     {
-    $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a href="javascript:setfav(\''+obj.sid+'\')" class="button favorite"></a></li></ul></li>');    
+    $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li><a href="javascript:setfav(\''+obj.sid+'\')" class="button favorite"></a></li></ul></li>');    
     }
     
     
@@ -447,6 +448,7 @@ $.mobile.showPageLoadingMsg();
      
      
  }
+ 
   function memoryresultlist(myObject){
       var areaid=""; 
       
@@ -458,7 +460,7 @@ $.mobile.showPageLoadingMsg();
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
 
-    $('.ui-page-active #searchresulthtml').append('<li><a data-ajax="false" href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="#">infotstant</a></li><li><a href="#">facebook</a></li><li><a href="#">twitter</a></li><li><a href="#">google+</a></li><li><a href="#">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
+    $('.ui-page-active #searchresulthtml').append('<li><a data-ajax="false" href="'+obj.memoryurl+'" class="thumb"><img src="'+obj.pic+'"  /></a><strong><a href="'+obj.memoryurl+'">'+obj.memoryname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.memoryurl+'" class="button edit"></a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare2(\''+obj.memoryname+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare2(\''+obj.memoryname+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare2(\''+obj.memoryname+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare2(\''+obj.memoryname+'\',\'google\')">google+</a></li><li><a href="javascript:openshare2(\''+obj.memoryname+'\',\'email\')">email</a></li></ul></li><li><a id="deleteid'+obj.meid+'" href="javascript:deletememory(\''+obj.meid+'\')" class="button delete">Delete</a></li><li class="date_add">'+obj.date+'<strong>|</strong> '+obj.time+'</li></ul></li>');    
 
     
     
@@ -682,7 +684,7 @@ $.mobile.showPageLoadingMsg();
              mySliderInstance.updateSliderSize();
               if(myObject.video){$('#video').html('<a href=\''+myObject.video+'\'" target="_blank">'+myObject.video+'</a>')}else
               {
-                 // var htmlstr ='<iframe width="284" height="174" src="http://www.youtube.com/embed/OoJj0YW4MU8" frameborder="0" allowfullscreen></iframe>';
+                 //var htmlstr ='<iframe width="284" height="174" src="http://www.youtube.com/embed/OoJj0YW4MU8" frameborder="0" allowfullscreen></iframe>';
             $('#clipvideo').hide(); 
                   
               }
@@ -1498,7 +1500,7 @@ default:
         $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
-        $('.ui-page-active #function').animate({ top: '-=720px', useTranslate3d: true, leaveTransforms: true}, 1000);
+        $('.ui-page-active #function').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
     })
  
  
