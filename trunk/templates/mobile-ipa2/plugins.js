@@ -1498,9 +1498,15 @@ default:
       
       $('.ui-page-active nav li:nth-child(2) a').click(function() { 
         $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
+         var height=$('.ui-page-active').height(); 
+
+                   $('.ui-page-active').height(height+360);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
         $('.ui-page-active #function').animate({ top: '-=720px', useTranslate3d: true, leaveTransforms: true}, 1000);
+                 var height=$('.ui-page-active').height(); 
+
+                   $('.ui-page-active').height(height-360);
     })
  
  
