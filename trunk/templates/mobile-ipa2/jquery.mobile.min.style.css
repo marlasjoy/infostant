@@ -6,7 +6,7 @@
 
 .detail p { text-align: justify; height:auto; overflow:hidden; }
 .detail.ui-content {
-    padding: 40px 10px 10px 10px;
+    margin-top: 20px;
 }
 
 a.button.save {
