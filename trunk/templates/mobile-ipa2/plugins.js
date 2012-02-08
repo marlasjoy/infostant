@@ -41,6 +41,8 @@ myCat[15]="Other";
  var arraydata;
   var arraydata2;
   var events=[]; 
+  var start=0;
+  var limit=10;
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -110,6 +112,7 @@ function resetvalue(){
      refcode="";
      sids="";
      fid="";
+     start=0;
  }
 function getWidth(){
     xWidth = null;
@@ -256,8 +259,11 @@ function searchresultlist(myObject){
     myObject2=myObject;
       var areaid=""; 
       var k=1;
+      if(start==0)
+      {
       $('.ui-page-active #searchresulthtml').html('');
-       var arraydata={};
+      }
+            var arraydata={};
              for (variable in myObject)
              {   
           //   alert(variable) ;
@@ -285,16 +291,16 @@ function searchresultlist(myObject){
     }
     
     
-    
+            start=start+1;
 
              }
              
-    if($('.ui-page-active').attr('id')=="favarite")
-    {    
+             if($('.ui-page-active').attr('id')=="favarite")
+             {    
                var jsonstring= JSON.stringify(arraydata);
                localStorage.setItem('sidshop',jsonstring);   
            
-    }
+            }
                  
 
     
@@ -366,10 +372,14 @@ function searchresultlist(myObject){
     
     }});
  }
+ function loadmore()
+ {
+     searchresultfunction();
+ }
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
                    $.ajax({
-                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid},                                                            
+                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit},                                                            
                                                       url: webdir+'/ajax/getallshopbyname3',
                                                       dataType: "jsonp",
                                                       jsonp: 'callback',
@@ -1515,14 +1525,14 @@ default:
  {
     if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
     {
-        $("input[type='radio']").click(function() {
-        if($("#radio-choice-a").attr("checked") != "undefined" &&$("#radio-choice-a").attr("checked") == "checked")
+        $(".ui-page-active input[type='radio']").click(function() {
+        if($(".ui-page-active #radio-choice-a").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-a").attr("checked") == "checked")
            {
              
              $.mobile.changePage("contact.html", "flip", true, true);
                                
            }
-           else if($("#radio-choice-b").attr("checked") != "undefined" &&$("#radio-choice-b").attr("checked") == "checked")
+           else if($(".ui-page-active #radio-choice-b").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-b").attr("checked") == "checked")
            {
             $.mobile.changePage("rfcode.html", "flip", true, true);   
                
@@ -1542,6 +1552,26 @@ default:
     else
     {
         
+         $(".ui-page-active input[type='radio']").click(function() {
+        if($(".ui-page-active #radio-choice-a").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-a").attr("checked") == "checked")
+           {
+             
+             $.mobile.changePage("contact.html", "flip", true, true);
+                               
+           }
+           else if($(".ui-page-active #radio-choice-b").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-b").attr("checked") == "checked")
+           {
+            $.mobile.changePage("rfcode.html", "flip", true, true);   
+               
+           }else
+           {
+               
+            $.mobile.changePage("qr.html", "flip", true, true);     
+               
+           }
+        
+        
+        });
     }  
  }else
   {
