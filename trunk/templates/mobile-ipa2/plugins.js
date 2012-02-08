@@ -1465,8 +1465,8 @@ case "landing":
 default:
   
 }
-  var viewport = $("head meta[name=viewport]");   
-  viewport.attr('content', 'width=320, initial-scale=1, user-scalable=no'); 
+
+    
   try
   {
    
@@ -1588,7 +1588,7 @@ else
   }
 
 
-    
+
     
     
   }
