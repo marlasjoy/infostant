@@ -692,6 +692,17 @@ $.mobile.showPageLoadingMsg();
             }).data("royalSlider");         
             var mySliderInstance = $("#myGallery2").data("royalSlider");              
              mySliderInstance.updateSliderSize();
+             
+
+            
+            var myPhotoSwipe = $("#testId a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+            
+            
+      
+             
+             
+             
+             
               if(myObject.video){$('#video').html('<a href=\''+myObject.video+'\'" target="_blank">'+myObject.video+'</a>')}else
               {
                  //var htmlstr ='<iframe width="284" height="174" src="http://www.youtube.com/embed/OoJj0YW4MU8" frameborder="0" allowfullscreen></iframe>';
