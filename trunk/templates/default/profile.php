@@ -16,7 +16,7 @@
                   <?=$this->data['recent'];?> 
                   
                   <section class="clearfix" id="itenary">
-                      <h4>Itenary</h4>
+                      <h4>Calendar</h4>
                       <div id="calendar">
                           <table cellpadding="0" cellspacing="15" border="0">
                               <thead>
@@ -97,30 +97,30 @@
                           <dt>Search Category by Map</dt>
                           <dd>
                               <ul class="h">
-                                  <li><a href="javascript:void(0);" class="icon map-01">Home</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-02">Hotel</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-03">Restaurant</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-04">Coffee</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-05">Shop</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-06">Fashion</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-07">Hospital</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-08">Spa Beauty</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-09">Service</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-10">Commu</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-11">Sport</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-12">Seminar</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-13">Travel</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-14">Education</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-15">Night Life</a></li>
-                                  <li><a href="javascript:void(0);" class="icon map-16">Other</a></li>
+                                  <li><a href="http://home.<?=domain?>/map" target="_blank" class="icon map-01">Home</a></li>
+                                  <li><a href="http://hotel.<?=domain?>/map" target="_blank" class="icon map-02">Hotel</a></li>
+                                  <li><a href="http://restaurant.<?=domain?>/map" target="_blank" class="icon map-03">Restaurant</a></li>
+                                  <li><a href="http://coffee.<?=domain?>/map" target="_blank" class="icon map-04">Coffee</a></li>
+                                  <li><a href="http://shop.<?=domain?>/map" target="_blank" class="icon map-05">Shop</a></li>
+                                  <li><a href="http://fashion.<?=domain?>/map" target="_blank" class="icon map-06">Fashion</a></li>
+                                  <li><a href="http://hospital.<?=domain?>/map" target="_blank" class="icon map-07">Hospital</a></li>
+                                  <li><a href="http://spa.<?=domain?>/map" target="_blank" class="icon map-08">Spa Beauty</a></li>
+                                  <li><a href="http://service.<?=domain?>/map" target="_blank" class="icon map-09">Service</a></li>
+                                  <li><a href="http://communication.<?=domain?>/map" target="_blank" class="icon map-10">Commu</a></li>
+                                  <li><a href="http://sport.<?=domain?>/map" target="_blank" class="icon map-11">Sport</a></li>
+                                  <li><a href="http://seminar.<?=domain?>/map" target="_blank" class="icon map-12">Seminar</a></li>
+                                  <li><a href="http://travel.<?=domain?>/map" target="_blank" class="icon map-13">Travel</a></li>
+                                  <li><a href="http://education.<?=domain?>/map" target="_blank" class="icon map-14">Education</a></li>
+                                  <li><a href="http://nightlife.<?=domain?>/map" target="_blank" class="icon map-15">Night Life</a></li>
+                                  <li><a href="http://other.<?=domain?>/map" target="_blank" class="icon map-16">Other</a></li>
                               </ul>
                           </dd>
                       </dl>
                   </section>
                   
                   <section>
-                      <dl id="event">
-                          <dt>14 October 2011</dt>
+                      <dl id="event" style="display:none">
+                          <dt id="date"></dt>
                           <dd>
                               <table>
                                   <tbody>

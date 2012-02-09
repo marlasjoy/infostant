@@ -461,13 +461,12 @@
 
       function getleftmenu()
       {
-                     $str=' <li><a href="'.homeinfo.'/'.$this->info['username'].'" class="icon">Itenary</a></li>
+                     $str=' <li><a href="'.homeinfo.'/'.$this->info['username'].'" class="icon">Calendar</a></li>
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon">Favorite</a></li>
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/shop" class="icon">Shop</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memory" class="icon">Personal Memory</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memorylist" class="icon">Personal Memory List</a></li>
+                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/memorylist" class="icon">Personal Memory </a></li>
+                      <li><a href="javascript:void(0);" class="icon">Share to Email</a></li>
                       <li><a href="javascript:void(0);" class="icon">Share to Facebook</a></li>
-                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>
                       <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>';
                       
                       return $str;
