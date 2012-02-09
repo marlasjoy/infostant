@@ -235,7 +235,7 @@ function getdetect(){
          navigator.notification.alert('เปิด GPS ด้วยค่ะ');  
      }else
      {
-         alert('error');
+         navigator.notification.alert('เปิด GPS ด้วยค่ะ');  
      }
 
     //map.setCenter(initialLocation);
@@ -323,7 +323,8 @@ function setMarkerPoint(){
    }
 }
 function myMarkers2(position){
-    
+ //   alert(position.coords.latitude);
+    //alert(position.coords.longitude);
     initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
     marker2.setPosition(initialLocation);
     map.setCenter(initialLocation); 
@@ -355,15 +356,15 @@ function myMarkers(){
    //     $("#hidden_link").trigger('click');
         toggleBounce(marker2);
   });
-  
+
   var options = { frequency: 3000 };
   watchID = navigator.geolocation.watchPosition(myMarkers2, onError, options);
 
   
 }
 function onError(error) {
-      alert('code: '    + error.code    + '\n' +
-            'message: ' + error.message + '\n');
+   //   alert('code: '    + error.code    + '\n' +
+     //       'message: ' + error.message + '\n');
 
 }
 
