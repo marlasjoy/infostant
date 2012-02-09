@@ -399,7 +399,7 @@ $.mobile.showPageLoadingMsg();
    //  alert(meid);
      $('#deleteid'+meid).simpledialog({
     'mode' : 'bool',
-    'fullScreen':'true',
+    'fullScreen':'false',
     'prompt' : 'คุณต้องการลบ Personal Memory นี้ หรือไม่ ?',
     'useModal': true,
     'buttons' : {
@@ -431,7 +431,7 @@ $.mobile.showPageLoadingMsg();
    //  alert(meid);
      $('#deleteid'+shopurl).simpledialog({
     'mode' : 'bool',
-    'fullScreen':'true',
+    'fullScreen':'false',
     'prompt' : 'คุณต้องการลบ ร้านค้า นี้ หรือไม่ ?',
     'useModal': true,
     'buttons' : {
@@ -1185,12 +1185,7 @@ function deletecalendar(sid,k)
 }
 function setcalendarevent2(datecheck)
 {
-     
-       
-//       var arraydate1= $(this).attr('date').split("/");
-  //     arraydate1[0];
-   //    arraydate1[1];
-    //   arraydate1[2];
+
       var selectdate= datecheck;
         $('.ui-page-active #searchresulthtml').html('');
         $('#activity').html('Activity '+selectdate);
@@ -1380,7 +1375,13 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
-    
+ case "social-rfcode":
+   if(accesspage())
+  {
+  //calendarfunction();
+  $('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
+  }
+  break;  
 case "calendar":
    if(accesspage())
   {

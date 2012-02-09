@@ -3436,6 +3436,7 @@ $data=$this->db->db_get_recordset();
                                     '.join("and",$where).'
                                      
                                     order by    tb_shop.createdate desc
+                                    limit '.$_GET['start'].','.$_GET['limit'].'
                                     
                                     ');
                                     
@@ -4674,7 +4675,7 @@ where tb_shop.shopurl="'.$shopurl.'"');
           if($this->post['photos'])
           {
               
-               $fp = fopen(rootpath.'/uploads/'.'test.png', 'wb');
+               $fp = fopen(rootpath.'/uploads/'.'test.jpg', 'wb');
 //               $this->post['photos']=str_replace(" ","",$this->post['photos']);
 //               $this->post['photos']=str_replace(">","",$this->post['photos']);
 //               $this->post['photos']=str_replace("<","",$this->post['photos']);
@@ -4687,7 +4688,7 @@ where tb_shop.shopurl="'.$shopurl.'"');
               $this->db->db_set($arraytest,'tb_test');
               $this->db->destory();
               $this->db->closedb();
-              echo "http://www.infostant.com/uploads/test.png";
+              echo "http://www.infostant.com/uploads/test.jpg";
           }
           
       }
