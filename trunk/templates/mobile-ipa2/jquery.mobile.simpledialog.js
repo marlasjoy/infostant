@@ -154,12 +154,13 @@
                     });
                 }
 
-                self.pickerContent.addClass('ui-overlay-shadow').css('zIndex', self.options.zindex);
+                self.pickerContent.addClass('ui-overlay-shadow').css('zIndex', 1000);
 
                 self.pickerHeader.show();
 
                 if ( o.fullScreenAlways || ( o.fullScreen && docWinWidth < 400 ) ) {
-                    self.pickerContent.css({'border': '0px !important', 'position': 'absolute', 'top': fullTop, 'left': fullLeft, 'height': docWinHeight, 'width': docWinWidth, 'maxWidth': docWinWidth }).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
+                    
+                    self.pickerContent.css({'border': '0px !important', 'position': 'absolute !important', 'top': fullTop, 'zIndex': 1200, 'left': fullLeft, 'height': docWinHeight, 'width': docWinWidth, 'maxWidth': docWinWidth }).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
                 } else {
                     self.pickerContent.css({'position': 'absolute', 'top': pickWinTop, 'left': pickWinLeft}).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
                 }
@@ -169,7 +170,7 @@
                 o.useDialog = true;
                 self.pickPageContent.append(self.pickerContent);
                 self.pickerHeader.hide();
-                self.pickerContent.removeClass('ui-overlay-shadow ui-simpledialog-hidden').css({'top': 'auto', 'left': 'auto', 'marginLeft': 'auto', 'marginRight': 'auto'}).css('zIndex', self.options.zindex);
+                self.pickerContent.removeClass('ui-overlay-shadow ui-simpledialog-hidden').css({'top': 'auto', 'left': 'auto', 'marginLeft': 'auto', 'marginRight': 'auto'}).css('zIndex', 1000);
                 $.mobile.changePage(self.pickPage, {'transition': (o.animate === true) ? o.transition : 'none' });
             }
             this.options.isOpen = true;
@@ -255,7 +256,7 @@
             }
 
             pickPage.appendTo( $.mobile.pageContainer )
-                .page().css('minHeight', '0px').css('zIndex', o.zindex);
+                .page().css('minHeight', '0px').css('zIndex',1000);
 
             if ( o.animate === true ) { pickPage.addClass('pop'); }
 
@@ -351,7 +352,7 @@
             pickerInput,
             pickerChoice,
             screen,
-            pickerContent = $("<div>", { "class": 'ui-simpledialog-container ui-overlay-shadow ui-corner-all ui-simpledialog-hidden '+((o.animate===true)?o.transition:'')+' ui-body-'+o.pickPageTheme}).css({'zIndex': o.zindex, 'width': o.width}),
+            pickerContent = $("<div>", { "class": 'ui-simpledialog-container ui-overlay-shadow ui-corner-all ui-simpledialog-hidden '+((o.animate===true)?o.transition:'')+' ui-body-'+o.pickPageTheme}).css({'zIndex': 1000, 'width': o.width}),
             pickerHeader = $("<div class='ui-simpledialog-header'><h4></h4></div>").appendTo(pickerContent).find("h4");
 
         pickerContent.bind('webkitAnimationEnd', function(){
@@ -421,7 +422,7 @@
         pickerContent.appendTo(self.thisPage);
 
         screen = $("<div>", {'class':'ui-simpledialog-screen ui-simpledialog-hidden'})
-            .css({'z-index': o.zindex-1})
+            .css({'z-index': 1000,'position':'fixed !important','top':'0 !important'})
             .appendTo(self.thisPage)
             .bind(o.clickEvent, function(event){
                 if ( !o.forceInput ) {
