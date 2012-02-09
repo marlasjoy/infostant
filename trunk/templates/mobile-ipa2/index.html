@@ -25,7 +25,7 @@
     <script src="plugins.js" charset="utf-8"></script> 
 
     <script src="phonegap-1.2.0.js" charset="utf-8"></script> 
-      <script src="googlemap.js" charset="utf-8"></script> 
+
       <script src="js/cufon-yui.js" charset="utf-8"></script> 
        <script src="jquery.mobile.simpledialog.js" charset="utf-8"></script>
          <script src="ChildBrowser.js" charset="utf-8"></script>
@@ -39,6 +39,7 @@
     
     <script type="text/javascript" src="klass.min.js"></script>
     <script type="text/javascript" src="code.photoswipe-3.0.4.min.js"></script>
+    <script type="text/javascript" src="turn.min.js"></script>
 
     <script type="text/javascript" charset="utf-8">
 
@@ -64,6 +65,8 @@ var size2;
 var shopurl2;
 var group2;
  var childBrowser;
+  var marker2;
+  var watchID = null;
 document.addEventListener("deviceready",onDeviceOk,false);
 function onDeviceOk()
 {        
@@ -144,18 +147,18 @@ function getUrlVars2()
 
 
 function setMap(){
-    $('#hidden_link').fancybox({
-     'width' : '310',
-     'height' :'950',
-     'centerOnScroll':true,
- 
-     'onClosed': function() {
-   var src2="http://www.infostant.com/images/default/icons/spiral.gif";
-    $("#mapimage").attr("src",src2);
-  } 
-    
-});
-$.post('http://www.infostant.com/ajax/getlatbyshopforiphone',{shopurl:getUrlVars2()['shopurl'],category:getUrlVars2()['category'] },function(data) {   
+//    $('#hidden_link').fancybox({
+//     'width' : '310',
+//     'height' :'950',
+//     'centerOnScroll':true,
+// 
+//     'onClosed': function() {
+//   var src2="http://www.infostant.com/images/default/icons/spiral.gif";
+//    $("#mapimage").attr("src",src2);
+//  } 
+//    
+//});
+$.post(webdir+'/ajax/getlatbyshopforiphone',{shopurl:getUrlVars2()['shopurl'],category:getUrlVars2()['category'] },function(data) {   
 
 myObject2 = eval('(' + data + ')'); 
 var temp=myObject2.json2;
@@ -169,7 +172,7 @@ beaches=[eval(temp)];
 }
 function getlocation(position){
    initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-
+   myMarkers();
    calcRoute();   
     //  map.setCenter(initialLocation); 
   //    myMarkers(map,initialLocation); 
@@ -279,7 +282,7 @@ function onDeviceReady(){
 
    directionsDisplay = new google.maps.DirectionsRenderer({preserveViewport: true });   
   var myOptions = {
-    zoom: 20,
+    zoom: 10,
     center: new google.maps.LatLng(myObject2.latnew,myObject2.lngnew),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
@@ -319,38 +322,51 @@ function setMarkerPoint(){
    }
    }
 }
+function myMarkers2(position){
+    
+    initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+    marker2.setPosition(initialLocation);
+    map.setCenter(initialLocation); 
+  
+}
 function myMarkers(){
     
-    var image = new google.maps.MarkerImage('http://www.infostant.com/images/default/icons/walk.png',
+    var image = new google.maps.MarkerImage('icons/walk.png',
       // This marker is 20 pixels wide by 32 pixels tall.
       new google.maps.Size(38,40),
       // The origin for this image is 0,0.
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
-      new google.maps.Point(0, 20));
-    var shape = {
-      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
-      type: 'poly'
-  };   
+      new google.maps.Point(0, 38));
+
    // var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-    var marker = new google.maps.Marker({
+     marker2 = new google.maps.Marker({
         position: initialLocation,
         map: map,
         icon: image,
-        shape: shape,
         title: 'คุณอยู่ที่นี่',
-        zIndex: 10
+        zIndex: 90000
     });
     
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker2, 'click', function() {
       //  alert(marker.getPosition().lat());
     //    setdata(marker);
             
    //     $("#hidden_link").trigger('click');
-        toggleBounce(marker);
+        toggleBounce(marker2);
   });
   
+  var options = { frequency: 3000 };
+  watchID = navigator.geolocation.watchPosition(myMarkers2, onError, options);
+
+  
 }
+function onError(error) {
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+
+}
+
 function calcRoute() {
    // var start = document.getElementById("start").value;
     //var end = document.getElementById("end").value;
@@ -369,14 +385,14 @@ function calcRoute() {
            map.setZoom(nowzoom);  
          }else
          {
-           map.setZoom(20);  
+           map.setZoom(12);  
          }
           
           map.setCenter(nowcenter);  
             
         }else
         {
-            map.setZoom(20);
+            map.setZoom(12);
         map.setCenter(initialLocation);
         }
         
@@ -396,9 +412,9 @@ function setMarkers(map, locations) {
   // the Y direction down.
   var dataset=myObject[1]; 
  //alert(dataset.icon);
-  var image = new google.maps.MarkerImage('http://www.infostant.com/images/default/icons/'+dataset.icon,
+  var image = new google.maps.MarkerImage('icons/'+dataset.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
-      new google.maps.Size(dataset.width, dataset.height),
+      new google.maps.Size(38, 46),
       // The origin for this image is 0,0.
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
@@ -414,10 +430,7 @@ function setMarkers(map, locations) {
       // traces out a polygon as a series of X,Y points. The final
       // coordinate closes the poly by connecting to the first
       // coordinate.
-  var shape = {
-      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
-      type: 'poly'
-  };
+
   for (var i = 0; i < locations.length; i++) {
     var beach = locations[i];
     var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
@@ -425,9 +438,9 @@ function setMarkers(map, locations) {
         position: myLatLng,
         map: map,
         icon: image,
-        shape: shape,
+
         title: beach[0],
-        zIndex: beach[3]
+        zIndex: 9000
     });
    setevent(marker);
    

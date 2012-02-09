@@ -718,32 +718,29 @@ $.mobile.showPageLoadingMsg();
               
    
  var myOptions = {
-    zoom: 10,
+    zoom: 20,
     center: new google.maps.LatLng(myObject.lat, myObject.lng),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
    map = new google.maps.Map(document.getElementById("mapgoogle"),
                                 myOptions);
-                               
-    var image = new google.maps.MarkerImage(webdir+'/images/default/icons/'+myObject.icon,
+              
+    var image = new google.maps.MarkerImage('icons/'+myObject.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
-      new google.maps.Size(myObject.width, myObject.height),
+
+      new google.maps.Size(38, 46),
       // The origin for this image is 0,0.
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
-      new google.maps.Point(0, 35)); 
-       var shape = {
-      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
-      type: 'poly'
-  };
+      new google.maps.Point(0, 40)); 
+   // alert(myObject.lat);
    var myLatLng = new google.maps.LatLng(myObject.lat, myObject.lng);
     var marker = new google.maps.Marker({
         position: myLatLng,
-        map: map,
         icon: image,
-        shape: shape,
+        map: map,
         title: myObject.shopname,
-        zIndex: 0
+        zIndex: 8000
     });                                 
 
    $('#maplink').attr('href','map.html?shopurl='+getUrlVars2()['shopurl']) ; 
@@ -1479,7 +1476,7 @@ case "landing":
    $.mobile.changePage("index.html", "flip", true, true); 
 
   break;
-  case "map":
+  case "maplanding":
   $('#map_canvas').css('width' , getWidth());
   $('#map_canvas').css('height' , getHeight());
   setMap();

@@ -20,7 +20,7 @@
                                     
                   <section>
                       <dl id="event">
-                      <dt>Shop Register</dt>
+                      <dt>Personal Memory<a href="<?=homeinfo?>/<?=$this->data['username'];?>/memory" class="icon edit_profile" style="float: right;">Add Personal Memory</a></dt>
                           <dd>
                               <table>
                                   <tbody><?=$this->data['tableshop'];?></tbody>

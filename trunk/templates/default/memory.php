@@ -20,7 +20,7 @@
                                     
                   <section>
                       <dl id="event">
-                      <dt>Register Memory</dt>
+                      <dt>Register Personal Memory</dt>
                           <dd>
                              <form name="register-form"    method="post" id="register-form">
     <div id="form-register">
