@@ -26,6 +26,13 @@ a.button.save {
     width: 45px;
 }
 
+
+
+nav li:nth-child(4) a { background: url(images/icon-directory.png) no-repeat center center; width: 30px;  background-size: 100% 29px; top: 2px; }
+nav li:nth-child(3) a { background: url(images/icon-function.png) no-repeat center center; width: 31px; background-size: 100% 30px; }
+nav li:nth-child(2) a { background: url(images/icon-top-shop.png) no-repeat center center; width: 30px;  background-size: 100% 28px; top: 2px; }
+nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center center; width: 31px; background-size: 100% 30px; top: 1px; }
+
 #function {top: -680px;}
 #function > ul.v{ height:660px;}
 
@@ -83,7 +90,7 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #contact-bar .ui-radio .ui-btn{ width:97%}
 #contact-bar { background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
 #contact-bar .ui-btn{ margin:3px;}
-#contact-bar .ui-btn-inner{ padding:0px 10px;;}
+#contact-bar .ui-btn-inner{ padding:0px 10px;}
 #contact-bar .alignbox{ display:block;margin-left:-60px;}
 #contact-bar .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333; font-size:0.9em;}
 #contact-bar .icon-contact{ background:url(images/icon_profile.png) no-repeat -60px -30px;}
@@ -179,3 +186,28 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 .relative { position: relative; }
 #calendar .subpage ul.h > li:last-child { background: none; padding: 0; }
 #calendar .relative, #calendar .subpage { display: none; }
+
+
+
+
+#friend-notification .subpage > ul.v > li,#place-notification .subpage > ul.v > li{padding: 10px 10px 10px 90px;}
+#notification .ui-radio{ width:49%}
+#notification .ui-radio .ui-btn{ width:97%}
+#notification{ background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#notification .ui-btn{ margin:3px;}
+#notification .ui-btn-inner{ padding:0px 10px;}
+#notification .alignbox{ display:block;margin-left:-60px;}
+#notification .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333;}
+
+
+#notification .icon-friend{ background:url(images/icon_profile.png) no-repeat -180px -30px;}
+#notification .ui-focus .icon-friend,  #notification  .ui-btn-active .icon-friend { background-position: -180px 0px;}
+
+#notification .icon-place{ background:url(images/icon_profile.png) no-repeat -150px -30px;}
+#notification .ui-focus .icon-place,  #notification  .ui-btn-active .icon-place { background-position: -150px 0px;}
+
+#notification .ui-btn-hidden{ opacity: 1;}
+#notification .ui-btn-text{line-height: 30px;display:block;text-align:center;}
+#notification .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
+#notification .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
+#notification .ui-btn-hover-c{ border:none;}
