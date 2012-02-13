@@ -77,7 +77,7 @@ Slides croped area
     display: block;
     position: absolute;        
     
-    z-index:25;
+    z-index:1;
     
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -233,7 +233,7 @@ Slides croped area
     cursor: pointer;
     display: block;
     position: absolute;        
-    z-index: 25;
+    z-index: 1;
     
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
@@ -271,7 +271,7 @@ Slides croped area
 
 /* Captions container */
 .royalSlider .royalCaption {
-    z-index:20;
+    z-index:2;
     display:block;
     position:absolute;    
     left:0;
@@ -297,7 +297,7 @@ Slides croped area
     width:100%;
     height:100%;
     position:absolute;
-    z-index:99;    
+    z-index:3;    
 }
 /* Loading screen text ("Loading...") */
 .royalSlider .royalLoadingScreen p {        
