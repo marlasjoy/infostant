@@ -1478,7 +1478,7 @@ case "landing":
   break;
   case "maplanding":
   $('#map_canvas').css('width' , getWidth());
-  $('#map_canvas').css('height' , getHeight());
+  $('#map_canvas').css('height' , getHeight()-100);
   setMap();
   break;
 default:
