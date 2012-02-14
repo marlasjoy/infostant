@@ -110,7 +110,7 @@ header h3 { width: 180px; height: 62px; float: left; background: url(http://www.
 .ie #login input[type=text], .ie #login input[type=password] { line-height: 23px; }
 #login input.login { background: url(http://www.infostant.com/images/shop/btn-black.png) no-repeat; border: none; color: #fff; width: 63px; height: 25px; position: relative; top: -1px; font-size: 11px; }
 
-#main { width: 938px;  border: solid 1px #333; min-height: 400px; display: block; margin: 0 auto; border-top: none; padding: 10px!important; position: relative; background: #262626; margin-bottom: 0!Important;  }
+#main { width: 940px;  border: solid 1px #333; min-height: 400px; display: block; margin: 0 auto; border-top: none; padding: 10px!important; position: relative; background: #262626; margin-bottom: 0!Important;  }
 body.white #main { background: #fff; border-color: #d9d9d9; }
 footer { background-color: #141414; height: 45px; line-height: 45px; color: #4f4f4f; font-size: 11px; padding: 0 10px;  }
 body.white footer { background-color: #f2f2f2; }
