@@ -33,8 +33,7 @@ nav li:nth-child(3) a { background: url(images/icon-function.png) no-repeat cent
 nav li:nth-child(2) a { background: url(images/icon-top-shop.png) no-repeat center center; width: 30px;  background-size: 100% 28px; top: 2px; }
 nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center center; width: 31px; background-size: 100% 30px; top: 1px; }
 
-#function {top: -680px;}
-#function > ul.v{ height:660px;}
+
 
 #profile .social{}
 #profile .ui-radio{ width:49%}
@@ -75,13 +74,72 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #addmemory .subpage h2 {background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-search.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;line-height: 40px;margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
 #addmemory .templatebox{ width:304px; height:259px; display:block; overflow:hidden; margin:10px auto;}
 
+
 #function{}
+#function {top: -340px;}
+#function > ul.v{ height:320px;}
+#function li:nth-child(1) a { background-position: -615px 7px;  }/*setting*/
+#function li:nth-child(2) a { background-position: -567px -45px;  }/*directory*/
+#function li:nth-child(3) a { background-position: -515px -90px;  }/*recent*/
+#function li:nth-child(4) a { background-position: -465px -142px;  }/*Fravorite*/
+#function li:nth-child(5) a { background-position: -417px -194px;  }/*calendar*/
+#function li:nth-child(6) a { background-position: -363px -246px;  }/*personal memory*/
+#function li:nth-child(7) a { background-position: -315px -293px;  }/*addfriend*/
+#function li:nth-child(8) a { background-position: -267px -344px;  }/*notification*/
+#function li:nth-child(9) a { background-position: -217px -394px;  }/*Promotion*/
+#function li:nth-child(10) a { background-position: -166px -446px;  }/*QR*/
+#function li:nth-child(11) a { background-position: -121px -495px;  }/*Show location*/
+#function li:nth-child(12) a { background-position: -65px -543px;  }/*shop*/
+#function li:nth-child(13) a { background-position: -22px -593px;  }/*help*/
+
+
 #function li:nth-child(14) a {
-	
     background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
 }
 
+#function li:nth-child(1) a {
+    background: url(images/function-icon-message.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
+}
+#function li:nth-child(2) a { background-position: -363px -246px;  }/*personal memory*/
+#function li:nth-child(3) a { background-position: -465px -142px;  }/*Fravorite*/
+#function li:nth-child(4) a { background-position: -417px -194px;  }/*calendar*/
+#function li:nth-child(5) a { background-position: -315px -293px;  }/*addfriend*/
+#function li:nth-child(6) a { background-position: -217px -394px;  }/*Promotion*/
+#function li:nth-child(7) a { background-position: -615px 7px;  }/*setting*/
 
+#function li:nth-child(14) a {
+    background: url(images/function-icon-coupon.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
+}
+
+
+#function2 {top: -260px;}
+#function2 > ul.v{ height:240px;}
+#function2 { position: absolute; background: #80c8e3 url(images/bg-header_shadow.png) top center no-repeat; background-size: 100% 5px;  height: auto; width: 100%;  z-index: 1101; top: 45px; top: -320px; }
+#function2 > ul.v { height: 230px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
+#function2 li {  height: 38px; display: block; line-height: 38px;  margin: 0 20px 5px; border: solid 1px #000; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
+#function2 li > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
+#function2 li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
+#function2 li:nth-child(1) a { background-position: -615px 7px;  }/*setting*/
+#function2 li:nth-child(2) a { background-position: -567px -45px;  }/*directory*/
+#function2 li:nth-child(3) a { background-position: -515px -90px;  }/*recent*/
+#function2 li:nth-child(4) a { background-position: -465px -142px;  }/*Fravorite*/
+#function2 li:nth-child(5) a { background-position: -417px -194px;  }/*calendar*/
+#function2 li:nth-child(6) a { background-position: -363px -246px;  }/*personal memory*/
+#function2 li:nth-child(7) a { background-position: -315px -293px;  }/*addfriend*/
+#function2 li:nth-child(8) a { background-position: -267px -344px;  }/*notification*/
+#function2 li:nth-child(9) a { background-position: -217px -394px;  }/*Promotion*/
+#function2 li:nth-child(10) a { background-position: -166px -446px;  }/*QR*/
+#function2 li:nth-child(11) a { background-position: -121px -495px;  }/*Show location*/
+#function2 li:nth-child(12) a { background-position: -65px -543px;  }/*shop*/
+#function2 li:nth-child(13) a { background-position: -22px -593px;  }/*help*/
+
+
+#function2 li:nth-child(1) a { background-position: -267px -344px;  }/*notification*/
+#function2 li:nth-child(2) a { background-position: -65px -543px;  }/*shop*/
+#function2 li:nth-child(3) a { background-position: -217px -394px;  }/*Promotion*/
+#function2 li:nth-child(4) a {background: url(images/function-icon-coupon.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;}/*coupon*/
+#function2 li:nth-child(5) a { background-position: -166px -446px;  }/*QR*/
+#function2 a.close { width: 100%; background: url(images/btn-function2-close.png) no-repeat top center; background-size: 100% 100%;width: 100%; height: 28px; text-indent: -1000em; display: block; position: absolute; bottom: -28px; }
 
 
 #social-contact {}
