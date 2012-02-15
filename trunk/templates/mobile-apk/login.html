@@ -1,0 +1,88 @@
+      
+  <div data-role="page" id="profile-login"> 
+      <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
+        <div>
+            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
+            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+            <nav>
+                <ul class="h">
+                    <li><a href="search.html" data-transition="slide">search</a></li>
+                    <li><a class="functionclick2" href="#">Place</a></li>
+                    <li><a class="functionclick" href="#">Member</a></li>
+                    <li><a href="directory.html" data-transition="slide">directory</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div  id="function">
+            <ul class="v">
+            	<li><a href="message.html"><span>Message</span></a></li>
+                <li><a href="index.html#memory"><span>Personal Memory</span></a></li>
+                <li><a href="favarite.html"><span>Favorite</span></a></li>
+                <li><a href="calendar.html"><span>Calendar / Itenary</span></a></li>
+                <li><a href="add_friend.html"><span>Friends</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="setting.html"><span>Settings</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+        <div  id="function2">
+            <ul class="v">   
+                <li><a href="notification.html"><span>Notification</span></a></li>
+                <li><a href="index.html#shop"><span>Shop</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="#"><span>Coupon</span></a></li>
+                <li><a href="qr.html"><span>QR Reader</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+    	</div><!-- /header -->      
+  <div data-role="content" class="subpage">
+  <div  id="profile">
+         
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                         <input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+                         <label for="radio-choice-c"><span class="alignbox"><span class="icon icon-profile">Profile</span></span></label>
+                         <input type="radio" name="radio-choice-b" id="radio-choice-d" value="off"/>
+                         <label for="radio-choice-d"><span class="alignbox"><span class="icon icon-shop">Shop</span></span></label>
+                </fieldset>
+                
+        </div>
+                         <h2>Login</h2>
+         <form name="registersummit" id="registersummit" onsubmit="return loginserver()">
+
+
+
+           <p>
+            <label for="input-username">Username</label>
+            <input type="text" name="username" id="username" />
+              </p><br />
+              <p>
+            <label for="input-password">Password</label>
+            <input type="password" name="password1" id="password1" />
+              </p>
+            <br />
+              <p>
+            <input type="submit" value="login" id="" data-inline="" />
+              </p>
+            
+            <p>
+            <a href="profile_forgot.html">Forgot password</a><br />
+           <a href="profile_register.html">Register</a>
+           </p>
+        
+        
+        <div class="social">
+            <p>
+            <a href="javascript:void(0);"><img src="images/icon_social_facebook.png" width="40%" /></a>
+            <a href="javascript:void(0);"><img src="images/icon_social_twitter.png" width="40%"  /></a>
+            </p>
+        </div>
+                
+
+                
+         </form>
+               
+        
+        </div> 
+   </div>
+         

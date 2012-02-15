@@ -1,0 +1,95 @@
+
+
+<div id="maplanding" data-role="page">
+
+    <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
+        <div>
+            <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
+            <h1><a href="index.html" data-transition="flip">infostant</a></h1>
+            <nav>
+                <ul class="h">
+                    <li><a href="search.html" data-transition="slide">search</a></li>
+                    <li><a class="functionclick2" href="#">Place</a></li>
+                    <li><a class="functionclick" href="#">Member</a></li>
+                    <li><a href="directory.html" data-transition="slide">directory</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div  id="function">
+            <ul class="v">
+            	<li><a href="message.html"><span>Message</span></a></li>
+                <li><a href="index.html#memory"><span>Personal Memory</span></a></li>
+                <li><a href="favarite.html"><span>Favorite</span></a></li>
+                <li><a href="calendar.html"><span>Calendar / Itenary</span></a></li>
+                <li><a href="add_friend.html"><span>Friends</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="setting.html"><span>Settings</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+        <div  id="function2">
+            <ul class="v">   
+                <li><a href="notification.html"><span>Notification</span></a></li>
+                <li><a href="index.html#shop"><span>Shop</span></a></li>
+                <li><a href="promotion.html"><span>Promotion</span></a></li>
+                <li><a href="#"><span>Coupon</span></a></li>
+                <li><a href="qr.html"><span>QR Reader</span></a></li>
+            </ul>
+            <a href="javascript:void(0);" class="close">Close Function</a>
+        </div> <!-- #function -->
+    	</div><!-- /header -->
+<div data-role="content" >    
+        <h2>Map</h2>
+        <div id="map_canvas"  ></div>
+    </div><!-- /content -->
+<div style="display: none;" id="powerbeebee-info">
+<a href="#powerbeebee" id="hidden_link"><font color="#FFFFFF">.</font></a>  
+<div  id="powerbeebee" style="width:100%">
+<div style=" display: block; font-family: Tahoma; font-size: 12px;  color: black;">
+
+<div>
+ <img width="100%"   src="http://www.infostant.com/images/default/header/header-map2.jpg"> 
+ <div style="display: none;" id="shopurl"></div>
+</div>
+<div style="">
+<div style="padding-bottom: 5px">
+
+</div>
+<div style="padding-bottom: 5px;font-weight: bold;">
+<span id="title" > </span>
+</div>
+<div style="padding-bottom: 5px">
+<span id="description" ></span>
+</div>
+<div style="padding-bottom: 5px">
+<img width="100%"  id="mapimage" src="http://www.infostant.com/images/default/icons/spiral.gif">
+</div>
+
+<div style="padding-bottom: 10px; color:#029fc1; line-height: 160%;">
+ชื่อสถานที่ : <span style="color: black;" id="shopname"></span><br>
+ที่อยู่ : <span style="color: black;" id="address"></span><br>
+เบอร์โทร:<span style="color: black;" id="tel"></span> <br>
+อีเมล์ :<span style="color: black;" id="emailshop"></span><br>
+</div>
+<div style="padding-bottom: 10px;text-align: center;">
+<a href="javascript:void(0);" id="dir" class="button black1">Get Direction</a> 
+<img id="mapimage2" width="100%"  src="http://www.infostant.com/images/default/icons/spiral.gif">
+</div>
+<div style="padding-bottom: 10px;text-align: center;"> <a href="javascript:void(window.open($('#shopurl').html()));" id="fav" class="button black1">Go To Shop</a>  </div>   
+ <div id="social" style="padding-bottom: 10px">
+
+                        <div class="dsocial" ><a  href="javascript:void(window.open('http://www.facebook.com/sharer/sharer.php?v=4&src=bm&u='+encodeURIComponent($('#shopurl').html()),'Facebook','height=450,width=550').focus())"><img src="http://www.infostant.com/images/shop/icon-social-01.png" alt="Facebook" width="29" height="29" /></a></div>
+                        <div class="dsocial"><a  href="javascript:void(window.open('http://twitter.com/intent/tweet?source=webclient&text='+encodeURIComponent($('#shopurl').html()),'Twitter','height=450,width=550').focus())"><img src="http://www.infostant.com/images/shop/icon-social-02.png" alt="Twitter" width="29" height="29" /></a></div>
+                        <div class="dsocial"><a  href="javascript:void(window.open('http://www.myspace.com/Modules/PostTo/Pages/?u='+encodeURIComponent($('#shopurl').html()),'My Space','height=450,width=550').focus())"><img src="http://www.infostant.com/images/shop/icon-social-04.png" alt="My Space" width="29" height="29" /></a></div>
+                        <div class="dsocial"><a  href="javascript:void(window.open('http://www.linkedin.com/shareArticle?mini=true&url=CONTENT-URL&title=web&summary=web&source='+encodeURIComponent($('#shopurl').html()),'Linkedin','height=450,width=550').focus())"><img src="http://www.infostant.com/images/shop/icon-social-05.png" alt="Linkedin" width="29" height="29" /></a></div>
+                        <div class="dsocial"><a  href="javascript:void(window.open('https://m.google.com/app/plus/x/?v=compose&content='+encodeURIComponent($('#shopurl').html()),'Google +','height=450,width=550').focus())"><img src="http://www.infostant.com/images/shop/icon-social-06.png" alt="Google +" width="29" height="29" /></a></div>
+                        <div class="dsocial"><a  href="mailto:?subject=&body=Link="><img src="http://www.infostant.com/images/shop/icon-social-07.png" alt="Email" width="29" height="29" /></a></div>
+
+</div>
+<div style="padding-bottom: 10px">&nbsp;
+</div>
+
+  </div>
+</div></div></div>
+</div><!-- /page -->
+
