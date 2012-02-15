@@ -695,7 +695,7 @@ $.mobile.showPageLoadingMsg();
              
 
             
-            var myPhotoSwipe = $("#testId a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+            var myPhotoSwipe = $("#testId a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false,zIndex:10000 });
             
             
       
