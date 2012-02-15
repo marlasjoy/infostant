@@ -28,10 +28,10 @@ a.button.save {
 
 
 
-nav li:nth-child(4) a { background: url(images/icon-directory.png) no-repeat center center; width: 30px;  background-size: 100% 29px; top: 2px; }
-nav li:nth-child(3) a { background: url(images/icon-function.png) no-repeat center center; width: 31px; background-size: 100% 30px; }
-nav li:nth-child(2) a { background: url(images/icon-top-shop.png) no-repeat center center; width: 30px;  background-size: 100% 28px; top: 2px; }
-nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center center; width: 31px; background-size: 100% 30px; top: 1px; }
+nav li:nth-child(4) a { background: url(images/icon-directory.png) no-repeat center center; width: 26px;  background-size: 100% 26px; top: 2px; }
+nav li:nth-child(3) a { background: url(images/icon-function.png) no-repeat center center; width: 26px; background-size: 100% 26px; }
+nav li:nth-child(2) a { background: url(images/icon-top-shop.png) no-repeat center center; width: 26px;  background-size: 100% 26px; top: 2px; }
+nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center center; width: 26px; background-size: 100% 26px; top: 1px; }
 
 
 
