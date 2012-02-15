@@ -2221,7 +2221,7 @@ $data=$this->db->db_get_recordset();
         $this->db->closedb();
         
         
-        
+        $this->post['username']=strtolower($this->post['username']);
          if(!is_dir(fullpathtemp2.$this->post['username']))
          {
              mkdir(fullpathtemp2.$this->post['username']);
@@ -4544,6 +4544,7 @@ where tb_shop.shopurl="'.$shopurl.'"');
 
               if($this->post['pic1'])
               {
+                  $this->post['username']=strtolower($this->post['username']);
               $filename=mktime();
               $fileext='jpg'; 
               $filenow= $filename.'.'.$fileext;   
