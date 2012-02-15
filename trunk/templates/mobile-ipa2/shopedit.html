@@ -48,26 +48,16 @@
      var strpopup5='<div><div  id="datatext2"><div class="ui-simpledialog-header"><h4>Save Address</h4></div><div ><div data-role="fieldcontain"><label for="name">Address:</label><input type="text" name="text-address" id="text-address" value=""  /></div><div data-role="fieldcontain"><label for="name">Tel:</label><input type="text" name="text-tel" id="text-tel" value=""  /></div><div data-role="fieldcontain"><label for="name">Email:</label><input type="text" name="text-emailshop" id="text-emailshop" value=""  /></div><div data-role="fieldcontain"><label for="name">Website:</label><input type="text" name="text-website" id="text-website" value=""  /></div><div data-role="fieldcontain"><label for="name">Pricerange:</label><input type="text" name="text-pricerange" id="text-pricerange" value=""  /></div><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata4()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div></div>';
      var stryoutube='<div ><div id="youtubedata"><div class="ui-simpledialog-header"><h4>Save Video</h4></div><div data-role="fieldcontain"><label for="name">Youtube Link:</label><input type="text" name="youtube" id="youtube" value=""  /></div><p><span >ตัวอย่าง http://www.youtube.com/embed/PVhRBTT2-7s </span></p><a rel=\'savetextfile\' data-role=\'button\' href=\'javascript:savetextdata5()\' id=\'savetextfile\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></div></div>';
     var webdir="http://www.infostant.com";
+    var strmapdata= '<div><p><div class="ui-simpledialog-header"><h4>Select Location</h4></div><select size="1" name="province" id="province"  onchange="onchangeprovince(this.value)"><option value="">เลือกจังหวัด</option><option value="101">กระบี่</option><option value="102">กรุงเทพมหานคร</option><option value="103">กาญจนบุรี</option><option value="104">กาฬสินธุ์</option><option value="105">กำแพงเพชร</option><option value="106">ขอนแก่น</option><option value="107">จันทบุรี</option><option value="108">ฉะเชิงเทรา</option><option value="109">ชลบุรี</option><option value="110">ชัยนาท</option><option value="111">ชัยภูมิ</option><option value="112">ชุมพร</option><option value="113">ตรัง</option><option value="114">ตราด</option><option value="115">ตาก</option><option value="116">นครนายก</option><option value="117">นครปฐม</option><option value="118">นครพนม</option><option value="119">นครราชสีมา</option><option value="120">นครศรีธรรมราช</option><option value="121">นครสวรรค์</option><option value="122">นนทบุรี</option><option value="123">นราธิวาส</option><option value="124">น่าน</option><option value="125">บุรีรัมย์</option><option value="126">ปทุมธานี</option><option value="127">ประจวบคีรีขันธ์</option><option value="128">ปราจีนบุรี</option><option value="129">ปัตตานี</option><option value="130">พระนครศรีอยุธยา</option><option value="131">พะเยา</option><option value="132">พังงา</option><option value="133">พัทลุง</option><option value="134">พิจิตร</option><option value="135">พิษณุโลก</option><option value="136">ภูเก็ต</option><option value="137">มหาสารคาม</option><option value="138">มุกดาหาร</option><option value="139">ยะลา</option><option value="140">ยโสธร</option><option value="141">ระนอง</option><option value="142">ระยอง</option><option value="143">ราชบุรี</option><option value="144">ร้อยเอ็ด</option><option value="145">ลพบุรี</option><option value="146">ลำปาง</option><option value="147">ลำพูน</option><option value="148">ศรีสะเกษ</option><option value="149">สกลนคร</option><option value="150">สงขลา</option><option value="151">สตูล</option><option value="152">สมุทรปราการ</option><option value="153">สมุทรสงคราม</option><option value="154">สมุทรสาคร</option><option value="155">สระบุรี</option><option value="156">สระแก้ว</option><option value="157">สิงห์บุรี</option><option value="158">สุพรรณบุรี</option><option value="159">สุราษฎร์ธานี</option><option value="160">สุรินทร์</option><option value="161">สุโขทัย</option><option value="162">หนองคาย</option><option value="163">หนองบัวลำภู</option><option value="164">อำนาจเจริญ</option><option value="165">อุดรธานี</option><option value="166">อุตรดิตถ์</option><option value="167">อุทัยธานี</option><option value="168">อุบลราชธานี</option><option value="169">อ่างทอง</option><option value="170">เชียงราย</option><option value="171">เชียงใหม่</option><option value="172">เพชรบุรี</option><option value="173">เพชรบูรณ์</option><option value="174">เลย</option><option value="175">แพร่</option><option value="176">แม่ฮ่องสอน</option></select><select size="1" name="district" id="district"  onchange="onchangedistrict(this.value)"><option value="">เลือกอำเภอ/เขต</option></select><select size="1" name="tumbon" id="tumbon" onchange="onchangetumbon(this.value)"><option value="">เลือกตำบล/แขวง</option></select><a rel=\'GetDirection\' data-role=\'button\' href=\'javascript:getmylocation()\' id=\'GetDirection\'>GetDirection</a><input type="hidden" value="" name="lat" id="lat"><input type="hidden" value="" name="lng" id="lng"><div id="maparea" class="maparea" style="width: 100%; height: 150px;"></div><a rel=\'savemap\' data-role=\'button\' href=\'javascript:savemapdata()\' id=\'savemap\'>Save</a><a rel=\'close\' data-role=\'button\' href=\'#\' id=\'simpleclose\'>Close</a></p></div>';
+   
     document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    document.addEventListener('DOMContentLoaded', loaded, false); 
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false); 
 
 function loaded() {
-    $('.ui-page-active nav li:nth-child(2) a').click(function() { 
-                 var height=$('.ui-page-active').height(); 
-
-                   $('.ui-page-active').height(height+360);
-        $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
-        
-    }) ;   
-      $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
-                           var height=$('.ui-page-active').height(); 
-
-                   $('.ui-page-active').height(height-360);
-        $('.ui-page-active #function').animate({ top: '-=720px', useTranslate3d: true, leaveTransforms: true}, 1000);
-    });
+   
         /******* EOS ********/
         onDeviceReady2();
-        myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
+        
     }
 function savetextdata()
 {
@@ -451,7 +441,7 @@ function initialize4()
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
    geocoder = new google.maps.Geocoder();
-   map3 = new google.maps.Map($('.maparea').get(1),
+   map3 = new google.maps.Map($('.maparea').get(0),
                                 myOptions);
 
   setMarkers2(map3);
@@ -623,10 +613,11 @@ function setmapdata()
 {
        $('.ir.edit.map').simpledialog({
                             'mode' : 'blank',
-
-                            'fullScreen':'true',
+                            'prompt':false,
+                            'top':0,
+                            'useModal':false,
                             'onShowFinish':function() { initialize4()},
-                            'fullHTML':$('#datamap').html()
+                            'fullHTML':strmapdata
                           });
 }
 function setcontact()
@@ -650,6 +641,7 @@ function setdata2(myObject){
               scriptjava= '<script  src="mylibs/'+myObject.fontjs+'"><\/script>';
               }
               $('#main').html(scriptjava+myObject.html);
+              myScroll = new iScroll('wrapper', { zoom:true,zoomMin:0.35 });
               if(myObject.fontjs){
               Cufon.replace('#main h3', { fontFamily:myObject.fonttext, fontSize: myObject.fontsize+'px' });
               Cufon.now();
@@ -671,10 +663,13 @@ function setdata2(myObject){
                   $(document).delegate('.ir.edit.map', 'click', function() {
                             $(this).simpledialog({
                             'mode' : 'blank',
-                            'fullScreen':'true',
-                            'onShowFinish':function() { initialize4()},
-                            'fullHTML':$('#datamap').html()
-                          })
+                            'prompt':false,
+                            'top':0,
+                            'useModal':false,
+                            'onShowFinish':function() { initialize4() },
+                            'fullHTML':strmapdata
+                            
+                          });
                         });
                   $(document).delegate('.ir.edit.text', 'click', function() {
                  
@@ -877,9 +872,9 @@ function onFail(message) {
             <h1><a href="index.html" data-ajax="false" >infostant</a></h1>
             <nav>
                 <ul class="h">
-                    <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>
+<!--                    <li><a href="#" onClick="window.location.reload( true );" data-transition="slide">search</a></li>
                     <li><a class="functionclick" href="#">function</a></li>
-                    <li><a href="directory.html" data-transition="slide">directory</a></li>
+                    <li><a href="directory.html" data-transition="slide">directory</a></li>-->
                 </ul>
             </nav>
         </div>
@@ -925,108 +920,7 @@ function onFail(message) {
 
           <div style="display: none;" id="setdata"></div>
           
-          <div  id="datamap" style="display: none;">
-<p>
-<div class="ui-simpledialog-header"><h4>Select Location</h4></div>
 
-                <select size="1" name="province" id="province"  onchange="onchangeprovince(this.value)">
-                    <option value="">เลือกจังหวัด</option>
-                                                 <option value="101">กระบี่</option>
-                                                      <option value="102">กรุงเทพมหานคร</option>
-                                                      <option value="103">กาญจนบุรี</option>
-                                                      <option value="104">กาฬสินธุ์</option>
-                                                      <option value="105">กำแพงเพชร</option>
-                                                      <option value="106">ขอนแก่น</option>
-                                                      <option value="107">จันทบุรี</option>
-                                                      <option value="108">ฉะเชิงเทรา</option>
-                                                      <option value="109">ชลบุรี</option>
-                                                      <option value="110">ชัยนาท</option>
-                                                      <option value="111">ชัยภูมิ</option>
-                                                      <option value="112">ชุมพร</option>
-                                                      <option value="113">ตรัง</option>
-                                                      <option value="114">ตราด</option>
-                                                      <option value="115">ตาก</option>
-                                                      <option value="116">นครนายก</option>
-                                                      <option value="117">นครปฐม</option>
-                                                      <option value="118">นครพนม</option>
-                                                      <option value="119">นครราชสีมา</option>
-                                                      <option value="120">นครศรีธรรมราช</option>
-                                                      <option value="121">นครสวรรค์</option>
-                                                      <option value="122">นนทบุรี</option>
-                                                      <option value="123">นราธิวาส</option>
-                                                      <option value="124">น่าน</option>
-                                                      <option value="125">บุรีรัมย์</option>
-                                                      <option value="126">ปทุมธานี</option>
-                                                      <option value="127">ประจวบคีรีขันธ์</option>
-                                                      <option value="128">ปราจีนบุรี</option>
-                                                      <option value="129">ปัตตานี</option>
-                                                      <option value="130">พระนครศรีอยุธยา</option>
-                                                      <option value="131">พะเยา</option>
-                                                      <option value="132">พังงา</option>
-                                                      <option value="133">พัทลุง</option>
-                                                      <option value="134">พิจิตร</option>
-                                                      <option value="135">พิษณุโลก</option>
-                                                      <option value="136">ภูเก็ต</option>
-                                                      <option value="137">มหาสารคาม</option>
-                                                      <option value="138">มุกดาหาร</option>
-                                                      <option value="139">ยะลา</option>
-                                                      <option value="140">ยโสธร</option>
-                                                      <option value="141">ระนอง</option>
-                                                      <option value="142">ระยอง</option>
-                                                      <option value="143">ราชบุรี</option>
-                                                      <option value="144">ร้อยเอ็ด</option>
-                                                      <option value="145">ลพบุรี</option>
-                                                      <option value="146">ลำปาง</option>
-                                                      <option value="147">ลำพูน</option>
-                                                      <option value="148">ศรีสะเกษ</option>
-                                                      <option value="149">สกลนคร</option>
-                                                      <option value="150">สงขลา</option>
-                                                      <option value="151">สตูล</option>
-                                                      <option value="152">สมุทรปราการ</option>
-                                                      <option value="153">สมุทรสงคราม</option>
-                                                      <option value="154">สมุทรสาคร</option>
-                                                      <option value="155">สระบุรี</option>
-                                                      <option value="156">สระแก้ว</option>
-                                                      <option value="157">สิงห์บุรี</option>
-                                                      <option value="158">สุพรรณบุรี</option>
-                                                      <option value="159">สุราษฎร์ธานี</option>
-                                                      <option value="160">สุรินทร์</option>
-                                                      <option value="161">สุโขทัย</option>
-                                                      <option value="162">หนองคาย</option>
-                                                      <option value="163">หนองบัวลำภู</option>
-                                                      <option value="164">อำนาจเจริญ</option>
-                                                      <option value="165">อุดรธานี</option>
-                                                      <option value="166">อุตรดิตถ์</option>
-                                                      <option value="167">อุทัยธานี</option>
-                                                      <option value="168">อุบลราชธานี</option>
-                                                      <option value="169">อ่างทอง</option>
-                                                      <option value="170">เชียงราย</option>
-                                                      <option value="171">เชียงใหม่</option>
-                                                      <option value="172">เพชรบุรี</option>
-                                                      <option value="173">เพชรบูรณ์</option>
-                                                      <option value="174">เลย</option>
-                                                      <option value="175">แพร่</option>
-                                                      <option value="176">แม่ฮ่องสอน</option>
-                                           </select>
-
-                <select size="1" name="district" id="district"  onchange="onchangedistrict(this.value)">
-                    <option value="">เลือกอำเภอ/เขต</option>
-                </select>
-
-
-                <select size="1" name="tumbon" id="tumbon" onchange="onchangetumbon(this.value)">
-                    <option value="">เลือกตำบล/แขวง</option>
-                </select>
-
-                <a rel='GetDirection' data-role='button' href='javascript:getmylocation()' id='GetDirection'>GetDirection</a>
-                <input type="hidden" value="" name="lat" id="lat">
-                <input type="hidden" value="" name="lng" id="lng">
-                   <div id="maparea" class="maparea" style="width: 100%; height: 150px;"></div>  
-
-                 <a rel='savemap' data-role='button' href='javascript:savemapdata()' id='savemap'>Save</a>
-                 <a rel='close' data-role='button' href='#' id='simpleclose'>Close</a>
-            </p> 
-  </div>
           <link rel="stylesheet" id="csscode" href="css/coffee.css">  
           <style>.cufon-loading #main h3 { visibility: hidden!important; }</style>
         </div> <!-- #scroll -->

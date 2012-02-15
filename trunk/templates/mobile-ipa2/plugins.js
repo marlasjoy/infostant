@@ -1493,23 +1493,23 @@ default:
       {
           if(localStorage.getItem("userId"))
           {
-             $('.ui-page-active #function .v').append('<li><a href="logout.html"><span>logout</span></a></li>'); 
+          //   $('.ui-page-active #function .v').append('<li><a href="logout.html"><span>logout</span></a></li>'); 
           }else
           {
-             $('.ui-page-active #function .v').append('<li><a href="login.html"><span>login</span></a></li>');  
+         //    $('.ui-page-active #function .v').append('<li><a href="login.html"><span>login</span></a></li>');  
           }
           
       }else
       {
           if(localStorage.getItem("userId"))
           {
-               $('#logid').html('logout');
-               $('#loglink').attr('href','logout.html');
+          //     $('#logid').html('logout');
+      //         $('#loglink').attr('href','logout.html');
                
           }else
           {
-              $('#logid').html('login');
-              $('#loglink').attr('href','login.html');
+         //     $('#logid').html('login');
+        //      $('#loglink').attr('href','login.html');
           }
          
       }    

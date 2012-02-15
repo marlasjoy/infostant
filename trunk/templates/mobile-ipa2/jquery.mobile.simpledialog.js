@@ -160,7 +160,7 @@
 
                 if ( o.fullScreenAlways || ( o.fullScreen && docWinWidth < 400 ) ) {
                     
-                    self.pickerContent.css({'border': '0px !important', 'position': 'absolute !important', 'top': fullTop, 'zIndex': 1200, 'left': fullLeft, 'height': docWinHeight, 'width': docWinWidth, 'maxWidth': docWinWidth }).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
+                    self.pickerContent.css({'border': '0px !important', 'position': 'absolute ', 'top': fullTop, 'zIndex': 1200, 'left': fullLeft, 'height': docWinHeight, 'width': docWinWidth, 'maxWidth': docWinWidth }).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
                 } else {
                     self.pickerContent.css({'position': 'absolute', 'top': pickWinTop, 'left': pickWinLeft}).addClass('ui-overlay-shadow in').removeClass('ui-simpledialog-hidden');
                 }
@@ -422,7 +422,7 @@
         pickerContent.appendTo(self.thisPage);
 
         screen = $("<div>", {'class':'ui-simpledialog-screen ui-simpledialog-hidden'})
-            .css({'z-index': 1000,'position':'fixed !important','top':'0 !important'})
+            .css({'z-index': 500,'position':'fixed !important','top':'0 !important'})
             .appendTo(self.thisPage)
             .bind(o.clickEvent, function(event){
                 if ( !o.forceInput ) {
