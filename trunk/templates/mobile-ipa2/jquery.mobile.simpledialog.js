@@ -239,11 +239,10 @@
         } else {
             var thisPage = caller.closest('.ui-page'),
                 pickPage = $("<div data-role='dialog' class='ui-simpledialog-dialog' data-theme='" + o.pickPageTheme + "' >" +
-                            "<div data-role='header' data-backbtn='false' data-theme='a'>" +
-                                "<div class='ui-title'>"+o.prompt+"</div>" +
-                            "</div>"+
+                            "" +
+                            ""+
                             "<div data-role='content'></div>"+
-                        "</div>"),
+                        "</div>"), 
                 ct = null,
                 pickPageContent = null;
 
