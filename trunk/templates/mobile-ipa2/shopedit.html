@@ -613,9 +613,7 @@ function setmapdata()
 {
        $('.ir.edit.map').simpledialog({
                             'mode' : 'blank',
-                            'prompt':false,
-                            'top':0,
-                            'pickPageTheme':'a',
+                            'fullScreen':'true',
                             'useModal':true,
                             'onShowFinish':function() { initialize4()},
                             'fullHTML':strmapdata
@@ -664,8 +662,7 @@ function setdata2(myObject){
                   $(document).delegate('.ir.edit.map', 'click', function() {
                             $(this).simpledialog({
                             'mode' : 'blank',
-                            'prompt':false,
-                            'top':0,
+                            'fullScreen':'true',
                             'useModal':false,
                             'onShowFinish':function() { initialize4() },
                             'fullHTML':strmapdata
