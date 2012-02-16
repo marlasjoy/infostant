@@ -684,7 +684,7 @@ $.mobile.showPageLoadingMsg();
               for (variable in myObject.gallery)
              {
                  
-                     $('#testId').append('<li class="royalSlide" ><a data-ajax="false" rel="external" href="'+myObject.gallery[variable]+'" class="linkImage"><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></a></li>')
+                     $('#testId').append('<li class="royalSlide" ><img class="royalImage"  src="'+myObject.gallery[variable]+'" alt="Photo Gallery" /></li>')
                  
              }
                var mySliderInstance =  $('#myGallery2').royalSlider({               
