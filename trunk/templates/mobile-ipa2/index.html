@@ -491,7 +491,7 @@ function toggleBounce(marker) {
         
     }
     .ui-content {
-        margin-top: 54px;
+        margin-top: 50px;
     }
 
 </style>
@@ -499,7 +499,7 @@ function toggleBounce(marker) {
 </head> 
 <body> 
 
-<div id="index" data-role="page"  style="z-index:1100 !important">
+<div id="index" data-role="page"  style="z-index:1100 !important" data-position="fixed">
 
     <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
         <div>
@@ -539,13 +539,19 @@ function toggleBounce(marker) {
     
 
     <div data-role="content">    
-            <!-- <img src="images/img-intro2.jpg" alt="img-intro2" /> -->
+            <img src="images/img-intro2.jpg" alt="img-intro2"/>
     </div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" >
         <ul class="h">
             <li><a href="#"><img src="images/img-group-01.jpg" alt="img-group-01" /></a></li>
             <li><a href="#"><img src="images/img-group-02.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-03.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-04.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-05.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-06.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-07.jpg" alt="img-group-01" /></a></li>
+            <li><a href="#"><img src="images/img-group-08.jpg" alt="img-group-01" /></a></li>
         </ul>
     </div><!-- /footer -->
 </div><!-- /page -->
@@ -659,7 +665,7 @@ function toggleBounce(marker) {
             <ul class="v">
                 <li>
                     <a href="detail.html" class="thumb">
-                        <img onclick="addpicme()" src="images/200-130.jpg" id="img-profile" alt="Sub-Category Name" />
+                        <img onClick="addpicme()" src="images/200-130.jpg" id="img-profile" alt="Sub-Category Name" />
                     </a>
                             Username<br />
                         <strong><a id="username" href="detail.html"></a></strong><br />

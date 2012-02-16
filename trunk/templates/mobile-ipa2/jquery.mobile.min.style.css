@@ -3,7 +3,7 @@
 .ui-content p.link{ line-height:1.5em;}
 .ui-content > h2 a.ui-link { font-size:11px; float:right; margin:0 5px;}
 
-
+#index { background:none;}
 .detail p { text-align: justify; height:auto; overflow:hidden; }
 .detail.ui-content { margin-top: 20px;}
 
