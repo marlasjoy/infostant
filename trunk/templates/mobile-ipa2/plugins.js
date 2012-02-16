@@ -636,11 +636,13 @@ $.mobile.showPageLoadingMsg();
                                 // return false;
                            }else  if(myObject.mid)
                            {
-                               if(!localStorage.getItem("userId")){
+                               if(!localStorage.getItem("userId"))
+                               {
                                localStorage.setItem("userId",myObject.mid);
                                localStorage.setItem("username",myObject.username); 
                                localStorage.setItem("emailprofile",myObject.emailprofile);
                                localStorage.setItem("picme",myObject.picme); 
+                               localStorage.setItem("group",myObject.group); 
                                }
                              //  navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
@@ -694,8 +696,7 @@ $.mobile.showPageLoadingMsg();
              mySliderInstance.updateSliderSize();
              
 
-            
-            var myPhotoSwipe = $("#testId a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false,zIndex:10000 });
+
             
             
       
@@ -1028,8 +1029,16 @@ function templatesshopfunction()
 function myprofilefunction()
 {
 
-  $('.ui-page-active #username').html(localStorage.getItem("username"));  
+  $('.ui-page-active #username').html(localStorage.getItem("username")); 
+   
   $('#emailprofile').html(localStorage.getItem("emailprofile"));
+  
+  if(localStorage.getItem("picme"))
+  {
+      $('#img-profile').attr('src',localStorage.getItem("picme"));
+      
+  }
+  
   memoryresultfunction();
 }
 function addmemoryfunction()
@@ -1489,30 +1498,13 @@ default:
   try
   {
    
-      if($('.ui-page-active').attr('id')!="index")  
-      {
-          if(localStorage.getItem("userId"))
+
+          if(localStorage.getItem("group")==1)
           {
-          //   $('.ui-page-active #function .v').append('<li><a href="logout.html"><span>logout</span></a></li>'); 
-          }else
-          {
-         //    $('.ui-page-active #function .v').append('<li><a href="login.html"><span>login</span></a></li>');  
+             $('.ui-page-active #function2 .v').append('<li><a href="sale.html"><span>sale</span></a></li>'); 
           }
           
-      }else
-      {
-          if(localStorage.getItem("userId"))
-          {
-          //     $('#logid').html('logout');
-      //         $('#loglink').attr('href','logout.html');
-               
-          }else
-          {
-         //     $('#logid').html('login');
-        //      $('#loglink').attr('href','login.html');
-          }
-         
-      }    
+    
 
       // PLACE SLIDE DOWN MENU
       $('.ui-page-active nav li:nth-child(2) a').click(function() { 
