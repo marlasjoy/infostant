@@ -180,7 +180,7 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 }
 
 #social-rfcode{}
-#social-rfcode .show-rfcode{ margin:20px; font-size:24px; font-weight:bold;}
+#social-rfcode .show-rfcode{ font-size:20px; font-weight:bold;}
 
 #social-qrcode{}
 #social-qrcode .show-qrcode{ margin:20px; border-radius: 10px 10px 10px 10px;}
@@ -269,3 +269,33 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #notification .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
 #notification .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
 #notification .ui-btn-hover-c{ border:none;}
+
+
+
+/* BAR ICON */
+
+ .icon-profile{ background:url(images/icon_profile.png) no-repeat 0 -30px;}
+ .ui-focus .icon-profile,   .ui-btn-active .icon-profile{ background-position: 0px 0px;}
+ .icon-shop{ background:url(images/icon_profile.png) no-repeat -30px -30px;}
+ .ui-focus .icon-shop,    .ui-btn-active .icon-shop { background-position: -30px 0px;}
+
+ .icon-contact{ background:url(images/icon_profile.png) no-repeat -60px -30px;}
+ .ui-focus .icon-contact,   .ui-btn-active .icon-contact{ background-position: -60px 0px;}
+
+ .icon-refer{ background:url(images/icon_profile.png) no-repeat -90px -30px;}
+ .ui-focus .icon-qr,    .ui-btn-active .icon-refer { background-position: -90px 0px;}
+
+ .icon-qr{ background:url(images/icon_profile.png) no-repeat -120px -30px;}
+ .ui-focus .icon-qr,    .ui-btn-active .icon-qr { background-position: -120px 0px;}
+
+.icon-friend{ background:url(images/icon_profile.png) no-repeat -180px -30px;}
+.ui-focus .icon-friend,  .ui-btn-active .icon-friend { background-position: -180px 0px;}
+
+.icon-place{ background:url(images/icon_profile.png) no-repeat -150px -30px;}
+.ui-focus .icon-place, .ui-btn-active .icon-place { background-position: -150px 0px;}
+
+
+
+
+
+
