@@ -1040,11 +1040,11 @@ function myprofilefunction()
 
   $('.ui-page-active #username').html(localStorage.getItem("username")); 
    
-  $('#emailprofile').html(localStorage.getItem("emailprofile"));
+  $('.ui-page-active #emailprofile').html(localStorage.getItem("emailprofile"));
   
   if(localStorage.getItem("picme"))
   {
-      $('#img-profile').attr('src',localStorage.getItem("picme"));
+      $('.ui-page-active #img-profile').attr('src',localStorage.getItem("picme"));
       
   }
   
@@ -1402,6 +1402,7 @@ $('div').live( 'pageshow',function(event, ui){
   {
   //calendarfunction();
   $('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
+  myprofilefunction();
   }
   break;  
 case "calendar":
@@ -1457,8 +1458,8 @@ case "landing":
   {
    //  $(".ui-page-active #radio-choice-d").attr("checked","checked"); 
     shopfunction();  
-     $(".ui-page-active #radio-choice-d").attr("checked",true).checkboxradio("refresh"); 
-     $(".ui-page-active #radio-choice-c").attr("checked",false).checkboxradio("refresh"); 
+  //   $(".ui-page-active #radio-choice-d").attr("checked",true).checkboxradio("refresh"); 
+  //   $(".ui-page-active #radio-choice-c").attr("checked",false).checkboxradio("refresh"); 
   }
   
   break;
@@ -1481,8 +1482,8 @@ case "landing":
   {
   
       myprofilefunction();
-      $(".ui-page-active #radio-choice-c").attr("checked",true).checkboxradio("refresh"); 
-           $(".ui-page-active #radio-choice-d").attr("checked",false).checkboxradio("refresh"); 
+    //  $(".ui-page-active #radio-choice-c").attr("checked",true).checkboxradio("refresh"); 
+     //      $(".ui-page-active #radio-choice-d").attr("checked",false).checkboxradio("refresh"); 
   }
   break;
   case "registershop":
