@@ -626,7 +626,8 @@ $.mobile.showPageLoadingMsg();
                              alert(errorcode); 
                              return false;
                          } 
-                $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').val(),password1:$('.ui-page-active #password1').val() }, function(data) {
+     
+$.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').val(),password1:$('.ui-page-active #password1').val() }, function(data) {
                 var myObject = eval('(' + data + ')');             
                     if(myObject.error)
                            {
@@ -650,7 +651,15 @@ $.mobile.showPageLoadingMsg();
                               // location.href="login.html";
                                $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
                            }
-                });
+                       }).error(function() {
+                                
+                                
+                                
+                                alert('error');
+                                
+                                });
+
+     
  }
  function setlanding(myObject)
  { 
@@ -1590,49 +1599,7 @@ default:
         
         });
     }  
- }else
-  {
- if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
- {
-                                       //  document.write('<script charset="utf-8" src="ios\/phonegap-1.2.0.js"><\/script>');
-                                   
-$(".ui-page-active input[type='radio']").click(function() {
-  if($(".ui-page-active #radio-choice-c").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-c").attr("checked") == "checked")
-           {
-             
-             $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
-                               
-          }else
-           {
-               $.mobile.changePage("index.html#shop", "flip", true, true);
-           }
-});
-                                       
-                                         }
-else
-{
-                                             
-                                      
-     $(".ui-page-active input[type='radio']").click(function() {
-  if($(".ui-page-active #radio-choice-c").attr("checked") == "checked")
-           {
-             //  alert('1');
-
-                    //     $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
-                         location.href="index.html#profile-myprofile";
-                               
-          }else 
-           {
-             //  alert('2');
-            //   $(".ui-page-active #radio-choice-d").attr("checked","checked");
-
-                        // $.mobile.changePage("index.html#shop", "flip", true, true);
-                        location.href="index.html#shop";
-           }
-});
-   }
-  
-  }
+ }
 
 
 
