@@ -145,7 +145,7 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #function2 li:nth-child(5) a { background-position: -166px -446px;  }/*QR*/
 #function2 a.close { width: 100%; background: url(images/btn-function2-close.png) no-repeat top center; background-size: 100% 100%;width: 100%; height: 28px; text-indent: -1000em; display: block; position: absolute; bottom: -28px; }
 
-
+#function2 li:nth-child(1),#function2 li:nth-child(3),#function2 li:nth-child(4){ display:none}
 
 #social-contact {}
 #contact-bar .social{}
