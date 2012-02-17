@@ -304,7 +304,7 @@
               $username=$arraydata['username'];
               $password=md5(strtolower($arraydata['username']) . $arraydata['password']);
               $this->db->get_connect();
-              $this->db->db_set_recordset('SELECT mid,email  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" and `status` ="1" ');
+              $this->db->db_set_recordset('SELECT *  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" and `status` ="1" ');
               
               $data=$this->db->db_get_recordset();
           
@@ -3502,11 +3502,11 @@ $data=$this->db->db_get_recordset();
                        $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';   
                      }else
                      {
-                     $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';       
+                     $arraydata[$k]['pic']='images/200-130.jpg';        
                      }  
                      }else
                      {
-                                             $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';   
+                                             $arraydata[$k]['pic']='images/200-130.jpg';   
                      }
                         
                        
@@ -3727,7 +3727,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                      }
                        }else
                      {
-                     $arraydata[$k]['pic']=homeinfo.'/images/default/no-image/200-130.jpg';       
+                     $arraydata[$k]['pic']='images/200-130.jpg';       
                      }  
                         
                        
@@ -4033,7 +4033,8 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
              $username=$arraydata['username'];
               $password=md5(strtolower($arraydata['username']) . $arraydata['password1']);
               $this->db->get_connect();
-              $this->db->db_set_recordset('SELECT mid,email,pic  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" ');
+              
+              $this->db->db_set_recordset('SELECT `mid`,`email`,`pic`,`group`  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" and `status`="1"  ');
               
               $data=$this->db->db_get_recordset();
           
@@ -4046,7 +4047,15 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                  $arraydata['mid']=$data[0]['mid'];
                  $arraydata['username']=$username;
                  $arraydata['emailprofile']=$data[0]['email'];
-                 $arraydata['picme']=$data[0]['pic'];
+                 if($data[0]['pic'])
+                 {
+                    $arraydata['picme']= homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/'.$data[0]['pic'];
+                 }else
+                 {
+                     $arraydata['picme']='';
+                 }
+                 
+                 $arraydata['group']=$data[0]['group'];
               }else
               {
                  $arraydata['error']="ชื่อผู้ใช้หรือรหัสผ่านผิด"; 
@@ -4535,6 +4544,38 @@ where tb_shop.shopurl="'.$shopurl.'"');
            
            
            }
+      }
+      function submitmyprofileformiphone()
+      {
+           if($this->post['pic1'])
+              {
+              $this->post['username']=strtolower($this->post['username']);
+             if(!is_dir(fullpathtemp2.$this->post['username']))
+             {
+                 mkdir(fullpathtemp2.$this->post['username']);
+                 chmod(fullpathtemp2.$this->post['username'],0777);
+             }
+             if(!is_dir(fullpathimages2.$this->post['username']))
+             {
+                 mkdir(fullpathimages2.$this->post['username']);
+                 chmod(fullpathimages2.$this->post['username'],0777);
+             }
+             $filenow= 'avatar.jpg'; 
+             $fp = fopen(fullpathimages2.$this->post['username'].'/'.$filenow, 'wb');
+              fwrite($fp, base64_decode($this->post['pic1']));
+              fclose($fp);
+              $this->db->get_connect();
+              $data['pic']=$filenow;
+              $this->db->db_set($data,'tb_member',' mid='.$this->post['mid']);
+              $this->db->destory();
+              $this->db->closedb();
+              
+              $arraydata['error']=0;
+              
+              
+              
+              echo array2json($arraydata);
+              }
       }
       function submitpicformiphone2()
       {
