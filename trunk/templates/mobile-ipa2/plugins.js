@@ -141,7 +141,7 @@ function getHeight() {
   return xHeight;
 }
 function indexfunction(){
-      //alert('');
+      //navigator.notification.alert('');
  }
 function setdistrict(myObject){
        $("select#district").html('');
@@ -214,20 +214,20 @@ function settumbon(myObject){
 }
 function setdatetime(valueText,inst)
 {
-    alert(valueText);
+    navigator.notification.alert(valueText);
 }
 function setcalendar(sid)
 {
     sid2=sid;
     $('#date'+sid).scroller('show');
-    //alert(shopurl);
+    //navigator.notification.alert(shopurl);
 }
 function saveoffline()
 {
 //    $('.ui-page-active #searchresulthtml').html();
 
       localStorage.setItem("searchresulthtml",$('.ui-page-active #searchresulthtml').html()); 
-      alert('บันทึกเรียบร้อยแล้ว');
+      navigator.notification.alert('บันทึกเรียบร้อยแล้ว');
 }
 function setfav(sid)
 { 
@@ -238,10 +238,10 @@ function setfav(sid)
             var myObject = eval('(' + data + ')');   
             if(myObject.resposne==1)
             {
-                alert('เพิ่ม favarite เรียบร้อยแล้ว');
+                navigator.notification.alert('เพิ่ม favarite เรียบร้อยแล้ว');
             }else
             {
-                alert(myObject.resposne);
+                navigator.notification.alert(myObject.resposne);
             }
             $.mobile.hidePageLoadingMsg();   
         });
@@ -266,7 +266,7 @@ function searchresultlist(myObject){
             var arraydata={};
              for (variable in myObject)
              {   
-          //   alert(variable) ;
+          //   navigator.notification.alert(variable) ;
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop")
@@ -343,14 +343,14 @@ function searchresultlist(myObject){
         })
     
     $('.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
-//alert(dateText);
+//navigator.notification.alert(dateText);
                  
        $.mobile.showPageLoadingMsg();
        var setcalendar=localStorage.getItem('calendar');   
        
        if(setcalendar)
        {
-          // alert(setcalendar);
+          // navigator.notification.alert(setcalendar);
           var arraydata=jQuery.parseJSON(setcalendar);
           
          arraydata[''+dateText+'']=sid2;
@@ -363,10 +363,10 @@ function searchresultlist(myObject){
            arraydata[''+dateText+'']=sid2;
            var jsonstring= JSON.stringify(arraydata);
            localStorage.setItem('calendar',jsonstring);  
-         //alert(jsonstring);
+         //navigator.notification.alert(jsonstring);
            
        }
-    alert('เพิ่ม วันที่ เรียบร้อยแล้ว');
+    navigator.notification.alert('เพิ่ม วันที่ เรียบร้อยแล้ว');
     $.mobile.hidePageLoadingMsg();  
     //localStorage.setItem('calendar','');    
     
@@ -396,7 +396,7 @@ $.mobile.showPageLoadingMsg();
  }
  function deletememory(meid)
  {
-   //  alert(meid);
+   //  navigator.notification.alert(meid);
      $('#deleteid'+meid).simpledialog({
     'mode' : 'bool',
     'fullScreen':'false',
@@ -407,7 +407,7 @@ $.mobile.showPageLoadingMsg();
         click: function () {
             $.mobile.showPageLoadingMsg();
            $.post(webdir+'/ajax/deletemorybymeid',{meid:meid,mid:localStorage.getItem("userId") }, function(data) {
-               alert('ลบเรียบร้อยแล้ว');
+               navigator.notification.alert('ลบเรียบร้อยแล้ว');
                memoryresultfunction();
             $.mobile.hidePageLoadingMsg();   
            });
@@ -428,7 +428,7 @@ $.mobile.showPageLoadingMsg();
  }
   function deleteshop(shopurl)
  {
-   //  alert(meid);
+   //  navigator.notification.alert(meid);
      $('#deleteid'+shopurl).simpledialog({
     'mode' : 'bool',
     'fullScreen':'false',
@@ -439,7 +439,7 @@ $.mobile.showPageLoadingMsg();
         click: function () {
             $.mobile.showPageLoadingMsg();
            $.post(webdir+'/ajax/deletemorybyshopurl',{shopurl:shopurl,mid:localStorage.getItem("userId") }, function(data) {
-               alert('ลบเรียบร้อยแล้ว');
+               navigator.notification.alert('ลบเรียบร้อยแล้ว');
                searchresultfunction();
             $.mobile.hidePageLoadingMsg();   
            });
@@ -466,7 +466,7 @@ $.mobile.showPageLoadingMsg();
              for (variable in myObject)
              {   
                  
-          //   alert(variable) ;
+          //   navigator.notification.alert(variable) ;
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
 
@@ -530,7 +530,7 @@ $.mobile.showPageLoadingMsg();
            $.mobile.hidePageLoadingMsg();
 }
  function searchfunction() {
-     //alert('');
+     //navigator.notification.alert('');
     
      $('#province').change(function() {
          $.mobile.showPageLoadingMsg();
@@ -622,8 +622,8 @@ $.mobile.showPageLoadingMsg();
                      }
                 if(errorcode!="")
                          {
-                            // navigator.notification.alert(errorcode);
-                             alert(errorcode); 
+                            // navigator.notification.navigator.notification.alert(errorcode);
+                             navigator.notification.alert(errorcode); 
                              return false;
                          } 
      
@@ -631,8 +631,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                 var myObject = eval('(' + data + ')');             
                     if(myObject.error)
                            {
-                              //navigator.notification.alert(myObject.error);
-                              alert(myObject.error);
+                              //navigator.notification.navigator.notification.alert(myObject.error);
+                              navigator.notification.alert(myObject.error);
                               //    $('#buttonSave').attr("disabled", "false"); 
                                 // return false;
                            }else  if(myObject.mid)
@@ -645,8 +645,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                                localStorage.setItem("picme",myObject.picme); 
                                localStorage.setItem("group",myObject.group); 
                                }
-                             //  navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
-                                alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
+                             //  navigator.notification.navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
+                                navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 
                               // location.href="login.html";
                                $.mobile.changePage("index.html#profile-myprofile", "flip", true, true);
@@ -655,7 +655,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                                 
                                 
                                 
-                                alert('error');
+                                navigator.notification.alert('error');
                                 
                                 });
 
@@ -669,7 +669,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
              var retrievedObject = localStorage.getItem('recentview');
              var arraydata=new Array();
              if (retrievedObject) {
-               //   alert(retrievedObject);
+               //   navigator.notification.alert(retrievedObject);
                   var arraydata = retrievedObject.split(",");
 
                   arraydata.push(myObject.sid); 
@@ -681,7 +681,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                     
                     
                 }
-                //alert(arraydata.join(","));
+                //navigator.notification.alert(arraydata.join(","));
                 localStorage.setItem("recentview",arraydata.join(",")); 
 
 
@@ -743,7 +743,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
       new google.maps.Point(0, 40)); 
-   // alert(myObject.lat);
+   // navigator.notification.alert(myObject.lat);
    var myLatLng = new google.maps.LatLng(myObject.lat, myObject.lng);
     var marker = new google.maps.Marker({
         position: myLatLng,
@@ -916,8 +916,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         
         if(errorset==1)
         {
-        // navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
-          alert("ท่านกรอกข้อมูลไม่ครบ");   
+        // navigator.notification.navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
+          navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");   
           return false;
         }
         else{
@@ -926,8 +926,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         $.post(webdir+'/ajax/checkshopurl',{shopurl:$('#shopurl').val() }, function(data3) {
                          if(!eval(data3))
                          {
-                         // navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
-                         alert("url ที่ท่านกรอกซ้ำ"); 
+                         // navigator.notification.navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
+                         navigator.notification.alert("url ที่ท่านกรอกซ้ำ"); 
                          }else
                          {
                             
@@ -972,8 +972,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
          var myObject = eval('(' + data + ')');
           if(myObject.error)
                            {
-                                 //navigator.notification.alert(myObject.error);
-                                 alert(myObject.error); 
+                                 //navigator.notification.navigator.notification.alert(myObject.error);
+                                 navigator.notification.alert(myObject.error); 
                                  $('#buttonSave').attr("disabled", "false"); 
                                  $('#buttonSave').html('Submit');
                                 // return false;
@@ -981,8 +981,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                            } if(myObject.shopurl)
                            {
 
-                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
-                               alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
+                              // navigator.notification.navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                               navigator.notification.alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
                             //   $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
                                 location.href="shopedit.html?shopurl="+myObject.shopurl;
@@ -993,12 +993,12 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
 function checktemplate()
 {
             var id=mySliderInstance.currentSlideId;
-           // alert(id);
+           // navigator.notification.alert(id);
            var temp= $('.royalImage-'+id).attr('id');
            temid=temp.replace('tem-', '');
            $('#temid').val(temid);
            
-           //alert(temid);
+           //navigator.notification.alert(temid);
           
      }
 function addmemoryserver()
@@ -1010,12 +1010,12 @@ function addmemoryserver()
 
                if(myObject.error)
                {
-                    alert(myObject.error);
+                    navigator.notification.alert(myObject.error);
                }else{
-                  // alert();
+                  // navigator.notification.alert();
                    
-                   alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                  // alert(webdir+'/memory/'+myObject.username+'/'+myObject.memoryurl);
+                   navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                  // navigator.notification.alert(webdir+'/memory/'+myObject.username+'/'+myObject.memoryurl);
                 
                  //  $.mobile.changePage("memoryedit.html?meid="+myObject.meid, "flip", true, true); 
                    location.href="memoryedit.html?meid="+myObject.meid;
@@ -1066,8 +1066,8 @@ function registerserver()
          var myObject = eval('(' + data + ')');
           if(myObject.error)
                            {
-                           // navigator.notification.alert(myObject.error);  
-                                 alert(myObject.error); 
+                           // navigator.notification.navigator.notification.alert(myObject.error);  
+                                 navigator.notification.alert(myObject.error); 
                                 $.mobile.hidePageLoadingMsg();
                                 return false;
                            } 
@@ -1080,8 +1080,8 @@ function registerserver()
                                localStorage.setItem("picme",myObject.picme); 
                                }
                                
-                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
-                               alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
+                              // navigator.notification.navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                               navigator.notification.alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
                                $.mobile.changePage("index.html#profile-myprofile", "flip", true, true); 
                            }
@@ -1096,7 +1096,7 @@ function recentfunction()
                     sids=retrievedObject;
                     
                     searchresultfunction();
-               //   alert(retrievedObject);
+               //   navigator.notification.alert(retrievedObject);
                 //  var arraydata = retrievedObject.split(",");
 
                  // arraydata.push(myObject.sid); 
@@ -1124,17 +1124,17 @@ function favaritefunction()
                 $('.ui-page-active #searchresulthtml').html(localStorage.getItem('searchresulthtml'));
                 setshare2();
                 
-                // alert('no online'); 
+                // navigator.notification.alert('no online'); 
                 return false;
                 
                 });
 
 
- //    alert(online) ;
+ //    navigator.notification.alert(online) ;
    //  if (online) {
 //    searchresultfunction();
 //  } else {
-//      alert('no online');
+//      navigator.notification.alert('no online');
     //document.getElementById('jquery_loader').src = '/javascripts/jquery.js';
 //  }
 

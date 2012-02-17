@@ -243,16 +243,16 @@ function getmylocation(){
            
     browserSupportFlag = true;
  //   var options =  { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
-   // alert('1');
+   // navigator.notification.alert('1');
     navigator.geolocation.getCurrentPosition(getlocation2,handleNoGeolocation);
   // Try Google Gears Geolocation
   } else if (google.gears) {
  
-   //alert('2');
+   //navigator.notification.alert('2');
   // Browser doesn't support Geolocation
   } else {
 
- //  alert('3');   
+ //  navigator.notification.alert('3');   
       
   } 
   
@@ -260,7 +260,7 @@ function getmylocation(){
 
      
 
-         alert('เปิด GPS ด้วยค่ะ');
+         navigator.notification.alert('เปิด GPS ด้วยค่ะ');
 
 
     //map.setCenter(initialLocation);
@@ -283,13 +283,14 @@ function getlocation2(position){
 
       
 }    
-function getUrlVars2() {
+function getUrlVars2() 
+{
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
             vars[key] = value;
         });
         return vars;
-    }
+}
 function savemapdata()
 {
 $.mobile.showPageLoadingMsg();
@@ -331,7 +332,7 @@ else if (pastedData.match('http://player\.soundcloud\.com')) {
 }
 if (success) { return media; }
 else {
- //alert("No valid media id detected");
+ //navigator.notification.alert("No valid media id detected");
 }
 return false;
 }
@@ -495,7 +496,7 @@ function showAddress(address)
         $('#lat:last').val(marker.getPosition().lat());
         $('#lng:last').val(marker.getPosition().lng()); 
       } else {
-        alert("Geocode was not successful for the following reason: " + status);
+        navigator.notification.alert("Geocode was not successful for the following reason: " + status);
       }
   });
   }
@@ -839,7 +840,8 @@ $('#'+size).simpledialog({
 
                 
     }
-function onFail(message) {
+function onFail(message) 
+   {
       navigator.notification.alert('Failed because: ' + message);
     }
 </script>
