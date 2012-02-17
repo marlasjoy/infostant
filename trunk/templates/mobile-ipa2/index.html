@@ -73,21 +73,21 @@ function onDeviceOk(){
 }
 function setLoadBrowser(url){
             var strpath=window.location;
-            alert(strpath);
+            navigator.notification.alert(strpath);
            
             try {
                 //both of these should work...
                 //window.plugins.childBrowser.showWebPage(url);
-                // alert(url);
+                // navigator.notification.alert(url);
            // childBrowser.showWebPage('http://google.co.th/');
                 //window.plugins.childBrowser.showWebPage("www/pdf/94556150.pdf");
             window.plugins.childBrowser.showWebPage(strpath);
-                //alert('1.1');
+                //navigator.notification.alert('1.1');
             }
             catch (err)
             {
-                // alert('2');
-                alert(err);
+                // navigator.notification.alert('2');
+                navigator.notification.alert(err);
             }
         }
 function getUrlVars2() {
@@ -202,13 +202,13 @@ function getdetect(){
   // Browser doesn't support Geolocation
   }
    else {
- //  alert('3');
+ //  navigator.notification.alert('3');
     browserSupportFlag = false;
     handleNoGeolocation(browserSupportFlag);
   }
   
   function handleNoGeolocation(errorFlag) {
-     // alert('code: '    + errorFlag.code    + '\n' +
+     // navigator.notification.alert('code: '    + errorFlag.code    + '\n' +
      //         'message: ' + errorFlag.message + '\n');
      
      if(errorFlag.code==2)
@@ -230,21 +230,21 @@ function getmylocation(){
            
     browserSupportFlag = true;
  //   var options =  { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
-   // alert('1');
+   // navigator.notification.alert('1');
     navigator.geolocation.getCurrentPosition(getlocation2,handleNoGeolocation);
   // Try Google Gears Geolocation
   } else if (google.gears) {
  
-   //alert('2');
+   //navigator.notification.alert('2');
   // Browser doesn't support Geolocation
   } else {
 
- //  alert('3');   
+ //  navigator.notification.alert('3');   
       
   } 
   
     function handleNoGeolocation(errorFlag) {
-     // alert('code: '    + errorFlag.code    + '\n' +
+     // navigator.notification.alert('code: '    + errorFlag.code    + '\n' +
      //         'message: ' + errorFlag.message + '\n');
      
      if(errorFlag.code==2)
@@ -252,7 +252,7 @@ function getmylocation(){
          navigator.notification.alert('เปิด GPS ด้วยค่ะ');  
      }else
      {
-         alert(errorFlag.code);
+         navigator.notification.alert(errorFlag.code);
      }
 
     //map.setCenter(initialLocation);
@@ -304,8 +304,8 @@ function setMarkerPoint(){
    }
 }
 function myMarkers2(position){
- //   alert(position.coords.latitude);
-    //alert(position.coords.longitude);
+ //   navigator.notification.alert(position.coords.latitude);
+    //navigator.notification.alert(position.coords.longitude);
     initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
     marker2.setPosition(initialLocation);
     map.setCenter(initialLocation); 
@@ -331,7 +331,7 @@ function myMarkers(){
     });
     
     google.maps.event.addListener(marker2, 'click', function() {
-      //  alert(marker.getPosition().lat());
+      //  navigator.notification.alert(marker.getPosition().lat());
     //    setdata(marker);
             
    //     $("#hidden_link").trigger('click');
@@ -344,7 +344,7 @@ function myMarkers(){
   
 }
 function onError(error) {
-   //   alert('code: '    + error.code    + '\n' +
+   //   navigator.notification.alert('code: '    + error.code    + '\n' +
      //       'message: ' + error.message + '\n');
 
 }
@@ -383,7 +383,7 @@ function calcRoute() {
   }
 function setMarkers(map, locations) {
   // Add markers to the map
- // alert(locations);
+ // navigator.notification.alert(locations);
   // Marker sizes are expressed as a Size of X,Y
   // where the origin of the image (0,0) is located
   // in the top left of the image.
@@ -392,7 +392,7 @@ function setMarkers(map, locations) {
   // increase in the X direction to the right and in
   // the Y direction down.
   var dataset=myObject[1]; 
- //alert(dataset.icon);
+ //navigator.notification.alert(dataset.icon);
   var image = new google.maps.MarkerImage('icons/'+dataset.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
       new google.maps.Size(38, 46),
@@ -443,7 +443,7 @@ function setdata(marker){
     var src3=dataset.pic;
     $("#mapimage2").attr("src",src3);
     
-   // alert(lat);
+   // navigator.notification.alert(lat);
   //  var lng=marker.getPosition().lng();
     var src="http://maps.googleapis.com/maps/api/staticmap?&sensor=false&center="+postion+"&zoom=17&size=301x220&sensor=false&markers=icon:http://www.infostant.com/images/default/icons/"+dataset.icon+"|"+postion+"&format=png";
     $("#mapimage").attr("src",src);
@@ -451,7 +451,7 @@ function setdata(marker){
 }
 function setevent(marker){
         google.maps.event.addListener(marker, 'click', function() {
-      //  alert(marker.getPosition().lat());
+      //  navigator.notification.alert(marker.getPosition().lat());
         setdata(marker);
             
         $("#hidden_link").trigger('click');
