@@ -622,7 +622,7 @@ $.mobile.showPageLoadingMsg();
                      }
                 if(errorcode!="")
                          {
-                            // navigator.notification.navigator.notification.alert(errorcode);
+                            // navigator.notification.alert(errorcode);
                              navigator.notification.alert(errorcode); 
                              return false;
                          } 
@@ -631,7 +631,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                 var myObject = eval('(' + data + ')');             
                     if(myObject.error)
                            {
-                              //navigator.notification.navigator.notification.alert(myObject.error);
+                              //navigator.notification.alert(myObject.error);
                               navigator.notification.alert(myObject.error);
                               //    $('#buttonSave').attr("disabled", "false"); 
                                 // return false;
@@ -645,7 +645,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                                localStorage.setItem("picme",myObject.picme); 
                                localStorage.setItem("group",myObject.group); 
                                }
-                             //  navigator.notification.navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
+                             //  navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 navigator.notification.alert('เข้าสู่ระบบเรียบร้อยแล้ว'); 
                                 
                               // location.href="login.html";
@@ -916,7 +916,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         
         if(errorset==1)
         {
-        // navigator.notification.navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
+        // navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
           navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");   
           return false;
         }
@@ -926,7 +926,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         $.post(webdir+'/ajax/checkshopurl',{shopurl:$('#shopurl').val() }, function(data3) {
                          if(!eval(data3))
                          {
-                         // navigator.notification.navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
+                         // navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
                          navigator.notification.alert("url ที่ท่านกรอกซ้ำ"); 
                          }else
                          {
@@ -972,7 +972,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
          var myObject = eval('(' + data + ')');
           if(myObject.error)
                            {
-                                 //navigator.notification.navigator.notification.alert(myObject.error);
+                                 //navigator.notification.alert(myObject.error);
                                  navigator.notification.alert(myObject.error); 
                                  $('#buttonSave').attr("disabled", "false"); 
                                  $('#buttonSave').html('Submit');
@@ -981,7 +981,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                            } if(myObject.shopurl)
                            {
 
-                              // navigator.notification.navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
                                navigator.notification.alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
                             //   $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
@@ -1066,7 +1066,7 @@ function registerserver()
          var myObject = eval('(' + data + ')');
           if(myObject.error)
                            {
-                           // navigator.notification.navigator.notification.alert(myObject.error);  
+                           // navigator.notification.alert(myObject.error);  
                                  navigator.notification.alert(myObject.error); 
                                 $.mobile.hidePageLoadingMsg();
                                 return false;
@@ -1080,7 +1080,7 @@ function registerserver()
                                localStorage.setItem("picme",myObject.picme); 
                                }
                                
-                              // navigator.notification.navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
                                navigator.notification.alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
                                $.mobile.hidePageLoadingMsg();
                                $.mobile.changePage("index.html#profile-myprofile", "flip", true, true); 
@@ -1390,7 +1390,13 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
-    
+ case "registeraffiliate":
+   if(accesspage())
+  {
+  //calendarfunction();
+  //$('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
+  }
+  break;     
  case "social-rfcode":
    if(accesspage())
   {
