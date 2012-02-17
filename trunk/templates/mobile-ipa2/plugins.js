@@ -1390,6 +1390,7 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
+    
  case "social-rfcode":
    if(accesspage())
   {
@@ -1510,7 +1511,14 @@ default:
 
           if(localStorage.getItem("group")==1)
           {
-             $('.ui-page-active #function2 .v').append('<li><a href="sale.html"><span>sale</span></a></li>'); 
+            if($('.ui-page-active #affiliatehtml').html())
+            {
+                
+            }else
+            {
+                $('.ui-page-active #function2 .v').append('<li><a href="affiliate.html"><span id="affiliatehtml">affiliate</span></a></li>'); 
+            }
+             
           }
           
     
