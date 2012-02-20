@@ -77,7 +77,7 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 
 #function{}
 #function {top: -340px;}
-#function > ul.v{ height:250px;}
+#function > ul.v{ height:320px;}
 #function li:nth-child(1) a { background-position: -615px 7px;  }/*setting*/
 #function li:nth-child(2) a { background-position: -567px -45px;  }/*directory*/
 #function li:nth-child(3) a { background-position: -515px -90px;  }/*recent*/
@@ -117,9 +117,9 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 
 
 #function2 {top: -260px;}
-#function2 > ul.v{ height: 160px;}
+#function2 > ul.v{ height:240px;}
 #function2 { position: absolute; background: #80c8e3 url(images/bg-header_shadow.png) top center no-repeat; background-size: 100% 5px;  height: auto; width: 100%;  z-index: 1101; top: 45px; top: -320px; }
-#function2 > ul.v { height: 160px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
+#function2 > ul.v { height: 230px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
 #function2 li {  height: 38px; display: block; line-height: 38px;  margin: 0 20px 5px; border: solid 1px #000; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
 #function2 li > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
 #function2 li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
@@ -300,7 +300,79 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 .ui-focus .icon-place, .ui-btn-active .icon-place { background-position: -150px 0px;}
 
 
+/***********Promotion************/
+#promotion{}
+#promotion .subpage ul.h {
+    bottom: 3px;
+    clear: both;
+	width:30px;
+    min-width: 30px;
+    position: absolute;
+    right: 10px;
+	left:auto;
+    top: 10px;
+}
+#promotion .subpage ul.h > li{margin-bottom:10px;}
+#promotion .subpage > ul.v > li {
+    padding-left: 125px;
+}
+#promotion .subpage > ul.v > li img{ width:65px;}
+#promotion .subpage > ul.v > li {
+    color: #747474;
+    font-size: 12px;
+    line-height: 135%;
+    padding: 10px 10px 10px 90px;
+    position: relative;
+	
+}
 
 
+#promotion .data{ position:relative; font-size:12px; margin:0 0 10px 0; color:#666; min-height:500px;}
+#promotion .data strong{ color:#333;}
+#promotion .data .logo{ background:#FFF; position:absolute; top:-25px; left:2%; width:27%; max-width:100px; border: 1px solid #C8C8C8; box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);padding: 2px;}
+#promotion .data div.promo{  position:absolute; top:100px; right:3%; width:27%;  max-width:100px;}
+#promotion .data div.promo img.sale{ width:100%;  background:#FFF; border: 1px solid #C8C8C8; box-shadow: 1px 1px 5px rgba(0, 0, 255, 0.2);padding: 2px;}
+#promotion .data div.promo img.fav{width:100%;padding: 2px; margin-top:5px;}
+#promotion .data div.d1{ margin-left:35%; min-height:90px;}
+#promotion .data div.d2{ margin-top:5px; margin-right:35%; text-align:justify;}
 
 
+#membersub .subpage > ul.v > li { padding-bottom:10px;}
+#membersub .subpage > ul.v > li img{ width:65px;}
+#membersub ul.stamp{ border-top:1px solid #CCC; display:block; padding:5px; background:#EEE;}
+#membersub ul.stamp > li{ display:block; float:left; margin:5px;width:50px; height:50px; background:#FFF;}
+#membersub ul.stamp > li img { width:50px;}
+#membersub .text1{ font-size:12px; display:block; clear:both; padding:10px;}
+#membersub .text2 { font-size:13px;}
+#membersub .text2 h3.condition{ background:#999; text-shadow:none; padding:5px 5px 5px 10px; margin:0;}
+#membersub .text2 .data{ padding:10px;}
+
+/***********Blackbar************/
+#black-bar .social{}
+#black-bar .ui-radio{ width:33%}
+#black-bar .ui-radio .ui-btn{ width:97%}
+#black-bar { background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#black-bar .ui-btn{ margin:3px;}
+#black-bar .ui-btn-inner{ padding:0px 10px;}
+#black-bar .alignbox{ display:block;margin-left:-60px;}
+/*ICON*/
+#black-bar .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333; font-size:0.75em;}
+
+#black-bar .icon-contact{ background:url(images/icon_profile.png) no-repeat -60px -30px;}
+#black-bar .ui-focus .icon-contact, #black-bar .ui-btn-active .icon-contact{ background-position: -60px 0px;}
+#black-bar .icon-refer{ background:url(images/icon_profile.png) no-repeat -90px -30px;}
+#black-bar .ui-focus .icon-qr,  #black-bar .ui-btn-active .icon-refer { background-position: -90px 0px;}
+#black-bar .icon-qr{ background:url(images/icon_profile.png) no-repeat -120px -30px;}
+#black-bar .ui-focus .icon-qr,  #black-bar .ui-btn-active .icon-qr { background-position: -120px 0px;}
+#black-bar .icon-promotion{ background:url(images/icon_profile.png) no-repeat -210px -30px;}
+#black-bar .ui-focus .icon-promotion,  #black-bar .ui-btn-active .icon-promotion { background-position: -210px 0px;}
+#black-bar .icon-coupon{ background:url(images/icon_profile.png) no-repeat -240px -30px;}
+#black-bar .ui-focus .icon-coupon,  #black-bar .ui-btn-active .icon-coupon { background-position: -240px 0px;}
+#black-bar .icon-member{ background:url(images/icon_profile.png) no-repeat -270px -30px;}
+#black-bar .ui-focus .icon-member,  #black-bar .ui-btn-active .icon-member { background-position: -270px 0px;}
+
+#black-bar .ui-btn-hidden{ opacity: 1;}
+#black-bar .ui-btn-text{line-height: 30px;display:block;text-align:center;}
+#black-bar .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
+#black-bar .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
+#black-bar .ui-btn-hover-c{ border:none;}
