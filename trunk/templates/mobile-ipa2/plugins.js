@@ -27,6 +27,9 @@ myCat[14]="Travel";
 myCat[13]="Education";
 myCat[15]="Other";
  var shopname;
+ var username;
+ var password;
+  var emailuser;
  var shopurl;
  var lat;
  var lng;
@@ -43,6 +46,7 @@ myCat[15]="Other";
   var events=[]; 
   var start=0;
   var limit=10;
+  var submid;
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -112,7 +116,11 @@ function resetvalue(){
      refcode="";
      sids="";
      fid="";
+     username="";
+     password="";
+     emailuser="";
      start=0;
+     submid="";
  }
 function getWidth(){
     xWidth = null;
@@ -269,7 +277,7 @@ function searchresultlist(myObject){
           //   navigator.notification.alert(variable) ;
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
-    if($('.ui-page-active').attr('id')=="shop")
+    if($('.ui-page-active').attr('id')=="shop"||$('.ui-page-active').attr('id')=="affiliate")
     {
       $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'"  class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
@@ -379,7 +387,7 @@ function searchresultlist(myObject){
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
                    $.ajax({
-                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit},                                                            
+                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid},                                                            
                                                       url: webdir+'/ajax/getallshopbyname3',
                                                       dataType: "jsonp",
                                                       jsonp: 'callback',
@@ -1376,6 +1384,125 @@ $.calendar.Initialize(options);
 
 
 }
+function nextaffstep1()
+{
+       resetvalue();
+        if($('#input-email').val()=="")
+        {
+           errorset=1; 
+        }else if($('#username').val()=="")
+        {
+          errorset=1;  
+        }
+        else if($('#password1').val()=="")
+        {
+          errorset=1;  
+        }
+        else if($('#shopurl').val()=="")
+        {
+           errorset=1; 
+        }else if($('#shopname').val()=="")
+        {
+          errorset=1;  
+        }else if($('#province').val()=="")
+        {
+          errorset=1;  
+        }else if($('#district').val()=="")
+        {
+          errorset=1;  
+        }else if($('#tumbon').val()=="")
+        {
+          errorset=1;  
+        }else if($('#cat').val()=="")
+        {
+          errorset=1;  
+        }
+        else if($('#subcat').val()=="")
+        {
+          errorset=1;  
+        }
+        
+        if(errorset==1)
+        {
+        // navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");
+          navigator.notification.alert("ท่านกรอกข้อมูลไม่ครบ");   
+          return false;
+        }
+        else{
+            
+        
+        $.post(webdir+'/ajax/checkaff',{shopurl:$('#shopurl').val(),email:$('#input-email').val(),username:$('#username').val() }, function(data3) {
+                            var myObject = eval('(' + data3 + ')');             
+
+                       if(myObject.error)
+                         {
+                         // navigator.notification.alert("url ที่ท่านกรอกซ้ำ");   
+                         navigator.notification.alert(myObject.error); 
+                         }else
+                         {
+                            
+                             
+                             
+                             
+                         username=$('#username').val();    
+                         password=$('#password1').val(); 
+                         emailuser=$('#input-email').val(); 
+                         proid=$('#province').val();
+                         disid=$('#district').val();
+                         tumid=$('#tumbon').val();
+                         catid=$('#cat').val();
+                         subcatid=$('#subcat').val();
+                         shopname=$('#shopname').val();
+                         shopurl=$('#shopurl').val();
+                         lat=$('#lat').val();
+                         lng=$('#lng').val();
+                         refcode=$('#refcode').val();
+                         $.mobile.changePage("templatesaff.html", "flip", true, true); 
+                         
+                         
+                         }
+                         
+                                
+        });
+        
+        
+        
+        }
+}
+ function nextaffstep2()
+ {
+     $.mobile.showPageLoadingMsg();
+     $('#buttonSave').attr("disabled", "true"); 
+     $('#buttonSave').html('Loading');
+     $.post(webdir+'/ajax/submitaffformiphone',{
+       mid:localStorage.getItem("userId"),catid:catid
+     ,subcatid:subcatid,shopname:encodeURIComponent(shopname),shopurl:shopurl
+     ,proid:proid,disid:disid,tumid:tumid,temid:$('#temid').val()
+     ,refcode:refcode,lat:lat,lng:lng
+     ,username:username,password:password,email:emailuser,status:1
+     }, function(data) {
+         var myObject = eval('(' + data + ')');
+          if(myObject.error)
+                           {
+                                 //navigator.notification.alert(myObject.error);
+                                 navigator.notification.alert(myObject.error); 
+                                 $('#buttonSave').attr("disabled", "false"); 
+                                 $('#buttonSave').html('Submit');
+                                // return false;
+                                $.mobile.hidePageLoadingMsg();
+                           } if(myObject.shopurl)
+                           {
+
+                              // navigator.notification.alert('บันทึกข้อมูลเรียบร้อยแล้ว');  
+                               navigator.notification.alert("บันทึกข้อมูลเรียบร้อยแล้ว"); 
+                               $.mobile.hidePageLoadingMsg();
+                            //   $.mobile.changePage("shopedit.html?shopurl="+myObject.shopurl, "flip", true, true); 
+                                location.href="shopedit.html?shopurl="+myObject.shopurl;
+                           }
+                           
+     });
+ }
+
 jQuery(document).ready(function($){ 
 	
 	/* Open/Close Function */
@@ -1390,9 +1517,18 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
+ case "templatesaff":
+   if(accesspage())
+  {
+      templatesshopfunction();
+
+  }
+  break;     
  case "registeraffiliate":
    if(accesspage())
   {
+      $('#refcode').val(parseInt(localStorage.getItem("userId"))+10000);
+      registershopfunction();
   //calendarfunction();
   //$('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
   }
@@ -1404,7 +1540,17 @@ $('div').live( 'pageshow',function(event, ui){
   $('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
   myprofilefunction();
   }
-  break;  
+  break;
+   case "affiliate":
+   if(accesspage())
+  {
+    resetvalue();
+  submid=localStorage.getItem("userId");
+ // $('#wordTxt').html(myCat[catid]);
+  searchresultfunction();
+
+  }
+  break;   
 case "calendar":
    if(accesspage())
   {
@@ -1480,7 +1626,7 @@ case "landing":
   case "profile-myprofile":
    if(accesspage())
   {
-  
+  $('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
       myprofilefunction();
     //  $(".ui-page-active #radio-choice-c").attr("checked",true).checkboxradio("refresh"); 
      //      $(".ui-page-active #radio-choice-d").attr("checked",false).checkboxradio("refresh"); 
@@ -1523,7 +1669,7 @@ default:
                 
             }else
             {
-                $('.ui-page-active #function2 .v').append('<li><a href="affiliate.html"><span id="affiliatehtml">affiliate</span></a></li>'); 
+                $('.ui-page-active #function2 .v').append('<li><a href="affiliate.html"><span id="affiliatehtml">Affiliate</span></a></li>'); 
             }
              
           }
@@ -1532,17 +1678,34 @@ default:
 
       // PLACE SLIDE DOWN MENU
       $('.ui-page-active nav li:nth-child(2) a').click(function() { 
+          if(accesspage())
+  {
+                  if(localStorage.getItem("group")==1)
+          { 
         $('.ui-page-active #function2').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
          var height=$('.ui-page-active').height(); 
 
                    $('.ui-page-active').height(height+360);
+                   
+      }else
+          {
+              $.mobile.changePage("shop.html", "flip", true, true);   
+          }
+          
+  }
+      
     })    
-      $('.ui-page-active #function2 a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() { 
+
+      $('.ui-page-active #function2 a, nav li:nth-child(1) a, nav li:nth-child(3) a, h1 > a, a[data-rel="back"]').click(function() {
+            
         $('.ui-page-active #function2').animate({ top: '-=360px', useTranslate3d: true, leaveTransforms: true}, 1000);
                  var height=$('.ui-page-active').height(); 
 
                    $('.ui-page-active').height(height-360);
-    })
+    
+      
+      })
+          
 	  
 	  
 	  
@@ -1551,18 +1714,18 @@ default:
         $('.ui-page-active #function').animate({ top: '45px', useTranslate3d: true, leaveTransforms: true}, 1000);
          var height=$('.ui-page-active').height(); 
 
-                   $('.ui-page-active').height(height+360);
+                   $('.ui-page-active').height(height+320);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(2) a,nav li:nth-child(4) a, h1 > a, a[data-rel="back"]').click(function() { 
-        $('.ui-page-active #function').animate({ top: '-=390px', useTranslate3d: true, leaveTransforms: true}, 1000);
+        $('.ui-page-active #function').animate({ top: '-=350px', useTranslate3d: true, leaveTransforms: true}, 1000);
                  var height=$('.ui-page-active').height(); 
 
-                   $('.ui-page-active').height(height-360);
+                   $('.ui-page-active').height(height-320);
     })
  
  
  
- if($('.ui-page-active').attr('id')=="social-qrcode"||$('.ui-page-active').attr('id')=="social-contact"||$('.ui-page-active').attr('id')=="social-rfcode")
+ if($('.ui-page-active').attr('id')=="social-qrcode"||$('.ui-page-active').attr('id')=="social-contact"||$('.ui-page-active').attr('id')=="social-rfcode"||$('.ui-page-active').attr('id')=="profile-myprofile")
  {
     if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
     {
