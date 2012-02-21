@@ -93,9 +93,11 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #function li:nth-child(13) a { background-position: -22px -593px;  }/*help*/
 
 
+
+
+
 #function li:nth-child(14) a {
-    background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
-}
+background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;}
 
 #function li:nth-child(1) a {
     background: url(images/function-icon-message.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
@@ -112,8 +114,11 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
     background: url(images/function-icon-coupon.png) no-repeat 4px 4px; background-size: 32px 32px; margin:0;
 }
 
+/*#function li:nth-child(1),#function li:nth-child(6){ display:none}*/
 
-#function li:nth-child(1),#function li:nth-child(6){ display:none}
+
+
+
 
 
 #function2 {top: -260px;}
@@ -376,3 +381,25 @@ a.button.member { background: url(images/icon_myshop_m.png) no-repeat; backgroun
 #black-bar .ui-btn-up-c{border: none;background:none;background: url("images/bg-profile.png") 50% 50%;color: #999999;text-shadow: none;}
 #black-bar .ui-btn-active{/*border:1px solid #155678;*/ background:#4596ce;font-weight:bold;color:#fff;cursor:pointer;text-shadow:0 -1px 1px #145072;text-decoration:none;background-image:-webkit-gradient(linear,left top,left bottom,from(#545454),to(#323232));background-image:-webkit-linear-gradient(#545454,#323232);background-image:-moz-linear-gradient(#545454,#323232);background-image:-ms-linear-gradient(#545454,#323232);background-image:-o-linear-gradient(#545454,#323232);background-image:linear-gradient(#545454,#323232);font-family:Helvetica,Arial,sans-serif}
 #black-bar .ui-btn-hover-c{ border:none;}
+
+
+#function{}
+#function {top: -340px;}
+#function > ul.v{ height:320px;}
+ul.v > li.icon > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat ; background-size: 650px 650px;   }
+ul.v > li.icon.setting a { background-position: -615px 7px !important;  }/*setting*/
+ul.v > li.icon.directory a { background-position: -567px -45px !important;  }/*directory*/
+ul.v > li.icon.recent a { background-position: -515px -90px !important;  }/*recent*/
+ul.v > li.icon.fravorite a { background-position: -465px -142px !important;  }/*Fravorite*/
+ul.v > li.icon.calendar a { background-position: -417px -194px !important;  }/*calendar*/
+ul.v > li.icon.memory a { background-position: -363px -246px !important;  }/*personal memory*/
+ul.v > li.icon.addfriend a { background-position: -315px -293px !important; }/*addfriend*/
+ul.v > li.icon.notification a { background-position: -267px -344px !important;  }/*notification*/
+ul.v > li.icon.Promotion a { background-position: -217px -394px !important;  }/*Promotion*/
+ul.v > li.icon.qr a { background-position: -166px -446px !important;  }/*QR*/
+ul.v > li.icon.location a { background-position: -121px -495px !important;  }/*Show location*/
+ul.v > li.icon.shop a { background-position: -65px -543px !important;  }/*shop*/
+ul.v > li.icon.help a { background-position: -22px -593px !important;  }/*help*/
+ul.v > li.icon.unlock a {background: url(images/icons/unlock.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*unlock*/
+ul.v > li.icon.message a {background: url(images/function-icon-message.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*message*/
+ul.v > li.icon.coupon a {background: url(images/function-icon-coupon.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*coupon*/
