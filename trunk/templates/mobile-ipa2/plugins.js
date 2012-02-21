@@ -1502,6 +1502,105 @@ function nextaffstep1()
                            
      });
  }
+ function addfriend()
+{
+ var reffriendcode=parseInt($('.ui-page-active #refercode').val())-10000;
+ var mycode=parseInt(localStorage.getItem("userId"));
+
+ if(reffriendcode>0)
+ {
+      
+ if(reffriendcode!=mycode) 
+ {
+      $.mobile.showPageLoadingMsg();
+      $.post(webdir+'/ajax/addfriend',{mid:localStorage.getItem("userId"),friend:reffriendcode}, function(data) {
+         var myObject = eval('(' + data + ')');
+         if(myObject.error)
+                           {
+                                 //navigator.notification.alert(myObject.error);
+                                 navigator.notification.alert(myObject.error); 
+                                 $('#buttonSave').attr("disabled", "false"); 
+                                 $('#buttonSave').html('Submit');
+                                // return false;
+                                $.mobile.hidePageLoadingMsg();
+                           }
+                           else
+                           {
+                               navigator.notification.alert("เพิ่มเป็นเพื่อนเรียบร้อยแล้ว"); 
+                               $.mobile.hidePageLoadingMsg();
+                           }       
+                           
+ });  
+ }
+ }
+}
+function contactlist(myObject)
+{
+      $('.ui-page-active #searchresulthtml').html('');
+      var stringuser;
+      var datastr="";
+      
+                 for (variable in myObject)
+             {   
+             var obj = myObject[variable]; 
+                 if(obj.tel==null)
+                 {
+                     var tel='';
+                     
+                 }else
+                 {
+                     var tel=obj.tel;
+                 }
+          //   navigator.notification.alert(variable) ;
+
+             if(stringuser)
+             {
+             var  stringuser2=obj.username.substr(0,1).toUpperCase();   
+            // if() 
+            if(stringuser!=stringuser2)
+            {
+                               datastr+='</ul>'+'<h3>'+stringuser2+'</h3><ul class="v" >';
+                           //    $('.ui-page-active #searchresulthtml').append();
+                              stringuser= stringuser2; 
+            }
+
+             }else
+             {
+               stringuser=obj.username.substr(0,1).toUpperCase();  
+               
+                              datastr+='<h3>'+stringuser+'</h3><ul class="v" >';
+               // $('.ui-page-active #searchresulthtml').append(data);
+             }
+             
+              datastr+='<li><a href="javascript:void(0)" class="thumb"><img src="'+obj.picme+'" alt="Sub-Category Name" /></a><strong><a href="javascript:void(0)">'+obj.username+'</a></strong><br />'+obj.email+'<br />Tel. '+tel+'</li>';
+             // $('.ui-page-active #searchresulthtml').append();
+             
+             }
+             datastr+='</ul>';
+
+      $('.ui-page-active #searchresulthtml').html(datastr);
+    $.mobile.hidePageLoadingMsg();
+}
+function setcontact()
+{
+    $.mobile.showPageLoadingMsg();
+                   $.ajax({
+                                                      data: {mid:localStorage.getItem("userId")},                                                            
+                                                      url: webdir+'/ajax/getallcontact',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'contactlist', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                           }); 
+     
+}
+
 
 jQuery(document).ready(function($){ 
 	
@@ -1517,9 +1616,16 @@ $('div').live( 'pageshow',function(event, ui){
   
   switch ($('.ui-page-active').attr('id'))
 {
+  case "social-contact":
+   if(accesspage())
+   {
+      setcontact();
+
+  }
+  break;
  case "templatesaff":
    if(accesspage())
-  {
+   {
       templatesshopfunction();
 
   }
@@ -1669,7 +1775,7 @@ default:
                 
             }else
             {
-                $('.ui-page-active #function2 .v').append('<li><a href="affiliate.html"><span id="affiliatehtml">Affiliate</span></a></li>'); 
+                $('.ui-page-active #function2 .v').append('<li><a href="index.html#affiliate"><span id="affiliatehtml">Affiliate</span></a></li>'); 
             }
              
           }
