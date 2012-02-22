@@ -10,6 +10,7 @@ var catid;
 var subcatid;
 var lastpage;
 var mid;
+var myScroll="";
 var myCat=new Array();
 myCat[1]="Home";       // argument to control array's size)
 myCat[2]="Hotel";
@@ -121,6 +122,7 @@ function resetvalue(){
      emailuser="";
      start=0;
      submid="";
+     myScroll="";
  }
 function getWidth(){
     xWidth = null;
@@ -315,7 +317,45 @@ function searchresultlist(myObject){
               setshare2();
     
              $.mobile.hidePageLoadingMsg();
-             
+             if($('.ui-page-active').attr('id')=="shop")
+    {
+            if(myScroll)
+            {
+               myScroll.refresh();
+            }else
+            {
+                myScroll = new iScroll('wapper');  
+
+            }
+        
+
+    }else if($('.ui-page-active').attr('id')=="cat_list")
+    {
+          // myScroll = new iScroll('wappercat'); 
+           
+           
+            if(myScroll)
+            {
+                myScroll.refresh();
+            }else
+            {
+                myScroll = new iScroll('wappercat');  
+                
+            }
+    }else if($('.ui-page-active').attr('id')=="affiliate")
+    {
+          // myScroll = new iScroll('wappercat'); 
+           
+           
+            if(myScroll)
+            {
+                myScroll.refresh();
+            }else
+            {
+                myScroll = new iScroll('wapperaff');  
+                
+            }
+    }
  }
  function setshare2()
  {
@@ -466,8 +506,7 @@ $.mobile.showPageLoadingMsg();
      
      
  }
- 
-  function memoryresultlist(myObject){
+ function memoryresultlist(myObject){
       var areaid=""; 
       
       $('.ui-page-active #searchresulthtml').html('');
@@ -487,6 +526,7 @@ $.mobile.showPageLoadingMsg();
              }
             setshare2();
              $.mobile.hidePageLoadingMsg();
+             myScroll = new iScroll('wapper2');  
              
  }
  function memoryresultfunction(){
@@ -766,6 +806,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
               
            //     $('#landing').show();  
                 $.mobile.hidePageLoadingMsg();  
+                myScroll = new iScroll('wapperlanding');  
+                
  }
  function landingfunction()
  {
@@ -894,7 +936,6 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                 }   
             });
  }
-
  function nextstep1()
 {
         resetvalue();
@@ -1614,6 +1655,8 @@ jQuery(document).ready(function($){
 });
 $('div').live( 'pageshow',function(event, ui){
   
+//  $('.ui-content')
+
   switch ($('.ui-page-active').attr('id'))
 {
   case "social-contact":
@@ -1665,6 +1708,7 @@ case "calendar":
   break;    
 case "index":
   indexfunction();
+  myScroll = new iScroll('footerindex');  
   break;
   
 case "favarite":
@@ -1692,12 +1736,16 @@ case "search":
 case "searchresult":
   if(searchTxt)$('#wordTxt').html('คำค้นหา '+searchTxt); 
   searchresultfunction();
+    
   break;
 case "cat_list":
   resetvalue();
+  myScroll="";
   catid=getUrlVars2()['catid'];
   $('#wordTxt').html(myCat[catid]);
   searchresultfunction();
+  
+
   break;
 case "landing":
   landingfunction();
@@ -1708,6 +1756,7 @@ case "landing":
   case "shop":
   if(accesspage())
   {
+     myScroll="";
    //  $(".ui-page-active #radio-choice-d").attr("checked","checked"); 
     shopfunction();  
   //   $(".ui-page-active #radio-choice-d").attr("checked",true).checkboxradio("refresh"); 
@@ -1795,7 +1844,7 @@ default:
                    
       }else
           {
-              $.mobile.changePage("shop.html", "flip", true, true);   
+              $.mobile.changePage("index.html#shop", "flip", true, true);   
           }
           
   }

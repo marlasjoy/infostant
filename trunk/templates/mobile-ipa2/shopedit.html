@@ -752,7 +752,8 @@ function setdata2(myObject){
 function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64 encoded image data
     //  imageURI2=imageData;
-      $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
+       var sizearray=size2.split("x");
+      $('#'+size2).html('<img width="'+sizearray[0]+'" height="'+sizearray[1]+'"  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
       $.post(webdir+'/ajax/submitpicformiphone',{
                      pic1:imageData
                      ,size:size2
@@ -772,20 +773,24 @@ function onPhotoDataSuccess(imageData) {
 function setcamera(){
                    var sizearray=size2.split("x");
                
-
+              var widththis= sizearray[0]*2;
+              var heighthis= sizearray[1]*2;
                 navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
                 { quality : 100, 
                 destinationType : Camera.DestinationType.DATA_URL, 
                 sourceType : Camera.PictureSourceType.CAMERA, 
                 allowEdit : true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: sizearray[0],
-                targetHeight: sizearray[1] }
+                targetWidth: widththis,
+                targetHeight: heighthis }
                 );
 }
 function setalbum(){
            var sizearray=size2.split("x");
                
+              var widththis= sizearray[0]*2;
+              var heighthis= sizearray[1]*2;
+            //  alert(widththis);
 
                 navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
                 { quality : 100, 
@@ -793,8 +798,8 @@ function setalbum(){
                 sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
                 allowEdit : true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: sizearray[0],
-                targetHeight: sizearray[1] }
+                targetWidth: widththis,
+                targetHeight: heighthis }
                 );
     
 }
