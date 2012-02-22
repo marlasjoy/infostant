@@ -36,6 +36,7 @@
 
     <link href="css/mobiscroll-1.5.3.css" rel="stylesheet" type="text/css" />
 
+    <script src="iscroll-full.js"></script>
     
 
 
@@ -68,6 +69,12 @@ var group2;
   var marker2;
   var watchID = null;
 document.addEventListener("deviceready",onDeviceOk,false);
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+document.addEventListener('DOMContentLoaded', function () { setTimeout(checkdomtest, 200); }, false); 
+function checkdomtest()
+{
+    
+}
 function onDeviceOk(){        
          childBrowser = ChildBrowser.install();
 }
@@ -567,6 +574,9 @@ function addpicme()
     .ui-content {
         margin-top: 50px;
     }
+    
+.ui-header { overflow: visible!important;  }
+.ui-header-fixed {  z-index: 1100!important;}
 
 </style>
 
@@ -611,12 +621,12 @@ function addpicme()
         </div> <!-- #function -->
     	</div><!-- /header -->
     
-
+    <div id="footerindex">
     <div data-role="content">    
             <img src="images/img-intro2.jpg" alt="img-intro2"/>
     </div><!-- /content -->
 
-    <div data-role="footer" >
+    <div data-role="footer"  >
         <ul class="h">
             <li><a href="#"><img src="images/img-group-01.jpg" alt="img-group-01" /></a></li>
             <li><a href="#"><img src="images/img-group-02.jpg" alt="img-group-01" /></a></li>
@@ -628,6 +638,7 @@ function addpicme()
             <li><a href="#"><img src="images/img-group-08.jpg" alt="img-group-01" /></a></li>
         </ul>
     </div><!-- /footer -->
+    </div>
 </div><!-- /page -->
 <div data-role="page" id="shop"  > 
       <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
@@ -666,19 +677,20 @@ function addpicme()
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
     	</div><!-- /header -->      
-  <div data-role="content" class="subpage">
+  <div data-role="content" class="subpage" id="wapper">
 
     <h2>My Shop <a class="shoptoplink" href="registershop.html">Add shop</a></h2>
     <div class="subpage">
             <ul class="v" id="searchresulthtml">
               
             </ul>
+                  <ul style="margin-left:50px; margin-top: 0;"><a href="javascript:loadmore()" id="loadmore" data-role="button" data-inline="true">Load More</a></ul>
         </div>         
         
         </div> 
    </div>
 <div id="memory" data-role="page">
-    <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
+<div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
         <div>
                     <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
             <h1><a href="index.html" data-transition="flip">infostant</a></h1>
@@ -714,7 +726,7 @@ function addpicme()
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
     	</div><!-- /header -->
-<div data-role="content">    
+<div data-role="content" id="wapper2">    
 
 
 

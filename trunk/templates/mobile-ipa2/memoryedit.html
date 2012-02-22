@@ -775,29 +775,31 @@ function onPhotoDataSuccess(imageData) {
 function setcamera(){
                    var sizearray=size2.split("x");
                
-
+var widththis= sizearray[0]*2;
+              var heighthis= sizearray[1]*2;
                 navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
                 { quality : 100, 
                 destinationType : Camera.DestinationType.DATA_URL, 
                 sourceType : Camera.PictureSourceType.CAMERA, 
                 allowEdit : true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: sizearray[0],
-                targetHeight: sizearray[1] }
+                targetWidth: widththis,
+                targetHeight: heighthis }
                 );
 }
 function setalbum(){
            var sizearray=size2.split("x");
                
-
+       var widththis= sizearray[0]*2;
+              var heighthis= sizearray[1]*2;
                 navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
                 { quality : 100, 
                 destinationType : Camera.DestinationType.DATA_URL, 
                 sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
                 allowEdit : true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: sizearray[0],
-                targetHeight: sizearray[1] }
+                targetWidth: widththis,
+                targetHeight: heighthis }
                 );
     
 }
