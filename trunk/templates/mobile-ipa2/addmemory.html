@@ -1,4 +1,12 @@
 <div id="addmemory" data-role="page">
+       <style type="text/css">
+
+    .ui-content {
+
+        height:1000px !important;
+    }
+
+</style>
     <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
         <div>
             <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
@@ -35,7 +43,7 @@
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
     	</div><!-- /header -->
-<div data-role="content" class="subpage">
+<div data-role="content" class="subpage" id="wapperaddmemory">
          <h2>Create Memory</h2>
          <form name="registersummit" id="registersummit" onsubmit="return addmemoryserver()">
 

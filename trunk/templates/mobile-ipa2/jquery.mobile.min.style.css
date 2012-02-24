@@ -235,7 +235,7 @@ background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32p
     padding-left: 0px;
 }
 
-
+input,select{z-index: 9999999;}
 #calendar .ui-content > table { margin: 5px 0 20px }
 #calendar table { width: 100%; font-size: 16px; font-weight: bold; text-align: center; border-collapse: separate; border-spacing: 1px; color: #000; }
 #calendar .ui-content > table > thead th {  width: 14%; }

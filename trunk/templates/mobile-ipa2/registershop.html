@@ -1,6 +1,7 @@
 
  
-          <div data-role="page" id="registershop"> 
+          <div data-role="page" id="registershop">
+
               <div data-role="header" data-position="fixed" data-fullscreen="true" data-transition="slide">
         <div>
             <a href="index.html"  data-inline="true" data-direction="reverse"  data-rel="back">Back</a>
@@ -36,10 +37,11 @@
             </ul>
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
-    	</div><!-- /header -->           <div data-role="content" class="subpage">
+    	</div><!-- /header -->           
+              <div data-role="content" class="subpage" id="wapperregistershop" >
 
         <h2>Register Shop</h2>
-       <form name="registersummit" id="registersummit" onsubmit="return nextstep1()">
+
                   
 
                  <div class="ui-body ui-body-b">
@@ -198,6 +200,11 @@
                     <label for="switch-c" id="switch-c-label" class="ui-slider">Referance Code</label>
                     <input type="text" value="" id="refcode" name="refcode" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">  
                 </div>
+                                                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <label for="switch-c" id="switch-c-label" class="ui-slider">Keyword(Tag)</label>
+                    <input type="text" value="" id="keyword" name="keyword" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">  
+                </div>
+                
                 
 
                 
@@ -238,7 +245,7 @@
                 <button data-theme="a" id="buttonSave" name="buttonSave" onclick="nextstep1()"  type="button" class="ui-btn-hidden" aria-disabled="false">Submit</button>
                 </fieldset>
                 </div>
-                </form> 
+
         
         
         </div> 
