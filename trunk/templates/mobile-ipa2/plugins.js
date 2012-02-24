@@ -49,6 +49,9 @@ myCat[15]="Other";
   var start=0;
   var limit=10;
   var submid;
+  var tempproid;
+  var tempdisid;
+  var temptumid;
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -574,7 +577,13 @@ $.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:d
              }
             setshare2();
              $.mobile.hidePageLoadingMsg();
-             myScroll = new iScroll('wapper2');  
+          //+   myScroll = new iScroll('wapper2');  
+             
+                     var elem = $('#wapper2');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
              
  }
  function memoryresultfunction(){
