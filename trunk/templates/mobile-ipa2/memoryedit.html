@@ -755,7 +755,8 @@ function setdata2(myObject){
 function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64 encoded image data
     //  imageURI2=imageData;
-      $('#'+size2).html('<img  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
+    var sizearray=size2.split("x");
+      $('#'+size2).html('<img width="'+sizearray[0]+'" height="'+sizearray[1]+'"  src="'+"data:image/jpeg;base64,"+imageData+'">'); 
       $.post(webdir+'/ajax/submitpicformiphone2',{
                      pic1:imageData
                      ,size:size2

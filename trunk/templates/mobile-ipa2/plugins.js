@@ -38,6 +38,7 @@ myCat[15]="Other";
  var temid;
  var errorset=0;
  var refcode;
+ var keyword;
  var sids;
  var fid;
  var myObject2;
@@ -123,6 +124,7 @@ function resetvalue(){
      start=0;
      submid="";
      myScroll="";
+     keyword="";
  }
 function getWidth(){
     xWidth = null;
@@ -266,16 +268,23 @@ function clearsaveall()
 //clearsaveall();
 
 function searchresultlist(myObject){
-    myObject2=myObject;
+myScroll='';
+  //  alert(('#shop').html());
+        if(myObject!= null)
+    {
+  //  myObject2=myObject;
       var areaid=""; 
       var k=1;
       if(start==0)
       {
       $('.ui-page-active #searchresulthtml').html('');
       }
-            var arraydata={};
-             for (variable in myObject)
-             {   
+       if($('.ui-page-active').attr('id')=="favarite")
+    {
+      var arraydata={};
+    }
+      for (variable in myObject)
+      {   
           //   navigator.notification.alert(variable) ;
              var obj = myObject[variable]; 
      //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
@@ -305,61 +314,73 @@ function searchresultlist(myObject){
 
              }
              
-             if($('.ui-page-active').attr('id')=="favarite")
-             {    
+       if($('.ui-page-active').attr('id')=="favarite")
+       {    
                var jsonstring= JSON.stringify(arraydata);
                localStorage.setItem('sidshop',jsonstring);   
            
-            }
+       }
                  
 
+            
+             setshare2();
     
-              setshare2();
-    
-             $.mobile.hidePageLoadingMsg();
+             
              if($('.ui-page-active').attr('id')=="shop")
     {
-            if(myScroll)
-            {
-               myScroll.refresh();
-            }else
-            {
-                myScroll = new iScroll('wapper');  
+        //    if(myScroll)
+//            {
+//               myScroll.refresh();
+//            }else
+//            {
+//                
+       //  var      myScroll5 = new iScroll('wapper');  
 
-            }
-        
+//            }
+        var elem = $('#wapper');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
 
     }else if($('.ui-page-active').attr('id')=="cat_list")
     {
           // myScroll = new iScroll('wappercat'); 
            
            
-            if(myScroll)
-            {
-                myScroll.refresh();
-            }else
-            {
-                myScroll = new iScroll('wappercat');  
-                
-            }
+
+             var elem = $('#wappercat');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
+            
+            
     }else if($('.ui-page-active').attr('id')=="affiliate")
     {
           // myScroll = new iScroll('wappercat'); 
            
            
-            if(myScroll)
-            {
-                myScroll.refresh();
-            }else
-            {
-                myScroll = new iScroll('wapperaff');  
-                
-            }
+
+            
+            
+               var elem = $('#wapperaff');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
     }
- }
+    $.mobile.hidePageLoadingMsg();
+    }else
+    {
+        $.mobile.hidePageLoadingMsg();
+    }
+}
  function setshare2()
  {
-       $('.button.share2').click(function(){
+      if($('.ui-page-active').attr('id')=="cat_list"||$('.ui-page-active').attr('id')=="favarite")
+      {
+       $('.ui-page-active.button.share2').click(function(){
                 if ( $(this).parent().children('#share2').css("display") == "block" ){
                 
                 $(this).parent().children('#share2').fadeOut(300);
@@ -375,7 +396,7 @@ function searchresultlist(myObject){
             
         })
         
-        $('#share2 a').click(function(){
+        $('.ui-page-active#share2 a').click(function(){
                 if ( $(this).parent().parent().css("display") == "block" ){
                 
                 $(this).parent().parent().fadeOut(300);
@@ -389,8 +410,11 @@ function searchresultlist(myObject){
                }
         
         })
-    
-    $('.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
+        
+      }
+    if($('.ui-page-active').attr('id')=="favarite")
+    {
+    $('.ui-page-active.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
 //navigator.notification.alert(dateText);
                  
        $.mobile.showPageLoadingMsg();
@@ -419,6 +443,7 @@ function searchresultlist(myObject){
     //localStorage.setItem('calendar','');    
     
     }});
+    }
  }
  function loadmore()
  {
@@ -426,20 +451,43 @@ function searchresultlist(myObject){
  }
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
-                   $.ajax({
-                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid},                                                            
-                                                      url: webdir+'/ajax/getallshopbyname3',
-                                                      dataType: "jsonp",
-                                                      jsonp: 'callback',
-                                                      jsonpCallback: 'searchresultlist', 
-                                                      crossDomain:true,
-                                                      xhrFields: {
-                                                      withCredentials: true
-                                                      },
-                                                       success: function(myObject){
-                                               
-                                                      }
-                           }); 
+
+$.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid}, function(data) {
+    
+     var myObject = eval('(' + data + ')');
+//    alert(data);
+   searchresultlist(myObject);
+  //$('.result').html(data);
+  //alert('Load was performed.');
+}).error(function() {
+                                
+                                
+                                
+                                alert('error');
+                                
+                                });
+
+
+//                  var req = $.ajax({
+//                                                      data: {searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid},                                                            
+//                                                      url: webdir+'/ajax/getallshopbyname3',
+//                                                      dataType: "jsonp",
+//                                                      jsonp: 'callback',
+//                                                      jsonpCallback: 'searchresultlist', 
+//                                                      timeout : 10000,
+//                                                       success: function(myObject){
+//                                               
+//                                                      }
+//                           }); 
+//                           
+//req.success(function() {
+//    console.log('Yes! Success!');
+//});
+
+//req.error(function() {
+//    console.log('Oh noes!');
+//});
+
      
  }
  function deletememory(meid)
@@ -962,6 +1010,10 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         {
           errorset=1;  
         }
+        else if($('#keyword').val()=="")
+        {
+          errorset=1;  
+        }
         
         if(errorset==1)
         {
@@ -994,6 +1046,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
                          lat=$('#lat').val();
                          lng=$('#lng').val();
                          refcode=$('#refcode').val();
+                          keyword=$('#keyword').val();
                          $.mobile.changePage("templatesshop.html", "flip", true, true); 
                          
                          
@@ -1016,7 +1069,7 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
        mid:localStorage.getItem("userId"),catid:catid
      ,subcatid:subcatid,shopname:encodeURIComponent(shopname),shopurl:shopurl
      ,proid:proid,disid:disid,tumid:tumid,temid:$('#temid').val()
-     ,refcode:refcode,lat:lat,lng:lng
+     ,refcode:refcode,lat:lat,lng:lng,keyword:keyword
      }, function(data) {
          var myObject = eval('(' + data + ')');
           if(myObject.error)
@@ -1102,6 +1155,20 @@ function myprofilefunction()
 function addmemoryfunction()
 {
     templatesshopfunction();
+    myScroll = new iScroll('wapperaddmemory', {
+        useTransform: false,
+        onBeforeScrollStart: function (e) {
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+        }
+    });
+        var memoryurl = document.getElementById('memoryurl');
+memoryurl.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
 }
 function registerserver()
 {
@@ -1431,7 +1498,7 @@ function nextaffstep1()
         if($('#input-email').val()=="")
         {
            errorset=1; 
-        }else if($('#username').val()=="")
+        }else if($('#input-username').val()=="")
         {
           errorset=1;  
         }
@@ -1462,6 +1529,10 @@ function nextaffstep1()
         {
           errorset=1;  
         }
+        else if($('#keyword').val()=="")
+        {
+          errorset=1;  
+        }
         
         if(errorset==1)
         {
@@ -1472,7 +1543,7 @@ function nextaffstep1()
         else{
             
         
-        $.post(webdir+'/ajax/checkaff',{shopurl:$('#shopurl').val(),email:$('#input-email').val(),username:$('#username').val() }, function(data3) {
+        $.post(webdir+'/ajax/checkaff',{shopurl:$('#shopurl').val(),email:$('#input-email').val(),username:$('#input-username').val() }, function(data3) {
                             var myObject = eval('(' + data3 + ')');             
 
                        if(myObject.error)
@@ -1485,7 +1556,7 @@ function nextaffstep1()
                              
                              
                              
-                         username=$('#username').val();    
+                         username=$('#input-username').val();    
                          password=$('#password1').val(); 
                          emailuser=$('#input-email').val(); 
                          proid=$('#province').val();
@@ -1498,6 +1569,7 @@ function nextaffstep1()
                          lat=$('#lat').val();
                          lng=$('#lng').val();
                          refcode=$('#refcode').val();
+                         keyword=$('#keyword').val();
                          $.mobile.changePage("templatesaff.html", "flip", true, true); 
                          
                          
@@ -1520,7 +1592,7 @@ function nextaffstep1()
      ,subcatid:subcatid,shopname:encodeURIComponent(shopname),shopurl:shopurl
      ,proid:proid,disid:disid,tumid:tumid,temid:$('#temid').val()
      ,refcode:refcode,lat:lat,lng:lng
-     ,username:username,password:password,email:emailuser,status:1
+     ,username:username,password:password,email:emailuser,status:1,keyword:keyword
      }, function(data) {
          var myObject = eval('(' + data + ')');
           if(myObject.error)
@@ -1641,7 +1713,62 @@ function setcontact()
                            }); 
      
 }
+function checkdomtest2()
+{
 
+    var selectField = document.getElementById('cat');
+selectField.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+    var shopname = document.getElementById('shopname');
+shopname.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+    var shopurl = document.getElementById('shopurl');
+shopurl.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+    var subcat = document.getElementById('subcat');
+subcat.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+    var province = document.getElementById('province');
+province.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+ var district = document.getElementById('district');
+district.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+ var tumbon = document.getElementById('tumbon');
+tumbon.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+ var refcode = document.getElementById('refcode');
+refcode.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+var keyword = document.getElementById('keyword');
+keyword.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+
+
+}
 
 jQuery(document).ready(function($){ 
 	
@@ -1670,14 +1797,41 @@ $('div').live( 'pageshow',function(event, ui){
    if(accesspage())
    {
       templatesshopfunction();
-
+      myScroll = new iScroll('wappertemplatesaff');
   }
   break;     
  case "registeraffiliate":
    if(accesspage())
   {
+      myScroll="";
       $('#refcode').val(parseInt(localStorage.getItem("userId"))+10000);
       registershopfunction();
+      myScroll = new iScroll('wapperregisteraffiliate', {
+        useTransform: false,
+        onBeforeScrollStart: function (e) {
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+        }
+    });
+    checkdomtest2();
+    
+    var emailinput = document.getElementById('input-email');
+emailinput.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+var usernameinput = document.getElementById('input-username');
+usernameinput.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
+
+var password1 = document.getElementById('password1');
+password1.addEventListener('touchstart' /*'mousedown'*/, function(e) {
+    e.stopPropagation();
+}, false);
   //calendarfunction();
   //$('.show-rfcode').html((parseInt(localStorage.getItem("userId"))+10000));
   }
@@ -1697,6 +1851,7 @@ $('div').live( 'pageshow',function(event, ui){
   submid=localStorage.getItem("userId");
  // $('#wordTxt').html(myCat[catid]);
   searchresultfunction();
+  
 
   }
   break;   
@@ -1775,6 +1930,7 @@ case "landing":
    if(accesspage())
   {
     templatesshopfunction();
+    myScroll = new iScroll('wappertemplatesshop');
   }
   
   break;
@@ -1790,7 +1946,21 @@ case "landing":
   case "registershop":
     if(accesspage())
   {
+  myScroll="";
   registershopfunction();
+      myScroll = new iScroll('wapperregistershop', {
+        useTransform: false,
+        onBeforeScrollStart: function (e) {
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+        }
+    });
+  checkdomtest2();
+
+
   }
   break;
     case "logout":
@@ -1812,11 +1982,11 @@ default:
   
 }
 
-    
-  try
-  {
    
 
+   
+           
+        $('.ui-page-active #function .v').html('<li class="icon message"><a href="message.html"><span>Message</span></a></li><li class="icon memory"><a href="index.html#memory"><span>Personal Memory</span></a></li><li class="icon favorite"><a href="favarite.html"><span>Favorite</span></a></li><li class="icon calendar"><a href="calendar.html"><span>Calendar / Itenary</span></a></li><li class="icon addfriend"><a href="contact.html"><span>Friends</span></a></li><li class="icon promotion"><a href="promotion.html"><span>Promotion</span></a></li><li class="icon message"><a href="setting.html"><span>Settings</span></a></li>');
           if(localStorage.getItem("group")==1)
           {
             if($('.ui-page-active #affiliatehtml').html())
@@ -1872,7 +2042,7 @@ default:
                    $('.ui-page-active').height(height+320);
     })    
       $('.ui-page-active #function a, nav li:nth-child(1) a, nav li:nth-child(2) a,nav li:nth-child(4) a, h1 > a, a[data-rel="back"]').click(function() { 
-        $('.ui-page-active #function').animate({ top: '-=350px', useTranslate3d: true, leaveTransforms: true}, 1000);
+        $('.ui-page-active #function').animate({ top: '-=370px', useTranslate3d: true, leaveTransforms: true}, 1000);
                  var height=$('.ui-page-active').height(); 
 
                    $('.ui-page-active').height(height-320);
@@ -1880,75 +2050,18 @@ default:
  
  
  
- if($('.ui-page-active').attr('id')=="social-qrcode"||$('.ui-page-active').attr('id')=="social-contact"||$('.ui-page-active').attr('id')=="social-rfcode"||$('.ui-page-active').attr('id')=="profile-myprofile")
- {
-    if (navigator.userAgent.toLowerCase().match(/iphone/) ) 
-    {
-        $(".ui-page-active input[type='radio']").click(function() {
-        if($(".ui-page-active #radio-choice-a").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-a").attr("checked") == "checked")
-           {
-             
-             $.mobile.changePage("contact.html", "flip", true, true);
-                               
-           }
-           else if($(".ui-page-active #radio-choice-b").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-b").attr("checked") == "checked")
-           {
-            $.mobile.changePage("rfcode.html", "flip", true, true);   
-               
-           }else
-           {
-               
-            $.mobile.changePage("qr.html", "flip", true, true);     
-               
-           }
-        
-        
-        });
-        
-        
-        
-    }
-    else
-    {
-        
-         $(".ui-page-active input[type='radio']").click(function() {
-        if($(".ui-page-active #radio-choice-a").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-a").attr("checked") == "checked")
-           {
-             
-             $.mobile.changePage("contact.html", "flip", true, true);
-                               
-           }
-           else if($(".ui-page-active #radio-choice-b").attr("checked") != "undefined" &&$(".ui-page-active #radio-choice-b").attr("checked") == "checked")
-           {
-            $.mobile.changePage("rfcode.html", "flip", true, true);   
-               
-           }else
-           {
-               
-            $.mobile.changePage("qr.html", "flip", true, true);     
-               
-           }
-        
-        
-        });
-    }  
- }
+
 
 
 
     
     
-  }
-catch(err)
-  {
-  //Handle errors here
-  }
+
 
     
     
-        
 
-    
-    
+    return;
+
   
 });
