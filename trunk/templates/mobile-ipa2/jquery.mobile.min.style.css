@@ -124,7 +124,7 @@ background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32p
 #function2 {top: -260px;}
 #function2 > ul.v{ height:240px;}
 #function2 { position: absolute; background: #80c8e3 url(images/bg-header_shadow.png) top center no-repeat; background-size: 100% 5px;  height: auto; width: 100%;  z-index: 1101; top: 45px; top: -320px; }
-#function2 > ul.v { height: 140px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
+#function2 > ul.v { height: 95px; overflow: scroll; padding-top: 15px; margin-bottom: 5px; }
 #function2 li {  height: 38px; display: block; line-height: 38px;  margin: 0 20px 5px; border: solid 1px #000; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
 #function2 li > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
 #function2 li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
