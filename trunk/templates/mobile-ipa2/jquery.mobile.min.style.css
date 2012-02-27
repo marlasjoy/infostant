@@ -154,7 +154,7 @@ background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32p
 
 #social-contact {}
 #contact-bar .social{}
-#contact-bar .ui-radio{ width:33%}
+#contact-bar .ui-radio{ width:49%}
 #contact-bar .ui-radio .ui-btn{ width:97%}
 #contact-bar { background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
 #contact-bar .ui-btn{ margin:3px;}
@@ -259,13 +259,13 @@ input,select{z-index: 9999999;}
 
 
 #friend-notification .subpage > ul.v > li,#place-notification .subpage > ul.v > li{padding: 10px 10px 10px 90px;}
-#notification .ui-radio{ width:49%}
+/*#notification .ui-radio{ width:49%}
 #notification .ui-radio .ui-btn{ width:97%}
-#notification{ background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#notification{ background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px; margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
 #notification .ui-btn{ margin:3px;}
 #notification .ui-btn-inner{ padding:0px 10px;}
 #notification .alignbox{ display:block;margin-left:-60px;}
-#notification .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333;}
+#notification .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333;}*/
 
 
 #notification .icon-friend{ background:url(images/icon_profile.png) no-repeat -180px -30px;}
@@ -403,3 +403,14 @@ ul.v > li.icon.help a { background-position: -22px -593px !important;  }/*help*/
 ul.v > li.icon.unlock a {background: url(images/icons/unlock.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*unlock*/
 ul.v > li.icon.message a {background: url(images/function-icon-message.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*message*/
 ul.v > li.icon.coupon a {background: url(images/function-icon-coupon.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*coupon*/
+
+
+
+/*setting*/
+
+#setting2 .ui-content dl { margin: 0; }
+#setting2 .ui-content dl dd{ padding:0 10px;}
+#setting2 .ui-content dl > dt { background-color: #d5d5d5; height: 18px; line-height: 18px; font-size: 10px; text-shadow: 1px 0 0 #e6e6e6; padding: 0 15px; font-weight: bold;  }
+#setting2 .ui-content li a { background: url(images/icon-next_sub.png) no-repeat right 4px; background-size: auto 30px; }
+#setting2 .ui-content li a#reflesh{ text-align:left;}
+#setting2 em { font-style: normal; color: #003a98; font-size: 12px; font-weight: normal!important; }
