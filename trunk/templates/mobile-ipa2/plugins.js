@@ -421,6 +421,20 @@ myScroll='';
          //   alert($(this).attr('id') +' - '+ iscroll);
         });
     }
+    else if($('.ui-page-active').attr('id')=="favarite")
+    {
+          // myScroll = new iScroll('wappercat'); 
+           
+           
+
+            
+            
+               var elem = $('#wapperfavorite');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
+    }
     $.mobile.hidePageLoadingMsg();
     }else
     {
@@ -952,7 +966,11 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
  }
  function settingfunction()
  {
-     
+       var elem = $('#wappersetting');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+         //   alert($(this).attr('id') +' - '+ iscroll);
+        });
  }
  function setshoplist(myObject)
  {
