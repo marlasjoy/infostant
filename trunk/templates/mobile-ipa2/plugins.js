@@ -2079,7 +2079,7 @@ default:
 
    
            
-        $('.ui-page-active #function .v').html('<li class="icon message"><a href="message.html"><span>Message</span></a></li><li class="icon memory"><a href="index.html#memory"><span>Personal Memory</span></a></li><li class="icon favorite"><a href="favarite.html"><span>Favorite</span></a></li><li class="icon calendar"><a href="calendar.html"><span>Calendar / Itenary</span></a></li><li class="icon addfriend"><a href="contact.html"><span>Friends</span></a></li><li class="icon promotion"><a href="promotion.html"><span>Promotion</span></a></li><li class="icon message"><a href="setting.html"><span>Settings</span></a></li>');
+        $('.ui-page-active #function .v').html('<li class="icon message"><a href="message.html"><span>Message</span></a></li><li class="icon memory"><a href="index.html#memory"><span>Personal Memory</span></a></li><li class="icon favorite"><a href="favarite.html"><span>Favorite</span></a></li><li class="icon calendar"><a href="calendar.html"><span>Calendar / Itenary</span></a></li><li class="icon addfriend"><a href="contact.html"><span>Friends</span></a></li><li class="icon promotion"><a href="promotion.html"><span>Promotion</span></a></li><li class="icon setting"><a href="setting.html"><span>Settings</span></a></li>');
           if(localStorage.getItem("group")==1)
           {
             if($('.ui-page-active #affiliatehtml').html())
