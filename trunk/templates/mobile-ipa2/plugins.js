@@ -52,6 +52,7 @@ myCat[15]="Other";
   var tempproid;
   var tempdisid;
   var temptumid;
+  var startchange;
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -128,6 +129,7 @@ function resetvalue(){
      submid="";
      myScroll="";
      keyword="";
+     startchange=0;
  }
 function getWidth(){
     xWidth = null;
@@ -184,6 +186,35 @@ function setdistrict(myObject){
          if(jQuery.isFunction(myselect.selectmenu))
          {
          myselect[0].selectedIndex = 0;
+         if($('.ui-page-active').attr('id')=="registeraffiliate")
+         {
+             if(typeof  tempdisid !='undefined'&&startchange!=1){
+                 
+              $("select#district").val(tempdisid); 
+                    if(tempdisid)
+    {
+      
+     //   showAddress($("#province option[value='"+tempproid+"']").text()+' '+$("#district option[value='"+tempdisid+"']").text());
+   
+     //    $.mobile.showPageLoadingMsg();
+     $.ajax({
+                                                      data: {disid: tempdisid},                                                            
+                                                      url: webdir+'/ajax/gettumbon',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'settumbon', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+     });
+          }     
+             }
+
+         }
          myselect.selectmenu("refresh");
          }
          
@@ -223,6 +254,23 @@ function settumbon(myObject){
           if(jQuery.isFunction(myselect.selectmenu))
          {
          myselect[0].selectedIndex = 0;
+         
+          if($('.ui-page-active').attr('id')=="registeraffiliate")
+         {
+          //   alert(temptumid);
+             if(typeof  temptumid !='undefined'&&startchange!=1){
+              $("select#tumbon").val(temptumid); 
+                           if(temptumid)
+                {
+                  
+                    showAddress($("#province option[value='"+tempproid+"']").text()+' '+$("#district option[value='"+tempdisid+"']").text()+' '+$("#tumbon option[value='"+temptumid+"']").text());
+                }  
+             }
+             
+ 
+
+         }
+         
          myselect.selectmenu("refresh");
          }
          $.mobile.hidePageLoadingMsg();
@@ -917,13 +965,42 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
         mid=localStorage.getItem("userId")
         searchresultfunction();
  }
+ 
+ function settempregister()
+ {
+     
+              if(tempproid)
+             {
+        $("select#province").val(tempproid); 
+        var myselect = $("select#province");
+        myselect.selectmenu("refresh");
+      
+       // showAddress($("#province option[value='"+tempproid+"']").text());
+  
+         $.mobile.showPageLoadingMsg();
+                            $.ajax({
+                                                      data: {proid: tempproid},                                                            
+                                                      url: webdir+'/ajax/getdistrict',
+                                                      dataType: "jsonp",
+                                                      jsonp: 'callback',
+                                                      jsonpCallback: 'setdistrict', 
+                                                      crossDomain:true,
+                                                      xhrFields: {
+                                                      withCredentials: true
+                                                      },
+                                                       success: function(myObject){
+                                               
+                                                      }
+                                                    });
+      }
+ }
  function registershopfunction()
  {
      initialize();
      $('#province').change(function() {
          if($(this).val())
     {
-      
+         startchange=1;
         showAddress($("#province option[value='"+$(this).val()+"']").text());
     }
          $.mobile.showPageLoadingMsg();
@@ -1569,8 +1646,13 @@ function nextaffstep1()
                          password=$('#password1').val(); 
                          emailuser=$('#input-email').val(); 
                          proid=$('#province').val();
+                         
+                         
                          disid=$('#district').val();
                          tumid=$('#tumbon').val();
+                         tempproid=proid;
+                         tempdisid=disid;
+                         temptumid=tumid;
                          catid=$('#cat').val();
                          subcatid=$('#subcat').val();
                          shopname=$('#shopname').val();
@@ -1812,9 +1894,12 @@ $('div').live( 'pageshow',function(event, ui){
  case "registeraffiliate":
    if(accesspage())
   {
+      resetvalue();
+
       myScroll="";
       $('#refcode').val(parseInt(localStorage.getItem("userId"))+10000);
       registershopfunction();
+      settempregister();
       myScroll = new iScroll('wapperregisteraffiliate', {
         useTransform: false,
         onBeforeScrollStart: function (e) {
@@ -1900,8 +1985,7 @@ case "search":
 case "searchresult":
   if(searchTxt)$('#wordTxt').html('คำค้นหา '+searchTxt); 
   searchresultfunction();
-    
-  break;
+ break;
 case "cat_list":
   resetvalue();
   myScroll="";
