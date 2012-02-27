@@ -156,9 +156,9 @@ background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32p
 #contact-bar .social{}
 #contact-bar .ui-radio{ width:49%}
 #contact-bar .ui-radio .ui-btn{ width:97%}
-#contact-bar { background:#999;height:30px;width:100%;overflow:hidden;background-attachment: scroll;background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;color: #353535;font-size: 18px;height: 40px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
-#contact-bar .ui-btn{ margin:3px;}
-#contact-bar .ui-btn-inner{ padding:0px 10px;}
+#contact-bar { background:#CCC;height:30px;width:100%;overflow:hidden;background-attachment: scroll;/*background-clip: border-box;background-color: transparent;background-image: url("images/bg-profile.png");background-origin: padding-box;background-position: 0 0;background-repeat: repeat;background-size: auto 40px;*/color: #353535;font-size: 18px;height: 50px;/*line-height: 40px;*/ margin: 0;text-align: left;text-indent: 10px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);}
+#contact-bar .ui-btn{ margin:4px;}
+#contact-bar .ui-btn-inner{ padding:5px 10px;}
 #contact-bar .alignbox{ display:block;margin-left:-60px;}
 #contact-bar .icon{ width:30px;height:30px;display:block;margin: 0 auto;text-indent: 32px;text-shadow: 1px 0 1px #333; font-size:0.9em;}
 #contact-bar .icon-contact{ background:url(images/icon_profile.png) no-repeat -60px -30px;}
