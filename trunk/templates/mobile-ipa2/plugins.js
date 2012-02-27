@@ -2087,7 +2087,7 @@ default:
                 
             }else
             {
-                $('.ui-page-active #function2 .v').append('<li><a href="index.html#affiliate"><span id="affiliatehtml">Affiliate</span></a></li>'); 
+                $('.ui-page-active #function2 .v').html('<li><a href="index.html#shop"><span id="shophtml">Place</span></a></li><li><a href="index.html#affiliate"><span id="affiliatehtml">Affiliate</span></a></li>'); 
             }
              
           }
