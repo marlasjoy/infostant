@@ -283,6 +283,7 @@ function setcalendar(sid)
 {
     sid2=sid;
     $('#date'+sid).scroller('show');
+   //alert('');
     //navigator.notification.alert(shopurl);
 }
 function saveoffline()
@@ -432,12 +433,13 @@ myScroll='';
                var elem = $('#wapperfavorite');
         elem.iscroll();
         elem.bind('onScrollEnd', function(e, iscroll){
-         //   alert($(this).attr('id') +' - '+ iscroll);
+
         });
     }
     $.mobile.hidePageLoadingMsg();
     }else
     {
+         $('.ui-page-active #searchresulthtml').html('');
         $.mobile.hidePageLoadingMsg();
     }
 }
@@ -445,7 +447,7 @@ myScroll='';
  {
       if($('.ui-page-active').attr('id')=="cat_list"||$('.ui-page-active').attr('id')=="favarite")
       {
-       $('.ui-page-active.button.share2').click(function(){
+       $('.button.share2').click(function(){
                 if ( $(this).parent().children('#share2').css("display") == "block" ){
                 
                 $(this).parent().children('#share2').fadeOut(300);
@@ -479,7 +481,8 @@ myScroll='';
       }
     if($('.ui-page-active').attr('id')=="favarite")
     {
-    $('.ui-page-active.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
+        
+    $('.datecalender').scroller('enable').scroller({dateFormat :'yy-m-d',timeFormat :'HH:ii', preset: 'datetime', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
 //navigator.notification.alert(dateText);
                  
        $.mobile.showPageLoadingMsg();
@@ -568,9 +571,11 @@ $.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:d
         click: function () {
             $.mobile.showPageLoadingMsg();
            $.post(webdir+'/ajax/deletemorybymeid',{meid:meid,mid:localStorage.getItem("userId") }, function(data) {
+                                          $.mobile.hidePageLoadingMsg();  
                navigator.notification.alert('ลบเรียบร้อยแล้ว');
+               start=0;
                memoryresultfunction();
-            $.mobile.hidePageLoadingMsg();   
+
            });
         }
       },
@@ -600,9 +605,13 @@ $.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:d
         click: function () {
             $.mobile.showPageLoadingMsg();
            $.post(webdir+'/ajax/deletemorybyshopurl',{shopurl:shopurl,mid:localStorage.getItem("userId") }, function(data) {
-               navigator.notification.alert('ลบเรียบร้อยแล้ว');
+               $.mobile.hidePageLoadingMsg();   
+               start=0;
                searchresultfunction();
-            $.mobile.hidePageLoadingMsg();   
+               navigator.notification.alert('ลบเรียบร้อยแล้ว');
+               
+              // alert('dfdfdf');
+         //   $.mobile.hidePageLoadingMsg();   
            });
         }
       },
@@ -1089,7 +1098,8 @@ $.post(webdir+'/ajax/loginformiphone',{username:$('.ui-page-active #username').v
             });
  }
  function nextstep1()
-{
+{    
+        errorset=0;
         resetvalue();
         if($('#shopurl').val()=="")
         {
@@ -2030,7 +2040,7 @@ case "landing":
   }
   
   break;
-  case "setting":
+  case "setting2":
    if(accesspage())
   {
     settingfunction();
