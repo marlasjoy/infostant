@@ -43,6 +43,14 @@
           if($_POST)$this->post=$_POST;
           if($_GET)$this->get=$_GET;
 
+          if($this->post['shopurl'])
+          {
+             $this->post['shopurl']= strtolower($this->post['shopurl']);
+          } 
+          if($this->post['username'])
+          {
+             $this->post['username']= strtolower($this->post['username']);
+          }           
           if($this->info['function'])
           eval("\$this->".$this->info['function']."();");
           
@@ -1042,7 +1050,31 @@ $data=$this->db->db_get_recordset();
           }else
           {
               
-            return false;  
+             $this->db->get_connect();
+          $this->db->db_set_recordset('SELECT
+          tb_shop.sid
+            FROM
+            tb_shop
+            where tb_shop.submid="'.$_COOKIE['userid'].'"
+            and tb_shop.shopurl="'.$shopurl.'"
+            
+             ');
+          $data=$this->db->db_get_recordset();
+          
+          
+          $this->db->destory();
+          $this->db->closedb();    
+          
+          
+           if($data['0']['sid'])
+          {
+              
+              return $data['0']['sid'];
+          }else
+          {
+              return false; 
+          } 
+          
           }
           
              
@@ -2285,6 +2317,38 @@ $data=$this->db->db_get_recordset();
         return $arraymember;
          }
         }
+        function checkaff()
+        {
+        if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
+        {
+            $arraydata['error']=" email ไม่ถูกต้อง";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkemail(1))
+        {
+             $arraydata['error']=" email ซ้ำ";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkusername(1))
+        {
+            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkshopurl(1))
+        {
+               $arraydata['error']=" shopurl ซ้ำ  หรือ มีตัวอักษรพิเศษ";
+            echo array2json($arraydata); 
+            exit();
+        }
+        
+        $arraydata['error']=0;
+        echo array2json($arraydata); 
+            exit();    
+            
+        }
        function  savemember2()
        {
                    $arraydata=array();
@@ -3316,7 +3380,7 @@ $data=$this->db->db_get_recordset();
        }
         function getallshopbyname3()
        {
-           header("content-type: text/javascript");
+        //   header("content-type: text/javascript");
          //  if(isset($_GET['name']) && isset($_GET['callback']))
 //    {
 //        $obj->name = $_GET['name'];
@@ -3410,6 +3474,14 @@ $data=$this->db->db_get_recordset();
             }
             
 
+          }
+           if($_GET['submid'])
+          {
+
+             $submid=$_GET['submid']; 
+              $where[]="  tb_shop.submid = '$submid' 
+            ";
+      
           }
           
           
@@ -3524,7 +3596,7 @@ $data=$this->db->db_get_recordset();
           }
           
           
-          echo        $_GET['callback'].'(' . json_encode($arraydata) . ');'; 
+          echo         array2json($arraydata); 
           exit();  
            
        }
@@ -3575,12 +3647,12 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
             {
              deleteAll(rootpath.'/images/user_c/'.$data['0']['username'].'/'.$data['0']['meid'].'');  
              
-             $this->db->db_set_recordset(' DELETE FROM tb_memory where tb_memory.meid='.$this->post['meid'].'');
+             $this->db->db_delete(' DELETE FROM tb_memory where tb_memory.meid='.$this->post['meid'].'');
              
               
             }
              
-             
+             echo "1";
              
           $this->db->destory();
           $this->db->closedb(); 
@@ -3593,18 +3665,9 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                 
            
             $this->db->get_connect();
-          $this->db->db_set_recordset('
-                                    SELECT
-                           tb_shop.shopurl
-FROM
-tb_shop
 
-                             where  
-                                    tb_shop.shopurl="'.$this->post['shopurl'].'"
-                                    and tb_shop.mid='.$this->post['mid'].'
-                                     
-                                    
-                                    ');
+          $this->db->db_set_recordset('
+                                    SELECT tb_shop.shopurl FROM tb_shop where  tb_shop.shopurl="'.$this->post['shopurl'].'" and tb_shop.mid='.$this->post['mid'].'');
                               
           $data=$this->db->db_get_recordset();
 
@@ -3613,7 +3676,7 @@ tb_shop
             {
              deleteAll(rootpath.'/images/shop_c/'.$data['0']['shopurl'].'');  
              
-             $this->db->db_set_recordset(' DELETE FROM tb_shop where tb_shop.shopurl="'.$data['0']['shopurl'].'"');
+             $this->db->db_delete(' DELETE FROM tb_shop where tb_shop.shopurl="'.$data['0']['shopurl'].'"');
              
               
             }
@@ -3622,6 +3685,7 @@ tb_shop
              
           $this->db->destory();
           $this->db->closedb(); 
+          echo "1";
             }
         }
        function getallmemorybymid()
@@ -3755,7 +3819,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
 
         if(!$this->checkshopurl(1))
         {
-            $arraydata['error']=" shopurl ซ้ำ หรือ มีตัวอักษรพิเศษ";
+            $arraydata['error']=" shop url ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
             echo array2json($arraydata); 
             exit();
         }
@@ -3775,6 +3839,112 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
         $arrayshop['tumid']=$arraydata2['tumid'];
         $arrayshop['temid']=$arraydata2['temid'];
         $arrayshop['refcode']=$arraydata2['refcode'];
+        $arrayshop['keyword']=$arraydata2['keyword'];
+        $arrayshop['lat']=$arraydata2['lat'];
+        $arrayshop['lng']=$arraydata2['lng'];
+        $arrayshop['createdate']=date("Y-m-d H:i:s");
+        $arrayshop['updatedate']=date("Y-m-d H:i:s");
+        if(preg_match('/^[a-zก-๙0-9เ]+$/i',$arraydata2['shopurl']))$arrayshop['shopurl']=$this->changeidn($arraydata2['shopurl']);
+        else $arrayshop['shopurl']=$arraydata2['shopurl'];
+
+        
+        $this->db->get_connect();
+        $this->db->db_set($arrayshop,'tb_shop');
+        $mid= $this->db->db_get_last_number();
+        $this->db->destory();
+        $this->db->db_set($arrayshop,'tb_shop_en'); 
+        $this->db->destory();
+        
+        $this->db->closedb();
+        $arraydata['error']=0;
+        $arraydata['shopurl']=$arrayshop['shopurl'];
+
+
+          
+       
+         if(!is_dir(fullpathtemp.$arraydata['shopurl']))
+         {
+             mkdir(fullpathtemp.$arraydata['shopurl']);
+             @chmod(fullpathtemp.$arraydata['shopurl'],0777);
+         }
+         if(!is_dir(fullpathimages.$arraydata['shopurl']))
+         {
+             mkdir(fullpathimages.$arraydata['shopurl']);
+             @chmod(fullpathimages.$arraydata['shopurl'],0777);
+         }
+         if(!is_dir(fullpathimages.$arraydata['shopurl'].'/resize'))
+         {
+             mkdir(fullpathimages.$arraydata['shopurl'].'/resize');
+             @chmod(fullpathimages.$arraydata['shopurl'].'/resize',0777);
+         }
+         $data=$this->getshop($arraydata['shopurl']);
+           
+         if(copy(fullpathtemplates.$data['0']['temname'].'/'.$data['0']['tempath'].'.php',fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_th.php')){
+             $file1=fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_th.php';
+             @chmod($file1,0777);
+         }
+         if(copy(fullpathtemplates.$data['0']['temname'].'/'.$data['0']['tempath'].'.php',fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_en.php'))
+         {
+             $file2=fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_en.php';
+             @chmod($file2,0777);
+         }
+
+         
+
+        echo array2json($arraydata); 
+                               
+                     
+               
+       }
+       function submitaffformiphone()
+       { 
+
+
+  if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
+        {
+            $arraydata['error']=" email ไม่ถูกต้อง";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkemail(1))
+        {
+             $arraydata['error']=" email นี้ได้ลงทะเบียนเรียบร้อยแล้ว";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkusername(1))
+        {
+            $arraydata['error']=" username ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkshopurl(1))
+        {
+               $arraydata['error']=" shop url ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
+            echo array2json($arraydata); 
+            exit();
+        }
+
+           
+       $arraydata2=$this->post;       
+
+
+        $arraymember= $this->savemember();
+       
+      //  $arraydata2['mid']=$this->post['mid'];
+         $arrayshop['mid']=$arraymember['mid'];
+                
+ 
+        $arrayshop['submid']=$this->post['mid'];
+        $arrayshop['catid']=$arraydata2['catid'];
+        $arrayshop['subcatid']=$arraydata2['subcatid'];
+        $arrayshop['shopname']=urldecode($arraydata2['shopname']);
+        $arrayshop['proid']=$arraydata2['proid'];
+        $arrayshop['disid']=$arraydata2['disid'];
+        $arrayshop['tumid']=$arraydata2['tumid'];
+        $arrayshop['temid']=$arraydata2['temid'];
+        $arrayshop['refcode']=$arraydata2['refcode'];
+        $arrayshop['keyword']=$arraydata2['keyword'];
         $arrayshop['lat']=$arraydata2['lat'];
         $arrayshop['lng']=$arraydata2['lng'];
         $arrayshop['createdate']=date("Y-m-d H:i:s");
@@ -4577,6 +4747,29 @@ where tb_shop.shopurl="'.$shopurl.'"');
               echo array2json($arraydata);
               }
       }
+      function submitmyprofileformiphone2()
+      {
+           if($this->post['pic1'])
+              {
+
+         
+             $filenow= mktime().'.jpg'; 
+             $fp = fopen(rootpath.'/images/'.'police'.'/'.$filenow, 'wb');
+              fwrite($fp, base64_decode($this->post['pic1']));
+              fclose($fp);
+              $this->db->get_connect();
+              $data['pic']=$filenow;
+              $data['lat']=$this->post['lat'];
+              $data['lng']=$this->post['lng'];
+              $this->db->db_set($data,'tb_police');
+              $this->db->destory();
+              $this->db->closedb();
+              
+              $arraydata['error']=0;
+              
+              echo 1;
+              }
+      }
       function submitpicformiphone2()
       {
            $meid=$this->post['meid'];
@@ -4686,28 +4879,247 @@ where tb_shop.shopurl="'.$shopurl.'"');
            
           
       }
+      function addfriend()
+      {
+              $this->db->get_connect();
+              
+          $this->db->db_set_recordset('SELECT
+          tb_member.mid
+          FROM
+          tb_member
+          where tb_member.mid='.$this->post['friend']);
+          
+
+              
+          $arraydata=$this->db->db_get_recordset();
+                    $this->db->destory();
+
+          
+          if($arraydata['0']['mid'])
+          {
+              $this->db->db_set_recordset('SELECT
+              tb_relate.flist,
+              tb_relate.relid
+              FROM
+              tb_relate
+              where tb_relate.mid="'.$this->post['mid'].'"');
+
+
+                    $arraydata2=$this->db->db_get_recordset();
+                    $this->db->destory();
+                    
+                     if($arraydata2['0']['relid'])
+                     {
+                        
+                         $arraylist=json2array($arraydata2['0']['flist']);
+                        if($arraylist[$arraydata['0']['mid']]==1)
+                         {
+                             $arrayres['error']="เป็นเพื่อนเรียบร้อยแล้ว";
+                             echo   array2json($arrayres);
+                             exit();
+                         }
+                          else 
+                         {
+                            $arraylist[$arraydata['0']['mid']]=1;
+                         }
+                       $strjson = array2json($arraylist);
+                       
+                       $arraysave['flist']=$strjson;
+                      // $this->db->db_set()
+                       $this->db->db_set($arraysave,'tb_relate',' relid='.$arraydata2['0']['relid']);
+                       
+                       $arrayres['error']=0;
+                       
+                       
+                       
+                       
+                       $this->db->db_set_recordset('SELECT
+              tb_relate.flist,
+              tb_relate.relid
+              FROM
+              tb_relate
+              where tb_relate.mid="'.$this->post['friend'].'"');
+
+
+                    $arraydata3=$this->db->db_get_recordset();
+                    $this->db->destory();
+                     if($arraydata3['0']['relid'])
+                     {
+                          $arraylist=json2array($arraydata3['0']['flist']);
+                          if($arraylist[$this->post['mid']]==1)
+                         {
+                             
+                         }else
+                         {
+                          
+                          $arraylist[$this->post['mid']]=1;
+                          $strjson = array2json($arraylist);
+                          $arraysave['flist']=$strjson;
+                         
+                          $this->db->db_set($arraysave,'tb_relate',' relid='.$arraydata3['0']['relid']);
+                         }
+                                         
+                         
+                     }else
+                     {
+                         $arraylist=array();
+                     $arraylist[$this->post['mid']]=1;    
+                    $strjson = array2json($arraylist);
+                    $arraysave['flist']=$strjson;
+                    $arraysave['mid']=$this->post['friend'];
+                    $this->db->db_set($arraysave,'tb_relate');
+                    $arrayres['error']=0;
+                     }
+
+                         
+                    }
+                    else
+                    {
+                         
+                    $arraylist[$arraydata['0']['mid']]=1;    
+                    $strjson = array2json($arraylist);
+                    $arraysave['flist']=$strjson;
+                    $arraysave['mid']=$this->post['mid'];
+                    $this->db->db_set($arraysave,'tb_relate');
+                    $arrayres['error']=0;
+                    
+                    
+                    
+                    
+              $this->db->db_set_recordset('SELECT
+              tb_relate.flist,
+              tb_relate.relid
+              FROM
+              tb_relate
+              where tb_relate.mid="'.$this->post['friend'].'"');
+
+
+                    $arraydata3=$this->db->db_get_recordset();
+                    $this->db->destory();
+                     if($arraydata3['0']['relid'])
+                     {
+                          $arraylist=json2array($arraydata3['0']['flist']);
+                          if($arraylist[$this->post['mid']]==1)
+                         {
+                             
+                         }else
+                         {
+                          
+                          $arraylist[$this->post['mid']]=1;
+                          $strjson = array2json($arraylist);
+                          $arraysave['flist']=$strjson;
+                         
+                          $this->db->db_set($arraysave,'tb_relate',' relid='.$arraydata3['0']['relid']);
+                         }
+                                         
+                         
+                     }else
+                     {
+                      $arraylist=array();   
+                     $arraylist[$this->post['mid']]=1;    
+                    $strjson = array2json($arraylist);
+                    $arraysave['flist']=$strjson;
+                    $arraysave['mid']=$this->post['friend'];
+                    $this->db->db_set($arraysave,'tb_relate');
+                    $arrayres['error']=0;
+                     }
+
+                    
+                    
+                  }
+                    
+                    
+
+              
+              
+          }
+          else
+          {
+              $arrayres['error']="ไม่มี user นี้อยู่ในระบบ";
+                             echo   array2json($arrayres);
+                             exit();
+          }
+          
+          
+          
+          $this->db->destory();
+          $this->db->closedb();
+                              echo   array2json($arrayres);
+                    exit();
+      }
       
-     // function testprogram()
-//      {
-//          $this->db->get_connect();
-//          if($_POST['username'])
-//          {
-//             $arraytest['status']=1;
-//              $this->db->db_set($arraytest,'tb_test');
-              // $mid= $this->db->db_get_last_number();
-//        
-//              echo $_POST['username'];
-//          }else
-//          {
-//              $arraytest['status']=2;
-//              $this->db->db_set($arraytest,'tb_test');
-//              echo "no post";
-//          }
-//          $this->db->destory();
-//          $this->db->closedb();
-//          
-//      }
-//      
+      function getallcontact()
+      {
+      if($_GET['mid'])
+          {
+          header("content-type: text/javascript");
+
+             $this->db->get_connect();
+            
+          $this->db->db_set_recordset('select flist from tb_relate where mid='.$_GET['mid']); 
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+          if($data['0']['flist']){
+          
+              
+              
+              $arrayfri=json2array($data['0']['flist']);
+              if(is_array($arrayfri))
+              {
+                  $arrayfri2=array();
+                  foreach($arrayfri as $keyfri =>$valuefri)
+                  {
+                     $arrayfri2[]=$keyfri; 
+                  }
+                  $mids=join(',',$arrayfri2);
+                 $where="  tb_member.mid IN  ($mids) ";
+                 
+          $this->db->db_set_recordset('select tb_member.username,tb_member.email,tb_member.pic,tb_member.tel  from tb_member where '.$where.' order by tb_member.username asc'); 
+          $data2=$this->db->db_get_recordset();
+          $this->db->destory();
+                 
+               
+               if($data2['0']['username'])
+               {
+                   $k=0;
+                   $arraydata=array();
+
+                   foreach($data2 as $value2)
+                   {
+                     $arraydata[$k]['username']= $value2['username'];
+                     $arraydata[$k]['email']= $value2['email'];
+
+                     
+                     
+                      if($value2['pic'])
+                 {
+                    $arraydata[$k]['picme']= homeinfo.'/images/user_c/'.strtolower($value2['username']).'/'.$value2['pic'];
+                 }else
+                 {
+                     $arraydata[$k]['picme']='images/200-130.jpg';
+                 }
+                     
+                     
+                     
+                     $arraydata[$k]['tel']= $value2['tel'];
+                     $k++;
+                   }
+               } 
+               
+               
+              }
+          }else
+          {
+
+          }
+         // echo   array2json($arraydata);
+          $this->db->destory();
+          $this->db->closedb(); 
+          
+          echo        $_GET['callback'].'(' . json_encode($arraydata) . ');'; 
+          exit();  
+          }
+      }
       function testconnect()
       {
           echo "ok";

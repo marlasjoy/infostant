@@ -30,14 +30,13 @@ nav li:nth-child(1) a { background: url(images/icon-search.png) no-repeat center
 .ui-content > h3 { background-color: #a5a5a5; height: 21px; line-height: 21px; margin: 0; font-size: 12px; text-shadow: 1px 0 0 #c9c9c9; padding: 0 15px; color: #1b1b1b }
 .ui-content > dl > dd { margin: 0;  }
 
-#index div[data-role="content"] img { height: 287px;  }
+
 #index .ui-footer {  }
 #index .ui-footer li { float: left; padding: 5px;  }
 #index .ui-footer li:nth-child(2n) { padding-left: 0; }
 #index .ui-footer li a { height: 138px; display: block; }
 #index .ui-footer img { width: 152px; }
 a[data-rel="back"] { width: 44px; height: 26px; display: block;text-indent: -1000em; background: url(images/btn-back.png) no-repeat; float: left; background-size: 100%; margin: 9px 3px 0 5px; }
-#backbtn { width: 44px; height: 26px; display: block;text-indent: -1000em; background: url(images/btn-back.png) no-repeat; float: left; background-size: 100%; margin: 9px 3px 0 5px; }
 
 .ui-header { overflow: visible!important;  }
 .ui-header-fixed {  z-index: 1100!important;}
