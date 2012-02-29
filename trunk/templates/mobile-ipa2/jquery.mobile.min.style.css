@@ -207,7 +207,7 @@ background: url(images/icons/unlock.png) no-repeat 4px 4px; background-size: 32p
 #share2 li:nth-child(4) a { background-position: -132px 0; }
 #share2 li:nth-child(5) a { background-position: -176px 0; }
 
-#cat_list #share2 {left: 25px;}
+#cat_list #share2 {left: -14px;}
 
 
 
