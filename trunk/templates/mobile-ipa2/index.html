@@ -781,13 +781,13 @@ function addpicme()
             <a href="javascript:void(0);" class="close">Close Function</a>
         </div> <!-- #function -->
         </div><!-- /header -->
-    <div data-role="content">    
-       <h2>My Profile <a href="#" class="text">Edit My Profile</a></h2>
+    <div data-role="content" id="wapper-myprofile">    
+       <h2>My Profile </h2>
                 <div class="subpage myprofile">
             <ul class="v">
                 <li>
                     <a href="javascript:addpicme();" class="thumb">
-                        <img  src="images/200-130.jpg" id="img-profile" alt="Sub-Category Name" />
+                        <img  src="images/65-65.jpg" id="img-profile" alt="Sub-Category Name" />
                     </a>
                         Username<br />
                         <strong><a id="username" href="detail.html"></a></strong><br />
@@ -804,7 +804,7 @@ function addpicme()
 
                  <strong>Add Friend by Reference Code</strong>
                 <input type="text" name="refercode" id="refercode" />
-                <input type="submit" value="Add" id="" data-inline="" />
+                <input type="button" onclick="addfriend()" value="Add" id="" data-inline="" />
              </div>
         </div>
     </div><!-- /content -->
