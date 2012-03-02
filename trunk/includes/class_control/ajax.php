@@ -3483,6 +3483,18 @@ $data=$this->db->db_get_recordset();
             ";
       
           }
+          if($_GET['searchTxt']==""&&$_GET['proid']==""&&$_GET['disid']==""&&$_GET['tumid']==""&&$_GET['catid']==""&&$_GET['subcatid']==""&&$_GET['mid']==""&&$_GET['sids']==""&&$_GET['fid']==""&&$_GET['submid']=="")
+          {
+              $nowhere=1;
+          }
+          
+          if($nowhere==1)
+          {
+              $checkwhere='';
+          }else
+          {
+              $checkwhere='where '.join("and",$where).'';
+          }
           
           
               $this->db->get_connect();
@@ -3503,10 +3515,7 @@ $data=$this->db->db_get_recordset();
                                     tb_shop
                                     INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
                                     INNER JOIN tb_cat ON tb_shop.catid = tb_cat.catid
-
-                                    where  
-                                    '.join("and",$where).'
-                                     
+                                    '.$checkwhere.'
                                     order by    tb_shop.createdate desc
                                     limit '.$_GET['start'].','.$_GET['limit'].'
                                     
@@ -3540,7 +3549,7 @@ $data=$this->db->db_get_recordset();
                   $arraydata[$k]['shopurl3']= $value['shopurl'];      
                   $arraydata[$k]['tel']=$value['tel'];
                   
-                   if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg')&&getimagesize(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg'))
+                   if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg')&&getimagesize(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg'))
                     {
                           $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
                       //   $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
@@ -3550,7 +3559,7 @@ $data=$this->db->db_get_recordset();
 //                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';   
 //                     }
                   
-                      $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';
+                      $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';
                       if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg'))
                     {
                         $arraydata[$k]['pic2']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg';       
@@ -3565,20 +3574,21 @@ $data=$this->db->db_get_recordset();
                     {
                         $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
                          $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+                         $thumbfilemobile=$dir_dest.'thumbmobile'.'.jpg'; 
                        //  echo homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg'."<br>";
                      if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg'))
                      {  
-                       if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfile5))
+                       if(copy(homeinfo.'/plugins/showimages.php?width='.'65'.'&height='.'65'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfilemobile))
                      {
-                       chmod($thumbfile5,0777);
-                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';   
+                       chmod($thumbfilemobile,0777);
+                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';   
                      }else
                      {
-                     $arraydata[$k]['pic']='images/200-130.jpg';        
+                     $arraydata[$k]['pic']='images/65-65.jpg';        
                      }  
                      }else
                      {
-                                             $arraydata[$k]['pic']='images/200-130.jpg';   
+                     $arraydata[$k]['pic']='images/65-65.jpg';   
                      }
                         
                        
@@ -3677,6 +3687,46 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
              deleteAll(rootpath.'/images/shop_c/'.$data['0']['shopurl'].'');  
              
              $this->db->db_delete(' DELETE FROM tb_shop where tb_shop.shopurl="'.$data['0']['shopurl'].'"');
+             
+              
+            }
+             
+             
+             
+          $this->db->destory();
+          $this->db->closedb(); 
+          echo "1";
+            }
+        }
+        function deletefavoritebysid()
+        {
+            if($this->post['sid'])
+            {
+                
+           
+            $this->db->get_connect();
+
+          $this->db->db_set_recordset('SELECT tb_shop.sid FROM tb_shop where  tb_shop.sid="'.$this->post['sid'].'" ');
+                              
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+
+            if($data['0']['sid'])
+            {
+           //  deleteAll(rootpath.'/images/shop_c/'.$data['0']['shopurl'].'');  
+           
+           
+           $this->db->db_set_recordset('SELECT tb_fav.faid FROM tb_fav where  tb_fav.sid="'.$data['0']['sid'].'" and tb_fav.mid='.$this->post['mid'].'');
+   
+          $data2=$this->db->db_get_recordset();
+          $this->db->destory();
+             
+             if($data2['0']['faid'])
+             {
+               $this->db->db_delete(' DELETE FROM tb_fav where tb_fav.faid="'.$data2['0']['faid'].'"  ');  
+               $this->db->db_delete(' DELETE FROM tb_itenary where tb_itenary.faid="'.$data2['0']['faid'].'"  ');  
+             }
+             
              
               
             }
@@ -4219,7 +4269,22 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                  $arraydata['emailprofile']=$data[0]['email'];
                  if($data[0]['pic'])
                  {
-                    $arraydata['picme']= homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/'.$data[0]['pic'];
+                 //   $arraydata['picme']= homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/'.$data[0]['pic'];
+                    
+                      if(!is_file(rootpath.'/images/user_c/'.strtolower($arraydata['username']).'/avatar65x65.jpg'))
+                    {
+                       if(copy(homeinfo.'/plugins/showimages.php?width=65&height=65&source='.homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/'.$data[0]['pic'],rootpath.'/images/user_c/'.strtolower($arraydata['username']).'/avatar65x65.jpg'))
+                     {
+                       chmod(rootpath.'/images/user_c/'.strtolower($arraydata['username']).'/avatar65x65.jpg',0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata['picme']= homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/avatar65x65.jpg';
+                     } 
+                    }else
+                    {
+                       $arraydata['picme']= homeinfo.'/images/user_c/'.strtolower($arraydata['username']).'/avatar65x65.jpg'; 
+                    }
+                    
+                    
                  }else
                  {
                      $arraydata['picme']='';
@@ -5094,9 +5159,24 @@ where tb_shop.shopurl="'.$shopurl.'"');
                       if($value2['pic'])
                  {
                     $arraydata[$k]['picme']= homeinfo.'/images/user_c/'.strtolower($value2['username']).'/'.$value2['pic'];
+             
+                    
+                     if(!is_file(rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar65x65.jpg'))
+                    {
+                       if(copy(homeinfo.'/plugins/showimages.php?width=65&height=65&source='.homeinfo.'/images/user_c/'.strtolower($value2['username']).'/'.$value2['pic'],rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar65x65.jpg'))
+                     {
+                       chmod(rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar65x65.jpg',0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata[$k]['picme']= homeinfo.'/images/user_c/'.strtolower($value2['username']).'/avatar65x65.jpg';
+                     } 
+                    }else
+                    {
+                        $arraydata[$k]['picme']= homeinfo.'/images/user_c/'.strtolower($value2['username']).'/avatar65x65.jpg';
+                    }
+                    
                  }else
                  {
-                     $arraydata[$k]['picme']='images/200-130.jpg';
+                     $arraydata[$k]['picme']='images/65-65.jpg';
                  }
                      
                      
