@@ -53,6 +53,7 @@ myCat[15]="Other";
   var tempdisid;
   var temptumid;
   var startchange;
+  var loadmorecheck=0;
 
 window.log = function(){
   log.history = log.history || [];   // store logs to an array for reference
@@ -130,6 +131,7 @@ function resetvalue(){
      myScroll="";
      keyword="";
      startchange=0;
+     loadmorecheck=0;
  }
 function getWidth(){
     xWidth = null;
@@ -318,7 +320,38 @@ function clearsaveall()
                    localStorage.setItem('searchresulthtml','');
 }
 //clearsaveall();
+function deletefav(sid)
+{
+         $('#deleteid'+sid).simpledialog({
+    'mode' : 'bool',
+    'fullScreen':'false',
+    'prompt' : 'คุณต้องการลบ รายการโปรด นี้ หรือไม่ ?',
+    'useModal': true,
+    'buttons' : {
+    'OK': {
+        click: function () {
+            $.mobile.showPageLoadingMsg();
+           $.post(webdir+'/ajax/deletefavoritebysid',{sid:sid,mid:localStorage.getItem("userId") }, function(data) {
+               $.mobile.hidePageLoadingMsg();   
+               start=0;
+               searchresultfunction();
+               navigator.notification.alert('ลบเรียบร้อยแล้ว');
+               
+              // alert('dfdfdf');
+         //   $.mobile.hidePageLoadingMsg();   
+           });
+        }
+      },
+      'Cancel': {
+        click: function () {
 
+        },
+        icon: "delete",
+        theme: "c"
+      }
+    }
+  });
+}
 function searchresultlist(myObject){
 myScroll='';
   //  alert(('#shop').html());
@@ -338,14 +371,14 @@ myScroll='';
       for (variable in myObject)
       {   
           //   navigator.notification.alert(variable) ;
-             var obj = myObject[variable]; 
-     //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
+             var obj = myObject[variable];
+             //$('.ui-page-active #searchresulthtml').append('<li><a  href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a data-ajax="false" href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel.  '+obj.tel+'<br />'+obj.address+'</li><ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a href="#" class="button go">Go</a></li><li><a href="#" class="button favorite">Favorite</a></li><li class="date_add">26/10/2011 <strong>|</strong> 09:00</li></ul>');
     if($('.ui-page-active').attr('id')=="shop"||$('.ui-page-active').attr('id')=="affiliate")
     {
       $('.ui-page-active #searchresulthtml').append('<li><a href="'+obj.shopurl+'"  class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a data-ajax="false" href="'+obj.shopurl2+'" class="button edit">Edit</a></li><li><a href="javascript:deleteshop(\''+obj.shopurl3+'\')" id="deleteid'+obj.shopurl3+'" class="button delete">Delete</a></li><li><a href="#" class="button promotion">Promotion</a></li><li><a href="#" class="button member">Member</a></li></ul></li>');      
     }else if($('.ui-page-active').attr('id')=="favarite")
     {
-           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="#" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
+           var strtext= '<li><a href="'+obj.shopurl+'" class="thumb" ><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletefav(\''+obj.sid+'\')" id="deleteid'+obj.sid+'" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li><a href="javascript:setcalendar(\''+obj.sid+'\')" class="button calendar"></a><input type="text" class="datecalender" style="display:none" id="date'+obj.sid+'"></li></ul></li>';  
            
            
            var strtext2= '<li><a href="'+obj.shopurl+'" class="thumb"><img src="'+obj.pic+'" alt="'+obj.shopname+'" /></a><strong><a href="'+obj.shopurl+'">'+obj.shopname+'</a></strong><br />Time. '+obj.daterange+'<br />Tel. '+obj.tel+'<br />'+obj.address+', '+obj.proname+'<ul class="h"><li><a href="javascript:deletecalendar(\''+obj.sid+'\',\''+k+'\')" class="button delete">Delete</a></li><li><a class="button go share2" href="#">Go</a><ul id="share2" class=""><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'infostant\')">infotstant</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'facebook\')">facebook</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'twitter\')">twitter</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'google\')">google+</a></li><li><a href="javascript:openshare(\''+obj.shopurl3+'\',\'email\')">email</a></li></ul></li><li class="dateshowset" id="date-'+obj.sid+'-'+k+'"></li></ul></li>'; 
@@ -378,17 +411,9 @@ myScroll='';
              setshare2();
     
              
-             if($('.ui-page-active').attr('id')=="shop")
+                if($('.ui-page-active').attr('id')=="shop")
     {
-        //    if(myScroll)
-//            {
-//               myScroll.refresh();
-//            }else
-//            {
-//                
-       //  var      myScroll5 = new iScroll('wapper');  
-
-//            }
+    
         var elem = $('#wapper');
         elem.iscroll();
         elem.bind('onScrollEnd', function(e, iscroll){
@@ -397,22 +422,23 @@ myScroll='';
 
     }else if($('.ui-page-active').attr('id')=="cat_list")
     {
-          // myScroll = new iScroll('wappercat'); 
-           
-           
 
-             var elem = $('#wappercat');
+    //    $('#wappercat').css('height','100%');
+        var elem = $('#wappercat');
         elem.iscroll();
         elem.bind('onScrollEnd', function(e, iscroll){
-         //   alert($(this).attr('id') +' - '+ iscroll);
+          //  alert($(this).attr('id') +' - '+ iscroll);
+       //  loadmorecheck=1;
+       //  searchresultfunction();
         });
-            
+
+         
             
     }else if($('.ui-page-active').attr('id')=="affiliate")
     {
           // myScroll = new iScroll('wappercat'); 
            
-           
+          
 
             
             
@@ -421,12 +447,12 @@ myScroll='';
         elem.bind('onScrollEnd', function(e, iscroll){
          //   alert($(this).attr('id') +' - '+ iscroll);
         });
-    }
-    else if($('.ui-page-active').attr('id')=="favarite")
+                   
+    }else if($('.ui-page-active').attr('id')=="favarite")
     {
           // myScroll = new iScroll('wappercat'); 
            
-           
+
 
             
             
@@ -435,19 +461,41 @@ myScroll='';
         elem.bind('onScrollEnd', function(e, iscroll){
 
         });
+
+                                
+    }else if($('.ui-page-active').attr('id')=="searchresult")
+    {
+          // myScroll = new iScroll('wappercat'); 
+           
+           
+                   
+            
+            
+               var elem = $('#wapper-searchresult');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+
+        });
+
     }
     $.mobile.hidePageLoadingMsg();
     }else
     {
-         $('.ui-page-active #searchresulthtml').html('');
+        if(loadmorecheck!=1)
+        {
+         $('.ui-page-active #searchresulthtml').html('');   
+        }
+         
         $.mobile.hidePageLoadingMsg();
     }
 }
  function setshare2()
  {
-      if($('.ui-page-active').attr('id')=="cat_list"||$('.ui-page-active').attr('id')=="favarite")
+      if($('.ui-page-active').attr('id')=="cat_list"||$('.ui-page-active').attr('id')=="favarite"||$('.ui-page-active').attr('id')=="calendar"||$('.ui-page-active').attr('id')=="searchresult")
       {
        $('.button.share2').click(function(){
+
+
                 if ( $(this).parent().children('#share2').css("display") == "block" ){
                 
                 $(this).parent().children('#share2').fadeOut(300);
@@ -464,13 +512,14 @@ myScroll='';
         })
         
         $('.ui-page-active#share2 a').click(function(){
+
                 if ( $(this).parent().parent().css("display") == "block" ){
-                
+
                 $(this).parent().parent().fadeOut(300);
                 $(this).parent().parent().animate({ top: '28px'}, 300);
                 
                } else {
-                   
+ 
                    $(this).parent().parent().fadeIn(200);
                    $(this).parent().parent().animate({ top: '32px' }, 300);
                 
@@ -515,25 +564,17 @@ myScroll='';
  }
  function loadmore()
  {
+     loadmorecheck=1;
      searchresultfunction();
  }
  function searchresultfunction(){
 $.mobile.showPageLoadingMsg();
 
-$.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid}, function(data) {
-    
-     var myObject = eval('(' + data + ')');
-//    alert(data);
+$.get(webdir+'/ajax/getallshopbyname3',{searchTxt: searchTxt,proid:proid,disid:disid,tumid:tumid,catid:catid,subcatid:subcatid,mid:mid,sids:sids,fid:fid,start:start,limit:limit,submid:submid}, function(data) {var myObject = eval('(' + data + ')');
    searchresultlist(myObject);
   //$('.result').html(data);
   //alert('Load was performed.');
-}).error(function() {
-                                
-                                
-                                
-                                alert('error');
-                                
-                                });
+}).error(function() {alert('error');});
 
 
 //                  var req = $.ajax({
@@ -1502,6 +1543,17 @@ function setcalendarevent()
         
             $('.relative, .subpage').fadeIn(300);
             $.scrollTo('#activity',800);
+            
+            
+            var elem = $('.ui-page-active .ui-content');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+
+        });
+               var height=$('.ui-page-active .ui-content').height(); 
+                  //  alert(height);
+               height=height+100;
+               $('.ui-page-active .ui-content').css("height",height+'px !important'); 
             setshare2();
          });
 }
@@ -1812,6 +1864,15 @@ function contactlist(myObject)
 
       $('.ui-page-active #searchresulthtml').html(datastr);
     $.mobile.hidePageLoadingMsg();
+      var elem = $('#wapper-contact');
+        elem.iscroll();
+        elem.bind('onScrollEnd', function(e, iscroll){
+
+        });
+                     var height=$('.ui-page-active #wapper-contact').height(); 
+                  //  alert(height);
+                    height=height+100;
+                    $('.ui-page-active #wapper-contact').css("height",height+'px !important'); 
 }
 function setcontact()
 {
@@ -2107,7 +2168,7 @@ default:
 
    
            
-        $('.ui-page-active #function .v').html('<li class="icon message"><a href="notification_friend.html"><span>Message</span></a></li><li class="icon memory"><a href="index.html#memory"><span>Personal Memory</span></a></li><li class="icon favorite"><a href="favarite.html"><span>Favorite</span></a></li><li class="icon calendar"><a href="calendar.html"><span>Calendar / Itenary</span></a></li><li class="icon addfriend"><a href="contact.html"><span>Friends</span></a></li><li class="icon promotion"><a href="promotion.html"><span>Promotion</span></a></li><li class="icon setting"><a href="setting.html"><span>Settings</span></a></li>');
+        $('.ui-page-active #function .v').html('<li class="icon message" style="display:none"><a href="notification_friend.html"><span>Message</span></a></li><li class="icon memory" style="display:none"><a href="index.html#memory"><span>Personal Memory</span></a></li><li class="icon favorite"><a href="favarite.html"><span>Favorite</span></a></li><li class="icon calendar"><a href="calendar.html"><span>Calendar / Itenary</span></a></li><li class="icon addfriend"><a href="contact.html"><span>Friends</span></a></li><li style="display:none" class="icon promotion"><a href="promotion.html"><span>Promotion</span></a></li><li class="icon setting"><a href="setting.html"><span>Settings</span></a></li>');
           if(localStorage.getItem("group")==1)
           {
             if($('.ui-page-active #affiliatehtml').html())

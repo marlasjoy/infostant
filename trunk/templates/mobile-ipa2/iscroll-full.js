@@ -121,11 +121,11 @@ iScroll.prototype = {
 		var that = this,
 			resetX = that.x, resetY = that.y,
 			snap;
-		
+		//alert(that.element.offsetHeight);
 		that.scrollWidth = that.wrapper.clientWidth;
 		that.scrollHeight = that.wrapper.clientHeight;
 		that.scrollerWidth = that.element.offsetWidth;
-		that.scrollerHeight = that.element.offsetHeight;
+		that.scrollerHeight = that.element.offsetHeight+50;
 		that.maxScrollX = that.scrollWidth - that.scrollerWidth;
 		that.maxScrollY = that.scrollHeight - that.scrollerHeight;
 		that.directionX = 0;
