@@ -387,7 +387,7 @@ input,select{z-index: 9999999;}
 
 #function{}
 #function {top: -340px;}
-#function > ul.v{ height:320px;}
+#function > ul.v{ height:180px;}
 ul.v > li.icon > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat ; background-size: 650px 650px;   }
 ul.v > li.icon.setting a { background-position: -615px 7px !important;  }/*setting*/
 ul.v > li.icon.directory a { background-position: -567px -45px !important;  }/*directory*/
