@@ -84,11 +84,51 @@
                                                
                       </dl>
                    </section>
+                   <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
                    <section id="promotionpage" style="display: none;" >
                    <dl id="event">
                       <dt>Promotion Page</dt>
                           <dd>
-                             ddd
+                          
+                             
+                                                            <div class="main_image">
+                                                               <img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>
+                                                             </div>
+                                                             <div class="data"><a href="#"><img class="logo" src="<?=imginfo?>/images/default/shopprofile/logo-s_p.png" /></a>
+                                                                       <div class="promo"> <a href="#"><img class="sale" src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_sale.jpg" /></a>
+                                                                        <a href="#"><img class="fav" src="<?=imginfo?>/images/default/shopprofile/btn-add_favorite.png" /></a>
+                                                        	</div>
+                                                            <div class="d1"><strong>S&amp;P ชือนี้มีแต่ของอร่อย</strong><br />
+                                                                              <strong>Vanilla at home</strong><br />บริการใหม่อีกหนึ่งทางเลือกที่คุณตองถูกใจกับสไตลการ
+                                                        ครีเอตเมนูได้หลากหลายและน่าสนใจทั้ง ฝรั่ง จีน ญี่ปุ่น 
+                                                                            </div>
+                                                                            
+                                                                            <div class="d2 subpage">
+                                                                                                <p>
+                                                                                                  <strong>พิเศษ!! ช่วงแนะนำ</strong><br />
+                                                                                                   ตลอดเดือนมิถุนายนนี้ Vanilla at home มีโปรโมชั่น
+                                                                                                    อิ่มอรอยครบเซตในราคาพิเศษ สำหรับลูกคาที่สั่ง
+                                                                                                                            Vanilla Special Set 
+                                                                                                                            
+                                                                                                                            <br /><br />
+                                                                                                        
+                                                                                                        บริการทุกวัน : 10.00 - 21.00 น.<br />
+                                                                                                        เฉพาะพื้นที่ 5 จุดที่กำหนด ได้แก่<br />
+                                                                                                          - ถนนสุขุมวิท 21 <br />
+                                                                                                          - สุขุมวิท 71 (ทั้ง 2 ฝั่ง)<br />
+                                                                                                          - ถนนพระราม 4 (แยกศูนย์สิริกิติ์)<br />
+                                                                                                           - แยกพระโขนง<br />
+                                                                                                          - ถนนเพชรบุรีตัดใหม่ (แยกอโศก) <br />
+                                                                                                          - พัฒนาการ 20<br />
+                                                                                                          - RCA<br />
+                                                                                                 <strong>Vanilla at home : 02-381-4332</strong>
+                                                                                                </p>
+                                                                                                
+                                                                                                
+                                                                            </div>
+                                                                            
+                                                              </div>
+                             
                           </dd>
                       </dl>
                    </section>
