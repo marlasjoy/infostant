@@ -1,0 +1,8 @@
+#promotionpage .data{ position:relative; font-size:12px; margin:0 0 10px 0; color:#666; min-height:500px;}
+#promotionpage .data strong{ color:#333;}
+#promotionpage .data .logo{ background:#FFF; position:absolute; top:-25px; left:2%; width:27%; max-width:100px; border: 1px solid #C8C8C8; box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);padding: 2px;}
+#promotionpage .data div.promo{  position:absolute; top:100px; right:3%; width:27%;  max-width:100px;}
+#promotionpage .data div.promo img.sale{ width:100%;  background:#FFF; border: 1px solid #C8C8C8; box-shadow: 1px 1px 5px rgba(0, 0, 255, 0.2);padding: 2px;}
+#promotionpage .data div.promo img.fav{width:100%;padding: 2px; margin-top:5px;}
+#promotionpage .data div.d1{ margin-left:20%; min-height:90px; padding:5px 0 0 0;}
+#promotionpage .data div.d2{ margin-top:5px; margin-right:20%; text-align:justify;}
