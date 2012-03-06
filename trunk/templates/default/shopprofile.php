@@ -18,7 +18,7 @@
 
                   
                                     
-                  <section>
+                  <section id="idshoplist" >
                       <dl id="event">
                       <dt>Shop Register</dt>
                           <dd>
@@ -36,7 +36,29 @@
                       </dl>
                   </section>
                   
-                   <section>
+                   <section id="idshopmenu" style="display: none;" >
+                        <dl>
+                      <dt><a href="javascript:backshop()">back</a> Shop Menu <input type="hidden" id="shopurldata" name="shopurldata" value=""><input type="hidden" id="siddata" name="siddata" value=""></dt>
+                          <dd>
+                             <a href="<?=homeinfo?>/registershop"> 1.Create New Shop</a>
+                          </dd>
+                          <dd>
+                             <a href="javascript:editshop()"> 2.Shop edit </a>
+                          </dd>
+                         <dd>
+                             <a href="javascript:openpromotion()"> 3.Promotion </a>
+                          </dd>
+                          <dd>
+                              4.Member
+                          </dd>
+                          <dd>
+                              5.Event
+                          </dd>
+                          <dd>
+                              6.Affaliate
+                          </dd>
+                                               
+                      </dl>
                    </section>
                   
               </article>

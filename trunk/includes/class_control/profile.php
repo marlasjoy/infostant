@@ -236,6 +236,7 @@
            }
           $sql='  SELECT
                     tb_shop.shopurl,
+                    tb_shop.sid,
                     tb_shop.shopname,
                     tb_shop.title,
                     tb_shop.description,
@@ -294,7 +295,7 @@
                                               '.date('H:i:s',$mktime).'
                                           </td>
                                           <td>
-                                              <a target="_blank" href="http://'.$valueshop['shopurl'].'.'.domain.'"><img src="'.$pic.'" alt="thumb-01" /></a>
+                                              <a  href="javascript:shopmenu('.$valueshop['sid'].',\''.$valueshop['shopurl'].'\')"><img src="'.$pic.'" alt="thumb-01" /></a>
                                           </td>
                                           <td>
                                               <strong>Title:</strong> '.strip_tags($valueshop['title']).' <br />
@@ -302,8 +303,8 @@
                                               <strong>Providence:</strong>  '.$valueshop['proname'].'
                                           </td>
                                           <td>
-                                              <a href="javascript:void(0);" class="btn-edit">Edit</a>
-                                              <a href="javascript:void(0);" class="btn-delete">Delete</a>
+                                              <a href="javascript:shopmenu('.$valueshop['sid'].',\''.$valueshop['shopurl'].'\')" class="btn-edit">Edit</a>
+                                              <a href="javascript:shopdelete('.$valueshop['sid'].')" class="btn-delete">Delete</a>
                                           </td>
                                       </tr>';
             
@@ -429,6 +430,7 @@
                    $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
         $databird['noheader']=1;
+        $databird['js'][]='shop.js';
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
@@ -445,6 +447,7 @@
         
         $this->footer->get_footer();
       }
+      
       function checkuserexit($username)
       {
           
