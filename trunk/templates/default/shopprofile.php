@@ -60,6 +60,38 @@
                                                
                       </dl>
                    </section>
+                   <section id="idpromotionmenu" style="display: none;" >
+                        <dl>
+                      <dt><a href="javascript:backpromotion()">back</a> Promotion Menu </dt>
+                          <dd>
+                             <a href="javascript:createpromotion()"> 1.Create Promotion</a>
+                          </dd>
+                          <dd>
+                             <a href="javascript:editshop()"> 2.Promotion Member </a>
+                          </dd>
+                         <dd>
+                             <a href="javascript:openpromotion()"> 3.Insert Code </a>
+                          </dd>
+                          <dd>
+                              <a href="javascript:openpromotion()"> 4.Statistic </a>
+                          </dd>
+                          <dd>
+                              5.Event
+                          </dd>
+                          <dd>
+                              6.Affaliate
+                          </dd>
+                                               
+                      </dl>
+                   </section>
+                   <section id="promotionpage" style="display: none;" >
+                   <dl id="event">
+                      <dt>Promotion Page</dt>
+                          <dd>
+                             ddd
+                          </dd>
+                      </dl>
+                   </section>
                   
               </article>
                 </div>
