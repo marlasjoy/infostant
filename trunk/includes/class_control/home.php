@@ -15,16 +15,22 @@
       function view()
       {
 
-        echo "<div align='center'><img src='http://www.infostant.com/images/comingsoon.jpg'> </div>";
-          exit();
-        $this->header->set_data();
-        $this->header->get_header(); 
-        
+       // echo "<div align='center'><img src='http://www.infostant.com/images/comingsoon.jpg'> </div>";
+//          exit();
+//        $this->header->set_data();
+//        $this->header->get_header(); 
+//        
 
-
-        $this->load('home');
+        if($this->info['lang']=="th")
+        {
+         $this->load('demo');   
+        }else
+        {
+          $this->load('demo_en');   
+        }
         
-        $this->footer->get_footer();      
+        
+     //   $this->footer->get_footer();      
         
 
       }

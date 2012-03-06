@@ -2440,6 +2440,73 @@ $data=$this->db->db_get_recordset();
          }
         } 
        }
+       function  savemember3()
+       {
+       $arraydata=array();
+        if(in_array('',$this->post))
+        {
+         
+         if(is_array($this->post))
+         {
+             foreach($this->post as $key => $value)
+             {
+                          if($this->post[$key]==""&&$key!='website'&&$key!='fid'&&$key!='searchmap'&&$key!='emailshop'&&$key!='tel'&&$key!='postcode'&&$key!='refcode')
+                          {
+                          $arraydata[]=$key;   
+                          }
+             }
+
+         }
+         if(count($arraydata)>0)
+         {
+             
+             $arraydata['error']="กรอกข้อมูลไม่ครบ";
+             exit();
+         }
+
+       //  echo array2json($arraydata); 
+        // exit();
+        }
+        if(empty($_COOKIE['userid']))
+        {
+        if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
+        {
+            $arraydata['error']=" email ไม่ถูกต้อง";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkemail(1))
+        {
+             $arraydata['error']=" email ซ้ำ";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkusername(1))
+        {
+            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
+            echo array2json($arraydata); 
+            exit();
+        }
+         if($this->post['password1']!=$this->post['repassword'])
+        {
+            $arraydata['error']=" password กรอก ไม่ตรงกัน";
+            echo array2json($arraydata); 
+            exit();
+        }
+        $arraymember= $this->savemember();
+         $email=$arraymember['email'];
+         $username=$arraymember['username']; 
+        $arrayshop['mid']=$arraymember['mid'];
+        $stringCode= md5($this->post['username']);
+        $this->post['mid']=$arrayshop['mid'];
+        $this->setstatuscode($stringCode);
+
+         echo array2json($arraydata);   
+         
+
+        
+        } 
+       }
        function saveflood()
        {
           
