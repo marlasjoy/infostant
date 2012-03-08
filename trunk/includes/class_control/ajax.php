@@ -425,7 +425,8 @@
         function saveitenary()
         {
          $this->db->get_connect();
-       
+           if($this->post['calendar'])
+           {
             foreach($this->post['calendar'] as $key =>$value)
             {
                  $datetime=$key;
@@ -487,7 +488,7 @@
           
             
           }
-          
+           }
           
           $this->db->db_set_recordset('SELECT
           tb_itenary.date,
@@ -518,6 +519,83 @@
           $this->db->destory();
           $this->db->closedb();
             
+        }
+        function getlistday()
+        {
+            if($this->post['mid'])
+            {
+            $this->db->get_connect();
+            $sql='SELECT
+tb_shop.title,
+tb_shop.description,
+tb_province.proname,
+tb_shop.shopurl,
+tb_shop.sid,
+tb_itenary.date,
+tb_itenary.time
+FROM
+tb_fav
+INNER JOIN tb_itenary ON tb_itenary.faid = tb_fav.faid
+INNER JOIN tb_shop ON tb_fav.sid = tb_shop.sid
+INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
+where tb_itenary.mid='.$this->post['mid'].' and  tb_itenary.date="'.$this->post['date'].'"
+';
+          $this->db->db_set_recordset($sql);
+          $datashop=$this->db->db_get_recordset();
+                     if(count($datashop))
+           {
+               $str="";
+           $k=1;   
+           $b=0; 
+           foreach($datashop as $valueshop)
+           {
+                   if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'))
+                    {
+                      $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                    }else
+                    {
+                       if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/original.jpg'))
+                    {
+
+                      $thumbfile7=fullpathimages.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['shopurl'] . '/resize/original.jpg',$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'; 
+                     } 
+                    }else
+                    {
+                       $pic=homeinfo.'/images/default/no-image/100-80.jpg';  
+                    } 
+                        
+                        
+                        
+                         
+                    }
+           $mktime=strtotime($valueshop['date'].' '.$valueshop['time']) ;
+          $row++;
+          $arraydata[$b]['l']=date('l',$mktime);
+          $arraydata[$b]['date']=date('d F Y',$mktime);
+          $arraydata[$b]['time']=date('H:i:s',$mktime);
+          $arraydata[$b]['pic']=$pic;
+          $arraydata[$b]['shopurl']=$valueshop['shopurl'];
+          $arraydata[$b]['title']=$valueshop['title'];
+          $arraydata[$b]['description']=$valueshop['description'];
+          $arraydata[$b]['proname']=$valueshop['proname'];
+          $arraydata[$b]['sid']=$valueshop['sid'];
+
+            $b++;
+            
+            
+            
+            
+            $k++;
+           }
+           }
+          $this->db->destory();
+          $this->db->closedb();
+          echo array2json($arraydata);   
+            }
         }
         function deleteitenary()
         {
@@ -1417,6 +1495,55 @@ $data=$this->db->db_get_recordset();
          }
          $str.='<li><a class="thumb" name="leaf" href="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'500x500.'.$fileext.'" title="Title #0">
                                     <img src="'.imginfo.'/images/user_c/'.$username.'/'.$meid.'/resize/'.$name.'75x75.'.$fileext.'" alt="Title #0" />
+                                </a>
+                                <div class="caption">
+                                    <div class="image-title">ชื่อรูป:'.$name.'</div>
+                                    <div class="image-desc">ชนิดรูปภาพ   image/jpeg</div>
+                                    <div class="image-desc">คำอธิบาย: <input type="text" value="" name="alt-'.$k.'" id="alt-'.$k.'" style="width: 150px;"></div>
+                                    <div class="image-desc">ทำรูปนี้เป็น Thumbnail <input type="checkbox" value="'.$k.'" name="check-'.$k.'" id="check-'.$k.'"></div>
+                                    <div class="image-desc">ทำรูปนี้เป็น Gallery <input type="checkbox" value="'.$k.'" name="check2-'.$k.'" id="check2-'.$k.'"></div>
+                                    <div class="image-desc"><input type="button" value="ใส่รูปภาพ" class="button" onclick="insertimage(\''.$name.'.'.$fileext.'\',\''.$k.'\' )" id="button'.$k.'"><input type="button" value="ลบรูปภาพนี้" class="button" onclick="deleteimage(\''.$name.'.'.$fileext.'\',\''.$k.'\' )" id="button'.$k.'"></div>
+                                </div>
+                            </li>';
+        $k++;
+         }
+         }
+         return $str;
+          
+      }
+      function getimagebypromotion($shopurl)
+      {
+          
+          $arrayfiles=getFilesFromDir2(rootpath.'/images/shop_c/'.$shopurl.'/'.'promotion');
+          return $arrayfiles;
+       
+
+      }
+      function gettablefile4($shopurl)
+      {
+         $imagearray= $this->getimagebypromotion($shopurl);
+         $str='';
+         $k=1;
+         if(count($imagearray)&&isset($imagearray))
+         {
+         foreach($imagearray as $valueimage) 
+         {
+         list($name,$fileext)=explode(".",$valueimage); 
+         $thumbfile1=fullpathimages.$shopurl.'/'.'promotion'.'/resize/'.$name.'500x500.'.$fileext;
+         $thumbfile2=fullpathimages.$shopurl.'/'.'promotion'.'/resize/'.$name.'75x75.'.$fileext;
+         if(!is_file($thumbfile1))
+         {
+             if(copy(homeinfo.'/plugins/showimages.php?width='.'500'.'&height='.'500'.'&source='.imginfo.'/images/shop_c/'.$shopurl.'/'.'promotion' . '/'.$name.'.'.$fileext,$thumbfile1))
+                     {
+                       chmod($thumbfile1,0777);
+                     }
+             if(copy(homeinfo.'/plugins/showimages.php?width='.'75'.'&height='.'75'.'&source='.imginfo.'/images/shop_c/'.$shopurl.'/'.'promotion' . '/'.$name.'.'.$fileext,$thumbfile2))
+                     {
+                       chmod($thumbfile2,0777);
+                     }
+         }
+         $str.='<li><a class="thumb" name="leaf" href="'.imginfo.'/images/shop_c/'.$shopurl.'/'.'promotion'.'/resize/'.$name.'500x500.'.$fileext.'" title="Title #0">
+                                    <img src="'.imginfo.'/images/shop_c/'.$shopurl.'/'.'promotion'.'/resize/'.$name.'75x75.'.$fileext.'" alt="Title #0" />
                                 </a>
                                 <div class="caption">
                                     <div class="image-title">ชื่อรูป:'.$name.'</div>
@@ -5298,6 +5425,16 @@ where tb_shop.shopurl="'.$shopurl.'"');
          
          echo md5(strtolower( "weerasark") . "12345");  
       }
+       function submitpictopromotion()
+       {
+           $pic1=$this->post['pic1'];
+           $pic2=$this->post['pic2']; 
+           $text1=$this->post['text1'];
+           $text2=$this->post['text2'];
+           $shopurl=$this->post['shopurl'];
+           $sid=$this->post['sid'];
+           
+       }
       
   }
 ?>

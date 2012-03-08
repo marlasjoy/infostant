@@ -40,6 +40,28 @@
 
           
       }
+      function imagepromotion()
+      {
+          if($_COOKIE['userlogin'])
+          {
+
+
+           $databird['shopurl']=$this->info['group'];
+           $databird['target']=$this->info['target'];
+           list($action,$group)=explode("&",$this->info['action']);
+           $databird['resize']=$action;
+           $databird['group']=$group;
+          
+          $databird['table']=$this->ajax->gettablefile4($databird['shopurl']);
+      //    if($this->info['target']=="memory")$databird['folder']='/images/user_c/'.$databird['username'].'/'.$databird['meid'].'';   
+           
+           $this->set_data($databird);   
+           $this->load('imagepromotion');   
+              
+          }
+
+          
+      }
       function writetitle()
       {
           if($_COOKIE['userlogin'])

@@ -673,6 +673,9 @@
         $databird['leftmenu']=$this->getleftmenu();
         $databird['recent']=$this->getrecent();  
         $databird['username']=$this->info['username'];   
+        
+        
+        
         $this->header->set_data($databird);
         $this->header->get_header(); 
         
