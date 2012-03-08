@@ -39,7 +39,7 @@
                    <section id="idshopmenu" style="display: none;" >
                         <dl>
                      
-                       <dt><h2><a class="back" href="javascript:backshop()">back</a>  Shop Menu  </h2><input type="hidden" id="shopurldata" name="shopurldata" value=""><input type="hidden" id="siddata" name="siddata" value=""></dt>   
+                       <dt><h2 class="bar"><a class="back" href="javascript:backshop()">back</a>  Shop Menu  </h2><input type="hidden" id="shopurldata" name="shopurldata" value=""><input type="hidden" id="siddata" name="siddata" value=""></dt>   
                                <div  id="shopmenu">
                                     <ul class="v">   
                                     	<li class="icon createshop"><a href="<?=homeinfo?>/registershop"><span>Create New Shop</span></a></li>
@@ -59,7 +59,7 @@
                   
                    
                         <dl>
-                      <dt><h2><a class="back" href="javascript:backpromotion()">back</a> Promotion Menu </h2></dt>
+                      <dt><h2 class="bar"><a class="back" href="javascript:backpromotion()">back</a> Promotion Menu </h2></dt>
                       
                       
                        <div  id="shopmenu">
@@ -78,7 +78,7 @@
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
                    <section id="promotionpage" style="display: none;" >
                    <dl id="event">
-                      <dt><h2><a class="back" href="javascript:openpromotion()">back</a>Promotion Page</h2></dt>
+                      <dt><h2 class="bar"><a class="back" href="javascript:openpromotion()">back</a>Promotion Page</h2></dt>
                           <dd>
                           
                              

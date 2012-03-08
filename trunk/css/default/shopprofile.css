@@ -1,4 +1,4 @@
-#main h2{
+#main h2.bar{
 	    background-attachment: scroll;
     background-clip: border-box;
     background-color: transparent;
@@ -19,7 +19,7 @@
 	border: solid 1px #CCC; border-radius: 5px;
 	
 	}
-#main h2 a.back{
+#main h2.bar a.back{
 
     background-attachment: scroll;
     background-clip: border-box;
