@@ -6,7 +6,9 @@
 #main > aside li:nth-child(1) a { background-position: -250px 4px; }
 #main > aside li:nth-child(2) a { background-position: -200px -45px; }
 #main > aside li:nth-child(3) a { background-position: -150px -85px;}
-#main > aside li:nth-child(4) a { background-position: -120px -120px; }
+/*#main > aside li:nth-child(4) a { background-position: -120px -120px; }*/
+#main > aside li:nth-child(4) a  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*personal memory*/
+
 #main > aside li:nth-child(5) a { background-position: -120px -120px; }
 #main > aside li:nth-child(6) a { background-position: -87px -146px; }
 #main > aside li:nth-child(7) a { background-position: -50px -195px; }
