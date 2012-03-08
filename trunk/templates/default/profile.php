@@ -11,7 +11,8 @@
               <article>
                   <h2><a href="javascript:void(0);"><?=$this->data['username'];?></a></h2>
                   <a href="javascript:void(0);" class="icon edit_profile">Edit Profile</a>
-                  
+              
+                  <input type="hidden" value="<?=$_COOKIE['userid']?>" id="mid" name="mid">
                   
                   <?=$this->data['recent'];?> 
                   
@@ -120,10 +121,10 @@
                   
                   <section>
                       <dl id="event" style="display:none">
-                          <dt id="date"></dt>
+                          <dt id="date"><?=date("d M Y")?></dt>
                           <dd>
                               <table>
-                                  <tbody>
+  <tbody id="setevent">
                                       <tr>
                                           <td>1</td>
                                           <td>
@@ -297,8 +298,7 @@
                       </dl>
                   </section>
                   
-                   <section>
-                   </section>
+
                   
               </article>
                 </div>
