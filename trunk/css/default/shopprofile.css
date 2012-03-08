@@ -28,3 +28,34 @@
     width: 100%;
     z-index: 1;
 }
+
+
+
+
+#promotionmenu {}
+#promotionmenu > ul.v{}
+#promotionmenu {   width: 100%;  z-index: 1101; top: 45px;  }
+#promotionmenu > ul.v {  padding-top: 15px; margin-bottom: 5px; }
+#promotionmenu li {  height: 38px; display: block; line-height: 38px;  margin: 0 0px 5px; border: solid 1px #CCC; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
+#promotionmenu li > a { color: #666; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
+#promotionmenu li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
+ul.v > li.icon > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat ; background-size: 650px 650px;   }
+
+ul.v > li.icon.setting a { background-position: -615px 7px !important;  }/*setting*/
+ul.v > li.icon.directory a { background-position: -567px -45px !important;  }/*directory*/
+ul.v > li.icon.recent a { background-position: -515px -90px !important;  }/*recent*/
+ul.v > li.icon.fravorite a { background-position: -465px -142px !important;  }/*Fravorite*/
+ul.v > li.icon.calendar a { background-position: -417px -194px !important;  }/*calendar*/
+ul.v > li.icon.memory a { background-position: -363px -246px !important;  }/*personal memory*/
+ul.v > li.icon.addfriend a { background-position: -315px -293px !important; }/*addfriend*/
+ul.v > li.icon.notification a { background-position: -267px -344px !important;  }/*notification*/
+ul.v > li.icon.Promotion a { background-position: -217px -394px !important;  }/*Promotion*/
+ul.v > li.icon.qr a { background-position: -166px -446px !important;  }/*QR*/
+ul.v > li.icon.location a { background-position: -121px -495px !important;  }/*Show location*/
+ul.v > li.icon.shop a { background-position: -65px -543px !important;  }/*shop*/
+ul.v > li.icon.help a { background-position: -22px -593px !important;  }/*help*/
+ul.v > li.icon.unlock a {background: url(images/icons/unlock.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*unlock*/
+ul.v > li.icon.message a {background: url(images/function-icon-message.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*message*/
+ul.v > li.icon.coupon a {background: url(images/function-icon-coupon.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*coupon*/
+ul.v > li.icon.aff a {background: url(images/function-icon-aff.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*affliate*/
+#promotionmenu a.close { width: 100%; background: url(images/btn-function2-close.png) no-repeat top center; background-size: 100% 100%;width: 100%; height: 28px; text-indent: -1000em; display: block; position: absolute; bottom: -28px; }
