@@ -1,3 +1,45 @@
+#main h2{
+	    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("images/bg-search.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto 40px;
+    color: #353535;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    text-align: left;
+    text-indent: 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	
+	border: solid 1px #CCC; border-radius: 5px;
+	
+	}
+#main h2 a.back{
+
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("images/btn-back.png");
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: block;
+    float: left;
+    height: 26px;
+    margin: 7px 3px 0 5px;
+    text-indent: -1000em;
+    width: 44px;
+}
+	
+
+
+
 #promotionpage .data{ position:relative; font-size:12px; margin:0 0 10px 0; color:#666; min-height:500px;}
 #promotionpage .data strong{ color:#333;}
 #promotionpage .data a.logo{background:#FFF; position:absolute; top:-25px; left:2%;  display:block;  border: 1px solid #C8C8C8; box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);padding: 2px;}
@@ -31,14 +73,22 @@
 
 
 
-
-#promotionmenu {}
-#promotionmenu > ul.v{}
-#promotionmenu {   width: 100%;  z-index: 1101; top: 45px;  }
-#promotionmenu > ul.v {  padding-top: 15px; margin-bottom: 5px; }
-#promotionmenu li {  height: 38px; display: block; line-height: 38px;  margin: 0 0px 5px; border: solid 1px #CCC; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden;background: url(images/bg-function-li.png) repeat-x; background-size: 2px 38px; }
-#promotionmenu li > a { color: #666; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
-#promotionmenu li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
+#shopmenu {}
+#shopmenu > ul.v{}
+#shopmenu {   width: 100%;  z-index: 1101; top: 45px;  }
+#shopmenu > ul.v {  padding-top: 15px; margin-bottom: 5px; }
+#shopmenu li {  height: 38px; display: block; line-height: 38px;  margin: 0 0px 5px; border: solid 1px #CCC; border-radius: 5px; font-size: 15px; font-weight: normal; overflow: hidden; background-color:#EEE; /*background: url(images/bg-function-li.png) repeat-x;*/ background-size: 2px 38px; 
+	background: -moz-linear-gradient(
+		top,
+		#ededed 0%,
+		#e0e0e0);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ededed),
+		to(#e0e0e0));
+}
+#shopmenu li > a { color: #666; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px; background: url(images/icon-function-li.png) no-repeat; background-size: 650px 650px;   }
+#shopmenu li > a span { display: block; height: 38px; background: url(images/bg-function-devider.png) no-repeat left center; background-size: 2px 36px; padding: 0 0 0 8px; line-height: 38px;  }
 ul.v > li.icon > a { color: #fff; text-decoration: none; text-shadow: none; font-weight: normal; padding-left: 42px;background: url(images/icon-function-li.png) no-repeat ; background-size: 650px 650px;   }
 
 ul.v > li.icon.setting a { background-position: -615px 7px !important;  }/*setting*/
@@ -49,8 +99,16 @@ ul.v > li.icon.calendar a { background-position: -417px -194px !important;  }/*c
 ul.v > li.icon.memory a { background-position: -363px -246px !important;  }/*personal memory*/
 ul.v > li.icon.addfriend a { background-position: -315px -293px !important; }/*addfriend*/
 ul.v > li.icon.notification a { background-position: -267px -344px !important;  }/*notification*/
-ul.v > li.icon.Promotion a { background-position: -217px -394px !important;  }/*Promotion*/
+ul.v > li.icon.createshop a {background: url(images/icon_createshop.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Shop ceate*/
+ul.v > li.icon.editshop a {background: url(images/icon_editshop.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Shop edit*/
+ul.v > li.icon.member a {background: url(images/icon_member.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Member*/
+ul.v > li.icon.event a {background: url(images/icon_event.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Member*/
+ul.v > li.icon.promotion a {background: url(images/icon_myshop_star.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Promotion*/
+ul.v > li.icon.createpromotion a {background: url(images/icon_createpromotion.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Promotion*/
+ul.v > li.icon.promotionmember a {background: url(images/icon_salem.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Promotion Member*/
+
 ul.v > li.icon.qr a { background-position: -166px -446px !important;  }/*QR*/
+ul.v > li.icon.statistic a {background: url(images/icon_statistic.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Promotion Member*/
 ul.v > li.icon.location a { background-position: -121px -495px !important;  }/*Show location*/
 ul.v > li.icon.shop a { background-position: -65px -543px !important;  }/*shop*/
 ul.v > li.icon.help a { background-position: -22px -593px !important;  }/*help*/
@@ -58,4 +116,4 @@ ul.v > li.icon.unlock a {background: url(images/icons/unlock.png) no-repeat 4px 
 ul.v > li.icon.message a {background: url(images/function-icon-message.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*message*/
 ul.v > li.icon.coupon a {background: url(images/function-icon-coupon.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*coupon*/
 ul.v > li.icon.aff a {background: url(images/function-icon-aff.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*affliate*/
-#promotionmenu a.close { width: 100%; background: url(images/btn-function2-close.png) no-repeat top center; background-size: 100% 100%;width: 100%; height: 28px; text-indent: -1000em; display: block; position: absolute; bottom: -28px; }
+#shopmenu a.close { width: 100%; background: url(images/btn-function2-close.png) no-repeat top center; background-size: 100% 100%;width: 100%; height: 28px; text-indent: -1000em; display: block; position: absolute; bottom: -28px; }
