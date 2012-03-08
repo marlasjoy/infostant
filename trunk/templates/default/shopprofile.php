@@ -93,7 +93,7 @@
                              
                                                             <div class="main_image">
                                                                <!--<img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>-->
-                                                               <span class="label">735 X 345</span>
+                                                               <span class="label">735 X 325</span>
                                                              </div>
                                                              <div class="data">
                                                              
