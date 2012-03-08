@@ -92,12 +92,26 @@
                           
                              
                                                             <div class="main_image">
-                                                               <img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>
+                                                               <!--<img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>-->
+                                                               <span class="label">735 X 345</span>
                                                              </div>
-                                                             <div class="data"><a href="#"><img class="logo" src="<?=imginfo?>/images/default/shopprofile/logo-s_p.png" /></a>
-                                                                       <div class="promo"> <a href="#"><img class="sale" src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_sale.jpg" /></a>
-                                                                        <a href="#"><img class="fav" src="<?=imginfo?>/images/default/shopprofile/btn-add_favorite.png" /></a>
+                                                             <div class="data">
+                                                             
+                                                             <a class="logo" href="#">
+                                                             <span class="label">100 x 100</span>
+                                                             </a>
+                                                             
+                                                             <div class="promo">  
+                                                             <a class="logo" href="#">
+                                                             <span class="label">100 x 100</span>
+                                                             </a>
                                                         	</div>
+                                                            
+                                                            
+                                                             <a class="fav" href="#"><img  width="100" src="<?=imginfo?>/images/default/shopprofile/btn-add_favorite.png" /></a>
+                                                            
+                                                            
+                                                            
                                                             <div class="d1"><strong>S&amp;P ชือนี้มีแต่ของอร่อย</strong><br />
                                                                               <strong>Vanilla at home</strong><br />บริการใหม่อีกหนึ่งทางเลือกที่คุณตองถูกใจกับสไตลการ
                                                         ครีเอตเมนูได้หลากหลายและน่าสนใจทั้ง ฝรั่ง จีน ญี่ปุ่น 
