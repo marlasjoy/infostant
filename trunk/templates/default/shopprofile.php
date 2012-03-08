@@ -38,50 +38,41 @@
                   
                    <section id="idshopmenu" style="display: none;" >
                         <dl>
-                      <dt><a href="javascript:backshop()">back</a> Shop Menu <input type="hidden" id="shopurldata" name="shopurldata" value=""><input type="hidden" id="siddata" name="siddata" value=""></dt>
-                          <dd>
-                             <a href="<?=homeinfo?>/registershop"> 1.Create New Shop</a>
-                          </dd>
-                          <dd>
-                             <a href="javascript:editshop()"> 2.Shop edit </a>
-                          </dd>
-                         <dd>
-                             <a href="javascript:openpromotion()"> 3.Promotion </a>
-                          </dd>
-                          <dd>
-                              4.Member
-                          </dd>
-                          <dd>
-                              5.Event
-                          </dd>
-                          <dd>
-                              6.Affaliate
-                          </dd>
+                     
+                       <dt><h2><a class="back" href="javascript:backshop()">back</a>  Shop Menu  </h2><input type="hidden" id="shopurldata" name="shopurldata" value=""><input type="hidden" id="siddata" name="siddata" value=""></dt>   
+                               <div  id="shopmenu">
+                                    <ul class="v">   
+                                    	<li class="icon createshop"><a href="<?=homeinfo?>/registershop"><span>Create New Shop</span></a></li>
+                                        <li class="icon editshop"><a href="javascript:editshop()"><span>Shop edit</span></a></li>
+                                        <li class="icon promotion"><a href="javascript:openpromotion()"><span>Promotion</span></a></li>
+                                        <li class="icon member"><a href="#"><span>Member</span></a></li>
+                                        <li class="icon event"><a href="#"><span>Event</span></a></li>
+                                        <li class="icon aff"><a href="#"><span>Affaliate</span></a></li>
+                                    </ul>
+                                </div> <!-- #shopmenu end -->
+ 
                                                
                       </dl>
                    </section>
                    <section id="idpromotionmenu" style="display: none;" >
+                   
+                  
+                   
                         <dl>
-                      <dt><a href="javascript:backpromotion()">back</a> Promotion Menu </dt>
-                          <dd>
-                             <a href="javascript:createpromotion()"> 1.Create Promotion</a>
-                          </dd>
-                          <dd>
-                             <a href="javascript:editshop()"> 2.Promotion Member </a>
-                          </dd>
-                         <dd>
-                             <a href="javascript:openpromotion()"> 3.Insert Code </a>
-                          </dd>
-                          <dd>
-                              <a href="javascript:openpromotion()"> 4.Statistic </a>
-                          </dd>
-                          <dd>
-                              5.Event
-                          </dd>
-                          <dd>
-                              6.Affaliate
-                          </dd>
-                                               
+                      <dt><h2><a class="back" href="javascript:backpromotion()">back</a> Promotion Menu </h2></dt>
+                      
+                      
+                       <div  id="shopmenu">
+                                    <ul class="v">   
+                                    	<li class="icon createpromotion"><a href="javascript:createpromotion()"><span>Create Promotion</span></a></li>
+                                        <li class="icon promotionmember"><a href="javascript:editshop()"><span>Promotion Member</span></a></li>
+                                        <li class="icon qr"><a href="javascript:openpromotion()"><span>QR Reader</span></a></li>
+                                        <li class="icon statistic"><a href="javascript:openpromotion()"><span>Statistic</span></a></li>
+                                        <li class="icon event"><a href=""><span>Event</span></a></li>
+                                        <li class="icon aff"><a href=""><span>Affaliate</span></a></li>
+                                    </ul>
+                                </div> <!-- #shopmenu end -->
+                            
                       </dl>
                    </section>
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
