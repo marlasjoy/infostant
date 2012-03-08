@@ -2,6 +2,7 @@
           <div id="main" role="main" class="clearfix">
               <aside>
               <input id="faid" name="faid" value="" type="hidden">
+                                <input type="hidden" value="<?=$_COOKIE['userid']?>" id="mid" name="mid">
                   <a href="javascript:void(0);"><img src="<?=homeinfo?>/images/img-avatar.jpg" alt="img-avatar" /></a>
                   <h3>Feature</h3>
                   <ul class="v">

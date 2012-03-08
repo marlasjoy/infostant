@@ -34,13 +34,13 @@
       function favorite()
       {
                    $databird['noindexcss']=1;
-        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/jquery-ui-1.8.16.custom.css">';
+
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
         $databird['noheader']=1;
-         $databird['js'][]='jquery-ui-1.8.16.custom.min.js';
-         $databird['js'][]='jquery-ui-timepicker-addon.js';
-         $databird['js'][]='jquery-ui-sliderAccess.js';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
          $databird['js'][]='dateoption.js';
+
           $this->header->set_data($databird);
         $this->header->get_header(); 
        $databird['leftmenu']=$this->getleftmenu();
@@ -162,9 +162,9 @@
                                          </div>     
                                           </td>
                                           <td>
-                                              <a href="javascript:addcalendar(\''.$valueshop['faid'].'\')" class="btn-edit" >Add</a>
+                                              <a href="javascript:void(0);" onclick="addcalendar(\''.$valueshop['sid'].'\')" class="btn-edit" >Add</a>
                                               <a href="javascript:void(0);" class="btn-delete">Delete</a>
-                                               <input type="text" style="opacity:0" class="setbox" name="setbox" id="setbox'.$valueshop['faid'].'">
+                                               <input type="text" style="opacity:0" class="setbox" name="setbox" id="setbox'.$valueshop['sid'].'">
                                           </td>
                                       </tr>';
             
