@@ -78,7 +78,7 @@
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
                    <section id="promotionpage" style="display: none;" >
                    <dl id="event">
-                      <dt>Promotion Page</dt>
+                      <dt><h2><a class="back" href="javascript:openpromotion()">back</a>Promotion Page</h2></dt>
                           <dd>
                           
                              
