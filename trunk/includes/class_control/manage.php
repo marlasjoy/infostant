@@ -53,7 +53,7 @@
            $databird['group']=$group;
           
           $databird['table']=$this->ajax->gettablefile4($databird['shopurl']);
-      //    if($this->info['target']=="memory")$databird['folder']='/images/user_c/'.$databird['username'].'/'.$databird['meid'].'';   
+         if($this->info['target']=="promotion")$databird['folder']='/images/shop_c/'.$databird['shopurl'].'/promotion';   
            
            $this->set_data($databird);   
            $this->load('imagepromotion');   

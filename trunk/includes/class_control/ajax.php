@@ -181,10 +181,13 @@
       {
           global $config;
           $access=0;
-          
+                   if($this->post['setname'])
+                   { 
           $this->post['username']=$this->post['setname']; 
-          if(!$this->checkusername(1))
+
+          if($this->checkusername(1))
         {
+     //       echo "1";
         $username= $this->post['username'];  
         $email=$this->getemailbyusername();
        
@@ -193,10 +196,13 @@
         }
         else
         {
+      //      echo "2";
         $this->post['email']=$this->post['setname']; 
         if(!$this->checkemail(1))
         {
+     //       echo "3";
          $email=$this->post['email'];
+         
          $username=$this->getuserbyemail();    
          $access=1;    
         }
@@ -218,16 +224,16 @@
 
      ทีมงาน 2bsimple'; 
 
-         $mail->From='doreply@infostant.com';
+         $mail->From='donotreply@infostant.com';
          $mail->FromName='Admin'; 
-         $mail->Subject    = "รหัสผ่านใหม่สำหรับ infostant.com";
+         $mail->Subject    = "เซตรหัสผ่านใหม่สำหรับ infostant.com";
          $mail->MsgHTML($body);
-       //  echo     $email;
+
          $mail->AddAddress($email, $username); 
          $mail->CharSet="utf-8";
          $mail->SMTPAuth=true;
          if(!$mail->Send()){
-         $arraydata['error']="ไม่สามารถส่ง email นี้ได้";    
+         $arraydata['error']="This email does not exist. Please try it again.";    
          echo array2json($arraydata);   
          
          } 
@@ -242,10 +248,15 @@
             
         }else
         {
-         $arraydata['error']="ไม่มีข้อมูล user นี้";    
+         $arraydata['error']="This username or email does not exist";    
          echo array2json($arraydata);    
             
         }
+                   }else
+                   {
+                     $arraydata['error']="This field is required";   
+                     echo array2json($arraydata);  
+                   }
         
        
           
@@ -295,7 +306,6 @@
           
           
       }
-      
       function loginuser($noredirect=0)
       {
           $arraydata=$this->post;
@@ -335,7 +345,6 @@
 
           if($noredirect==0)redirectto($_SERVER['HTTP_REFERER']);
       }
-      
       function checkloginuser()
       {
           if($_COOKIE['userid'])
@@ -832,8 +841,7 @@ where tb_itenary.mid='.$this->post['mid'].' and  tb_itenary.date="'.$this->post[
           return $datafile;
             
         }
-        
-        function getlatbyshopforiphone()
+         function getlatbyshopforiphone()
         {
             if($this->post['shopurl'])
             {
@@ -845,8 +853,6 @@ where tb_itenary.mid='.$this->post['mid'].' and  tb_itenary.date="'.$this->post[
             }
             
         }
-        
-        
         function getlaflood()
         {
          $this->db->get_connect();
@@ -1253,7 +1259,6 @@ $data=$this->db->db_get_recordset();
           
          
       }
-      
       function savetext()
       {
           if($this->post['mid'])
@@ -1521,6 +1526,16 @@ $data=$this->db->db_get_recordset();
       }
       function gettablefile4($shopurl)
       {
+          if(!is_dir(fullpathimages.$shopurl.'/'.'promotion'))
+         {
+             mkdir(fullpathimages.$shopurl.'/'.'promotion');
+             chmod(fullpathimages.$shopurl.'/'.'promotion',0777);
+         } 
+         if(!is_dir(fullpathimages.$shopurl.'/'.'promotion/resize'))
+         {
+             mkdir(fullpathimages.$shopurl.'/'.'promotion/resize');
+             chmod(fullpathimages.$shopurl.'/'.'promotion/resize',0777);
+         } 
          $imagearray= $this->getimagebypromotion($shopurl);
          $str='';
          $k=1;
@@ -1783,7 +1798,71 @@ $data=$this->db->db_get_recordset();
 
                
       }
-     
+      function uploadfile4()
+      {      
+         if($_FILES['Filedata']["name"])
+         {
+         $uploads_dir=rootpath . $this->post['folder'] ;
+         $arrayfolder=explode('/',$this->post['folder']);
+         $name = $_FILES["Filedata"]["name"];
+         if(is_file("$uploads_dir/$name"))
+         {
+             $i=1;
+             $k=1;
+             $arrayfile=explode(".",$name);
+             $filename=$arrayfile[0];
+             $ext=$arrayfile[count($arrayfile)-1];
+             while ($i <= 10) {
+                 if(is_file("$uploads_dir/$filename$k".'.'.$ext))
+                 {
+                     
+                 }else
+                 {
+                     $name=$filename.$k.'.'.$ext;
+                     break;
+                 }
+               $k++;
+            }
+
+         }   
+         if(move_uploaded_file($_FILES["Filedata"]["tmp_name"], "$uploads_dir/$name"))
+         {
+             
+         chmod( "$uploads_dir/$name",0777);    
+           
+           
+         include(pluginpath.'/simpleimage.php');
+         
+         $arrayfile=explode(".",$name);
+         $filename=$arrayfile[0];
+         $ext=$arrayfile[count($arrayfile)-1];
+         
+         $image = new SimpleImage();
+         $image->load( "$uploads_dir/$name");
+         
+         
+         
+         $image->resizeToWidth(500);
+         $newfile=$filename.'500x500'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         
+         chmod(  "$uploads_dir/resize/$newfile",0777); 
+         
+         $image->resize(75,75);
+         $newfile=$filename.'75x75'.'.'.$ext;
+         $image->save( "$uploads_dir/resize/$newfile");
+         chmod(  "$uploads_dir/resize/$newfile",0777);
+         
+
+         $arraydata['table']=$this->gettablefile4($arrayfolder[3]);
+         echo array2json($arraydata); 
+         
+          } 
+         
+         }  
+
+               
+      }
       function saveimagefile2()
       {
           list($name,$fileext)=explode(".",$this->post['filename']); 
@@ -1876,6 +1955,80 @@ $data=$this->db->db_get_recordset();
           $fp = fopen($file, 'w');
           fwrite($fp, $html);
           fclose($fp);
+          $arraydata['resposne']=1;
+          $arraydata['imgstr']=$strcode;
+          $arraydata['alt']=$this->post['alt'];
+          
+          //$arraydata['html']=$html;
+          echo array2json($arraydata); 
+          
+          
+          
+
+      
+      }
+      function saveimagefile3()
+      {
+          list($name,$fileext)=explode(".",$this->post['filename']); 
+          list($width,$height)=explode("x",$this->post['resize']); 
+          $resize=$width.'x'.$height;
+          $dir_dest = rootpath . $this->post['folder'] . '/resize/';
+          $newfile=$dir_dest.$name.$resize.'.'.$fileext;
+          
+          if(is_file($newfile))
+          {
+            $arraydata['filedata']=$name.$resize.'.'.$fileext;  
+            $arraydata['width']=$width;
+            $arraydata['height']=$height;
+            $arraydata['fileorigi']=$this->post['filename'];
+          }else
+          {
+               //list($width,$height)= explode("x",$resize);
+             if(copy(homeinfo.'/plugins/showimages.php?width='.$width.'&height='.$height.'&source='.homeinfo . $this->post['folder'] . '/'.$this->post['filename'],$newfile))
+                     {
+                       chmod($newfile,0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata['filedata']=$name.$resize.'.'.$fileext;  
+                       $arraydata['width']=$width;
+                       $arraydata['height']=$height;
+                       $arraydata['fileorigi']=$this->post['filename'];
+                     } 
+                     
+          }
+         $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
+         $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
+         $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
+         $thumbfile4=$dir_dest.'thumb4'.'.'.$fileext;
+         $thumbfile5=$dir_dest.'thumb5'.'.'.$fileext;
+         $thumbfile6=$dir_dest.'original'.'.'.$fileext;
+         $thumbfile7=$dir_dest.'thumb7'.'.'.$fileext;
+         $access=0;
+         if(is_file($thumbfile1))
+         {
+               if($this->post['thumb']=="1")
+               {
+                   $access=1;
+               }
+             
+         }else
+         {
+          $access=1;    
+         }  
+          if($access)
+          {
+
+          if(copy(homeinfo.$this->post['folder'] . '/'.$this->post['filename'],$thumbfile6))
+                     {
+                       chmod($thumbfile6,0777);
+                     }
+
+          }
+          
+          $arrayfolder=explode('/',$this->post['folder']);
+          
+
+          $strcode='<a class="galleryimg" rel="'.$this->post['group'].'" href="javascript:changeimage(\''.$this->post['resize'].'\')"><img style="opacity:1" alt="'.$this->post['alt'].'"  src="'.homeinfo.$this->post['folder'].'/resize/'.$arraydata['filedata'].'"></a>';
+
           $arraydata['resposne']=1;
           $arraydata['imgstr']=$strcode;
           $arraydata['alt']=$this->post['alt'];
@@ -1987,7 +2140,6 @@ $data=$this->db->db_get_recordset();
               exit();
           }
       }
-     
       function deletefile()
       {
           //$this->isloginandmyshop();
@@ -2078,7 +2230,6 @@ $data=$this->db->db_get_recordset();
           echo array2json($arraydata); 
           
       }
-      
       function getimagebyshop($shopurl)
       {
           
@@ -2155,8 +2306,7 @@ $data=$this->db->db_get_recordset();
           $this->db->closedb(); 
           return $data;
       }
-      
-       function checkshopexit($str)
+      function checkshopexit($str)
        {
                 if(preg_match('/^[a-zก-๙0-9เ]+$/i',$str))$str=$this->changeidn($str);
            $this->db->get_connect();
@@ -2304,9 +2454,10 @@ $data=$this->db->db_get_recordset();
           
           $this->db->get_connect();
           $this->db->db_set_recordset('SELECT tb_member.mid,tb_cat.catname_en FROM `tb_member`,`tb_cat` where tb_member.username="'.$str.'" or tb_cat.catname_en="'.$str.'"  ');
+         
           $data=$this->db->db_get_recordset();
           
-            if(count($data)!=0)
+            if(empty($data['0']['mid']))
           {
               $check=0;
           }
@@ -2996,7 +3147,6 @@ $data=$this->db->db_get_recordset();
         
 
        }
-       
        function checkemail($noecho="")
        {
            
@@ -3027,7 +3177,6 @@ $data=$this->db->db_get_recordset();
           else{ if($noecho) return false; else echo "false";}  
            
        }
-       
        function checkcapcha($noecho="")
        {
        if(strtoupper($this->post['ct_captcha']) == $_SESSION['captcha_id'])
@@ -3046,7 +3195,6 @@ $data=$this->db->db_get_recordset();
           }
         
        }
-       
        function randcapcha()
        {
            $char = strtoupper(substr(str_shuffle('abcdefghjkmnpqrstuvwxyz'), 0, 4));
@@ -3583,6 +3731,8 @@ $data=$this->db->db_get_recordset();
 //        echo $_GET['callback']. '(' . json_encode($obj) . ');';
 //    }
           // exit();
+          
+
           $where="";
           $join="";
           if($_GET['searchTxt'])
@@ -3766,12 +3916,19 @@ $data=$this->db->db_get_recordset();
                     
                     }else
                     {
-                        $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
+                         $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
                          $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
                          $thumbfilemobile=$dir_dest.'thumbmobile'.'.jpg'; 
                        //  echo homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg'."<br>";
                      if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg'))
-                     {  
+                     {   
+                        // chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg',0777);
+                     if(!is_file($thumbfilemobile))
+                     {
+                      //   chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg',0777);
                        if(copy(homeinfo.'/plugins/showimages.php?width='.'65'.'&height='.'65'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfilemobile))
                      {
                        chmod($thumbfilemobile,0777);
@@ -3780,12 +3937,261 @@ $data=$this->db->db_get_recordset();
                      {
                      $arraydata[$k]['pic']='images/65-65.jpg';        
                      }  
-                     }else
+                     }
+                     else
                      {
-                     $arraydata[$k]['pic']='images/65-65.jpg';   
+                     $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';    
                      }
                         
-                       
+                     }else
+                     {
+                      $arraydata[$k]['pic']='images/65-65.jpg';      
+                     }
+                    }   
+                  $k++;
+                  
+              }
+              //$datafile['latnew']=array_sum($arraylat)/count($arraylat);
+              //$datafile['lngnew']=array_sum($arraylng)/count($arraylng);
+              
+          //   $newjson= join(",",$str);
+            // $datafile['json']=$newjson;
+           ///  $datafile['json2']=array2json($arraydata);
+              
+          }
+          
+          
+          echo         array2json($arraydata); 
+          exit();  
+           
+       }
+       function getallshopbyname4()
+       {
+        //   header("content-type: text/javascript");
+         //  if(isset($_GET['name']) && isset($_GET['callback']))
+//    {
+//        $obj->name = $_GET['name'];
+//        $obj->message = "Hello " . $obj->name;
+// 
+//        echo $_GET['callback']. '(' . json_encode($obj) . ');';
+//    }
+          // exit();
+          
+
+          $where="";
+          $join="";
+          if($_GET['searchTxt'])
+          {
+             $keyword=$_GET['searchTxt']; 
+              $where[]=" ( tb_shop.title like '%$keyword%'   or
+           tb_shop.shopname like '%$keyword%'   or
+           tb_shop.description like '%$keyword%'  or
+           tb_shop.keyword like '%$keyword%' )
+            ";
+          }
+          if($_GET['proid'])
+          {
+             $proid=$_GET['proid']; 
+              $where[]="  tb_shop.proid = '$proid' 
+            ";
+          }
+          if($_GET['disid'])
+          {
+             $disid=$_GET['disid']; 
+              $where[]="  tb_shop.disid = '$disid' 
+            ";
+          }
+          if($_GET['tumid'])
+          {
+             $tumid=$_GET['tumid']; 
+              $where[]="  tb_shop.tumid = '$tumid' 
+            ";
+          }
+          if($_GET['catid'])
+          {
+             $catid=$_GET['catid']; 
+              $where[]="  tb_shop.catid = '$catid' 
+            ";
+          }
+          if($_GET['subcatid'])
+          {
+             $subcatid=$_GET['subcatid']; 
+              $where[]="  tb_shop.subcatid = '$subcatid' 
+            ";
+          }
+          if($_GET['mid'])
+          {
+              if(!$_GET['fid'])
+              {
+             $mid=$_GET['mid']; 
+              $where[]="  tb_shop.mid = '$mid' 
+            ";
+              }
+          }
+          if($_GET['sids'])
+          {
+             $sids=$_GET['sids']; 
+             //echo $sids;
+             $arraysids=explode(",",$sids);
+             krsort($arraysids,SORT_NUMERIC);
+             $arraysids=array_unique($arraysids);
+             $sids=join(',',$arraysids);
+             
+             
+              $where[]="  tb_shop.sid IN  ($sids)
+            ";
+          }
+           if($_GET['fid'])
+          {
+            $this->db->get_connect();
+            $this->db->db_set_recordset('SELECT sid FROM tb_fav where tb_fav.mid='.$_GET['mid']);
+            $data2=$this->db->db_get_recordset();
+            $this->db->destory();
+            $this->db->closedb(); 
+            if(count($data2))
+            {
+                foreach($data2 as $value2)
+                {
+                    $arraysids[]=$value2['sid'];
+                }
+                $sids=join(',',$arraysids);
+                 $where[]="  tb_shop.sid IN  ($sids) ";
+                
+            }else
+            {
+                 $where[]="  tb_shop.sid =0";
+            }
+            
+
+          }
+           if($_GET['submid'])
+          {
+
+             $submid=$_GET['submid']; 
+              $where[]="  tb_shop.submid = '$submid' 
+            ";
+      
+          }
+          if($_GET['searchTxt']==""&&$_GET['proid']==""&&$_GET['disid']==""&&$_GET['tumid']==""&&$_GET['catid']==""&&$_GET['subcatid']==""&&$_GET['mid']==""&&$_GET['sids']==""&&$_GET['fid']==""&&$_GET['submid']=="")
+          {
+              $nowhere=1;
+          }
+          
+          if($nowhere==1)
+          {
+              $checkwhere='';
+          }else
+          {
+              $checkwhere='where '.join("and",$where).'';
+          }
+          
+          
+              $this->db->get_connect();
+          $this->db->db_set_recordset('
+                                    SELECT
+                                                tb_shop.shopname,
+                                                tb_shop.shopurl,
+                                                tb_shop.sid,
+                                                tb_shop.title,
+                                                tb_shop.description,
+                                                tb_shop.namepost,
+                                                tb_shop.tel,
+                                                tb_shop.emailshop,
+                                                tb_shop.address,
+                                                tb_shop.daterange,
+                                                tb_province.proname
+                                    FROM
+                                    tb_shop
+                                    INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
+                                    INNER JOIN tb_cat ON tb_shop.catid = tb_cat.catid
+                                    '.$checkwhere.'
+                                    order by    tb_shop.createdate desc
+                                    limit '.$_GET['start'].','.$_GET['limit'].'
+                                    
+                                    ');
+                                    
+          
+                              
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb(); 
+          $datafile=array();
+          if(count($data))
+          {
+              $k=1;
+              foreach($data as $value)
+              {
+                //  $arraylat[]=$value['lat'];
+                //  $arraylng[]=$value['lng'];
+                  //$str[]="['".$value['shopname']."',".$value['lat'].",".$value['lng'].",".$k."]";
+                  $arraydata[$k]['title']=$value['title'];
+                  $arraydata[$k]['sid']=$value['sid'];
+                  $arraydata[$k]['description']=strip_tags($value['description']); 
+                  $arraydata[$k]['shopurl']= 'landing.html?shopurl='.$value['shopurl'];   
+                  $arraydata[$k]['shopname']=$value['shopname']; 
+                  $arraydata[$k]['namepost']=$value['namepost'];
+                  $arraydata[$k]['emailshop']=$value['emailshop'];
+                  $arraydata[$k]['address']=$value['address'];
+                  $arraydata[$k]['daterange']=$value['daterange'];
+                  $arraydata[$k]['proname']=$value['proname'];   
+                  $arraydata[$k]['shopurl2']= 'shopedit.html?shopurl='.$value['shopurl'];  
+                  $arraydata[$k]['shopurl3']= $value['shopurl'];      
+                  $arraydata[$k]['tel']=$value['tel'];
+                  
+                   if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg')&&getimagesize(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg'))
+                    {
+                          $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
+                      //   $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+//                       if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfile5))
+//                     {
+//                       chmod($thumbfile5,0777);
+//                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb5.jpg';   
+//                     }
+                  
+                      $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';
+                      if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg'))
+                    {
+                        $arraydata[$k]['pic2']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumb4.jpg';       
+                      
+                    }else
+                    {
+                        
+                       $arraydata[$k]['pic2']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg'; 
+                    }  
+                    
+                    }else
+                    {
+                         $dir_dest = rootpath.'/'.'images/shop_c/'.$value['shopurl'] . '/resize/'; 
+                         $thumbfile5=$dir_dest.'thumb5'.'.jpg'; 
+                         $thumbfilemobile=$dir_dest.'thumbmobile'.'.jpg'; 
+                       //  echo homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg'."<br>";
+                     if(is_file(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg'))
+                     {   
+                        // chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg',0777);
+                     if(!is_file($thumbfilemobile))
+                     {
+                      //   chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/',0777);
+                     //    chmod(rootpath.'/images/shop_c/'.$value['shopurl'].'/resize/original.jpg',0777);
+                       if(copy(homeinfo.'/plugins/showimages.php?width='.'65'.'&height='.'65'.'&source='.homeinfo .'/'.'images/shop_c/'.$value['shopurl'] . '/resize/original.jpg',$thumbfilemobile))
+                     {
+                       chmod($thumbfilemobile,0777);
+                       $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';   
+                     }else
+                     {
+                     $arraydata[$k]['pic']='images/65-65.jpg';        
+                     }  
+                     }
+                     else
+                     {
+                     $arraydata[$k]['pic']=homeinfo.'/images/shop_c/'.$value['shopurl'].'/resize/thumbmobile.jpg';    
+                     }
+                        
+                     }else
+                     {
+                      $arraydata[$k]['pic']='images/65-65.jpg';      
+                     }
                     }   
                   $k++;
                   
@@ -4245,7 +4651,6 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                      
                
        }
-       
        function getdatafromiphone()
        {
              $this->db->get_connect();
@@ -4413,21 +4818,22 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
        } 
        function submitformregisteriphone()
        {
+       //    echo $this->post['email'];
        if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
         {
-            $arraydata['error']=" email ไม่ถูกต้อง";
+            $arraydata['error']=" This e-mail does not exit";
             echo array2json($arraydata); 
             exit();
         }
         if(!$this->checkemail(1))
         {
-             $arraydata['error']=" email ซ้ำ";
+             $arraydata['error']=" This e-mail address already exists ";
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if($this->checkusername(1))
         {
-            $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ".$this->post['username'];
+            $arraydata['error']=' This username already exists or it have a special character such as !@#$ .. etc ';
             echo array2json($arraydata); 
             exit();
         }
@@ -4442,6 +4848,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
        function loginformiphone()
        {
         $arraydata=$this->post;   
+
        if($arraydata['username']&&$arraydata['password1'])
           {
              $username=$arraydata['username'];
@@ -4449,7 +4856,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
               $this->db->get_connect();
               
               $this->db->db_set_recordset('SELECT `mid`,`email`,`pic`,`group`  FROM `tb_member` where `username`="'.$username.'" and `password`="'.$password.'" and `status`="1"  ');
-              
+
               $data=$this->db->db_get_recordset();
           
               $this->db->destory();
@@ -4487,12 +4894,11 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
                  $arraydata['group']=$data[0]['group'];
               }else
               {
-                 $arraydata['error']="ชื่อผู้ใช้หรือรหัสผ่านผิด"; 
+                 $arraydata['error']="Username or Password is not correct"; 
               }
               echo  array2json($arraydata);  
        }
-       
-        function getshoptemplate()
+      function getshoptemplate()
       {
           header("content-type: text/javascript"); 
           $this->db->get_connect();
@@ -5306,7 +5712,6 @@ where tb_shop.shopurl="'.$shopurl.'"');
                               echo   array2json($arrayres);
                     exit();
       }
-      
       function getallcontact()
       {
       if($_GET['mid'])

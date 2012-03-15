@@ -95,6 +95,17 @@
            
            $arrayrecentsid[]=$databird['shop']['sid'];
            
+           $arrayrecentsid=array_unique($arrayrecentsid);
+           if(count($arrayrecentsid)>5)
+           {
+               $toomuch=(count($arrayrecentsid)-5);
+               for($i=0;$i<$toomuch;$i++)
+               {
+                 array_pop($arrayrecentsid);  
+               }
+           }
+           
+           
            $strsid=join("&",$arrayrecentsid);
             
            setcookie("recentsid", $strsid, time()+3600000, "/", ".".domain);
@@ -103,6 +114,19 @@
            $arrayrecentshopurl=explode("&",$_COOKIE['recentshopurl']);  
            
            $arrayrecentshopurl[]=$this->info['subdomain'];
+           
+           $arrayrecentshopurl=array_unique($arrayrecentshopurl);
+           
+           if(count($arrayrecentshopurl)>5)
+           {
+               $toomuch=(count($arrayrecentshopurl)-5);
+               for($i=0;$i<$toomuch;$i++)
+               {
+                 array_pop($arrayrecentshopurl);  
+               }
+           }
+           
+           
            
            $strshopurl=join("&",$arrayrecentshopurl);
             

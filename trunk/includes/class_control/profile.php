@@ -429,6 +429,9 @@
       {
                    $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css">';
+        $databird['option'][]='<script src="'.homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js"></script>';
+        $databird['option'][]='<script src="'.homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>';
         $databird['noheader']=1;
         $databird['js'][]='shop.js';
 

@@ -68,7 +68,7 @@
                 });
         document.domain="<?=domain?>";
           var gallery;
-                          function deleteimage(imagename,index)
+                           function deleteimage(imagename,index)
                           {
             if(confirm('ต้องการลบรูปนี้หรือไม่'))
       {  
@@ -100,12 +100,12 @@
                             {
                             thumb=1;
                             }
-       $.post('<?=homeinfo?>/ajax/saveimagefile2','alt='+alt+'&thumb='+thumb+'&resize=<?=$this->data['resize']?>&group=<?=$this->data['group']?>&target=<?=$this->data['target']?>&filename='+filename+'&folder=<?=$this->data['folder']?>', function(reposnse)     {
+       $.post('<?=homeinfo?>/ajax/saveimagefile3','alt='+alt+'&thumb='+thumb+'&resize=<?=$this->data['resize']?>&group=<?=$this->data['group']?>&target=<?=$this->data['target']?>&filename='+filename+'&folder=<?=$this->data['folder']?>', function(reposnse)     {
            eval("var obj1="+reposnse); 
-                       $('#textx<?=$this->data['resize']?>',parent.document.body).html($('#alt-'+k).val());         
+                     //  $('#textx<?=$this->data['resize']?>',parent.document.body).html($('#alt-'+k).val());         
                    
                        $('#<?=$this->data['resize']?>',parent.document.body).html(obj1.imgstr);
-                       parent.window.setgalleryimg();
+                     //  parent.window.setgalleryimg();
                        parent.$.fancybox.close();
        });
         
@@ -257,7 +257,7 @@
                 
                 $('#file_upload').uploadify({
         'uploader'  : '<?=homeinfo?>/js/popup/uploadify/uploadify.swf',
-        'script'    : '<?=homeinfo?>/ajax/uploadfile2',
+        'script'    : '<?=homeinfo?>/ajax/uploadfile4',
         'cancelImg' : '<?=homeinfo?>/js/popup/uploadify/cancel.png',
         'folder'    : '<?=$this->data['folder']?>',
         'fileExt'     : '*.jpg',
