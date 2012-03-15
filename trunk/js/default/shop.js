@@ -75,6 +75,6 @@ $.fancybox({
 'transitionIn' : 'none',
 'transitionOut' : 'none',
 'type' : 'iframe',
-'href':$("#homeinfo").html()+'/manage/image/'+code+'/imagepromotion/'+$("#shopurl").html()
+'href':$("#homeinfo").html()+'/manage/imagepromotion/'+code+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
 });
 } 

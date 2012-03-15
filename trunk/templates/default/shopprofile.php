@@ -78,22 +78,25 @@
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
                    <section id="promotionpage" style="display: none;" >
                    <dl id="event">
-                      <dt><h2 class="bar"><a class="back" href="javascript:openpromotion()">back</a>Promotion Page</h2></dt>
+                      <dt><h2 class="bar"><a class="back" href="javascript:createpromotion()">back</a>Promotion Page</h2></dt>
                           <dd>
                           
                              
-                                                            <div class="main_image">
+                                                            <div class="main_image" onclick="changeimage('735x325')">
                                                                <!--<img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>-->
-                                                               <span class="label">735 X 325</span>
+                                                               <div id="735x325" ></div>
+                                                               <span  class="label">735 X 325</span>
                                                              </div>
-                                                             <div class="data">
+                                                             <div class="data" onclick="">
                                                              
-                                                             <a class="logo" href="#">
+                                                             <a class="logo" href="javascript:changeimage('100x100',0)">
+                                                             <div id="100x100x0" ></div>
                                                              <span class="label">100 x 100</span>
                                                              </a>
                                                              
                                                              <div class="promo">  
-                                                             <a class="logo" href="#">
+                                                             <a class="logo" href="javascript:changeimage('100x100',1)">
+                                                             <div id="100x100x1" ></div>
                                                              <span class="label">100 x 100</span>
                                                              </a>
                                                         	</div>
