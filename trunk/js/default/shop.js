@@ -46,23 +46,55 @@ function createpromotion()
      $('#idpromotionmenu').toggle('slow', function() {
     // Animation complete.
   });
+    
        $('#promotionpage').toggle('slow', function() {
     // Animation complete.
   });
+  
+   callpromotion();
 }
 function backpromotion()
 {
-   $('#idshopmenu').toggle('slow', function() {
-    // Animation complete.
-  });
-     $('#idpromotionmenu').toggle('slow', function() {
-    // Animation complete.
-  });
+   $('#idshopmenu').toggle('slow');
+   $('#idpromotionmenu').toggle('slow');
+  if($('#idpromotionmenu').css('display')!= 'none')
+  {
+       callpromotion();
+  }
 }
 function callpromotion()
 {
       var webdir=$("#webdir").html();
-        $.post(webdir+'/ajax/getpromotion',$('#register-form').serialize() ,function(data) {
+        $.post(webdir+'/ajax/getpromotion',{sid:$('#siddata').val()} ,function(data) {
+            var myObject = eval('(' + data + ')');
+             if(myObject.error)
+               {
+                 //   alert(myObject.error);
+               }else{
+                   
+                   
+                //   alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                  // location.href='http://'+myObject.shopurl+'.'+subdir;
+                  if(myObject[0].pic1)
+                  {
+                      
+                      $('#735x325x1').html('<img src="'+webdir+'/images/shop_c/'+$('#shopurldata').val()+'/promotion/resize/'+myObject[0].pic1+'">');
+                     
+                  }
+                  
+                  if(myObject[0].pic2)
+                 {
+                     
+                     $('#100x100x2').html('<img src="'+webdir+'/images/shop_c/'+$('#shopurldata').val()+'/promotion/resize/'+myObject[0].pic2+'">');
+                 }
+                 
+                  if(myObject[0].pic3)
+                 {
+                     
+                     $('#100x100x3').html('<img src="'+webdir+'/images/shop_c/'+$('#shopurldata').val()+'/promotion/resize/'+myObject[0].pic3+'">');
+                 }
+                  
+               }
         });
 }
 function changeimage(size,group)
