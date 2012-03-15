@@ -151,7 +151,6 @@
                                     <ul class="v">   
                                     	<li class="icon createpromotion"><a href="javascript:createpromotion()"><span>Create Promotion</span></a></li>
                                         <li class="icon promotionmember"><a href="javascript:editshop()"><span>Promotion Member</span></a></li>
-                                        <li class="icon qr"><a href="javascript:openpromotion()"><span>QR Reader</span></a></li>
                                         <li class="icon statistic"><a href="javascript:openpromotion()"><span>Statistic</span></a></li>
                                         <li class="icon event"><a href=""><span>Event</span></a></li>
                                         <li class="icon aff"><a href=""><span>Affaliate</span></a></li>
