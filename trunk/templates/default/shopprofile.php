@@ -76,6 +76,8 @@
                             
                       </dl>
                    </section>
+                   
+                   
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
                    <section id="promotionpage" style="display: none;" >
                    <dl id="event">
