@@ -58,6 +58,7 @@ function backmembercard()
        $('#idshopmenu').toggle('slow');
    $('#idmembercard').toggle('slow');
 }
+
 function backpromotion()
 {
    $('#idshopmenu').toggle('slow');
@@ -73,6 +74,61 @@ function openmembercard()
    $('#idmembercard').toggle('slow');
 
 }
+
+
+
+
+// MEMBERCARD SUBPAGE
+function membercard_create()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-create').toggle('slow');
+}
+
+function membercard_list()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-list').toggle('slow');
+}
+
+function membercard_list()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-list').toggle('slow');
+}
+
+function membercard_stamp()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-stamp').toggle('slow');
+}
+
+function membercard_usestamp()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-usestamp').toggle('slow');
+}
+
+function membercard_report()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-report').toggle('slow');
+}
+function membercard_statistic()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-statistic').toggle('slow');
+}
+
+function membercard_setting()
+{
+   $('#idmembercard').toggle('slow');
+   $('#idmembercard-setting').toggle('slow');
+}
+
+//END MEMBERCARD SUBPAGE
+
+
 function callpromotion()
 {
       var webdir=$("#webdir").html();
