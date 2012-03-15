@@ -48,6 +48,7 @@
                                         <li class="icon member"><a href="#"><span>Member</span></a></li>
                                         <li class="icon event"><a href="#"><span>Event</span></a></li>
                                         <li class="icon aff"><a href="#"><span>Affaliate</span></a></li>
+                                         <li class="icon member-card"><a href="#"><span>Member Card</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
  
