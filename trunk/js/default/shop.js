@@ -53,6 +53,11 @@ function createpromotion()
   
    callpromotion();
 }
+function backmembercard()
+{
+       $('#idshopmenu').toggle('slow');
+   $('#idmembercard').toggle('slow');
+}
 function backpromotion()
 {
    $('#idshopmenu').toggle('slow');
@@ -61,6 +66,12 @@ function backpromotion()
   {
        callpromotion();
   }
+}
+function openmembercard()
+{
+   $('#idshopmenu').toggle('slow');
+   $('#idmembercard').toggle('slow');
+
 }
 function callpromotion()
 {
