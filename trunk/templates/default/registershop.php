@@ -115,6 +115,27 @@
                 <span class="required">*</span><label for="address" generated="true" class="error"></label>
             </p>
             <p>
+                <label for="">ประเทศ <span>:</span></label>
+                <select id="countries" name="countries" size="1">
+                    <option value="">เลือกประเทศ</option>
+
+                      <?
+                        if(is_array($this->data['countrie'])){
+                          foreach($this->data['countrie'] as $value)
+                          {
+                           ?>
+                           <option value="<?=$value['contrid']?>"><?=$value['country_name']?></option>
+                           <?   
+                          }
+                          
+                          
+                      }
+                      ?>
+                </select>
+                <span class="required">*</span><label for="countries" generated="true" class="error"></label>
+            </p>
+            <div id="groupthai">
+            <p>
                 <label for="">จังหวัด <span>:</span></label>
                 <select id="province" name="province" size="1">
                     <option value="">เลือกจังหวัด</option>
@@ -148,6 +169,15 @@
                 </select>
                 <span class="required">*</span><div><label for="tumbon" generated="true" class="error"></label></div>
             </p>
+            
+            </div>
+            <div id="groupeng" style="display: none;">
+            <p>
+                <label for="">Town <span>:</span></label>
+                 <input type="text" id="subcontry" disabled="true" name="subcontry" maxlength="30" value="" />
+                <span class="required">*</span><div><label for="subcontry" generated="true" class="error"></label></div>
+            </p>
+            </div>
             <p>
                 <label for="">รหัสไปรษณีย์ <span>:</span></label>
                 <input type="text" id="postcode" name="postcode" maxlength="30" value="" />

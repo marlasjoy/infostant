@@ -33,6 +33,18 @@
           return $dataprovince;
           
       }
+            function getcountries()
+      {
+          
+          $this->db->get_connect();
+          $this->db->db_set_recordset('SELECT contrid,country_name FROM `tb_countries`');
+          $datacountries=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb();
+          
+          return $datacountries;
+          
+      }
       function gettemplate()
       {
           
@@ -95,7 +107,7 @@
         {
             $databird=$this->getuserbyfacebook();
         }
-        
+        $databird['countrie']=$this->getcountries();
         $databird['province']=$this->getprovince();
         $databird['template']=$this->gettemplate();
         $databird['cat']=$this->getcat();

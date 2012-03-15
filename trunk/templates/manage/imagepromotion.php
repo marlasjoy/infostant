@@ -100,7 +100,7 @@
                             {
                             thumb=1;
                             }
-       $.post('<?=homeinfo?>/ajax/saveimagefile3','alt='+alt+'&thumb='+thumb+'&resize=<?=$this->data['resize']?>&group=<?=$this->data['group']?>&target=<?=$this->data['target']?>&filename='+filename+'&folder=<?=$this->data['folder']?>', function(reposnse)     {
+       $.post('<?=homeinfo?>/ajax/saveimagefile3','alt='+alt+'&thumb='+thumb+'&resize=<?=$this->data['resize']?>&group=<?=$this->data['group']?>&target=<?=$this->data['target']?>&filename='+filename+'&folder=<?=$this->data['folder']?>&sid=<?=$this->data['sid']?>', function(reposnse)     {
            eval("var obj1="+reposnse); 
                      //  $('#textx<?=$this->data['resize']?>',parent.document.body).html($('#alt-'+k).val());         
                    

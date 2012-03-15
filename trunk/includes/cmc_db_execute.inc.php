@@ -151,6 +151,8 @@ class db_execute extends db_config {
                  VALUES ($strvalue)";
                  
            }
+           
+          // echo $sql;
            return $this->db_set_execute($sql);
            
         }else
