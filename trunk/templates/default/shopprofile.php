@@ -84,7 +84,55 @@
                    <section id="idmembercard-create" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_create()">back</a> Create Member Card</h2></dt>   
-     					Content                    
+     					
+                        	<div class="subpage">
+                               <ul class="v">
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">tesry</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <ul class="stamp">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+  
+                                        
+                               </ul>
+                               <div class="text1"> กรุณาแสดง Member Card นี้เพื่อแลกใช้สิทธิ์ ก่อนการเรียกชำระเงิน</div>
+                               <div class="text2"><h3 class="condition">Conditions</h3>
+                                           <div class="data">
+                                          <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">Input text here.</div>
+                                            </div>
+                               </div>
+                              
+                               </ul>
+                               
+                            </div>
+                                              
                       </dl>
                    </section>
                    
