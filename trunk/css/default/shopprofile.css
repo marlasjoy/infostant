@@ -135,13 +135,16 @@ ul.v > li.icon.member-stamp a{ background: url(images/icon_member-stamp.png) no-
 ul.v > li.icon.member-statistic a{ background: url(images/icon_member-statistic.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 
-		/*<ul class="v">   
-			<li class="icon member-card"><a href=""><span>Create Member Card</span></a></li>
-			<li class="icon list"><a href=""><span>Member List</span></a></li>
-			<li class="icon stamp"><a href=""><span>Stamp</span></a></li>
-			<li class="icon usestamp"><a href=""><span>Use Stamp</span></a></li>
-			<li class="icon qr"><a href=""><span>QR Reader</span></a></li>
-			<li class="icon member-report"><a href=""><span>Report</span></a></li>
-			 <li class="icon member-statistic"><a href=""><span>Statistic</span></a></li>
-			 <li class="icon member-setting"><a href=""><span>Member Setting</span></a></li>
-		</ul>*/
+#idmembercard-create a.thumb{ display:block; width:100px; height: 80px; float:left; margin-right:15px ;}
+#idmembercard-create a.thumb img{  border: 1px solid #C8C8C8;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    }
+#idmembercard-create .subpage > ul.v > li { padding:10px; overflow:hidden; color:#666;}
+#idmembercard-create .subpage > ul.v > li strong.a{ color:#333;}
+#idmembercard-create ul.stamp{ border-top:1px solid #CCC; display:block; padding:5px; background:#EEE; overflow:hidden;}
+#idmembercard-create ul.stamp > li{ display:block; float:left; margin:5px;width:50px; height:50px; background:#FFF url(images/img-stamp.png) no-repeat 50% 50% !important; background-size: 50px 50px !important;}
+#idmembercard-create .text1{ font-size:12px; display:block; clear:both; padding:10px;}
+#idmembercard-create .text2 { font-size:13px;}
+#idmembercard-create .text2 h3.condition{ background:#999; text-shadow:none; padding:5px 5px 5px 10px; margin:0;}
+#idmembercard-create .text2 .data{ padding:10px;}
