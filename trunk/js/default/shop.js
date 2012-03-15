@@ -59,6 +59,12 @@ function backpromotion()
     // Animation complete.
   });
 }
+function callpromotion()
+{
+      var webdir=$("#webdir").html();
+        $.post(webdir+'/ajax/getpromotion',$('#register-form').serialize() ,function(data) {
+        });
+}
 function changeimage(size,group)
 {
 if(group)

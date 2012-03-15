@@ -45,12 +45,18 @@
           if($_COOKIE['userlogin'])
           {
 
-
+           $databird['sid']=$this->info['group2'];
            $databird['shopurl']=$this->info['group'];
+           
            $databird['target']=$this->info['target'];
            list($action,$group)=explode("&",$this->info['action']);
            $databird['resize']=$action;
-           $databird['group']=$group;
+           if($group)
+           {
+              $databird['group']=$group;  
+              $databird['resize']=$databird['resize'].'x'.$group; 
+           }
+           
           
           $databird['table']=$this->ajax->gettablefile4($databird['shopurl']);
          if($this->info['target']=="promotion")$databird['folder']='/images/shop_c/'.$databird['shopurl'].'/promotion';   

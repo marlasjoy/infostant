@@ -172,6 +172,7 @@ $('#register-form').validate({
              repassword: {   
              equalTo: "#password1"
              },
+             subcontry:"required",
              title: "required",
              keyword: "required",
              description: "required",
@@ -187,6 +188,7 @@ $('#register-form').validate({
                             } 
                       },
              address: "required",
+             countries: "required",
              province: "required",
              district: "required", 
              tumbon: "required",
@@ -229,9 +231,10 @@ $('#register-form').validate({
 
                                 },
                         address:"โปรดกรอกที่อยู่",
-                        province:"โปรดกรอกจังหวัด",
-                        district:"โปรดกรอกอำเภอ",
-                        tumbon:"โปรดกรอกตำบล",
+                        countries:"โปรดเลือกประเทศ",
+                        province:"โปรดเลือกจังหวัด",
+                        district:"โปรดเลือกอำเภอ",
+                        tumbon:"โปรดเลือกตำบล",
                         title:"โปรดกรอกไตเติ้ล",
                         keyword:"โปรดกรอกคีย์เวิร์ด",
                         description:"โปรดกรอกรายละเอียด",     
@@ -281,5 +284,28 @@ $('#register-form').validate({
 
 });
 
+
+$('#countries').change(function(){
+    
+    if($(this).val()==210)
+    {
+       $('#groupthai').show();
+       $('#groupeng').hide();  
+       $('#province').removeAttr('disabled');
+      $('#district').removeAttr('disabled');
+      $('#tumbon').removeAttr('disabled');
+      $('#subcontry').attr('disabled', true);
+
+    }else
+    {
+      $('#groupthai').hide();  
+      $('#groupeng').show();   
+      $('#subcontry').removeAttr('disabled');
+      $('#province').attr('disabled', true);
+      $('#district').attr('disabled', true); 
+      $('#tumbon').attr('disabled', true);  
+    }
+
+});
 
 });

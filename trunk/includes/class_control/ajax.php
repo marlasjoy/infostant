@@ -1995,6 +1995,9 @@ $data=$this->db->db_get_recordset();
                      } 
                      
           }
+          
+          
+
          $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
          $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
          $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
@@ -2026,8 +2029,36 @@ $data=$this->db->db_get_recordset();
           
           $arrayfolder=explode('/',$this->post['folder']);
           
+                    if($this->post['sid'])
+          {
+             $this->db->get_connect(); 
+             $this->db->db_set_recordset('select promoid  from tb_promotion where sid='.$this->post['sid']);
+             
+             $data=$this->db->db_get_recordset();
+             $this->db->destory();
+             $arraypic['pic'.$this->post['group']]=$arraydata['filedata'];
+             if($data['0']['promoid'])
+             {
+             
+                $this->db->db_set($arraypic,'tb_promotion',' promoid='.$data['0']['promoid']);
+                 
+             }else
+             {
+               $arraypic['sid']=$this->post['sid'];  
+               $this->db->db_set($arraypic,'tb_promotion');
+                 
+             }
+             
+             
+             
+             
+             $this->db->destory();
+             $this->db->closedb(); 
 
-          $strcode='<a class="galleryimg" rel="'.$this->post['group'].'" href="javascript:changeimage(\''.$this->post['resize'].'\')"><img style="opacity:1" alt="'.$this->post['alt'].'"  src="'.homeinfo.$this->post['folder'].'/resize/'.$arraydata['filedata'].'"></a>';
+              
+          }
+
+          $strcode='<img style="opacity:1" alt="'.$this->post['alt'].'"  src="'.homeinfo.$this->post['folder'].'/resize/'.$arraydata['filedata'].'">';
 
           $arraydata['resposne']=1;
           $arraydata['imgstr']=$strcode;
@@ -3075,10 +3106,21 @@ $data=$this->db->db_get_recordset();
         $arrayshop['title']=$arraydata2['title'];
         $arrayshop['keyword']=$arraydata2['keyword'];
         $arrayshop['description']=$arraydata2['description'];
-        $arrayshop['proid']=$arraydata2['province'];
+        $arrayshop['contrid']=$arraydata2['countries'];
+        if($arraydata2['countries']==210)
+        {
+         $arrayshop['proid']=$arraydata2['province'];
+         $arrayshop['disid']=$arraydata2['district'];
+         $arrayshop['tumid']=$arraydata2['tumbon'];
+        
+        }else
+        {
+         $arrayshop['subcontry']=$arraydata2['subcontry'];   
+        }
+        
+
+        
         $arrayshop['temid']=$arraydata2['template'];
-        $arrayshop['disid']=$arraydata2['district'];
-        $arrayshop['tumid']=$arraydata2['tumbon'];
         $arrayshop['postcode']=$arraydata2['postcode'];
         $arrayshop['address']=$arraydata2['address'];
         $arrayshop['tel']=$arraydata2['tel'];
@@ -3092,7 +3134,6 @@ $data=$this->db->db_get_recordset();
         if(preg_match('/^[a-zก-๙0-9เ]+$/i',$arraydata2['shopurl']))$arrayshop['shopurl']=strtolower($this->changeidn($arraydata2['shopurl']));
         else $arrayshop['shopurl']=strtolower($arraydata2['shopurl']);
 
-        
         $this->db->get_connect();
         $this->db->db_set($arrayshop,'tb_shop');
         $mid= $this->db->db_get_last_number();

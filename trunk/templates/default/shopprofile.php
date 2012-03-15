@@ -82,22 +82,24 @@
                           <dd>
                           
                              
-                                                            <div class="main_image" onclick="changeimage('735x325')">
+                                                            <div class="main_image" onclick="changeimage('735x325',1)">
                                                                <!--<img src="<?=imginfo?>/images/default/shopprofile/promotion_ex1_image.jpg" width="100%"/>-->
-                                                               <div id="735x325" ></div>
+                                                               <div id="735x325x1" ></div>
                                                                <span  class="label">735 X 325</span>
                                                              </div>
                                                              <div class="data" onclick="">
                                                              
-                                                             <a class="logo" href="javascript:changeimage('100x100',0)">
-                                                             <div id="100x100x0" ></div>
+                                                             <a class="logo" href="javascript:changeimage('100x100',2)">
+                                                             <div id="100x100x2" >
                                                              <span class="label">100 x 100</span>
+                                                             </div>
                                                              </a>
                                                              
                                                              <div class="promo">  
-                                                             <a class="logo" href="javascript:changeimage('100x100',1)">
-                                                             <div id="100x100x1" ></div>
-                                                             <span class="label">100 x 100</span>
+                                                             <a class="logo" href="javascript:changeimage('100x100',3)">
+                                                                <div id="100x100x3" >
+                                                             <span class="label">100 x 100 </span>
+                                                             </div>
                                                              </a>
                                                         	</div>
                                                             
