@@ -61,19 +61,84 @@
                        <dt><h2 class="bar"><a class="back" href="javascript:backmembercard()">back</a>  Member Card  </h2></dt>   
                                <div  id="shopmenu">
                                     <ul class="v">   
-                                        <li class="icon member-card"><a href="<?=homeinfo?>/registershop"><span>Create Member Card</span></a></li>
-                                        <li class="icon member-list"><a href="javascript:editshop()"><span>Member List</span></a></li>
-                                        <li class="icon member-stamp"><a href="javascript:openpromotion()"><span>Stamp</span></a></li>
-                                        <li class="icon member-usestamp"><a href="#"><span>Use Stamp</span></a></li>
-                                        <li class="icon member-report"><a href="#"><span>Report</span></a></li>
-                                        <li class="icon statistic"><a href="#"><span>Statistic</span></a></li>
-                                        <li class="icon member-setting"><a href="#"><span>Member Setting</span></a></li>
+                                        <li class="icon member-card"><a href="javascript:membercard_create()"><span>Create Member Card</span></a></li>
+                                        <li class="icon member-list"><a href="javascript:membercard_list()"><span>Member List</span></a></li>
+                                        <li class="icon member-stamp"><a href="javascript:membercard_stamp()"><span>Stamp</span></a></li>
+                                        <li class="icon member-usestamp"><a href="javascript:membercard_usestamp()"><span>Use Stamp</span></a></li>
+                                        <li class="icon member-report"><a href="javascript:membercard_report()"><span>Report</span></a></li>
+                                        <li class="icon statistic"><a href="javascript:membercard_statistic()"><span>Statistic</span></a></li>
+                                        <li class="icon member-setting"><a href="javascript:membercard_setting()"><span>Member Setting</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
  
                                                
                       </dl>
                    </section>
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <section id="idmembercard-create" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_create()">back</a> Create Member Card</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   
+                    <section id="idmembercard-list" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_list()">back</a> Member List</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   <section id="idmembercard-stamp" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_stamp()">back</a> Stamp</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   
+                   <section id="idmembercard-usestamp" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_usestamp()">back</a> Use Stamp</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   <section id="idmembercard-report" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_report()">back</a>Report</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   <section id="idmembercard-statistic" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_statistic()">back</a>Statistic</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   <section id="idmembercard-setting" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:membercard_setting()">back</a>Setting</h2></dt>   
+     					Content                    
+                      </dl>
+                   </section>
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
                    <section id="idpromotionmenu" style="display: none;" >
                    
                   
@@ -130,31 +195,12 @@
                                                             
                                                             
                                                             
-                                                            <div class="d1"><strong>S&amp;P ชือนี้มีแต่ของอร่อย</strong><br />
-                                                                              <strong>Vanilla at home</strong><br />บริการใหม่อีกหนึ่งทางเลือกที่คุณตองถูกใจกับสไตลการ
-                                                        ครีเอตเมนูได้หลากหลายและน่าสนใจทั้ง ฝรั่ง จีน ญี่ปุ่น 
+                                                            <div class="d1">
+                                                            <div style="display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;">input text here</div>
                                                                             </div>
                                                                             
                                                                             <div class="d2 subpage">
-                                                                                                <p>
-                                                                                                  <strong>พิเศษ!! ช่วงแนะนำ</strong><br />
-                                                                                                   ตลอดเดือนมิถุนายนนี้ Vanilla at home มีโปรโมชั่น
-                                                                                                    อิ่มอรอยครบเซตในราคาพิเศษ สำหรับลูกคาที่สั่ง
-                                                                                                                            Vanilla Special Set 
-                                                                                                                            
-                                                                                                                            <br /><br />
-                                                                                                        
-                                                                                                        บริการทุกวัน : 10.00 - 21.00 น.<br />
-                                                                                                        เฉพาะพื้นที่ 5 จุดที่กำหนด ได้แก่<br />
-                                                                                                          - ถนนสุขุมวิท 21 <br />
-                                                                                                          - สุขุมวิท 71 (ทั้ง 2 ฝั่ง)<br />
-                                                                                                          - ถนนพระราม 4 (แยกศูนย์สิริกิติ์)<br />
-                                                                                                           - แยกพระโขนง<br />
-                                                                                                          - ถนนเพชรบุรีตัดใหม่ (แยกอโศก) <br />
-                                                                                                          - พัฒนาการ 20<br />
-                                                                                                          - RCA<br />
-                                                                                                 <strong>Vanilla at home : 02-381-4332</strong>
-                                                                                                </p>
+                                                                                             <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">input text here</div>
                                                                                                 
                                                                                                 
                                                                             </div>
