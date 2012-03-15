@@ -63,11 +63,11 @@
                                     <ul class="v">   
                                         <li class="icon member-card"><a href="javascript:membercard_create()"><span>Create Member Card</span></a></li>
                                         <li class="icon member-list"><a href="javascript:membercard_list()"><span>Member List</span></a></li>
-                                        <li class="icon member-stamp"><a href="javascript:membercard_stamp()"><span>Stamp</span></a></li>
+                                        <!--<li class="icon member-stamp"><a href="javascript:membercard_stamp()"><span>Stamp</span></a></li>-->
                                         <li class="icon member-usestamp"><a href="javascript:membercard_usestamp()"><span>Use Stamp</span></a></li>
                                         <li class="icon member-report"><a href="javascript:membercard_report()"><span>Report</span></a></li>
                                         <li class="icon statistic"><a href="javascript:membercard_statistic()"><span>Statistic</span></a></li>
-                                        <li class="icon member-setting"><a href="javascript:membercard_setting()"><span>Member Setting</span></a></li>
+                                        <li class="icon member-stamp"><a href="javascript:membercard_setting()"><span>Member Setting</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
  
@@ -96,12 +96,12 @@
                       </dl>
                    </section>
                    
-                   <section id="idmembercard-stamp" style="display: none;" >
+<!--                   <section id="idmembercard-stamp" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_stamp()">back</a> Stamp</h2></dt>   
      					Content                    
                       </dl>
-                   </section>
+                   </section>-->
                    
                    
                    <section id="idmembercard-usestamp" style="display: none;" >
@@ -195,11 +195,11 @@
                                                             
                                                             
                                                             <div class="d1">
-                                                            <div style="display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;">input text here</div>
+                                                            <div style="display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;">Input text here</div>
                                                                             </div>
                                                                             
                                                                             <div class="d2 subpage">
-                                                                                             <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">input text here</div>
+                                                                                             <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">Input text here.</div>
                                                                                                 
                                                                                                 
                                                                             </div>
