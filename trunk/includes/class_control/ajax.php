@@ -3012,6 +3012,27 @@ $data=$this->db->db_get_recordset();
         
 
        }
+       function getpromotion()
+       {
+             
+             $this->db->get_connect(); 
+             $this->db->db_set_recordset('select *  from tb_promotion where sid='.$this->post['sid']);
+             $arraydata=$this->db->db_get_recordset();
+           
+             $this->db->destory();
+             $this->db->closedb();
+              if($arraydata['0']['promoid'])
+              {
+              $arraydata['error']=0;
+             echo array2json($arraydata); 
+              }else
+              {
+                $arraydata['error']=1;
+             echo array2json($arraydata);   
+              }
+
+           
+       }
        function saveregister()
        {
           

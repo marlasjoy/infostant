@@ -209,7 +209,7 @@
                     tb_shop.sid
                     FROM
                     tb_shop
-                    INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
                     INNER JOIN tb_member ON tb_shop.mid = tb_member.mid
                     where  tb_member.username="'.$this->info['username'].'"
                     order by tb_shop.createdate desc  ';
@@ -244,7 +244,7 @@
                     tb_province.proname
                     FROM
                     tb_shop
-                    INNER JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
                     INNER JOIN tb_member ON tb_shop.mid = tb_member.mid
                     where  tb_member.username="'.$this->info['username'].'"
                     order by tb_shop.createdate desc
