@@ -48,7 +48,26 @@
                                         <li class="icon member"><a href="#"><span>Member</span></a></li>
                                         <li class="icon event"><a href="#"><span>Event</span></a></li>
                                         <li class="icon aff"><a href="#"><span>Affaliate</span></a></li>
-                                         <li class="icon member-card"><a href="#"><span>Member Card</span></a></li>
+                                         <li class="icon member-card"><a href="javascript:openmembercard()"><span>Member Card</span></a></li>
+                                    </ul>
+                                </div> <!-- #shopmenu end -->
+ 
+                                               
+                      </dl>
+                   </section>
+                   <section id="idmembercard" style="display: none;" >
+                        <dl>
+                     
+                       <dt><h2 class="bar"><a class="back" href="javascript:backmembercard()">back</a>  Member Card  </h2></dt>   
+                               <div  id="shopmenu">
+                                    <ul class="v">   
+                                        <li class="icon member-card"><a href="<?=homeinfo?>/registershop"><span>Create Member Card</span></a></li>
+                                        <li class="icon member-list"><a href="javascript:editshop()"><span>Member List</span></a></li>
+                                        <li class="icon member-stamp"><a href="javascript:openpromotion()"><span>Stamp</span></a></li>
+                                        <li class="icon member-usestamp"><a href="#"><span>Use Stamp</span></a></li>
+                                        <li class="icon member-report"><a href="#"><span>Report</span></a></li>
+                                        <li class="icon statistic"><a href="#"><span>Statistic</span></a></li>
+                                        <li class="icon member-setting"><a href="#"><span>Member Setting</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
  
