@@ -120,7 +120,7 @@
   
                                         
                                </ul>
-                               <div class="text1"> กรุณาแสดง Member Card นี้เพื่อแลกใช้สิทธิ์ ก่อนการเรียกชำระเงิน</div>
+                               <div class="text1">* กรุณาแสดง Member Card นี้เพื่อแลกใช้สิทธิ์ ก่อนการเรียกชำระเงิน</div>
                                <div class="text2"><h3 class="condition">Conditions</h3>
                                            <div class="data">
                                           <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">Input text here.</div>
