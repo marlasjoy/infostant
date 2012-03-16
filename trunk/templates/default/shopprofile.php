@@ -276,14 +276,74 @@
                        <div  id="shopmenu">
                                     <ul class="v">   
                                     	<li class="icon createpromotion"><a href="javascript:createpromotion()"><span>Create Promotion</span></a></li>
-                                        <li class="icon promotionmember"><a href="javascript:editshop()"><span>Promotion Member</span></a></li>
-                                        <li class="icon statistic"><a href="javascript:openpromotion()"><span>Statistic</span></a></li>
+                                        <li class="icon promotionmember"><a href="javascript:promotiom_member()"><span>Promotion Member</span></a></li>
+                                        <li class="icon qr"><a href="javascript:promotiom_use()"><span>Use Promotion</span></a></li>
+                                        <li class="icon statistic"><a href="javascript:promotiom_statistic()"><span>Statistic</span></a></li>
                                 
                                     </ul>
                                 </div> <!-- #shopmenu end -->
                             
                       </dl>
                    </section>
+                   
+                   
+                 
+                   <section id="idpromotion-member" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_member()">back</a>Promotion Member</h2></dt>   
+                       <div class="subpage">
+                               <ul class="v line">
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Suphannika Spa – Baan Amphawa Resort&Spa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">อีรันด้า เฮอร์เบิล สปา</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Healthlandspa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               </ul>
+                               
+                            </div>             
+                      </dl>
+                   </section>
+                   
+                   <section id="idpromotion-statistic" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_statistic()">back</a>Statistic</h2></dt>  
+                       Graph              
+                      </dl>
+					</section>
+                    
+                    <section id="idpromotion-statistic" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_statistic()">back</a>Statistic</h2></dt>  
+                       Graph              
+                      </dl>
+					</section>
+                    <section id="idpromotion-use" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_use()">back</a>Use Promotion</h2></dt>    
+                       <form method="post" action="" id="dummy">
+                        
+                       
+
+                            <div style="padding:20px 40px;">  
+                                <p>
+                                  <label for="dummy1">Infostant ID</label><br>
+                                  <input type="text" value="" name="dummy1" id="dummy1" class="text" >
+                                </p>
+                                
+                                <p>
+                                  <input type="submit" value="Submit">
+                                  <input type="reset" value="Reset">
+                                </p>
+                    
+                              </div>
+                             
+        			</form>              
+                      </dl>
+					</section>
                    
                    
                    <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />
