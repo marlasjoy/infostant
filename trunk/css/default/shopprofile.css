@@ -150,7 +150,7 @@ ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.pn
  .text1{ font-size:12px; display:block; clear:both; padding:10px; color:#999}
  .text2 { font-size:13px;}
  .text2 h3.condition{ background:#CCC; text-shadow:none; padding:2px 2px 2px 10px; margin:0;}
- .text2 .data{ padding:10px;}
+ .text2 .data{ padding:10px 0;}
 
 .nocontentdescription{display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;}
 .contentdescription{display:block; height: 400px;width: 100%; }
