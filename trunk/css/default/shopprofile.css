@@ -1,8 +1,8 @@
 #main h2.bar{
 	    background-attachment: scroll;
     background-clip: border-box;
-    background-color: transparent;
-    background-image: url("images/bg-search.png");
+    background-color: #CCC;
+    /*background-image: url("images/bg-search.png");*/
     background-origin: padding-box;
     background-position: 0 0;
     background-repeat: repeat;
@@ -157,3 +157,143 @@ ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.pn
 
 .nocontenttitle{display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;}
 .contenttitle{display:block; height: 80px;width: 100%; }
+
+/* --------------------------------------------------------------
+
+   forms.css
+   * Sets up some default styling for forms
+   * Gives you classes to enhance your forms
+
+   Usage:
+   * For text fields, use class .title or .text
+   * For inline forms, use .inline (even when using columns)
+
+-------------------------------------------------------------- */
+
+/*
+  A special hack is included for IE8 since it does not apply padding
+  correctly on fieldsets
+ */
+form{color:#666;}
+label    { font-weight: normal;}
+fieldset { padding:0 1.4em 1.4em 1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
+legend   { font-weight: bold; font-size:1.2em; margin-top:-0.2em; margin-bottom:1em; }
+
+fieldset, #IE8#HACK { padding-top:1.4em; }
+legend, #IE8#HACK { margin-top:0; margin-bottom:0; }
+
+/* Form fields
+-------------------------------------------------------------- */
+
+/*
+  Attribute selectors are used to differentiate the different types
+  of input elements, but to support old browsers, you will have to
+  add classes for each one. ".title" simply creates a large text
+  field, this is purely for looks.
+ */
+input[type=text], input[type=password], input[type=url], input[type=email],
+input.text, input.title,
+textarea {
+  color:#000;
+  background: -moz-linear-gradient(center top , #FFFFFF, #EEEEEE 1px, #FFFFFF 8px) repeat scroll 0 0 transparent;
+    border: 1px solid #DDD;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=password]:focus, input[type=url]:focus, input[type=email]:focus,
+input.text:focus, input.title:focus,
+textarea:focus {
+  border-color:#CCC;
+}
+select { background-color:#fff; border-width:1px; border-style:solid; }
+
+input[type=text], input[type=password], input[type=url], input[type=email],
+input.text, input.title,
+textarea, select {
+  margin:0.5em 0;
+}
+
+input.text,
+input.title { width: 300px; padding:8px; }
+input.title { font-size:1.5em; }
+textarea    { width: 390px; height: 250px; padding:5px; }
+
+/*
+  This is to be used on forms where a variety of elements are
+  placed side-by-side. Use the p tag to denote a line.
+ */
+form.inline { line-height:3; }
+form.inline p { margin-bottom:0; }
+
+
+/* Success, info, notice and error/alert boxes
+-------------------------------------------------------------- */
+
+.error,
+.alert,
+.notice,
+.success,
+.info { padding: 0.8em; margin-bottom: 1em; border: 2px solid #ddd; }
+
+.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
+.error a, .alert a { color: #8a1f11; }
+.notice a          { color: #514721; }
+.success a         { color: #264409; }
+.info a            { color: #205791; }
+
+input[type="submit"], input.submit {
+    background: none repeat scroll 0 0 #0088CC;
+    border: 1px solid #0066AA;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 5px;
+    width: auto;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus, input.submit:hover, input.submit:focus {
+    background: none repeat scroll 0 0 #0066AA;
+    color: #FFFFFF;
+}
+
+input[type="reset"], input.reset {
+    background: none repeat scroll 0 0 #DBA32B;
+    border: 1px solid #B78925 ;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 5px;
+    width: auto;
+}
+
+input[type="reset"]:hover, input[type="reset"]:focus, input.reset:hover, input.reset:focus {
+    background: none repeat scroll 0 0 #B78925;
+    color: #FFFFFF;
+}
+
+.cross{ background: url(images/btn-delete.png) no-repeat 50% 40% !important; background-size: 24px 24px !important; margin:0;
+height: 24px;
+    line-height: 24px;
+    margin: 0 0 0 10px;
+    padding: 10px;
+    width: 24px;
+}
+.tick{ background: url(images/btn-delete.png) no-repeat 50% 40% !important; background-size: 24px 24px !important; margin:0;
+height: 24px;
+    line-height: 24px;
+    margin: 0 0 0 10px;
+    padding: 10px;
+    width: 24px;
+}
+
+
+
+
+

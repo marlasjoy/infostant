@@ -166,14 +166,52 @@
                    <section id="idmembercard-usestamp" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_usestamp()">back</a> Use Stamp</h2></dt>   
-     					Content                    
+                       
+     					<form method="post" action="" id="dummy">
+                        
+                       
+
+                            <div style="padding:20px 40px;">  
+                                <p>
+                                  <label for="dummy1">Infostant ID</label><br>
+                                  <input type="text" value="" name="dummy1" id="dummy1" class="text" >
+                                </p>
+                                
+                                 <p>
+                                  <label for="dummy2">Total Stamp</label><br>
+                                  <input type="text" value="" name="dummy2" id="dummy2" class="text">
+                                </p>
+                    
+                                <p>
+                                  <label for="dummy3">Advance</label><br>
+                                   item 1 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a><br>
+                                   item 2 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a><br>
+                                   item 3 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a>
+                                </p>
+                    
+                    
+                                <p>
+                                  <input type="submit" value="Submit">
+                                  <input type="reset" value="Reset">
+                                </p>
+                    
+                              </div>
+                             
+        			</form>                   
                       </dl>
                    </section>
                    
                    <section id="idmembercard-report" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_report()">back</a>Report</h2></dt>   
-     					Content                    
+     					 <div  id="shopmenu">
+                                    <ul class="v">   
+                                        <li class="icon member-card"><a href=""><span>By Day</span></a></li>
+                                        <li class="icon member-list"><a href=""><span>By Month</span></a></li>
+                                        <li class="icon member-stamp"><a href=""><span>By Year</span></a></li>
+
+                                    </ul>
+                                </div> <!-- #shopmenu end -->                   
                       </dl>
                    </section>
                    
@@ -187,7 +225,36 @@
                    <section id="idmembercard-setting" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_setting()">back</a>Setting</h2></dt>   
-     					Content                    
+     					<form method="post" action="" id="dummy">
+                        
+                       
+
+                            <div style="padding:20px 40px;">  
+                                <p>
+                                  <label for="dummy1">Total Cost</label><br>
+                                  <input type="text" value="" name="dummy1" id="dummy1" class="text" >
+                                </p>
+                                
+                                 <p>
+                                  <label for="dummy2">Stamp</label><br>
+                                  <input type="text" value="" name="dummy2" id="dummy2" class="text">
+                                </p>
+                    
+                                <p>
+                                  <label for="dummy3">Advance</label><br>
+                                   item 1 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a><br>
+                                   item 2 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a><br>
+                                   item 3 <input type="text" value="" name="dummy3" id="dummy3" class="text"><a class="cross" href="#"></a>
+                                </p>
+                    
+                                <p>
+                                  <input type="submit" value="Submit">
+                                  <input type="reset" value="Reset">
+                                </p>
+                    
+                              </div>
+                             
+        			</form>                         
                       </dl>
                    </section>
                    
