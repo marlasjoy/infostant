@@ -148,3 +148,9 @@ ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.pn
 #idmembercard-create .text2 { font-size:13px;}
 #idmembercard-create .text2 h3.condition{ background:#999; text-shadow:none; padding:5px 5px 5px 10px; margin:0;}
 #idmembercard-create .text2 .data{ padding:10px;}
+
+.nocontentdescription{display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;}
+.contentdescription{display:block; height: 400px;width: 100%; }
+
+.nocontenttitle{display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;}
+.contenttitle{display:block; height: 80px;width: 100%; }
