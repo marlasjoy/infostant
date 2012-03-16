@@ -135,19 +135,22 @@ ul.v > li.icon.member-stamp a{ background: url(images/icon_member-stamp.png) no-
 ul.v > li.icon.member-statistic a{ background: url(images/icon_member-statistic.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 
-#idmembercard-create a.thumb{ display:block; width:100px; height: 80px; float:left; margin-right:15px ;}
-#idmembercard-create a.thumb img{  border: 1px solid #C8C8C8;
+ a.thumb{ display:block; width:100px; height: 84px; float:left; margin-right:15px ;}
+ a.thumb img{  border: 1px solid #C8C8C8;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     padding: 2px;
+	border-radius: 8px 8px 8px 8px;
     }
-#idmembercard-create .subpage > ul.v > li { padding:10px; overflow:hidden; color:#666;}
-#idmembercard-create .subpage > ul.v > li strong.a{ color:#333;}
-#idmembercard-create ul.stamp{ border-top:1px solid #CCC; display:block; padding:5px; background:#EEE; overflow:hidden;}
-#idmembercard-create ul.stamp > li{ display:block; float:left; margin:5px;width:50px; height:50px; background:#FFF url(images/img-stamp.png) no-repeat 50% 50% !important; background-size: 50px 50px !important;}
-#idmembercard-create .text1{ font-size:12px; display:block; clear:both; padding:10px;}
-#idmembercard-create .text2 { font-size:13px;}
-#idmembercard-create .text2 h3.condition{ background:#999; text-shadow:none; padding:5px 5px 5px 10px; margin:0;}
-#idmembercard-create .text2 .data{ padding:10px;}
+ .subpage > ul.v > li { padding:10px; overflow:hidden; color:#666;}
+ .subpage > ul.v.line > li{}
+ .subpage > ul.v.line > li:nth-child(2n-1) {background: none repeat scroll 0 0 #F4F4F4;}
+ .subpage > ul.v > li strong a{ color:#333; font-size:14px;}
+ ul.stamp{ border-top:1px solid #DDD; display:block; padding:5px; background:#F4F4F4; overflow:hidden; margin:0;}
+ ul.stamp > li{ display:block; float:left; margin:5px;width:50px; height:50px; background:#FFF url(images/img-stamp.png) no-repeat 50% 50% !important; background-size: 50px 50px !important;}
+ .text1{ font-size:12px; display:block; clear:both; padding:10px;}
+ .text2 { font-size:13px;}
+ .text2 h3.condition{ background:#CCC; text-shadow:none; padding:2px 2px 2px 10px; margin:0;}
+ .text2 .data{ padding:10px;}
 
 .nocontentdescription{display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;}
 .contentdescription{display:block; height: 400px;width: 100%; }

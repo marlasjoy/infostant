@@ -138,7 +138,20 @@
                     <section id="idmembercard-list" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:membercard_list()">back</a> Member List</h2></dt>   
-     					Content                    
+     					<div class="subpage">
+                               <ul class="v line">
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Suphannika Spa – Baan Amphawa Resort&Spa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">อีรันด้า เฮอร์เบิล สปา</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Healthlandspa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               </ul>
+                               
+                            </div>                   
                       </dl>
                    </section>
                    
