@@ -147,7 +147,7 @@ ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.pn
  .subpage > ul.v > li strong a{ color:#333; font-size:14px;}
  ul.stamp{ border-top:1px solid #DDD; display:block; padding:5px; background:#F4F4F4; overflow:hidden; margin:0;}
  ul.stamp > li{ display:block; float:left; margin:5px;width:50px; height:50px; background:#FFF url(images/img-stamp.png) no-repeat 50% 50% !important; background-size: 50px 50px !important;}
- .text1{ font-size:12px; display:block; clear:both; padding:10px;}
+ .text1{ font-size:12px; display:block; clear:both; padding:10px; color:#999}
  .text2 { font-size:13px;}
  .text2 h3.condition{ background:#CCC; text-shadow:none; padding:2px 2px 2px 10px; margin:0;}
  .text2 .data{ padding:10px;}
