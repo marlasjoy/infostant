@@ -46,8 +46,6 @@
                                         <li class="icon editshop"><a href="javascript:editshop()"><span>Shop edit</span></a></li>
                                         <li class="icon promotion"><a href="javascript:openpromotion()"><span>Promotion</span></a></li>
                                         <li class="icon member"><a href="#"><span>Member</span></a></li>
-                                        <li class="icon event"><a href="#"><span>Event</span></a></li>
-                                        <li class="icon aff"><a href="#"><span>Affaliate</span></a></li>
                                          <li class="icon member-card"><a href="javascript:openmembercard()"><span>Member Card</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
@@ -200,8 +198,7 @@
                                     	<li class="icon createpromotion"><a href="javascript:createpromotion()"><span>Create Promotion</span></a></li>
                                         <li class="icon promotionmember"><a href="javascript:editshop()"><span>Promotion Member</span></a></li>
                                         <li class="icon statistic"><a href="javascript:openpromotion()"><span>Statistic</span></a></li>
-                                        <li class="icon event"><a href=""><span>Event</span></a></li>
-                                        <li class="icon aff"><a href=""><span>Affaliate</span></a></li>
+                                
                                     </ul>
                                 </div> <!-- #shopmenu end -->
                             
@@ -243,11 +240,11 @@
                                                             
                                                             
                                                             <div class="d1">
-                                                            <div style="display:block; background:#efefef;height: 80px;text-align: center;width: 100%; line-height:80px;">Input text here</div>
+                                                            <div id="title" onclick="changecontent('title')" class="nocontenttitle">Input text here</div>
                                                                             </div>
                                                                             
                                                                             <div class="d2 subpage">
-                                                                                             <div style="display:block; background:#efefef;height: 400px;text-align: center;width: 100%; line-height:400px;">Input text here.</div>
+                                                                                             <div id="description" onclick="changecontent('description')" class="nocontentdescription" >Input text here.</div>
                                                                                                 
                                                                                                 
                                                                             </div>

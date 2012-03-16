@@ -1357,6 +1357,53 @@ $data=$this->db->db_get_recordset();
           }
          
       }
+      function savedescriptionpromotion()
+      {
+          if($this->post['sid'])
+          {
+         
+           $this->db->get_connect();
+           
+           
+           $this->db->db_set_recordset('select promoid  from tb_promotion where sid='.$this->post['sid']);
+             
+             $data=$this->db->db_get_recordset();
+             $this->db->destory();
+           
+           
+           $arraydata[$this->post['target']]=$this->post['value'];
+           
+         
+           
+           $arraydata['updatedate']=date("Y-m-d H:i:s");
+           
+            if($data['0']['promoid'])
+             {
+             
+                $this->db->db_set($arraydata,'tb_promotion',' promoid='.$data['0']['promoid']);
+                 
+             }else
+             {
+                $arraydata['createdate']=date("Y-m-d H:i:s"); 
+               $arraydata['sid']=$this->post['sid'];  
+               $this->db->db_set($arraydata,'tb_promotion');
+                 
+             }
+           
+           
+           
+           
+
+             $this->db->destory();
+             $this->db->closedb(); 
+          
+     
+          $arraydata['resposne']=1;
+          echo array2json($arraydata); 
+          
+          }
+         
+      }
       function getlang($selected)
       {
           global $langobj,$langtitle;
@@ -2036,6 +2083,7 @@ $data=$this->db->db_get_recordset();
              
              $data=$this->db->db_get_recordset();
              $this->db->destory();
+             $arraypic['updatedate']=date("Y-m-d H:i:s");
              $arraypic['pic'.$this->post['group']]=$arraydata['filedata'];
              if($data['0']['promoid'])
              {
@@ -2044,6 +2092,7 @@ $data=$this->db->db_get_recordset();
                  
              }else
              {
+               $arraypic['createdate']=date("Y-m-d H:i:s");
                $arraypic['sid']=$this->post['sid'];  
                $this->db->db_set($arraypic,'tb_promotion');
                  

@@ -183,3 +183,19 @@ $.fancybox({
 'href':$("#homeinfo").html()+'/manage/imagepromotion/'+code+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
 });
 } 
+
+function changecontent(content)
+{
+
+var code=content;
+
+$.fancybox({
+'width' : '100%',
+'height' : '100%',
+'autoScale' : false,
+'transitionIn' : 'none',
+'transitionOut' : 'none',
+'type' : 'iframe',
+'href':$("#homeinfo").html()+'/manage/write'+content+'promotion/'+content+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
+});
+} 
