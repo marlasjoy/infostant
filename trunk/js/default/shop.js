@@ -129,6 +129,30 @@ function membercard_setting()
 //END MEMBERCARD SUBPAGE
 
 
+// PROMOTION SUBPAGE
+
+function promotiom_member()
+{
+   $('#idpromotionmenu').toggle('slow');
+   $('#idpromotion-member').toggle('slow');
+}
+function promotiom_statistic()
+{
+   $('#idpromotionmenu').toggle('slow');
+   $('#idpromotion-statistic').toggle('slow');
+}
+function promotiom_use()
+{
+   $('#idpromotionmenu').toggle('slow');
+   $('#idpromotion-use').toggle('slow');
+}
+
+// END PROMOTION SUBPAGE
+
+
+
+
+
 function callpromotion()
 {
       var webdir=$("#webdir").html();
