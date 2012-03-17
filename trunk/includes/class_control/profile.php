@@ -475,19 +475,24 @@
 //                      <li><a href="javascript:void(0);" class="icon">Share to Facebook</a></li>
 //                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>';
 
-                     $str='
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'" class="icon">Calendar</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon">Favorite</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/shop" class="icon">Shop</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/event" class="icon">Event</a></li>
-                      <li><a href="'.homeinfo.'/'.$this->info['username'].'/affaliate" class="icon">Affaliate</a></li>
+                     $str='		  
+					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon recent">Recent View</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon favorite">Favorite</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon carlendar">Calendar</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon mymemory">My Memory</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon friend">Friends</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon message">Message</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon notification">Notification</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon promotion">Promotion</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon membercard">Member Card</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon place">Place</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon blackbox">Blackbox</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/event" class="icon evend">Event</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/shop" class="icon shop">Shop</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/affaliate" class="icon affliate">Affliate</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon setting">Setting</a></li>
                       ';
 					  
-					  
-					  
-					  
-
-             
                       
                       return $str;
       }
