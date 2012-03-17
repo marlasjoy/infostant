@@ -45,7 +45,7 @@
                                     	<li class="icon createshop"><a href="<?=homeinfo?>/registershop"><span>Create New Shop</span></a></li>
                                         <li class="icon editshop"><a href="javascript:editshop()"><span>Shop edit</span></a></li>
                                         <li class="icon promotion"><a href="javascript:openpromotion()"><span>Promotion</span></a></li>
-                                        <li class="icon member"><a href="#"><span>Member</span></a></li>
+                                        <li class="icon member"><a href="javascript:openmember()"><span>Member</span></a></li>
                                          <li class="icon member-card"><a href="javascript:openmembercard()"><span>Member Card</span></a></li>
                                     </ul>
                                 </div> <!-- #shopmenu end -->
@@ -72,6 +72,29 @@
                                                
                       </dl>
                    </section>
+                   
+                   
+                   
+                   
+                   <section id="idmember" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:openmember()">back</a>Member</h2></dt> 
+                       <div class="subpage">
+                               <ul class="v line">
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Suphannika Spa – Baan Amphawa Resort&Spa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">อีรันด้า เฮอร์เบิล สปา</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               <li><a class="thumb" href="landing.html?shopurl=tesry"><img alt="tesry" src="http://www.infostant.com/images/shop_c/chabuton/resize/thumb7.jpg"></a><strong><a href="landing.html?shopurl=tesry">Healthlandspa</a></strong>
+                               Time. null<br>Tel. null<br>null, กรุงเทพมหานคร 
+                               </li>
+                               </ul>
+                               
+                            </div>                
+                      </dl>
+					</section>
                    
                    
                    

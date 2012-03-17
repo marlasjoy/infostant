@@ -152,6 +152,19 @@ function promotiom_use()
 
 
 
+// MEMBER
+
+function openmember()
+{
+    $('#idshopmenu').toggle('slow');
+   $('#idmember').toggle('slow');
+}
+
+// END PROMOTION SUBPAGE
+
+
+
+
 
 function callpromotion()
 {
