@@ -13,6 +13,19 @@
 #main > aside li:nth-child(6) a { background-position: -87px -146px; }
 #main > aside li:nth-child(7) a { background-position: -50px -195px; }
 #main > aside li:nth-child(8) a { background-position: 0 -245px; }
+
+
+
+#main > aside li:nth-child(x) a  {background: url(images/) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/**/
+
+
+
+
+
+
+
+
+
 #main > article { display: block; float: left; width: 735px; margin-left: 15px; padding: 15px 0 0;}
 #main > article > section { margin-top: 30px; }
 #main > article > h2 a, #main > article > h2  { color: #414141; display: inline; font-size: 18px; }

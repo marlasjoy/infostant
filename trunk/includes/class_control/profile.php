@@ -482,6 +482,10 @@
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/event" class="icon">Event</a></li>
                       <li><a href="'.homeinfo.'/'.$this->info['username'].'/affaliate" class="icon">Affaliate</a></li>
                       ';
+					  
+					  
+					  
+					  
 
              
                       
