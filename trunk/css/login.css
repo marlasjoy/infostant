@@ -3,16 +3,15 @@
 #main > aside h3 { background: url(../images/bg-side-h3.png) no-repeat; width: 220px; height: 29px; line-height: 29px; text-indent: 10px; font-size: 14px; margin-bottom: 10px; }
 #main > aside li { background: url(../images/bg-dot.png) repeat-x bottom left;padding-bottom: 1px;  }
 #main > aside li a { color: #000; font-size: 14px; height: 40px; line-height: 40px; padding-left: 40px; background: url(../images/icon-side.png) no-repeat; margin-left: 3px;  }
-#main > aside li:nth-child(1) a { background-position: -250px 4px; }
+/*#main > aside li:nth-child(1) a { background-position: -250px 4px; }
 #main > aside li:nth-child(2) a { background-position: -200px -45px; }
 #main > aside li:nth-child(3) a { background-position: -150px -85px;}
-/*#main > aside li:nth-child(4) a { background-position: -120px -120px; }*/
-#main > aside li:nth-child(4) a  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*personal memory*/
-
+#main > aside li:nth-child(4) a { background-position: -120px -120px; }
+#main > aside li:nth-child(4) a  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}
 #main > aside li:nth-child(5) a { background-position: -120px -120px; }
 #main > aside li:nth-child(6) a { background-position: -87px -146px; }
 #main > aside li:nth-child(7) a { background-position: -50px -195px; }
-#main > aside li:nth-child(8) a { background-position: 0 -245px; }
+#main > aside li:nth-child(8) a { background-position: 0 -245px; }*/
 
 
 
@@ -23,19 +22,14 @@
 #main > aside li a.calendar { background-position: -250px 4px; }/*calendar*/
 #main > aside li a.favorite { background-position: -200px -45px; }/*Favoorite*/
 #main > aside li a.shop { background-position: -150px -85px;}/*shop*/
-#main > aside li a.memory  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*personal memory*/
+#main > aside li a.mymemory  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*personal memory*/
 #main > aside li a.message { background-position: -120px -120px; }/*message*/
 #main > aside li a.friend { background-position: -87px -146px; }/*friend*/
 #main > aside li a.notification { background-position: -50px -195px; }/*notification*/
 #main > aside li a.membercard  {background: url(images/icon_member-create.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Member Card*/
+#main > aside li a.promotion  {background: url(images/icon_personal-promotion.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*Promotion*/
 #main > aside li a.affliate  {background: url(images/function-icon-aff.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*affliate*/
 #main > aside li a.setting  {background: url(images/icon_personal-setting.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*setting*/
-
-
-
-
-
-
 
 
 
