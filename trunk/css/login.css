@@ -20,6 +20,17 @@
 
 
 
+#main > aside li a.calendar { background-position: -250px 4px; }/*calendar*/
+#main > aside li a.favorite { background-position: -200px -45px; }/*Favoorite*/
+#main > aside li a.shop { background-position: -150px -85px;}/*shop*/
+#main > aside li a.memory  {background: url(images/icon-mymemory.png) no-repeat 4px 4px !important; background-size: 32px 32px !important; margin:0;}/*personal memory*/
+#main > aside li a.message { background-position: -120px -120px; }/*message*/
+#main > aside li a.friend { background-position: -87px -146px; }/*friend*/
+#main > aside li a.notification { background-position: -50px -195px; }/*notification*/
+
+
+
+
 
 
 

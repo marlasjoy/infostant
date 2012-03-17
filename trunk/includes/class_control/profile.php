@@ -478,7 +478,7 @@
                      $str='		  
 					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon recent">Recent View</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon favorite">Favorite</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon carlendar">Calendar</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon calendar">Calendar</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon mymemory">My Memory</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon friend">Friends</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon message">Message</a></li>
