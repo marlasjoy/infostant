@@ -2556,6 +2556,38 @@ $data=$this->db->db_get_recordset();
            
            
        }
+       function checkusername2($noecho="")
+       {
+          $role=$this->rolearray ;  
+          $str= $this->post['username'];  
+        if(preg_match('/^[a-z0-9]+$/i',$str)&&!in_array($str,$role)){
+            
+          $check=1;
+          
+          $this->db->get_connect();
+          $this->db->db_set_recordset('SELECT tb_member.mid,tb_cat.catname_en FROM `tb_member`,`tb_cat` where tb_member.username="'.$str.'" or tb_cat.catname_en="'.$str.'"  ');
+         
+          $data=$this->db->db_get_recordset();
+          
+            if(($data['0']['mid']))
+          {
+              $check=0;
+          }
+          $this->db->destory();
+          $this->db->closedb(); 
+          
+         }else{
+         //  if(preg_match('/^[a00-9]+$/i',$str))   
+          $check=0;
+         }
+         
+         
+         
+          if($check){if($noecho) return true; else echo "true";}
+          else{ if($noecho) return false; else echo "false";}  
+           
+           
+       }
        function changeidn($subdomain="")
        {
            
@@ -2825,6 +2857,7 @@ $data=$this->db->db_get_recordset();
        //  echo array2json($arraydata); 
         // exit();
         }
+        unset($_COOKIE);
         if(empty($_COOKIE['userid']))
         {
         if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
@@ -2839,7 +2872,7 @@ $data=$this->db->db_get_recordset();
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
@@ -2858,7 +2891,7 @@ $data=$this->db->db_get_recordset();
         $stringCode= md5($this->post['username']);
         $this->post['mid']=$arrayshop['mid'];
         $this->setstatuscode($stringCode);
-
+         $arraydata['error']=0;
          echo array2json($arraydata);   
          
 
@@ -3945,6 +3978,7 @@ $data=$this->db->db_get_recordset();
                                                 tb_shop.emailshop,
                                                 tb_shop.address,
                                                 tb_shop.daterange,
+                                                tb_shop.temid,
                                                 tb_province.proname
                                     FROM
                                     tb_shop
@@ -3969,7 +4003,8 @@ $data=$this->db->db_get_recordset();
               {
                 //  $arraylat[]=$value['lat'];
                 //  $arraylng[]=$value['lng'];
-                  //$str[]="['".$value['shopname']."',".$value['lat'].",".$value['lng'].",".$k."]";
+                  //$str[]="['".$value['shopname']."',".$value['lat'].",".$value['lng'].",".$k."]";.
+                  $arraydata[$k]['temid']=$value['temid'];
                   $arraydata[$k]['title']=$value['title'];
                   $arraydata[$k]['sid']=$value['sid'];
                   $arraydata[$k]['description']=strip_tags($value['description']); 
@@ -5017,14 +5052,10 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
       function getshopbyshopurlformobile()
       {
                      $shopurl=$this->post['shopurl'];
-                      //  $shopurl='atchiangrairesort';
-                       // $this->post['mid']=1;
-                      
-                  //    $_COOKIE['userid']=$this->post['mid'];
-                           // echo "dfdf";
+          
                        if($this->checkuserwithshop($shopurl,$this->post['mid']))
                       {   
-                       // echo  "no";
+
                             $opts = array(
   'http'=>array(
     'user_agent'=>"Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
@@ -5160,6 +5191,61 @@ $context = stream_context_create($opts);
                          echo array2json($arraydata);       
                        }
                        
+      }
+      // getalldataofshop
+      function getshopbyshopurlformobile2()
+      {
+              //$shopurl="xn--72czaafnjh5fdb6f6acddb5bh7a30agaddc52afo";
+              $shopurl=$this->post['shopurl'];
+          
+              if($this->checkuserwithshop($shopurl,$this->post['mid']))
+                      {   
+                          $this->db->get_connect();
+          $this->db->db_set_recordset('
+                                    SELECT
+
+                                                tb_shop.temid
+
+                                    FROM
+                                    tb_shop
+                                    where  tb_shop.shopurl=\''.$shopurl.'\'
+                                    
+                                    ');
+                                    
+
+                              
+          $datashop=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb(); 
+              $html=file_get_html('http://'.$shopurl.'.'.domain);    
+              $arraydata=array();     
+                   foreach($html->find('img') as $ele)
+                   {
+                               if($ele->style=="opacity:0")
+                               {
+                                   if($ele->parent()->parent()->parent()->id)
+                                   {
+                                       $arraydata['img'][$ele->parent()->parent()->parent()->id]=$ele->src;
+                                       
+                                   }
+                                //   echo $ele->src."<br>";
+//                                   echo $ele->parent()->parent()->parent()->id ."<br>";
+                               }
+                   }
+                 $arraydata['temid']= $datashop['0']['temid'];  
+                 $arraydata['title']= $html->find('#title')->innertext;
+                 $arraydata['detail']= $html->find('#detail')->innertext;
+                 $arraydata['contact']['address']= $html->find('#address')->innertext;
+                 $arraydata['contact']['tel']= $html->find('#tel')->innertext;
+                 $arraydata['contact']['emailshop']= $html->find('#emailshop')->innertext;
+                 $arraydata['contact']['website']= $html->find('#website')->innertext;
+                 $arraydata['contact']['pricerange']= $html->find('#pricerange')->innertext;
+                 $arraydata['daterange']= $html->find('#daterange')->innertext;
+                 $arraydata['video']= $html->find('#videotext')->innertext;
+                 $arraydata['lat']= $html->find('#lat')->innertext;
+                 $arraydata['lng']= $html->find('#lng')->innertext;
+                                          echo array2json($arraydata);    
+                      }
       }
       function getshopbymeidformobile()
       {
@@ -5990,7 +6076,7 @@ where tb_promotion_member.sid=".$this->post['sid']."
            
      
            
-          if($this->post['promoid']&&$this->post['sid'])
+          if($this->post['sid'])
            {
                $this->db->get_connect();  
            if($this->post['day'])
@@ -5998,7 +6084,8 @@ where tb_promotion_member.sid=".$this->post['sid']."
                $value1=$this->post['day']." 00:00:00";
                $value2=$this->post['day']." 23:59:59";
              
-             $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and createdate BETWEEN '.$value1.' AND '.$value2.' order by createdate asc  ';  
+             $sql="select promo_memid,createdate,promoid,sid from tb_promotion_member where sid=".$this->post['sid'].' and createdate BETWEEN \''.$value1.'\' AND \''.$value2.'\' order by createdate asc  ';  
+
              $this->db->db_set_recordset($sql);
              $data=$this->db->db_get_recordset();
              if($data['0']['promo_memid'])
@@ -6064,7 +6151,7 @@ where tb_promotion_member.sid=".$this->post['sid']."
                $starttime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.'01'.' '.'00:00:00';
                $endtime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.sprintf("%02d",$num).' '.'23:59:59';
                
-               $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';  
+               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';  
              $this->db->db_set_recordset($sql);
              $data=$this->db->db_get_recordset();
              if($data['0']['promo_memid'])
@@ -6106,7 +6193,7 @@ where tb_promotion_member.sid=".$this->post['sid']."
                $starttime=$this->post['year'].'-'.'01'.'-'.'01'.' '.'00:00:00';
                $endtime=$this->post['year'].'-'.'12'.'-'.'31'.' '.'23:59:59';
                
-               $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';    
+               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';    
               $this->db->db_set_recordset($sql);
               $data=$this->db->db_get_recordset();
               
@@ -6239,7 +6326,7 @@ where tb_promotion_member.sid=".$this->post['sid']."
            
            }
        }
-              function getpromotion()
+       function getpromotion()
        {
              
              $this->db->get_connect(); 

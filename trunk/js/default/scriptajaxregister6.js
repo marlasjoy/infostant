@@ -44,7 +44,7 @@ $('#dummy').validate({
             username:{
                required: true,
                remote: {
-               url: 'ajax/checkusername/',
+               url: 'ajax/checkusername2/',
                type: "post"
                             } 
                       },

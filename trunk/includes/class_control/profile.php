@@ -433,6 +433,8 @@
          $databird['js'][]='mobiscroll-1.5.3.min.js';
         $databird['noheader']=1;
         $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
@@ -445,6 +447,163 @@
         
         $this->set_data($databird);
         $this->load('shopprofile');
+        
+        
+        $this->footer->get_footer();
+      }
+      
+      function recentview()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('recentview');
+        
+        
+        $this->footer->get_footer();
+      }
+      function friend()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('friend');
+        
+        
+        $this->footer->get_footer();
+      }
+      function message()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('message');
+        
+        
+        $this->footer->get_footer();
+      }
+      function notification()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('notification');
+        
+        
+        $this->footer->get_footer();
+      }
+      function promotionmember()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('promotionmember');
+        
+        
+        $this->footer->get_footer();
+      }
+      function membercard()
+      {
+            $databird['noindexcss']=1;
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
+         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['noheader']=1;
+        $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.core.js';
+        $databird['js'][]='RGraph.line.js';
+
+          $this->header->set_data($databird);
+        $this->header->get_header(); 
+       $databird['leftmenu']=$this->getleftmenu();
+        $databird['recent']=$this->getrecent();
+//       $databird['tableshop']=$this->getshoplist(); 
+  //      $databird['pagination']=$this->pagination(); 
+        $databird['username']=$this->info['username'];
+        
+        
+        $this->set_data($databird);
+        $this->load('promotionmember');
         
         
         $this->footer->get_footer();
@@ -475,14 +634,14 @@
 //                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>';
 
                      $str='		  
-					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon recent">Recent View</a></li>
+					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/recentview" class="icon recent">Recent View</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon favorite">Favorite</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon calendar">Calendar</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon mymemory">My Memory</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon friend">Friends</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon message">Message</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon notification">Notification</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon promotion">Promotion</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/memorylist" class="icon mymemory">My Memory</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/friend" class="icon friend">Friends</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/message" class="icon message">Message</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/notification" class="icon notification">Notification</a></li>
+						<li><a href="'.homeinfo.'/'.$this->info['username'].'/promotionmember" class="icon promotion">Promotion</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon membercard">Member Card</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon place">Place</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon blackbox">Blackbox</a></li>

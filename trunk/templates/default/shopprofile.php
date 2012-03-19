@@ -336,12 +336,15 @@
                        <dt><h2 class="bar"><a class="back" href="javascript:promotiom_statistic()">back</a>Report</h2></dt>   
                           <div  id="shopmenu">
                                     <ul class="v">   
+                                         
                                         <li class="icon member-card"><a href="javascript:reportpromotionbyday()"><span>By Day</span></a></li>
                                         <li class="icon member-list"><a href="javascript:reportpromotionbymonth()"><span>By Month</span></a></li>
                                         <li class="icon member-stamp"><a href="javascript:reportpromotionbyyear()"><span>By Year</span></a></li>
 
                                     </ul>
-                                </div> <!-- #shopmenu end -->                   
+                                    <input type="text" id="setbox" name="setbox"  style="opacity:0" >
+                                </div> <!-- #shopmenu end -->               
+                              <canvas id="line1" width="600" height="250"></canvas>    
                       </dl>
 					</section>
                     
