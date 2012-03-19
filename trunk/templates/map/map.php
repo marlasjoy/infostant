@@ -316,7 +316,7 @@ function toggleBounce(marker) {
 <div style=" display: block; font-family: Tahoma; font-size: 12px;  color: black;">
 
 <div>
- <img width="100%"   src="<?=homeinfo?>/images/default/header/header-map2.jpg"> 
+ <img width="100%"   src="<?=homeinfo?>/images/default/header/header-map3.jpg"> 
  <div style="display: none;" id="shopurl"></div>
 </div>
 <div style="">
