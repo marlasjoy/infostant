@@ -26,6 +26,7 @@ $pageconfig=array('register'
 ,'setaccept'
 ,'aboutus'
 ,'contact'
+,'login'
 ,'manage'=>'manage'
 );
 $subconfig=array('map'=>'map');

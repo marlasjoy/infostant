@@ -32,7 +32,7 @@
 ,'setpassword'
 ,'setaccept'
 ,'aboutus'
-,'contact','admin') ;
+,'contact','admin','login') ;
        function ajax($db,$header,$footer,$info='')
       {
           $this->db=$db;
@@ -5195,13 +5195,13 @@ $context = stream_context_create($opts);
       // getalldataofshop
       function getshopbyshopurlformobile2()
       {
-              //$shopurl="xn--72czaafnjh5fdb6f6acddb5bh7a30agaddc52afo";
-              $shopurl=$this->post['shopurl'];
+             // $shopurl="xn--72czaafnjh5fdb6f6acddb5bh7a30agaddc52afo";
+             $shopurl=$this->post['shopurl'];
 //          echo "<pre>";
 //          print_r($this->post);
 //          echo "</pre>";
               if($this->checkuserwithshop($shopurl,$this->post['mid']))
-                      {   
+                     {   
                           $this->db->get_connect();
           $this->db->db_set_recordset('
                                     SELECT
@@ -5220,34 +5220,34 @@ $context = stream_context_create($opts);
           $this->db->destory();
           $this->db->closedb(); 
               $html=file_get_html('http://'.$shopurl.'.'.domain);    
-              $arraydata=array();     
+            //  $arraydata=array();     
                    foreach($html->find('img') as $ele)
                    {
                                if($ele->style=="opacity:0")
                                {
                                    if($ele->parent()->parent()->parent()->id)
                                    {
-                                       $arraydata['img'][$ele->parent()->parent()->parent()->id]=$ele->src;
+                                       $arraydata[1]['img'][$ele->parent()->parent()->parent()->id]=$ele->src;
                                        
                                    }
                                 //   echo $ele->src."<br>";
 //                                   echo $ele->parent()->parent()->parent()->id ."<br>";
                                }
                    }
-                 $arraydata['temid']= $datashop['0']['temid'];  
-                 $arraydata['title']= $html->find('#title')->innertext;
-                 $arraydata['detail']= $html->find('#detail')->innertext;
-                 $arraydata['contact']['address']= $html->find('#address')->innertext;
-                 $arraydata['contact']['tel']= $html->find('#tel')->innertext;
-                 $arraydata['contact']['emailshop']= $html->find('#emailshop')->innertext;
-                 $arraydata['contact']['website']= $html->find('#website')->innertext;
-                 $arraydata['contact']['pricerange']= $html->find('#pricerange')->innertext;
-                 $arraydata['daterange']= $html->find('#daterange')->innertext;
-                 $arraydata['video']= $html->find('#videotext')->innertext;
-                 $arraydata['lat']= $html->find('#lat')->innertext;
-                 $arraydata['lng']= $html->find('#lng')->innertext;
+                 $arraydata[1]['temid']= $datashop['0']['temid'];  
+                 $arraydata[1]['title']= $html->find('#title')->innertext;
+                 $arraydata[1]['detail']= $html->find('#detail')->innertext;
+                $arraydata[1]['address']= $html->find('#address')->innertext;
+                 $arraydata[1]['tel']= $html->find('#tel')->innertext;
+                $arraydata[1]['emailshop']= $html->find('#emailshop')->innertext;
+                $arraydata[1]['website']= $html->find('#website')->innertext;
+               $arraydata[1]['pricerange']= $html->find('#pricerange')->innertext;
+                 $arraydata[1]['daterange']= $html->find('#daterange')->innertext;
+                 $arraydata[1]['video']= $html->find('#videotext')->innertext;
+                 $arraydata[1]['lat']= $html->find('#lat')->innertext;
+                 $arraydata[1]['lng']= $html->find('#lng')->innertext;
                                           echo array2json($arraydata);    
-                      }
+                     }
       }
       function getshopbymeidformobile()
       {
@@ -5553,6 +5553,116 @@ where tb_shop.shopurl="'.$shopurl.'"');
                     fclose($fp);
                      
                      $this->getshopbyshopurlformobile();
+                     
+              } 
+           
+           
+           }
+      }
+      function submitpicformiphone5()
+      {
+           $shopurl=$this->post['shopurl'];
+                      // $_COOKIE['userid']=$this->post['mid'];
+           if($this->checkuserwithshop($shopurl,$this->post['mid']))
+           {    
+
+              if($this->post['pic1'])
+              {
+              $filename=mktime();
+              $fileext='jpg'; 
+              $filenow= $filename.'.'.$fileext;   
+              $fp = fopen(fullpathimages.$this->post['shopurl'].'/'.$filenow, 'wb');
+              fwrite($fp, base64_decode($this->post['pic1']));
+              fclose($fp);
+              
+              chmod(fullpathimages.$this->post['shopurl'].'/'.$filenow,0777);
+              $dir_dest = fullpathimages .$this->post['shopurl'].'/resize/';
+              
+               $this->post['folder']='images/shop_c/'.$this->post['shopurl'];
+           //    $this->post['filename']=.'/'.$filenow;   
+               list($width,$height)=explode("x",$this->post['size']);
+               $resize=$width.'x'.$height;
+               $newfile=$dir_dest.$filename.$resize.'.'.$fileext;
+          
+          
+               //list($width,$height)= explode("x",$resize);
+             if(copy(homeinfo.'/plugins/showimages.php?width='.$width.'&height='.$height.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$newfile))
+                     {
+                       chmod($newfile,0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata['filedata']=$filename.$resize.'.'.$fileext;  
+                       $arraydata['width']=$width;
+                       $arraydata['height']=$height;
+                       $arraydata['fileorigi']=$filenow;
+                     }
+                     
+           //   $resize2='200x128';       
+            //  $newfile2=$dir_dest.$filename.$resize2.'.'.$fileext;
+              $thumbfile6=$dir_dest.'original'.'.'.$fileext; 
+
+          
+               //list($width,$height)= explode("x",$resize);
+           //  if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'128'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$newfile2))
+//                     {
+//                       chmod($newfile2,0777);
+
+//                     }          
+                     
+
+              
+              
+             // $thumbfile0=$dir_dest.$filename.'200x128'.'.'.$fileext;
+          //    $thumbfile1=$dir_dest.'thumb1'.'.'.$fileext; 
+           //   $thumbfile2=$dir_dest.'thumb2'.'.'.$fileext; 
+         //     $thumbfile3=$dir_dest.'thumb3'.'.'.$fileext;
+          //    $thumbfile4=$dir_dest.'thumb4'.'.'.$fileext;
+          //    $thumbfile5=$dir_dest.'thumb5'.'.'.$fileext;
+              
+  
+//         if(copy(homeinfo.'/plugins/showimages.php?width='.'269'.'&height='.'218'.'&source='.homeinfo .'/'.$this->post['folder'].'/'.$filenow,$thumbfile1))
+//                     {
+//                       @chmod($thumbfile1,0777);
+//                     }
+//         if(copy(homeinfo.'/plugins/showimages.php?width='.'176'.'&height='.'95'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile2))
+//                     {
+//                       @chmod($thumbfile2,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'120'.'&height='.'90'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile3))
+//                     {
+//                       @chmod($thumbfile3,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'302'.'&height='.'220'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$thumbfile4))
+//                     {
+//                       @chmod($thumbfile4,0777);
+//                     }
+//          if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'130'.'&source='.homeinfo .'/'. $this->post['folder'].'/'.$filenow,$thumbfile5))
+//                     {
+//                       @chmod($thumbfile5,0777);
+//                     }
+          if(copy(homeinfo .'/'. $this->post['folder'] . '/'.$filenow,$thumbfile6))
+                     {
+                       @chmod($thumbfile6,0777);
+                     }
+         
+                     
+                      $file=fullpathtemp.$this->post['shopurl'].'/'.$this->post['filename'].'.php';
+                     $this->post['width']=$width;
+                     $this->post['height']=$height;
+                     $this->post['action']=$this->post['size'];
+                     $this->post['imageori']=$arraydata['fileorigi'];
+                     $this->post['imagesrc']=$arraydata['filedata'];
+                   //  $this->post['group']=$this->post['qroup']; 
+          
+                    $html=file_get_html($file);
+                    $html->find('div#'.$this->post['action'].'', 0)->innertext='<div style="width: '.$this->post['width'].'px;height: '.$this->post['height'].'px;background-image: url('.homeinfo.'/images/shop_c/'.$this->post['shopurl'].'/resize/'.$this->post['imagesrc'].');background-repeat: no-repeat;-moz-border-radius: 7px;-webkit-border-radius: 7px;border-radius: 7px;">
+          <a class="galleryimg" rel="'.$this->post['group'].'" href="'.homeinfo.'/images/shop_c/'.$this->post['shopurl'].'/'.$this->post['imageori'].'"><img style="opacity:0" alt="'.$this->post['alt'].'"  src="'.homeinfo.'/images/shop_c/'.$this->post['shopurl'].'/resize/'.$this->post['imagesrc'].'"></a></div>';
+                    //$html->find('div[id=textx'.$this->post['action'].']', 0)->innertext=$this->post['alt'];
+                    $fp = fopen($file, 'w');
+                    fwrite($fp, $html);
+                    fclose($fp);
+                     $arraydata['error']=0;
+                     echo array2json($arraydata);
+                  //   $this->getshopbyshopurlformobile();
                      
               } 
            

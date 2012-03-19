@@ -319,15 +319,21 @@ function reportpromotionbyday()
 $(document).ready(function() {
       $('#setbox').scroller('enable').scroller({dateFormat :'yy-mm-dd', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
            var arraydata={};
-           alert(dateText);
+         //  alert(dateText);
   //         arraydata[''+dateText+'']=sid2;
               var webdir=$("#webdir").html();
               $.post(webdir + "/ajax/getpromotionstatbypromoid",{sid:$('#siddata').val(),day:dateText},
                 function(data) {
-                  
-                });
-
-         var line1 = new RGraph.Line('line1', [56,45,43,52,56,65,21,23,34,15,21,12], [35,43,41,41,42,46,42,39,46,41,45,65,54]);
+                   var myObject = eval('(' + data + ')');
+                    var yplot=[];
+                    var xplot=[];
+                    var k=0;
+                    for(var key in myObject) {
+                        yplot[k]=myObject[key];
+                        xplot[k]=key;
+                        k++;
+                    }
+            var line1 = new RGraph.Line('line1', yplot);
             line1.Set('chart.background.grid', true);
             line1.Set('chart.linewidth', 5);
             line1.Set('chart.gutter.left', 35);
@@ -343,10 +349,15 @@ $(document).ready(function() {
             line1.Set('chart.background.grid.autofit.numhlines', 10);
             line1.Set('chart.curvy', 1);
             line1.Set('chart.curvy.factor', 0.25);
-            line1.Set('chart.labels',['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
-            line1.Set('chart.title','A curvy Line chart');
+            line1.Set('chart.labels',xplot);
+            line1.Set('chart.title','ตารางวันที่ '+dateText);
             
             line1.Draw();
+                    
+                    
+                });
+
+
     }});
 });
 // END Promotion
