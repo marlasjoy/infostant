@@ -313,7 +313,40 @@ $.fancybox({
 
 function reportpromotionbyday()
 {
+     $('#setbox').scroller('show');
     
 }
+$(document).ready(function() {
+      $('#setbox').scroller('enable').scroller({dateFormat :'yy-mm-dd', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
+           var arraydata={};
+           alert(dateText);
+  //         arraydata[''+dateText+'']=sid2;
+              var webdir=$("#webdir").html();
+              $.post(webdir + "/ajax/getpromotionstatbypromoid",{sid:$('#siddata').val(),day:dateText},
+                function(data) {
+                  
+                });
 
+         var line1 = new RGraph.Line('line1', [56,45,43,52,56,65,21,23,34,15,21,12], [35,43,41,41,42,46,42,39,46,41,45,65,54]);
+            line1.Set('chart.background.grid', true);
+            line1.Set('chart.linewidth', 5);
+            line1.Set('chart.gutter.left', 35);
+            line1.Set('chart.hmargin', 5);
+
+            if (!document.all || RGraph.isIE9up()) {
+                line1.Set('chart.shadow', true);
+            }
+            line1.Set('chart.tickmarks', null);
+            line1.Set('chart.units.post', 'k');
+            line1.Set('chart.colors', ['red']);
+            line1.Set('chart.background.grid.autofit', true);
+            line1.Set('chart.background.grid.autofit.numhlines', 10);
+            line1.Set('chart.curvy', 1);
+            line1.Set('chart.curvy.factor', 0.25);
+            line1.Set('chart.labels',['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
+            line1.Set('chart.title','A curvy Line chart');
+            
+            line1.Draw();
+    }});
+});
 // END Promotion
