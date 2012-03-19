@@ -427,12 +427,16 @@
       }
       function shop()
       {
-                   $databird['noindexcss']=1;
+       $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
-         $databird['js'][]='mobiscroll-1.5.3.min.js';
+        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css">';
+        $databird['fulljs'][]=homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js';
+        $databird['fulljs'][]=homeinfo.'/js/shop/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js';
+        $databird['js'][]='mobiscroll-1.5.3.min.js';
         $databird['noheader']=1;
         $databird['js'][]='shop.js';
+        $databird['js'][]='RGraph.common.annotate.js';
         $databird['js'][]='RGraph.common.core.js';
         $databird['js'][]='RGraph.line.js';
 
