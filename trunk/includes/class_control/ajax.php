@@ -185,7 +185,7 @@
                    { 
           $this->post['username']=$this->post['setname']; 
 
-          if($this->checkusername(1))
+          if($this->checkusername2(1))
         {
      //       echo "1";
         $username= $this->post['username'];  
@@ -2721,7 +2721,7 @@ $data=$this->db->db_get_recordset();
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
@@ -2780,7 +2780,7 @@ $data=$this->db->db_get_recordset();
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
@@ -2942,7 +2942,7 @@ $data=$this->db->db_get_recordset();
             exit();
         }
        
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
@@ -3137,7 +3137,7 @@ $data=$this->db->db_get_recordset();
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ  หรือ มีตัวอักษรพิเศษ";
             echo array2json($arraydata); 
@@ -4688,7 +4688,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
             echo array2json($arraydata); 
             exit();
         }
-        if(!$this->checkusername(1))
+        if(!$this->checkusername2(1))
         {
             $arraydata['error']=" username ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
             echo array2json($arraydata); 
@@ -4957,7 +4957,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
             echo array2json($arraydata); 
             exit();
         }
-        if($this->checkusername(1))
+        if($this->checkusername2(1))
         {
             $arraydata['error']=' This username already exists or it have a special character such as !@#$ .. etc ';
             echo array2json($arraydata); 
@@ -5197,7 +5197,9 @@ $context = stream_context_create($opts);
       {
               //$shopurl="xn--72czaafnjh5fdb6f6acddb5bh7a30agaddc52afo";
               $shopurl=$this->post['shopurl'];
-          
+//          echo "<pre>";
+//          print_r($this->post);
+//          echo "</pre>";
               if($this->checkuserwithshop($shopurl,$this->post['mid']))
                       {   
                           $this->db->get_connect();
