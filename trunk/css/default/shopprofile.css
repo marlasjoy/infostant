@@ -135,11 +135,11 @@ ul.v > li.icon.member-stamp a{ background: url(images/icon_member-stamp.png) no-
 ul.v > li.icon.member-statistic a{ background: url(images/icon_member-statistic.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 ul.v > li.icon.member-usestamp a{ background: url(images/icon_member-usestamp.png) no-repeat 50% 40% !important; background-size: 48px 48px !important; margin:0;}/*member */
 
- a.thumb{ display:block; width:100px; height: 84px; float:left; margin-right:15px ;}
+ a.thumb{ display:block; width:auto; height: auto; float:left; margin-right:15px ;}
  a.thumb img{  border: 1px solid #C8C8C8;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
     padding: 2px;
-	border-radius: 8px 8px 8px 8px;
+	/*border-radius: 8px 8px 8px 8px;*/
     }
  .subpage > ul.v > li { padding:10px; overflow:hidden; color:#666;}
  .subpage > ul.v.line > li{}
