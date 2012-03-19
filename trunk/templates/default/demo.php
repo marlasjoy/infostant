@@ -75,7 +75,7 @@
             <p>
             <label for=""></label>
               <input class="css3button" type="submit" value="ลงทะเบียน">
-              <input class="css3button2" type="submit" value="เข้าสู่ระบบ">
+              <input class="css3button blue" type="submit" value="เข้าสู่ระบบ">
             </p>
 
         </form>

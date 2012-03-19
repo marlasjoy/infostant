@@ -69,7 +69,7 @@
             <p>
             <label for=""></label>
               <input class="css3button" type="submit" value="Register">
-               <input class="css3button2" type="submit" value="Login">
+               <input class="css3button blue" type="submit" value="Login">
             </p>
 
         </form>

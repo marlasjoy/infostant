@@ -51,13 +51,7 @@ input.css3button:hover {
 
 	
 	
-input.css3button2 {
-	cursor:pointer;
-		margin-top:10px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	color: #ffffff;
-	padding: 5px 13px;
+.blue {
 	background: -moz-linear-gradient(
 		top,
 		#1ea9ba 0%,
@@ -82,7 +76,7 @@ input.css3button2 {
 }
 
 
-input.css3button2:hover {
+.blue:hover {
 	background: -moz-linear-gradient(
 		top,
 		#14a5b6 0%,
