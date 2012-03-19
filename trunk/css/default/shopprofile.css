@@ -38,6 +38,17 @@
 }
 	
 
+#event dt > .button{
+    background: none repeat scroll 0 0 #D9D7D7;
+    border-radius: 3px 3px 3px 3px;
+    color: #555555;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+}
 
 
 #promotionpage .data{ position:relative; font-size:12px; margin:0 0 10px 0; color:#666; min-height:500px;}
@@ -292,8 +303,3 @@ height: 24px;
     padding: 10px;
     width: 24px;
 }
-
-
-
-
-

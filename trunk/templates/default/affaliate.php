@@ -20,7 +20,7 @@
                                     
                   <section id="idshoplist" >
                       <dl id="event">
-                      <dt>Affaliate</dt>
+                      <dt>Affaliate <a class="button" href="">+ Create Shop</a></dt>
                           <dd>
                               <table>
                                   <tbody><?=$this->data['tableshop'];?></tbody>
