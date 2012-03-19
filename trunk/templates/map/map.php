@@ -92,7 +92,7 @@ function initialize()
    directionsDisplay = new google.maps.DirectionsRenderer();   
   var myOptions = {
     zoom: <?=$this->data['zoom']?>,
-    center: new google.maps.LatLng(<?=$this->data['flood']['latnew']?>, <?=$this->data['flood']['lngnew']?>),
+    center: new google.maps.LatLng(13.70803, 100.58311),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
    map = new google.maps.Map(document.getElementById("map_canvas"),

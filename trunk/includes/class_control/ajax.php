@@ -1224,6 +1224,8 @@ $data=$this->db->db_get_recordset();
           {
             $_COOKIE['userid']=$this->post['mid'];  
           }
+          $this->post['filename']="index_th.php";
+          $this->post['target']="video";
           if($this->checkuserwithshop($this->post['shopurl'],$this->post['mid']))
           {
               
@@ -5599,7 +5601,8 @@ where tb_shop.shopurl="'.$shopurl.'"');
            //   $resize2='200x128';       
             //  $newfile2=$dir_dest.$filename.$resize2.'.'.$fileext;
               $thumbfile6=$dir_dest.'original'.'.'.$fileext; 
-
+   
+          $this->post['filename']="index_th";
           
                //list($width,$height)= explode("x",$resize);
            //  if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'128'.'&source='.homeinfo.'/'.$this->post['folder'].'/'.$filenow,$newfile2))
@@ -6129,6 +6132,63 @@ where tb_shop.shopurl="'.$shopurl.'"');
            $sid=$this->post['sid'];
            
        }
+       /*   member function  */
+       function getmember()
+       {
+           if($this->post['sid'])
+           {
+               $this->db->get_connect();
+               $sql="SELECT
+tb_member.username,
+tb_member.pic,
+tb_member.email,
+tb_member.tel,
+tb_member.`name`,
+tb_fav.faid
+FROM
+tb_fav
+INNER JOIN tb_member ON tb_fav.mid = tb_member.mid
+where tb_fav.sid=".$this->post['sid']."
+";
+           $this->db->db_set_recordset($sql);
+           $arraydata=$this->db->db_get_recordset();
+           $k=0;
+           if(count($arraydata))
+           {
+           foreach($arraydata as $valuedata)
+           {
+               if($valuedata['pic'])
+               { 
+                   if(!is_file(rootpath.'/images/user_c/'.$valuedata['username'].'/avatar100x80.jpg'))
+                   {
+                       $thumbfile7=fullpathimages2.$valuedata['username'].'/avatar100x80.jpg';  
+                         if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/user_c/'. $valuedata['username'] . '/'.$valuedata['pic'],$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $arraydata[$k]['pic']='avatar100x80.jpg'; 
+                     } 
+                   }else
+                   {
+                       $arraydata[$k]['pic']='avatar100x80.jpg'; 
+                   }
+               
+               }else
+               {
+                   
+               }
+               
+               $k++;
+           }
+           }
+           $this->db->destory();
+           $this->db->closedb();
+           
+           echo   array2json($arraydata);
+           exit();
+           
+           }
+       }
+       /*  end  member function  */
        
        /*   promotion function  */
        function getmemberpromotionbypromoid()
@@ -6259,11 +6319,15 @@ where tb_promotion_member.sid=".$this->post['sid']."
            }    
            else if($this->post['month'])
            {
+               list($year,$month)=explode("-",$this->post['month']) ;
+               $this->post['year']=$year;
+               $this->post['month']=$month;
+               
                $num = cal_days_in_month(CAL_GREGORIAN, $this->post['month'], $this->post['year']);
                $starttime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.'01'.' '.'00:00:00';
                $endtime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.sprintf("%02d",$num).' '.'23:59:59';
                
-               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';  
+               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN \''.$starttime.'\' AND \''.$endtime.'\' order by createdate asc  ';  
              $this->db->db_set_recordset($sql);
              $data=$this->db->db_get_recordset();
              if($data['0']['promo_memid'])
@@ -6302,10 +6366,12 @@ where tb_promotion_member.sid=".$this->post['sid']."
            } 
             else if($this->post['year'])
            {
+                list($year,$month)=explode("-",$this->post['year']) ;
+               $this->post['year']=$year;
                $starttime=$this->post['year'].'-'.'01'.'-'.'01'.' '.'00:00:00';
                $endtime=$this->post['year'].'-'.'12'.'-'.'31'.' '.'23:59:59';
                
-               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';    
+               $sql="select promo_memid,createdate from tb_promotion_member where sid=".$this->post['sid'].' and  createdate BETWEEN \''.$starttime.'\' AND \''.$endtime.'\' order by createdate asc  ';    
               $this->db->db_set_recordset($sql);
               $data=$this->db->db_get_recordset();
               

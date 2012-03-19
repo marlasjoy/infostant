@@ -163,6 +163,42 @@ function openmember()
 {
     $('#idshopmenu').toggle('slow');
    $('#idmember').toggle('slow');
+     if($('#idmember').css('display')!= 'none')
+  {
+       callmember();
+  }
+}
+function callmember()
+{
+    $('.v.line').html('');
+    var webdir=$("#webdir").html();
+    $.post(webdir+'/ajax/getmember',{sid:$('#siddata').val()} ,function(data) {
+    var myObject = eval('(' + data + ')');    
+    var str='';
+    
+               for(var key in myObject) {
+                     var obj = myObject[key];
+                   if(obj.tel===null)
+                   {
+                       var tel='';
+                   }else
+                   {
+                       var tel=obj.tel;
+                   }
+                   
+                   if(obj.pic===null)
+                   {
+                       var pic=webdir+'/images/default/no-image/100-80.jpg';
+                   }else
+                   {
+                       var pic=webdir+'/images/user_c/'+obj.username+'/'+obj.pic;
+                   }
+                   str+='<li><a href="'+pic+'" class="thumb"><img  src="'+pic+'" alt="tesry"></a><strong>'+obj.username+'</strong><br>Tel. '+tel+'<br>Email, '+obj.email+'</li>';
+                   
+               }
+    $('.v.line').html(str);
+            
+    });
 }
 
 // END PROMOTION SUBPAGE
@@ -310,11 +346,30 @@ $.fancybox({
 'href':$("#homeinfo").html()+'/manage/write'+content+'promotion/'+content+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
 });
 } 
-
+var choosetime="day";
 function reportpromotionbyday()
 {
+     choosetime="day";
      $('#setbox').scroller('show');
     
+}
+function reportpromotionbymonth()
+{
+     choosetime="month";
+     $('#setbox').scroller('show');
+    
+}
+function reportpromotionbyyear()
+{
+     choosetime="year";
+     $('#setbox').scroller('show');
+    
+}
+function ClearAndRedraw (obj)
+{
+    RGraph.ClearAnnotations(obj.canvas);
+    RGraph.Clear(obj.canvas);
+    obj.Draw();
 }
 $(document).ready(function() {
       $('#setbox').scroller('enable').scroller({dateFormat :'yy-mm-dd', theme: 'sense-ui', mode: 'clickpick',onSelect: function(dateText, inst) {
@@ -322,7 +377,7 @@ $(document).ready(function() {
          //  alert(dateText);
   //         arraydata[''+dateText+'']=sid2;
               var webdir=$("#webdir").html();
-              $.post(webdir + "/ajax/getpromotionstatbypromoid",{sid:$('#siddata').val(),day:dateText},
+              $.post(webdir + "/ajax/getpromotionstatbypromoid",'sid='+$('#siddata').val()+'&'+choosetime+'='+dateText,
                 function(data) {
                    var myObject = eval('(' + data + ')');
                     var yplot=[];
@@ -343,7 +398,7 @@ $(document).ready(function() {
                 line1.Set('chart.shadow', true);
             }
             line1.Set('chart.tickmarks', null);
-            line1.Set('chart.units.post', 'k');
+            line1.Set('chart.units.post', 'คน');
             line1.Set('chart.colors', ['red']);
             line1.Set('chart.background.grid.autofit', true);
             line1.Set('chart.background.grid.autofit.numhlines', 10);
@@ -351,8 +406,10 @@ $(document).ready(function() {
             line1.Set('chart.curvy.factor', 0.25);
             line1.Set('chart.labels',xplot);
             line1.Set('chart.title','ตารางวันที่ '+dateText);
+            ClearAndRedraw(line1);
+           // line1.Draw();
             
-            line1.Draw();
+         //   RGraph.Clear(line1);
                     
                     
                 });
