@@ -20,7 +20,7 @@
                                     
                   <section id="idshoplist" >
                       <dl id="event">
-                      <dt>Affaliate <a class="button" href="">+ Create Shop</a></dt>
+                      <dt>Affaliate <a class="button" href="http://www.infostant.com/registershop">+ Create Shop</a></dt>
                           <dd>
                               <table>
                                   <tbody><?=$this->data['tableshop'];?></tbody>
