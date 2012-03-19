@@ -148,18 +148,14 @@ function myMarkers(map,mylocation,locations)
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
       new google.maps.Point(0, 20));
-    var shape = {
-      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
-      type: 'poly'
-  };   
+
    // var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
     var marker = new google.maps.Marker({
         position: mylocation,
         map: map,
         icon: image,
-        shape: shape,
         title: 'คุณอยู่ที่นี่',
-        zIndex: 10
+        zIndex: 100000
     });
     
     google.maps.event.addListener(marker, 'click', function() {
@@ -219,7 +215,7 @@ function setMarkers(map, locations) {
   var dataset=myObject[1]; 
   var image = new google.maps.MarkerImage('<?=homeinfo?>/images/default/icons/'+dataset.icon,
       // This marker is 20 pixels wide by 32 pixels tall.
-      new google.maps.Size(dataset.width, dataset.height),
+      new google.maps.Size(38, 46),
       // The origin for this image is 0,0.
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
@@ -246,7 +242,6 @@ function setMarkers(map, locations) {
         position: myLatLng,
         map: map,
         icon: image,
-        shape: shape,
         title: beach[0],
         zIndex: beach[3]
     });

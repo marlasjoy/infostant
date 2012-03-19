@@ -47,7 +47,7 @@ infowindow.open(map,marker);
       var myLatlng = new google.maps.LatLng(parseFloat(lat),  parseFloat(lng));
                var image = new google.maps.MarkerImage($("#homeinfo").html()+'/images/default/icons/'+$('#icon').html(),
       // This marker is 20 pixels wide by 32 pixels tall.
-      new google.maps.Size($('#width').html(), $('#height').html()),
+      new google.maps.Size(38, 46),
       // The origin for this image is 0,0.
       new google.maps.Point(0,0),
       // The anchor for this image is the base of the flagpole at 0,32.
