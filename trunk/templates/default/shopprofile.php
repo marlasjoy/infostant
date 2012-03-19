@@ -332,9 +332,16 @@
                    </section>
                    
                    <section id="idpromotion-statistic" style="display: none;" >
-                        <dl>
-                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_statistic()">back</a>Statistic</h2></dt>  
-                       Graph              
+                   <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:promotiom_statistic()">back</a>Report</h2></dt>   
+                          <div  id="shopmenu">
+                                    <ul class="v">   
+                                        <li class="icon member-card"><a href="javascript:reportpromotionbyday()"><span>By Day</span></a></li>
+                                        <li class="icon member-list"><a href="javascript:reportpromotionbymonth()"><span>By Month</span></a></li>
+                                        <li class="icon member-stamp"><a href="javascript:reportpromotionbyyear()"><span>By Year</span></a></li>
+
+                                    </ul>
+                                </div> <!-- #shopmenu end -->                   
                       </dl>
 					</section>
                     
@@ -347,18 +354,18 @@
                     <section id="idpromotion-use" style="display: none;" >
                         <dl>
                        <dt><h2 class="bar"><a class="back" href="javascript:promotiom_use()">back</a>Use Promotion</h2></dt>    
-                       <form method="post" action="" id="dummy">
+                       <form method="post" action="" onsubmit="callpromotionuse()" id="dummy">
                         
                        
 
                             <div style="padding:20px 40px;">  
                                 <p>
                                   <label for="dummy1">Infostant ID</label><br>
-                                  <input type="text" value="" name="dummy1" id="dummy1" class="text" >
+                                  <input type="text" value="" name="infid" id="infid" class="text" >
                                 </p>
                                 
                                 <p>
-                                  <input type="submit" value="Submit">
+                                  <input type="button" onclick="callpromotionuse()" class="submit" value="Submit">
                                   <input type="reset" value="Reset">
                                 </p>
                     
