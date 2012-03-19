@@ -58,6 +58,7 @@ function revertDate($date){
             return $day." ".$month_array[$month]." ".$year.'  '.$time;
         }
     }
+    
 function revertDate3($date){
         $month_array = array("01"=>"มกราคม","02"=>"กุมภาพันธ์","03"=>"มีนาคม","04"=>"เมษายน","05"=>"พฤษภาคม","06"=>"มิถุนายน","07"=>"กรกฎาคม","08"=>"สิงหาคม","09"=>"กันยายน","10"=>"ตุลาคม","11"=>"พฤศจิกายน","12"=>"ธันวาคม");
         list($year, $month, $day) = explode("-",$date);
@@ -359,6 +360,19 @@ function date_diff($d1, $d2) {
         return true;
     }
 } 
+  function checkarraydatabettween($arraydata,$value1,$value2)
+  {
+      $arraytime=array();
+      foreach($arraydata as $valuedata)
+      {
+          if($valuedata>=$value1&&$value2>=$valuedata)
+          {
+              $arraytime[]=$valuedata;
+          }
+          
+      }
+      return $arraytime;
+  }
   function array2json($arr) 
   {
     if(function_exists('json_encode')) return json_encode($arr); //Lastest versions of PHP already has this functionality.

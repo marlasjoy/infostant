@@ -234,7 +234,7 @@
          if($this->info['target']=="promotion")$databird['folder']='/images/shop_c/'.$databird['shopurl'].'/promotion';   
            
            $this->set_data($databird);   
-           $this->load('writedescriptionpromotion');   
+           $this->load('writetitlepromotion');   
               
           }
       }

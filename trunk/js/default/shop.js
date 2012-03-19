@@ -135,6 +135,10 @@ function promotiom_member()
 {
    $('#idpromotionmenu').toggle('slow');
    $('#idpromotion-member').toggle('slow');
+   if($('#idpromotion-member').css('display')!= 'none')
+  {
+       callpromotionmember();
+  }
 }
 function promotiom_statistic()
 {
@@ -145,6 +149,7 @@ function promotiom_use()
 {
    $('#idpromotionmenu').toggle('slow');
    $('#idpromotion-use').toggle('slow');
+
 }
 
 // END PROMOTION SUBPAGE
@@ -162,10 +167,68 @@ function openmember()
 
 // END PROMOTION SUBPAGE
 
+// Promotion
 
-
-
-
+function isInt(x) 
+{
+  
+  return (x % 1) == 0;
+}
+function callpromotionuse()
+{
+     
+    if(($("#infid").val()=="")||(!isInt($("#infid").val())))
+    {
+        alert('โปรดกรอกเป็นตัวเลขเท่านั้น');
+        return false;
+    }
+    
+    var webdir=$("#webdir").html();
+    var mid=$("#infid").val()-10000;
+    $.post(webdir+'/ajax/savepromotionbymid',{sid:$('#siddata').val(),mid:mid} ,function(data) {
+        var myObject = eval('(' + data + ')');    
+         if(myObject.error)
+               {
+                   alert(myObject.error);
+               }else{
+                   alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+               }
+        return false;
+    });
+    return false;
+}
+function callpromotionmember()
+{
+    $('.v.line').html('');
+    var webdir=$("#webdir").html();
+    $.post(webdir+'/ajax/getmemberpromotionbypromoid',{sid:$('#siddata').val()} ,function(data) {
+    var myObject = eval('(' + data + ')');    
+    var str='';
+    
+               for(var key in myObject) {
+                     var obj = myObject[key];
+                   if(obj.tel===null)
+                   {
+                       var tel='';
+                   }else
+                   {
+                       var tel=obj.tel;
+                   }
+                   
+                   if(obj.pic===null)
+                   {
+                       var pic=webdir+'/images/default/no-image/100-80.jpg';
+                   }else
+                   {
+                       var pic=webdir+'/images/user_c/'+obj.username+'/'+obj.pic;
+                   }
+                   str+='<li><a href="'+pic+'" class="thumb"><img  src="'+pic+'" alt="tesry"></a><strong>'+obj.username+'</strong><br>Tel. '+tel+'<br>Email, '+obj.email+'</li>';
+                   
+               }
+    $('.v.line').html(str);
+            
+    });
+}
 function callpromotion()
 {
       var webdir=$("#webdir").html();
@@ -179,6 +242,7 @@ function callpromotion()
                    
                 //   alert('บันทึกข้อมูลเรียบร้อยแล้ว');
                   // location.href='http://'+myObject.shopurl+'.'+subdir;
+
                   if(myObject[0].pic1)
                   {
                       
@@ -196,6 +260,17 @@ function callpromotion()
                  {
                      
                      $('#100x100x3').html('<img src="'+webdir+'/images/shop_c/'+$('#shopurldata').val()+'/promotion/resize/'+myObject[0].pic3+'">');
+                 }
+                 
+                  if(myObject[0].title)
+                 {
+                     $('#title').removeClass("nocontenttitle").addClass("contenttitle");
+                     $('#title').html(myObject[0].title);
+                 }
+                  if(myObject[0].description)
+                 {
+                     $('#description').removeClass("nocontentdescription").addClass("contentdescription");
+                     $('#description').html(myObject[0].description);
                  }
                   
                }
@@ -220,7 +295,6 @@ $.fancybox({
 'href':$("#homeinfo").html()+'/manage/imagepromotion/'+code+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
 });
 } 
-
 function changecontent(content)
 {
 
@@ -236,3 +310,10 @@ $.fancybox({
 'href':$("#homeinfo").html()+'/manage/write'+content+'promotion/'+content+'/promotion/'+$("#shopurldata").val()+'/'+$('#siddata').val()
 });
 } 
+
+function reportpromotionbyday()
+{
+    
+}
+
+// END Promotion

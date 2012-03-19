@@ -2523,7 +2523,7 @@ $data=$this->db->db_get_recordset();
 
            
        }
-       
+
        function checkusername($noecho="")
        {
           $role=$this->rolearray ;  
@@ -3061,27 +3061,7 @@ $data=$this->db->db_get_recordset();
         
 
        }
-       function getpromotion()
-       {
-             
-             $this->db->get_connect(); 
-             $this->db->db_set_recordset('select *  from tb_promotion where sid='.$this->post['sid']);
-             $arraydata=$this->db->db_get_recordset();
-           
-             $this->db->destory();
-             $this->db->closedb();
-              if($arraydata['0']['promoid'])
-              {
-              $arraydata['error']=0;
-             echo array2json($arraydata); 
-              }else
-              {
-                $arraydata['error']=1;
-             echo array2json($arraydata);   
-              }
 
-           
-       }
        function saveregister()
        {
           
@@ -5951,6 +5931,515 @@ where tb_shop.shopurl="'.$shopurl.'"');
            $sid=$this->post['sid'];
            
        }
-      
+       
+       /*   promotion function  */
+       function getmemberpromotionbypromoid()
+       {
+           if($this->post['sid'])
+           {
+               $this->db->get_connect();
+               $sql="SELECT
+tb_promotion_member.promo_memid,
+tb_member.username,
+tb_member.pic,
+tb_member.email,
+tb_member.tel,
+tb_member.`name`
+FROM
+tb_promotion_member
+INNER JOIN tb_member ON tb_promotion_member.mid = tb_member.mid
+where tb_promotion_member.sid=".$this->post['sid']."
+";
+           $this->db->db_set_recordset($sql);
+           $arraydata=$this->db->db_get_recordset();
+           $k=0;
+           foreach($arraydata as $valuedata)
+           {
+               if($valuedata['pic'])
+               { 
+                   if(!is_file(rootpath.'/images/user_c/'.$valuedata['username'].'/avatar100x80.jpg'))
+                   {
+                       $thumbfile7=fullpathimages2.$valuedata['username'].'/avatar100x80.jpg';  
+                         if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/user_c/'. $valuedata['username'] . '/'.$valuedata['pic'],$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $arraydata[$k]['pic']='avatar100x80.jpg'; 
+                     } 
+                   }else
+                   {
+                       $arraydata[$k]['pic']='avatar100x80.jpg'; 
+                   }
+               
+               }else
+               {
+                   
+               }
+               
+               $k++;
+           }
+           $this->db->destory();
+           $this->db->closedb();
+           
+           echo   array2json($arraydata);
+           exit();
+           
+           }
+       }
+       function getpromotionstatbypromoid()
+       {
+           
+     
+           
+          if($this->post['promoid']&&$this->post['sid'])
+           {
+               $this->db->get_connect();  
+           if($this->post['day'])
+           {
+               $value1=$this->post['day']." 00:00:00";
+               $value2=$this->post['day']." 23:59:59";
+             
+             $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and createdate BETWEEN '.$value1.' AND '.$value2.' order by createdate asc  ';  
+             $this->db->db_set_recordset($sql);
+             $data=$this->db->db_get_recordset();
+             if($data['0']['promo_memid'])
+             {
+                  $arraydatatime=array();
+                 foreach($data as $value)
+                 {
+                    $arraydatatime[]=strtotime($value['createdate']) ;
+                 }
+                // checkarraydatabettween($arraydatatime,$value1,$value2);
+                 
+                 $time='0';
+                 $starttime=$this->post['day']." ".sprintf("%02d",$time).':00:00';
+                 $endtime=$this->post['day']." ".sprintf("%02d",$time+2).':59:59';
+                 $datatime=checkarraydatabettween($arraydatatime,strtotime($starttime),strtotime($endtime));
+                 $arraydata[sprintf("%02d",$time).":00"]=count($datatime);
+
+                 for($i=0;$i<8;$i++)
+                 {
+                     
+                     
+                     
+                     $time=$time+3;
+                     $starttime=$this->post['day']." ".sprintf("%02d",$time).':00:00';
+                     $endtime=$this->post['day']." ".sprintf("%02d",$time+2).':59:59';
+                     $datatime=checkarraydatabettween($arraydatatime,strtotime($starttime),strtotime($endtime));
+                     $arraydata[sprintf("%02d",$time).":00"]=count($datatime);
+
+                 }
+                 
+                 
+                 
+                 
+             }else
+             {
+                 $time='0';
+                 $starttime=sprintf("%02d",$time).':00';
+                 $arraydata[$starttime]=0;
+
+                 for($i=0;$i<8;$i++)
+                 {
+                     
+                     
+                     
+                     $time=$time+3;
+                     $starttime=sprintf("%02d",$time).':00';
+                     $arraydata[$starttime]=0;
+
+                 }
+                 
+             
+             
+             
+             
+             }
+             $this->db->destory();
+             
+               
+           }    
+           else if($this->post['month'])
+           {
+               $num = cal_days_in_month(CAL_GREGORIAN, $this->post['month'], $this->post['year']);
+               $starttime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.'01'.' '.'00:00:00';
+               $endtime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.sprintf("%02d",$num).' '.'23:59:59';
+               
+               $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';  
+             $this->db->db_set_recordset($sql);
+             $data=$this->db->db_get_recordset();
+             if($data['0']['promo_memid'])
+             {
+                 $arraydatatime=array();
+                 foreach($data as $value)
+                 {
+                    $arraydatatime[]=strtotime($value['createdate']) ;
+                 }
+                 for($i=0;$i<$num;$i++)
+                 {
+                     
+                     $k=$i+1;
+                     $starttime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.sprintf("%02d",$k).' '.'00:00:00';
+                     $endtime=$this->post['year'].'-'.sprintf("%02d",$this->post['month']).'-'.sprintf("%02d",$k).' '.'23:59:59';
+                     
+                     $datatime=checkarraydatabettween($arraydatatime,strtotime($starttime),strtotime($endtime));
+                    // $starttime=sprintf("%02d",$time).':00';
+                     $arraydata[$k]=count($datatime);
+
+                 }
+             }else
+             {
+                  for($i=0;$i<$num;$i++)
+                 {
+                     
+                     
+                     
+                     $k=$i+1;
+                    // $starttime=sprintf("%02d",$time).':00';
+                     $arraydata[$k]=0;
+
+                 }
+             }
+               
+           } 
+            else if($this->post['year'])
+           {
+               $starttime=$this->post['year'].'-'.'01'.'-'.'01'.' '.'00:00:00';
+               $endtime=$this->post['year'].'-'.'12'.'-'.'31'.' '.'23:59:59';
+               
+               $sql="select promo_memid,createdate from tb_promotion_member where promoid=".$this->post['promoid'].' and  createdate BETWEEN '.$starttime.' AND '.$endtime.' order by createdate asc  ';    
+              $this->db->db_set_recordset($sql);
+              $data=$this->db->db_get_recordset();
+              
+              if($data['0']['promo_memid'])
+             {
+                 $arraydatatime=array();
+                 foreach($data as $value)
+                 {
+                    $arraydatatime[]=strtotime($value['createdate']) ;
+                 }
+                 for($i=0;$i<12;$i++)
+                 {
+                     
+                     $k=$i+1;
+                     $num = cal_days_in_month(CAL_GREGORIAN, $k, $this->post['year']);
+                     $starttime=$this->post['year'].'-'.sprintf("%02d",$k).'-'.'01'.' '.'00:00:00';
+                     $endtime=$this->post['year'].'-'.sprintf("%02d",$k).'-'.$num.' '.'23:59:59';
+                     
+                     $datatime=checkarraydatabettween($arraydatatime,strtotime($starttime),strtotime($endtime));
+                    // $starttime=sprintf("%02d",$time).':00';
+                     $arraydata[$k]=count($datatime);
+
+                 }
+             }else
+             {
+                  for($i=0;$i<12;$i++)
+                 {
+                     
+                     
+                     
+                     $k=$i+1;
+                    // $starttime=sprintf("%02d",$time).':00';
+                     $arraydata[$k]=0;
+
+                 }
+             }
+           
+           
+           } 
+           
+             $this->db->closedb();
+             echo   array2json($arraydata);
+             exit();
+           
+           }
+       }
+       function savepromotionbymid()
+       {
+           if($this->post['mid']&&$this->post['sid'])
+           {
+           $this->db->get_connect();
+           
+           $sql="select promoid from tb_promotion where sid=".$this->post['sid'];
+           $this->db->db_set_recordset($sql);
+           $data2=$this->db->db_get_recordset();
+           $this->db->destory();
+           if($data2['0']['promoid'])
+           {
+           
+           $sql="select mid from tb_member where mid=".$this->post['mid'];
+           $this->db->db_set_recordset($sql);
+           $data3=$this->db->db_get_recordset();
+           $this->db->destory(); 
+           
+           if($data3['0']['mid'])   
+           {
+           
+           
+           $sql="select promo_memid from tb_promotion_member where promoid=".$data2['0']['promoid'].' and mid='.$data3['0']['mid'].' and sid='.$this->post['sid'];
+           $this->db->db_set_recordset($sql);
+           $data=$this->db->db_get_recordset();
+           $this->db->destory();
+           if($data['0']['promo_memid'])
+           {
+               $arraydata['error']="มี user นี้แล้ว";
+
+           }else
+           {
+               $datapromotion['promoid']=$data2['0']['promoid'];
+               $datapromotion['mid']=$data3['0']['mid'];
+               $datapromotion['sid']=$this->post['sid'];
+               $datapromotion['createdate']=date("Y-m-d H:i:s");
+               $datapromotion['updatedate']=date("Y-m-d H:i:s");
+               $this->db->db_set($datapromotion,'tb_promotion_member');
+               $arraydata['error']=0;
+               
+           }
+           }else
+           {
+               $arraydata['error']="ไม่มี user ในระบบ";
+           }
+           
+           
+           }
+           else
+           {
+           $arraydata['error']= "ท่านยังไม่ได้ create promotion";   
+
+           }
+          $this->db->destory();
+          $this->db->closedb();
+          echo   array2json($arraydata);
+          exit();
+           }
+       
+       }
+       function getmembershopbysid()
+       {
+                 if($this->post['sid'])
+           {
+               $this->db->get_connect();
+               $sql="SELECT
+               tb_member.username,
+               tb_member.pic,
+               tb_member.email,
+               tb_member.tel,
+               tb_member.`name`
+               FROM
+               tb_fav
+               INNER JOIN tb_member ON tb_fav.mid = tb_member.mid
+               where tb_fav.sid=".$this->post['sid']."
+";
+           $this->db->db_set_recordset($sql);
+           $arraydata=$this->db->db_get_recordset();
+           $this->db->destory();
+           $this->db->closedb();
+           
+           echo   array2json($arraydata);
+           exit();
+           
+           }
+       }
+              function getpromotion()
+       {
+             
+             $this->db->get_connect(); 
+             $this->db->db_set_recordset('select *  from tb_promotion where sid='.$this->post['sid']);
+             $arraydata=$this->db->db_get_recordset();
+           
+             $this->db->destory();
+             $this->db->closedb();
+              if($arraydata['0']['promoid'])
+              {
+              $arraydata['error']=0;
+             echo array2json($arraydata); 
+              }else
+              {
+                $arraydata['error']=1;
+             echo array2json($arraydata);   
+              }
+
+           
+       }
+       
+        /*  end  stamp function  */
+        function savetextstamp()
+        {
+            if($this->post['sid']&&$this->post['target']&&$this->post['value'])
+            {
+                $this->db->get_connect();
+                $sql="SELECT
+tb_stamp.stampid
+FROM
+tb_stamp
+where sid=".$this->post['sid']."
+";
+           $this->db->db_set_recordset($sql);
+           $data=$this->db->db_get_recordset();
+           $datastamp['updatedate']=date("Y-m-d H:i:s");
+           $datastamp[$this->post['target']]=$this->post['value'];
+           if($data['0']['stampid'])
+           {
+               $this->db->db_set($datastamp,'tb_stamp','where stampid='.$data['0']['stampid']);
+               $arraydata['error']=0;  
+
+           }else
+           {
+               
+
+               $datastamp['sid']=$this->post['sid'];
+               $datastamp['createdate']=date("Y-m-d H:i:s");
+
+               $this->db->db_set($datastamp,'tb_stamp');
+               $arraydata['error']=0;
+               
+           }
+           $this->db->destory();
+           $this->db->closedb();
+
+            }
+        
+        echo   array2json($arraydata);
+          exit();
+        }
+        
+        function savestamp()
+        {
+          if($this->post['stampid']&&$this->post['count']&&$this->post['mid'])
+          {
+           $this->db->get_connect();
+           $arraydata['stampid']=$this->post['stampid'];
+           $arraydata['mid']=$this->post['mid'];
+           $arraydata['status']=0;
+           $arraydata['createdate']=date("Y-m-d H:i:s");
+           $arraydata['updatedate']=date("Y-m-d H:i:s");
+           for($i=0;$i<$this->post['count'];$i++)
+           {
+            $this->db->db_set($arraydata,'tb_substamp');  
+           }
+           if(count($this->post['text2'])&&$this->post['text2'])
+           {
+              $this->db->db_delete('
+          DELETE
+          FROM
+          tb_stamprelate
+          where tb_stamprelate.stampid="'.$this->post['stampid'].'" and tb_stamprelate.mid="'.$this->post['mid'].'" 
+           ');
+               $k=0;
+               $arraystamprelate['mid']=$this->post['mid'];
+               $arraystamprelate['stampid']=$this->post['stampid'];
+               $arraystamprelate['createdate']=date("Y-m-d H:i:s");
+               foreach($this->post['text1'] as $valuetext1)
+               {
+                   $valuetext2=$this->post['text2'][$k];
+                   $arraystamprelate['text1']=$valuetext1;
+                   $arraystamprelate['text2']=$valuetext2;
+                   
+                   $this->db->db_set($arraystamprelate,'tb_stamprelate');  
+                   
+                   
+                   $k++;  
+               }
+
+                
+           }
+           
+           $arraydata['error']=0;
+           
+           $this->db->destory();
+           $this->db->closedb();
+           echo   array2json($arraydata);
+          exit();
+          }  
+        }
+        
+        function usestamp()
+        {
+          if($this->post['stampid']&&$this->post['count'])
+          {
+           $this->db->get_connect();
+            $sql="SELECT
+            tb_substamp.substampid
+            FROM
+            tb_substamp
+            where stampid=".$this->post['stampid']." and tb_substamp.mid=".$this->post['mid']." and tb_substamp.status=0 order by tb_substamp.createdate desc limit 0,".$this->post['count'];
+           $this->db->db_set_recordset($sql);
+           $data=$this->db->db_get_recordset();
+           $this->db->destory();
+           if(count($data)==$this->post['count'])
+           {
+         //  $arraydata['stampid']=$this->post['stampid'];
+         //  $arraydata['mid']=$this->post['mid'];
+           $arraydata['status']=1;
+       //    $arraydata['createdate']=date("Y-m-d H:i:s");
+           $arraydata['updatedate']=date("Y-m-d H:i:s");
+           foreach($data as $valuedata)
+           {
+            $this->db->db_set($arraydata,'tb_substamp',' substampid='.$valuedata['substampid']);  
+           }
+           $arraydata['error']=0;
+           
+           }else
+           {
+            $arraydata['error']="stamp มีไม่พอตัด";   
+           }
+           $this->db->destory();
+           $this->db->closedb();
+           echo   array2json($arraydata);
+           exit();
+          }  
+        }
+        function setsettingstamp()
+        {
+           if($this->post['stampid']&&$this->post['total']&&$this->post['stamp'])
+          {
+            $this->db->get_connect();
+            $sql="SELECT
+            tb_setstamp.setstampid
+            FROM
+            tb_setstamp
+            where stampid=".$this->post['stampid']." ";
+           $this->db->db_set_recordset($sql);
+           $data=$this->db->db_get_recordset();
+           $this->db->destory();
+           $arraydatasetting['updatedate']=date("Y-m-d H:i:s");
+           $arraydatasetting['total']= $this->post['total'];
+           $arraydatasetting['stamp']= $this->post['stamp'];
+           if($data['0']['setstampid'])
+           {
+             $this->db->db_set($arraydatasetting,'tb_setstamp',' setstampid='.$valuedata['setstampid']);   
+             $setstampid=$data['0']['setstampid'];
+           }else
+           {
+              $this->db->db_set($arraydatasetting,'tb_setstamp');  
+              $setstampid=$this->db->db_get_last_number();  
+           }
+           if(count($this->post['text'])&&$this->post['text'])
+           {
+               $sort=1;       
+               $this->db->db_delete('
+          DELETE
+          FROM
+          tb_subsetstamp
+          where tb_subsetstamp.setstampid="'.$setstampid.'"
+           ');
+               $arraydatasubsetting['setstampid']=$setstampid;
+               foreach($this->post['text'] as $value)
+               {
+                   $arraydatasubsetting['text']=$value;
+                   $this->db->db_set($arraydatasubsetting,'tb_subsetstamp');  
+               }
+           }
+           
+           
+           $arraydata['error']=0;
+           $this->db->closedb();
+           echo   array2json($arraydata);
+          exit();
+          
+          } 
+            
+        }
+        /*   stamp function  */
+       
   }
 ?>
