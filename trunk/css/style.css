@@ -216,12 +216,39 @@ header > nav p { margin: 0; }
 header > nav a { color: #723e00; text-decoration: none; display: inline-block; padding: 0 5px;  }
 header > nav a:hover { color: #723e00; text-decoration: underline; }
 
-#login { position: absolute; right: 0; top: 22px; }
+#login { position: absolute; right: 0; top: 10px; }
 #login p { margin: 0; white-space: nowrap; }
 #login p:nth-child(2) { text-align: right; margin-top: 5px; color: #aaa; }
 #login p:nth-child(2) img { position: relative; top: -2px;  }
 #login input[type=text], #login input[type=password] { width: 84px; height: 23px; padding: 2px 5px 0; background: url(../images/bg-input1.png) no-repeat left top; border: none; margin-right: 3px;}
 #login input[value=LOGIN] { width: 63px; height: 25px; background: url(../images/btn-login.png) no-repeat; display: inline-block; position: relative; top: -1px; }
+
+#login  .subpage{ width:300px;}
+#login  .subpage > ul.v > li { padding:10px; overflow:hidden; color:#666;}
+ #login .subpage > ul.v.line > li{}
+ #login .subpage > ul.v.line > li:nth-child(2n-1) {background: none repeat scroll 0 0 #F4F4F4;}
+ #login .subpage > ul.v > li strong a{ color:#333; font-size:14px;}
+ #login a.thumb{ display:block; width:auto; height: auto; float:left; margin-right:15px ;}
+ #login a.thumb img{  border: 1px solid #C8C8C8;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 2px;
+	/*border-radius: 8px 8px 8px 8px;*/
+    }
+	
+	#login .button {
+    background: none repeat scroll 0 0 #D9D7D7;
+    border-radius: 3px 3px 3px 3px;
+    color: #555555;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+}
+ 
+ 
+ 
 .placeholder { position: relative; }
 .placeholder label { position: absolute; left: 5px; top: 0; color: #807f7e; z-index: 5;  }
 

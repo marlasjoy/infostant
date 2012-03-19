@@ -51,6 +51,7 @@ foreach($this->data['option'] as $value){ ?>
                    <? if(empty($_COOKIE['userlogin'])){ ?>
                      <form name="login" method="post" action="<?=homeinfo?>/ajax/loginuser">     
               <section id="login">
+              
                   <p>    
                       <span class="placeholder"><label for="input-username"></label> <input type="text" name="username" id="input-username" /></span>
                       <span class="placeholder"><label for="input-password"></label> <input type="password" name="password" id="input-password" /></span>
@@ -67,7 +68,23 @@ foreach($this->data['option'] as $value){ ?>
                 <?}else{?>
                              <form name="login" method="post" action="<?=homeinfo?>/ajax/logoutuser">    
                                 <section id="login"> 
-                                <p><div  style="padding-right: 10px; float: left;"><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>"><? echo $_COOKIE['userlogin']?></a></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div></p>
+                                <div class="subpage myprofile">
+                                    <ul class="v">
+                                        <li>
+                                            <a class="thumb ui-link" href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>">
+                                                <img alt="Sub-Category Name" id="img-profile" src="http://www.infostant.com/templates/mobile-ipa2/images/65-65.jpg">
+                                            </a>
+                                                Welcome,
+                                                <strong><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>" id="username" class="ui-link"><? echo $_COOKIE['userlogin']?></a></strong>
+												<div style=" float: left; margin-top:8px;">
+                                                <input type="image" src="<?=homeinfo?>/images/logout.png" >
+                                                <!--<a class="button" href="">Logout</a>-->
+                                                </div>
+                                        </li>
+                                      </ul>
+                                </div>
+        
+                                <p><div  style="padding-right: 10px; float: left; display:none;"><a href="<?=homeinfo?>/<?=$_COOKIE['userlogin']?>"><? echo $_COOKIE['userlogin']?></a></div><div style=" float: left;"><input type="image" src="<?=homeinfo?>/images/logout.png" ></div></p>
                                  
                                                                  </section>  
                                       </form>      
