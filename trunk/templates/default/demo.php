@@ -19,7 +19,42 @@
       <script src="http://www.infostant.com/js/libs/jquery-1.7.1.min.js"></script>
       <script src="http://www.infostant.com/js/default/jquery.validate.js"></script>
       <script src="http://www.infostant.com/js/default/scriptajaxregister5.js"></script>
-     
+      <style>
+	  .buttonblue {
+		  cursor:pointer;
+		  margin-top:10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 5px 13px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid #14a5b6;
+	-moz-box-shadow:
+		0px 1px 5px rgba(000,000,000,0.2),
+		inset 0px 0px 3px rgba(255,255,255,0);
+	-webkit-box-shadow:
+		0px 1px 5px rgba(000,000,000,0.2),
+		inset 0px 0px 3px rgba(255,255,255,0);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.1),
+		0px 1px 3px rgba(0,0,0,0.4);
+		background:#1ea9ba !important;
+}
+
+
+.buttonblue:hover {
+	background: -moz-linear-gradient(
+		top,
+		#14a5b6 0%,
+		#1ea9ba);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#14a5b6),
+		to(#1ea9ba);
+	}
+      </style>	
   </head>
   <body>
 
@@ -75,7 +110,7 @@
             <p>
             <label for=""></label>
               <input class="css3button" type="submit" value="ลงทะเบียน">
-              <input class="css3button blue" type="submit" value="เข้าสู่ระบบ">
+              <input class="buttonblue" type="submit" value="เข้าสู่ระบบ">
             </p>
 
         </form>
