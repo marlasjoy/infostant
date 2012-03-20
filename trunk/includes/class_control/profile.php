@@ -318,6 +318,129 @@
             $this->db->closedb();       
                return   $str; 
       }
+      function getrecentlist()
+      {    
+          
+          
+           if($_COOKIE['recentsid'])
+          {
+                  
+              $arraysid=explode("&",$_COOKIE['recentsid']);
+              krsort($arraysid,SORT_NUMERIC);
+              $arraysid=array_unique($arraysid);
+              $strsid="(".join(",",$arraysid).")";
+         $sql='SELECT
+                    tb_shop.sid
+                    FROM
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    where  tb_shop.sid IN '.$strsid.'
+                    order by tb_shop.createdate desc  ';
+                    
+                    
+
+           $this->limit = 10;   
+           
+            
+           $this->db->get_connect(); 
+           $this->db->db_set_recordset($sql);
+          // $dataarea=$this->db->db_get_recordset();
+           $this->total=$this->db->db_get_count(); 
+           $this->db->destory(); 
+
+           if(isset($this->info['pagenumber'])&&$this->info['pagenumber']!=1)
+           {
+              $pagenext=($this->limit*($this->info['pagenumber']-1)); 
+              $row=$pagenext;
+           }else
+           {
+               $pagenext=0;
+               $row=$pagenext;
+           }
+          $sql='  SELECT
+                    tb_shop.shopurl,
+                    tb_shop.sid,
+                    tb_shop.shopname,
+                    tb_shop.title,
+                    tb_shop.description,
+                    tb_shop.createdate,
+                    tb_province.proname
+                    FROM
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    where  tb_shop.sid IN '.$strsid.'
+                    order by tb_shop.createdate desc
+                    limit  '.$pagenext.','.$this->limit;
+
+
+                     
+                     $this->db->db_set_recordset($sql);
+                     $datashop=$this->db->db_get_recordset();
+                     $this->db->destory(); 
+                     
+           if(count($datashop))
+           {
+               $str="";
+           $k=1;    
+           foreach($datashop as $valueshop)
+           {
+                   if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'))
+                    {
+                      $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                    }else
+                    {
+                       if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/original.jpg'))
+                    {
+
+                      $thumbfile7=fullpathimages.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['shopurl'] . '/resize/original.jpg',$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'; 
+                     } 
+                    }else
+                    {
+                       $pic=homeinfo.'/images/default/no-image/100-80.jpg';  
+                    } 
+                        
+                        
+                        
+                         
+                    }
+           $mktime=strtotime($valueshop['createdate']) ;
+          $row++;
+           $str.='<tr>
+                      <td>'.$row.'</td>
+                                          <td>
+                                              '.date('l',$mktime).' <br />
+                                              '.date('d F Y',$mktime).' <br />
+                                              '.date('H:i:s',$mktime).'
+                                          </td>
+                                          <td>
+                                              <a  href="javascript:shopmenu('.$valueshop['sid'].',\''.$valueshop['shopurl'].'\')"><img src="'.$pic.'" alt="thumb-01" /></a>
+                                          </td>
+                                          <td>
+                                              <strong>Title:</strong> '.strip_tags($valueshop['title']).' <br />
+                                              <strong>Description:</strong>  '.strip_tags($valueshop['description']).'  <br />
+                                              <strong>Providence:</strong>  '.$valueshop['proname'].'
+                                          </td>
+                                          <td>
+                                              <a href="javascript:shopmenu('.$valueshop['sid'].',\''.$valueshop['shopurl'].'\')" class="btn-edit">Edit</a>
+                                              <a href="javascript:shopdelete('.$valueshop['sid'].')" class="btn-delete">Delete</a>
+                                          </td>
+                                      </tr>';
+            
+            
+            
+            
+            
+            $k++;
+           }
+           }
+            $this->db->closedb();       
+               return   $str; 
+          }
+      }
       function getmemorylist()
       {
          $sql='SELECT
@@ -425,6 +548,245 @@
             $this->db->closedb();       
                return   $str; 
       }
+      function getpromotionmemberlist()
+      {    
+          
+          
+           if($_COOKIE['userid'])
+          {
+                  
+
+         $sql='SELECT
+                    tb_shop.sid
+                    FROM
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    INNER JOIN tb_promotion_member ON tb_shop.sid = tb_promotion_member.sid
+                    INNER JOIN tb_promotion ON tb_promotion.promoid = tb_promotion_member.promoid
+                    where  tb_promotion_member.mid = '.$_COOKIE['userid'].'
+                    order by tb_shop.createdate desc  ';
+                    
+                    
+
+           $this->limit = 10;   
+           
+            
+           $this->db->get_connect(); 
+           $this->db->db_set_recordset($sql);
+          // $dataarea=$this->db->db_get_recordset();
+           $this->total=$this->db->db_get_count(); 
+           $this->db->destory(); 
+
+           if(isset($this->info['pagenumber'])&&$this->info['pagenumber']!=1)
+           {
+              $pagenext=($this->limit*($this->info['pagenumber']-1)); 
+              $row=$pagenext;
+           }else
+           {
+               $pagenext=0;
+               $row=$pagenext;
+           }
+          $sql='  SELECT
+                    tb_shop.shopurl,
+                    tb_shop.sid,
+                    tb_shop.shopname,
+                    tb_promotion.title,
+                    tb_promotion.description,
+                    tb_promotion.createdate,
+                    tb_province.proname
+                    FROM
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    INNER JOIN tb_promotion_member ON tb_shop.sid = tb_promotion_member.sid
+                    INNER JOIN tb_promotion ON tb_promotion.promoid = tb_promotion_member.promoid
+                    where  tb_promotion_member.mid = '.$_COOKIE['userid'].'
+                    order by tb_promotion.createdate desc 
+                    limit  '.$pagenext.','.$this->limit;
+
+
+                     
+                     $this->db->db_set_recordset($sql);
+                     $datashop=$this->db->db_get_recordset();
+                     $this->db->destory(); 
+                     
+           if(count($datashop))
+           {
+               $str="";
+           $k=1;    
+           foreach($datashop as $valueshop)
+           {
+                   if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'))
+                    {
+                      $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                    }else
+                    {
+                       if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/original.jpg'))
+                    {
+
+                      $thumbfile7=fullpathimages.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['shopurl'] . '/resize/original.jpg',$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'; 
+                     } 
+                    }else
+                    {
+                       $pic=homeinfo.'/images/default/no-image/100-80.jpg';  
+                    } 
+                        
+                        
+                        
+                         
+                    }
+           $mktime=strtotime($valueshop['createdate']) ;
+          $row++;
+           $str.='<tr>
+                      <td>'.$row.'</td>
+                                          <td>
+                                              '.date('l',$mktime).' <br />
+                                              '.date('d F Y',$mktime).' <br />
+                                              '.date('H:i:s',$mktime).'
+                                          </td>
+                                          <td>
+                                              <a  href="http://'.$valueshop['shopurl'].'.'.domain.'" target="_blank"><img src="'.$pic.'" alt="thumb-01" /></a>
+                                          </td>
+                                          <td>
+                                              <strong>Title:</strong> '.strip_tags($valueshop['title']).' <br />
+                                              <strong>Description:</strong>  '.strip_tags($valueshop['description']).'  <br />
+                                              <strong>Providence:</strong>  '.$valueshop['proname'].'
+                                          </td>
+                                          <td>
+                                              <a href="http://'.$valueshop['shopurl'].'.'.domain.'" target="_blank" class="btn-edit">Edit</a>
+                                              <a href="javascript:shopdelete('.$valueshop['sid'].')" class="btn-delete">Delete</a>
+                                          </td>
+                                      </tr>';
+            
+            
+            
+            
+            
+            $k++;
+           }
+           }
+            $this->db->closedb();       
+               return   $str; 
+          }
+      }
+      function getafflist()
+      {
+         $sql='SELECT
+                    tb_shop.sid
+                    FROM
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    where  tb_shop.submid="'.$_COOKIE['userid'].'"
+                    order by tb_shop.createdate desc  ';
+                    
+                    
+
+           $this->limit = 10;   
+           
+            
+           $this->db->get_connect(); 
+           $this->db->db_set_recordset($sql);
+          // $dataarea=$this->db->db_get_recordset();
+           $this->total=$this->db->db_get_count(); 
+           $this->db->destory(); 
+
+           if(isset($this->info['pagenumber'])&&$this->info['pagenumber']!=1)
+           {
+              $pagenext=($this->limit*($this->info['pagenumber']-1)); 
+              $row=$pagenext;
+           }else
+           {
+               $pagenext=0;
+               $row=$pagenext;
+           }
+          $sql='  SELECT
+                    tb_shop.shopurl,
+                    tb_shop.sid,
+                    tb_shop.shopname,
+                    tb_shop.title,
+                    tb_shop.description,
+                    tb_shop.createdate,
+                    tb_province.proname
+                    FROM
+                    tb_shop
+                    tb_shop
+                    LEFT JOIN tb_province ON tb_shop.proid = tb_province.proid
+                    where  tb_shop.submid="'.$_COOKIE['userid'].'"
+                    order by tb_shop.createdate desc
+                    limit  '.$pagenext.','.$this->limit;
+
+
+                     
+                     $this->db->db_set_recordset($sql);
+                     $datashop=$this->db->db_get_recordset();
+                     $this->db->destory(); 
+                     
+           if(count($datashop))
+           {
+               $str="";
+           $k=1;    
+           foreach($datashop as $valueshop)
+           {
+                   if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'))
+                    {
+                      $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                    }else
+                    {
+                       if(is_file(rootpath.'/images/shop_c/'.$valueshop['shopurl'].'/resize/original.jpg'))
+                    {
+
+                      $thumbfile7=fullpathimages.$valueshop['shopurl'].'/resize/thumb7.jpg';  
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'100'.'&height='.'80'.'&source='.homeinfo .'/images/shop_c/'. $valueshop['shopurl'] . '/resize/original.jpg',$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       $pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'; 
+                     } 
+                    }else
+                    {
+                       $pic=homeinfo.'/images/default/no-image/100-80.jpg';  
+                    } 
+                        
+                        
+                        
+                         
+                    }
+           $mktime=strtotime($valueshop['createdate']) ;
+          $row++;
+           $str.='<tr>
+                      <td>'.$row.'</td>
+                                          <td>
+                                              '.date('l',$mktime).' <br />
+                                              '.date('d F Y',$mktime).' <br />
+                                              '.date('H:i:s',$mktime).'
+                                          </td>
+                                          <td>
+                                              <a  href="http://'.$valueshop['shopurl'].'.'.domain.'" target="_blank"><img src="'.$pic.'" alt="thumb-01" /></a>
+                                          </td>
+                                          <td>
+                                              <strong>Title:</strong> '.strip_tags($valueshop['title']).' <br />
+                                              <strong>Description:</strong>  '.strip_tags($valueshop['description']).'  <br />
+                                              <strong>Providence:</strong>  '.$valueshop['proname'].'
+                                          </td>
+                                          <td>
+                                              <a href="http://'.$valueshop['shopurl'].'.'.domain.'" target="_blank" class="btn-edit">Edit</a>
+                                              <a href="javascript:shopdelete('.$valueshop['sid'].')" class="btn-delete">Delete</a>
+                                          </td>
+                                      </tr>';
+            
+            
+            
+            
+            
+            $k++;
+           }
+           }
+            $this->db->closedb();       
+               return   $str; 
+      }
+
       function shop()
       {
        $databird['noindexcss']=1;
@@ -460,19 +822,16 @@
       {
             $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
-        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
-         $databird['js'][]='mobiscroll-1.5.3.min.js';
+
         $databird['noheader']=1;
-        $databird['js'][]='shop.js';
-        $databird['js'][]='RGraph.common.core.js';
-        $databird['js'][]='RGraph.line.js';
+
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
        $databird['leftmenu']=$this->getleftmenu();
         $databird['recent']=$this->getrecent();
-//       $databird['tableshop']=$this->getshoplist(); 
-  //      $databird['pagination']=$this->pagination(); 
+       $databird['tableshop']=$this->getrecentlist(); 
+        $databird['pagination']=$this->pagination(); 
         $databird['username']=$this->info['username'];
         
         
@@ -486,12 +845,10 @@
       {
             $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
-        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
-         $databird['js'][]='mobiscroll-1.5.3.min.js';
+
         $databird['noheader']=1;
-        $databird['js'][]='shop.js';
-        $databird['js'][]='RGraph.common.core.js';
-        $databird['js'][]='RGraph.line.js';
+        $databird['js'][]='addfriend.js';
+
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
@@ -564,19 +921,17 @@
       {
             $databird['noindexcss']=1;
         $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/login.css">';
-        $databird['option'][]='<link rel="stylesheet" href="'.homeinfo.'/css/mobiscroll-1.5.3.css">';
-         $databird['js'][]='mobiscroll-1.5.3.min.js';
+
+
         $databird['noheader']=1;
-        $databird['js'][]='shop.js';
-        $databird['js'][]='RGraph.common.core.js';
-        $databird['js'][]='RGraph.line.js';
+
 
           $this->header->set_data($databird);
         $this->header->get_header(); 
        $databird['leftmenu']=$this->getleftmenu();
         $databird['recent']=$this->getrecent();
-//       $databird['tableshop']=$this->getshoplist(); 
-  //      $databird['pagination']=$this->pagination(); 
+       $databird['tableshop']=$this->getpromotionmemberlist(); 
+        $databird['pagination']=$this->pagination(); 
         $databird['username']=$this->info['username'];
         
         
@@ -679,8 +1034,8 @@
         $this->header->get_header(); 
        $databird['leftmenu']=$this->getleftmenu();
         $databird['recent']=$this->getrecent();
-//       $databird['tableshop']=$this->getshoplist(); 
-  //      $databird['pagination']=$this->pagination(); 
+       $databird['tableshop']=$this->getafflist(); 
+        $databird['pagination']=$this->pagination(); 
         $databird['username']=$this->info['username'];
         
         
@@ -740,22 +1095,28 @@
 //                      <li><a href="javascript:void(0);" class="icon">Share to Email</a></li>
 //                      <li><a href="javascript:void(0);" class="icon">Share to Facebook</a></li>
 //                      <li><a href="javascript:void(0);" class="icon">Share to Twitter</a></li>';
-
+                if($_COOKIE['group']==1)
+            {
+                $show='';
+            }else
+            {
+                $show='style="display:none"';
+            }
                      $str='		  
-					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/recentview" class="icon recent">Recent View</a></li>
+					  	<li><a href="'.homeinfo.'/'.$this->info['username'].'/recentview" style="display:none" class="icon recent">Recent View</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/favorite" class="icon favorite">Favorite</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/" class="icon calendar">Calendar</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/memorylist" class="icon mymemory">My Memory</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/friend" class="icon friend">Friends</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/message" class="icon message">Message</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/notification" class="icon notification">Notification</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/message" class="icon message">Message</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/notification" class="icon notification">Notification</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/promotionmember" class="icon promotion">Promotion</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/membercard" class="icon membercard">Member Card</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/place" class="icon place">Place</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/blackbox" class="icon blackbox">Blackbox</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/event" class="icon evend">Event</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/membercard" class="icon membercard">Member Card</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/place"  class="icon place">Place</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/blackbox"  class="icon blackbox">Blackbox</a></li>
+						<li style="display:none"><a href="'.homeinfo.'/'.$this->info['username'].'/event"  class="icon evend">Event</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/shop" class="icon shop">Shop</a></li>
-						<li><a href="'.homeinfo.'/'.$this->info['username'].'/affaliate" class="icon affliate">Affliate</a></li>
+						<li '.$show.'><a href="'.homeinfo.'/'.$this->info['username'].'/affaliate" class="icon affliate">Affliate</a></li>
 						<li><a href="'.homeinfo.'/'.$this->info['username'].'/setting" class="icon setting">Setting</a></li>
                       ';
 					  

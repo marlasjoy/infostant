@@ -40,7 +40,13 @@ $('#register-form').validate({
                 url: webdir+'/ajax/checkcapcha/',
                 type: "post"
                             }
-                      },         
+                      }, 
+                      tel_user:{
+               required: true
+             },
+              countries_user:{
+               required: true
+             },        
             username:{
                required: true,
                remote: {
@@ -72,7 +78,9 @@ $('#register-form').validate({
                         password1:{
                             required: "โปรดกรอกพาสเวิร์ด",
                             maxlength:"ความยาวไม่เกิน 16 ตัวอักษร"
-                        },          
+                        },  
+                        countries_user:"โปรดเลือกประเทศของผู้ใช้",
+                        tel_user:"โปรดกรอกเบอร์โทรศัพท์",           
                         repassword:{
                                        required: "โปรดกรอกพาสเวิร์ด อีกครั้ง นี้",
                                         equalTo: "โปรดกรอกพาสเวิร์ดให้ตรง"

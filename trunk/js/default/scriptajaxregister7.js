@@ -266,7 +266,7 @@ $('#register-form').validate({
            // $('#register-form').serialize();
            //$.post(webdir+'/ajax/saveregister', $('#register-form').serialize() );
            
-           $.post(webdir+'/ajax/saveregister',$('#register-form').serialize() ,function(data) {
+           $.post(webdir+'/ajax/submitaffformiphone2',$('#register-form').serialize() ,function(data) {
                var validator = $("#register-form").validate();
                
                var myObject = eval('(' + data + ')');

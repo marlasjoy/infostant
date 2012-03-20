@@ -17,26 +17,44 @@
                     <?=$this->data['recent'];?> 
 
                   
-                                    
-                  <section id="idshoplist" >
-                      <dl id="event">
-                      <dt>Friend</dt>
-                          <dd>
-                              <table>
-                                  <tbody><?=$this->data['tableshop'];?></tbody>
-                                  <tfoot>
-                                      <tr>
-                                          <td colspan="7" id="pagination">
-                                              <?=$this->data['pagination'];?>
-                                          </td>
-                                      </tr>
-                                  </tfoot>
-                              </table>
-                          </dd>
+                                     
+                   <link rel="stylesheet" href="<?=homeinfo?>/css/default/shopprofile.css" />                  
+                  <section id="idfriendlist" >
+                         <dl id="event">
+                      <dt>Friend List<a class="button" href="javascript:openaddfriend()">+ Add Friend</a></dt>
+                       <div class="subpage">
+                               <ul class="v line">
+                               
+                               </ul>
+                               
+                            </div>                
                       </dl>
                   </section>
                   
 
+                  <section id="idaddfriend" style="display: none;" >
+                        <dl>
+                       <dt><h2 class="bar"><a class="back" href="javascript:openaddfriend()">back</a>Add Friend</h2></dt>    
+                       <form method="post" action="" onsubmit="calladdfriend()" id="dummy">
+                        
+                       
+
+                            <div style="padding:20px 40px;">  
+                                <p>
+                                  <label for="dummy1">Infostant ID</label><br>
+                                  <input type="text" value="" name="infid" id="infid" class="text" >
+                                </p>
+                                
+                                <p>
+                                  <input type="button" onclick="calladdfriend()" class="submit" value="Submit">
+                                  <input type="reset" value="Reset">
+                                </p>
+                    
+                              </div>
+                             
+                    </form>              
+                      </dl>
+                    </section>
                    
                    
                    

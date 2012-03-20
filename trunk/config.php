@@ -27,6 +27,8 @@ $pageconfig=array('register'
 ,'aboutus'
 ,'contact'
 ,'login'
+,'webdirectory'
+,'registershopaff'
 ,'manage'=>'manage'
 );
 $subconfig=array('map'=>'map');
