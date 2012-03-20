@@ -26,6 +26,12 @@
                 <span class="required">*</span><label for="username" generated="true" class="error"></label>
                 
             </p>
+                         <p>
+                <label for="">เบอร์โทรศัพท์ <span>:</span></label>
+                <input type="text" id="tel_user" name="tel_user"  maxlength="30" value="" />
+                <span class="required">*</span><label for="tel_user" generated="true" class="error"></label>
+                
+            </p>
             <p>
                 <label for="">&nbsp;<span>&nbsp;</span></label>
                 <span class="text-normal">ขึ้นต้นด้วยตัวอักษร และตามด้วยตัวอักษรภาษาอังกฤษ (a-z,A-Z), <br />
@@ -41,6 +47,26 @@
                 <label for="">ยืนยันรหัสผ่าน <span>:</span></label>
                 <input type="password" id="repassword" name="repassword" maxlength="30" value="" />
                 <span class="required">*</span><label for="repassword" generated="true" class="error"></label>
+            </p>
+                <p>
+                <label for="">ประเทศ <span>:</span></label>
+                <select id="countries_user" name="countries_user" size="1">
+                    <option value="">เลือกประเทศ</option>
+
+                      <?
+                        if(is_array($this->data['countrie'])){
+                          foreach($this->data['countrie'] as $value)
+                          {
+                           ?>
+                           <option value="<?=$value['contrid']?>"><?=$value['country_name']?></option>
+                           <?   
+                          }
+                          
+                          
+                      }
+                      ?>
+                </select>
+                <span class="required">*</span><label for="countries_user" generated="true" class="error"></label>
             </p>
              <p>
               

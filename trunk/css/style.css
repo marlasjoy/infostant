@@ -438,6 +438,7 @@ input[type=button]:hover { box-shadow: 0 0 4px rgba(0,0,0,0.5);
 #register-member input[type="text"],
 #register-member input[type="email"],
 #register-member input[type="password"],
+#register-member select,
 #register-shop input[type="text"],
 #register-shop input[type="email"],
 #register-shop input[type="password"],
@@ -470,11 +471,13 @@ input[type=button]:hover { box-shadow: 0 0 4px rgba(0,0,0,0.5);
     width: 192px;
 }
 #register-shop select,
+#register-member select,
 #register-shop2 select
 {
     width: 194px;
 }
 #register-shop textarea,
+#register-member textarea,
 #register-shop2 textarea
 {
     height: 64px;

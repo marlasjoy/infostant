@@ -331,7 +331,7 @@
               if(count($data))
               {   
                   
-                 
+                  setcookie("group", $data[0]['group'], time()+3600000, "/", ".".domain);
                   setcookie("userid", $data[0]['mid'], time()+3600000, "/", ".".domain);
                   setcookie("email", $data[0]['email'], time()+3600000, "/", ".".domain);
                   setcookie("userlogin", $username, time()+3600000, "/", ".".domain);
@@ -359,6 +359,7 @@
        function logoutuser()
         {
          // $arraydata=$this->post;
+         setcookie("group", '', time()-3600000, "/", ".".domain);
           setcookie("userid", '', time()-3600000, "/", ".".domain);
           setcookie("email", '', time()-3600000, "/", ".".domain);
           setcookie("userlogin", '', time()-3600000, "/", ".".domain);
@@ -1224,7 +1225,7 @@ $data=$this->db->db_get_recordset();
           {
             $_COOKIE['userid']=$this->post['mid'];  
           }
-          $this->post['filename']="index_th.php";
+          $this->post['filename']="index_th";
           $this->post['target']="video";
           if($this->checkuserwithshop($this->post['shopurl'],$this->post['mid']))
           {
@@ -1240,6 +1241,7 @@ $data=$this->db->db_get_recordset();
           echo array2json($arraydata); 
           }
       }
+      
       function savevideo2()
       {
            if($this->post['meid'])
@@ -1299,12 +1301,18 @@ $data=$this->db->db_get_recordset();
                }
                
           }
+              if(empty($this->post['filename']))
+              {
+                  $this->post['filename']="index_th";
+              }
+    
+        
                list($name,$lang)=explode("_",$this->post['filename']);
               if($lang=="th")
               $table="tb_shop";
               else
               $table="tb_shop_".$lang; 
-             
+
              $this->db->db_set($data,$table," $table.mid='".$_COOKIE['userid']."' and $table.shopurl='".$this->post['shopurl']."'  " );
              $this->db->destory();
              $this->db->closedb(); 
@@ -2385,6 +2393,43 @@ $data=$this->db->db_get_recordset();
             ');
           $data=$this->db->db_get_recordset();
           $this->db->destory();
+          
+          if(empty($data['0']['sid']))
+          {
+              $this->db->db_set_recordset('SELECT
+          tb_shop.sid,
+          tb_shop.shopname,
+          tb_shop.shopurl,
+          tb_shop.website,
+          tb_shop.title,
+          tb_shop.keyword,
+          tb_shop.description,
+          tb_shop.address,
+          tb_shop.proid,
+          tb_shop.disid,
+          tb_shop.tumid,
+          tb_shop.postcode,
+          tb_shop.tel,
+          tb_shop.emailshop,
+          tb_shop.daterange,
+          tb_shop.lat,
+          tb_shop.lng,
+          tb_shop.info,
+          tb_shop.mid,
+          tb_template.tempath,
+          tb_template.temname
+            FROM
+            tb_shop
+            INNER JOIN tb_subcat ON tb_shop.subcatid = tb_subcat.subcatid
+            INNER JOIN tb_template ON tb_subcat.temid = tb_template.temid
+            where tb_shop.submid="'.$str.'" 
+            and tb_shop.shopurl="'.$str2.'"
+            
+            ');
+          $data=$this->db->db_get_recordset();
+          }
+          
+          
           $this->db->closedb(); 
           return $data;
       }
@@ -2696,6 +2741,9 @@ $data=$this->db->db_get_recordset();
         if(isset($arraydata['fid']))$arraymember['fid']=$arraydata['fid'];
         if(isset($arraydata['status']))$arraymember['status']=1;
         $arraymember['username']=$arraydata['username'];
+
+        $arraymember['tel']=$arraydata['tel_user'];
+        $arraymember['countries_user']=$arraydata['countries_user'];
         $arraymember['password']=md5(strtolower($arraydata['username']) . $arraydata['password1']);
         $arraymember['createdate']=date("Y-m-d H:i:s");
         $arraymember['updatedate']=date("Y-m-d H:i:s");
@@ -4702,7 +4750,7 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
             echo array2json($arraydata); 
             exit();
         }
-
+        $this->post['status']=1;
            
        $arraydata2=$this->post;       
 
@@ -4711,7 +4759,13 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
        
       //  $arraydata2['mid']=$this->post['mid'];
          $arrayshop['mid']=$arraymember['mid'];
-                
+         if($this->post['mid'])
+         {
+             $this->post['mid']=$this->post['mid'];
+         }else if($_COOKIE['userid'])
+         {
+            $this->post['mid']=$_COOKIE['userid']; 
+         }         
  
         $arrayshop['submid']=$this->post['mid'];
         $arrayshop['catid']=$arraydata2['catid'];
@@ -4727,10 +4781,123 @@ INNER JOIN tb_member ON tb_memory.mid = tb_member.mid
         $arrayshop['lng']=$arraydata2['lng'];
         $arrayshop['createdate']=date("Y-m-d H:i:s");
         $arrayshop['updatedate']=date("Y-m-d H:i:s");
+
         if(preg_match('/^[a-zก-๙0-9เ]+$/i',$arraydata2['shopurl']))$arrayshop['shopurl']=$this->changeidn($arraydata2['shopurl']);
         else $arrayshop['shopurl']=$arraydata2['shopurl'];
 
+
+        $this->db->get_connect();
+        $this->db->db_set($arrayshop,'tb_shop');
+        $mid= $this->db->db_get_last_number();
+        $this->db->destory();
+        $this->db->db_set($arrayshop,'tb_shop_en'); 
+        $this->db->destory();
         
+        $this->db->closedb();
+        $arraydata['error']=0;
+        $arraydata['shopurl']=$arrayshop['shopurl'];
+
+
+          
+       
+         if(!is_dir(fullpathtemp.$arraydata['shopurl']))
+         {
+             mkdir(fullpathtemp.$arraydata['shopurl']);
+             @chmod(fullpathtemp.$arraydata['shopurl'],0777);
+         }
+         if(!is_dir(fullpathimages.$arraydata['shopurl']))
+         {
+             mkdir(fullpathimages.$arraydata['shopurl']);
+             @chmod(fullpathimages.$arraydata['shopurl'],0777);
+         }
+         if(!is_dir(fullpathimages.$arraydata['shopurl'].'/resize'))
+         {
+             mkdir(fullpathimages.$arraydata['shopurl'].'/resize');
+             @chmod(fullpathimages.$arraydata['shopurl'].'/resize',0777);
+         }
+         $data=$this->getshop($arraydata['shopurl']);
+           
+         if(copy(fullpathtemplates.$data['0']['temname'].'/'.$data['0']['tempath'].'.php',fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_th.php')){
+             $file1=fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_th.php';
+             @chmod($file1,0777);
+         }
+         if(copy(fullpathtemplates.$data['0']['temname'].'/'.$data['0']['tempath'].'.php',fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_en.php'))
+         {
+             $file2=fullpathtemp.$arraydata['shopurl'].'/'.$data['0']['tempath'].'_en.php';
+             @chmod($file2,0777);
+         }
+
+         
+
+        echo array2json($arraydata); 
+                               
+                     
+               
+       }
+       function submitaffformiphone2()
+       { 
+
+
+  if( !preg_match('/^(?:[\w\d]+\.?)+@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/i', $this->post['email']))
+        {
+            $arraydata['error']=" email ไม่ถูกต้อง";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkemail(1))
+        {
+             $arraydata['error']=" email นี้ได้ลงทะเบียนเรียบร้อยแล้ว";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkusername2(1))
+        {
+            $arraydata['error']=" username ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
+            echo array2json($arraydata); 
+            exit();
+        }
+        if(!$this->checkshopurl(1))
+        {
+               $arraydata['error']=" shop url ซ้ำ มีช่องว่าง หรือ มีตัวอักษรพิเศษ -_*!@#%^&*()";
+            echo array2json($arraydata); 
+            exit();
+        }
+        $this->post['status']=1;
+           
+       $arraydata2=$this->post;       
+
+
+        $arraymember= $this->savemember();
+       
+      //  $arraydata2['mid']=$this->post['mid'];
+         $arrayshop['mid']=$arraymember['mid'];
+         if($this->post['mid'])
+         {
+             $this->post['mid']=$this->post['mid'];
+         }else if($_COOKIE['userid'])
+         {
+            $this->post['mid']=$_COOKIE['userid']; 
+         }         
+ 
+        $arrayshop['submid']=$this->post['mid'];
+        $arrayshop['catid']=$arraydata2['cat'];
+        $arrayshop['subcatid']=$arraydata2['subcat'];
+        $arrayshop['shopname']=urldecode($arraydata2['shopname']);
+        $arrayshop['proid']=$arraydata2['province'];
+        $arrayshop['disid']=$arraydata2['district'];
+        $arrayshop['tumid']=$arraydata2['tumbon'];
+        $arrayshop['temid']=$arraydata2['template'];
+        $arrayshop['refcode']=$arraydata2['refcode'];
+        $arrayshop['keyword']=$arraydata2['keyword'];
+        $arrayshop['lat']=$arraydata2['lat'];
+        $arrayshop['lng']=$arraydata2['lng'];
+        $arrayshop['createdate']=date("Y-m-d H:i:s");
+        $arrayshop['updatedate']=date("Y-m-d H:i:s");
+
+        if(preg_match('/^[a-zก-๙0-9เ]+$/i',$arraydata2['shopurl']))$arrayshop['shopurl']=$this->changeidn($arraydata2['shopurl']);
+        else $arrayshop['shopurl']=$arraydata2['shopurl'];
+
+
         $this->db->get_connect();
         $this->db->db_set($arrayshop,'tb_shop');
         $mid= $this->db->db_get_last_number();
@@ -5237,17 +5404,17 @@ $context = stream_context_create($opts);
                                }
                    }
                  $arraydata[1]['temid']= $datashop['0']['temid'];  
-                 $arraydata[1]['title']= $html->find('#title')->innertext;
-                 $arraydata[1]['detail']= $html->find('#detail')->innertext;
-                $arraydata[1]['address']= $html->find('#address')->innertext;
-                 $arraydata[1]['tel']= $html->find('#tel')->innertext;
-                $arraydata[1]['emailshop']= $html->find('#emailshop')->innertext;
-                $arraydata[1]['website']= $html->find('#website')->innertext;
-               $arraydata[1]['pricerange']= $html->find('#pricerange')->innertext;
-                 $arraydata[1]['daterange']= $html->find('#daterange')->innertext;
-                 $arraydata[1]['video']= $html->find('#videotext')->innertext;
-                 $arraydata[1]['lat']= $html->find('#lat')->innertext;
-                 $arraydata[1]['lng']= $html->find('#lng')->innertext;
+                 $arraydata[1]['title']= $html->find('#title',0)->innertext;
+                 $arraydata[1]['detail']= $html->find('#detail',0)->innertext;
+                $arraydata[1]['address']= $html->find('#address',0)->innertext;
+                 $arraydata[1]['tel']= $html->find('#tel',0)->innertext;
+                $arraydata[1]['emailshop']= $html->find('#emailshop',0)->innertext;
+                $arraydata[1]['website']= $html->find('#website',0)->innertext;
+               $arraydata[1]['pricerange']= $html->find('#pricerange',0)->innertext;
+                 $arraydata[1]['daterange']= $html->find('#daterange',0)->innertext;
+                 $arraydata[1]['video']= $html->find('#videotext',0)->innertext;
+                 $arraydata[1]['lat']= $html->find('#lat',0)->innertext;
+                 $arraydata[1]['lng']= $html->find('#lng',0)->innertext;
                                           echo array2json($arraydata);    
                      }
       }
@@ -5850,7 +6017,14 @@ where tb_shop.shopurl="'.$shopurl.'"');
               
           $arraydata=$this->db->db_get_recordset();
                     $this->db->destory();
-
+           
+           if($this->post['mid'])
+           {
+               
+           }else  if($_COOKIE['userid'])
+           {
+              $this->post['mid']=$_COOKIE['userid']; 
+           }
           
           if($arraydata['0']['mid'])
           {
@@ -5993,6 +6167,8 @@ where tb_shop.shopurl="'.$shopurl.'"');
           else
           {
               $arrayres['error']="ไม่มี user นี้อยู่ในระบบ";
+              $this->db->destory();
+            $this->db->closedb();
                              echo   array2json($arrayres);
                              exit();
           }
@@ -6088,6 +6264,99 @@ where tb_shop.shopurl="'.$shopurl.'"');
           $this->db->closedb(); 
           
           echo        $_GET['callback'].'(' . json_encode($arraydata) . ');'; 
+          exit();  
+          }
+      }
+      function getallcontact2()
+      {
+          if($_COOKIE['userid'])
+          {
+              $_GET['mid']=$_COOKIE['userid'];
+          }
+      if($_GET['mid'])
+          {
+        //  header("content-type: text/javascript");
+
+             $this->db->get_connect();
+            
+          $this->db->db_set_recordset('select flist from tb_relate where mid='.$_GET['mid']); 
+          $data=$this->db->db_get_recordset();
+          $this->db->destory();
+
+
+          if($data['0']['flist']){
+          
+              
+              
+              $arrayfri=json2array($data['0']['flist']);
+              if(is_array($arrayfri))
+              {
+                  $arrayfri2=array();
+                  foreach($arrayfri as $keyfri =>$valuefri)
+                  {
+                     $arrayfri2[]=$keyfri; 
+                  }
+                  $mids=join(',',$arrayfri2);
+                 $where="  tb_member.mid IN  ($mids) ";
+                 
+          $this->db->db_set_recordset('select tb_member.username,tb_member.email,tb_member.pic,tb_member.tel  from tb_member where '.$where.' order by tb_member.username asc'); 
+          $data2=$this->db->db_get_recordset();
+          $this->db->destory();
+                 
+               
+               if($data2['0']['username'])
+               {
+                   $k=0;
+                   $arraydata=array();
+
+                   foreach($data2 as $value2)
+                   {
+                     $arraydata[$k]['username']= $value2['username'];
+                     $arraydata[$k]['email']= $value2['email'];
+
+                     
+                     
+                      if($value2['pic'])
+                 {
+                  //  $arraydata[$k]['pic']=$value2['pic'];
+             
+                    
+                     if(!is_file(rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar100x80.jpg'))
+                    {
+                       if(copy(homeinfo.'/plugins/showimages.php?width=100&height=80&source='.homeinfo.'/images/user_c/'.strtolower($value2['username']).'/'.$value2['pic'],rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar100x80.jpg'))
+                     {
+                       chmod(rootpath.'/images/user_c/'.strtolower($value2['username']).'/avatar100x80.jpg',0777);
+                      // $arraydata['resizename']=$name.$resize.'.'.$fileext; 
+                       $arraydata[$k]['pic']= 'avatar100x80.jpg';
+                     } 
+                    }else
+                    {
+                        $arraydata[$k]['pic']= 'avatar100x80.jpg';
+                    }
+                    
+                 }else
+                 {
+                  //   $arraydata[$k]['pic']='';
+                 }
+                     
+                     
+                     
+                     $arraydata[$k]['tel']= $value2['tel'];
+                     $k++;
+                   }
+               } 
+               
+               
+              }
+          }else
+          {
+
+          }
+         // echo   array2json($arraydata);
+          $this->db->destory();
+          $this->db->closedb(); 
+          
+          echo        json_encode($arraydata); 
           exit();  
           }
       }

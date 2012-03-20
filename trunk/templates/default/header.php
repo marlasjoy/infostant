@@ -91,7 +91,7 @@ foreach($this->data['option'] as $value){ ?>
           <?}?>
               
               <nav>
-                <p><a href="<?=homeinfo?>">Home</a> | <a href="<?=homeinfo?>/package">Package</a> | <a href="<?=homeinfo?>/service">Service</a> | <a href="<?=homeinfo?>/promotion">Promotion</a> | <a href="<?=homeinfo?>/aboutus">About Us</a> | <a href="<?=homeinfo?>/contact">Contact Us</a></p>
+                <p><a href="<?=homeinfo?>">Home</a> | <a href="<?=homeinfo?>/package">Package</a> | <a href="<?=homeinfo?>/service">Service</a>| <a href="<?=homeinfo?>/aboutus">About Us</a> | <a href="<?=homeinfo?>/contact">Contact Us</a></p>
             </nav>
             <div style="display:none;" id="homeinfo"><?=homeinfo?></div> 
           </header>

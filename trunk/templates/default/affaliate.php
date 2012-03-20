@@ -109,7 +109,7 @@
                                     
                   <section id="idshoplist" >
                       <dl id="event">
-                      <dt>Affaliate <a class="button" href="http://www.infostant.com/registershop">+ Create Shop</a></dt>
+                      <dt>Affaliate <a class="button" href="http://www.infostant.com/registershopaff">+ Create Shop</a></dt>
                           <dd>
                           
                           <?php if(!$this->data['tableshop']):?>
@@ -118,7 +118,7 @@
                           
                           <div id="shopmenu" style="padding:150px 0 0 250px;">
                                     <ul class="v">   
-                                    	<li class="icon createshop"><a href="http://www.infostant.com/registershop"><span>Create New Shop</span></a></li>
+                                    	<li class="icon createshop"><a href="http://www.infostant.com/registershopaff"><span>Create New Shop</span></a></li>
                                     </ul>
                                 </div>
                           </div>

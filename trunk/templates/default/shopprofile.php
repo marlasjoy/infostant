@@ -46,7 +46,7 @@
                                         <li class="icon editshop"><a href="javascript:editshop()"><span>Shop edit</span></a></li>
                                         <li class="icon promotion"><a href="javascript:openpromotion()"><span>Promotion</span></a></li>
                                         <li class="icon member"><a href="javascript:openmember()"><span>Member</span></a></li>
-                                         <li class="icon member-card"><a href="javascript:openmembercard()"><span>Member Card</span></a></li>
+<!--                                         <li class="icon member-card"><a href="javascript:openmembercard()"><span>Member Card</span></a></li>-->
                                     </ul>
                                 </div> <!-- #shopmenu end -->
  

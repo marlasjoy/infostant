@@ -18,6 +18,18 @@
 
          
       }
+       function getcountries()
+      {
+          
+          $this->db->get_connect();
+          $this->db->db_set_recordset('SELECT contrid,country_name FROM `tb_countries`');
+          $datacountries=$this->db->db_get_recordset();
+          $this->db->destory();
+          $this->db->closedb();
+          
+          return $datacountries;
+          
+      }
 
       function getuserbyfacebook()
       {
@@ -42,7 +54,7 @@
         $databird['noheader']=1;  
         $databird['js'][]='jquery.validate.js';
         $databird['js'][]='scriptajaxregister3.js';
-        
+        $databird['countrie']=$this->getcountries();
         $this->header->set_data($databird);  
         $this->header->get_header();
          $databird['loginfacebook']=$this->info['loginfacebook']; 
