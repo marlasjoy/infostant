@@ -110,7 +110,7 @@
             <p>
             <label for=""></label>
               <input class="css3button" type="submit" value="ลงทะเบียน">
-              <input class="buttonblue" type="submit" value="เข้าสู่ระบบ">
+              <input class="buttonblue" type="button" onclick="location.href='<?=homeinfo?>/login'" value="เข้าสู่ระบบ">
             </p>
 
         </form>

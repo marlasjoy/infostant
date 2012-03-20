@@ -1460,6 +1460,7 @@ $data=$this->db->db_get_recordset();
       }
       function gettablefile($shopurl)
       {
+           $shopurl=strtolower($shopurl);
          $imagearray= $this->getimagebyshop($shopurl);
          $str='';
          $k=1;
@@ -1467,7 +1468,23 @@ $data=$this->db->db_get_recordset();
          {
          foreach($imagearray as $valueimage) 
          {
+
+             
          list($name,$fileext)=explode(".",$valueimage); 
+         $thumbfile7=fullpathimages.$shopurl.'/resize/'.$name.'200x128.'.$fileext; 
+         if(!is_file($thumbfile7))
+         {
+             
+         
+                    
+                      if(copy(homeinfo.'/plugins/showimages.php?width='.'200'.'&height='.'128'.'&source='.homeinfo .'/images/shop_c/'. $shopurl . '/'.$name.'.'.$fileext,$thumbfile7))
+                     {
+                       chmod($thumbfile7,0777);
+                       //$pic=homeinfo.'/images/shop_c/'.$valueshop['shopurl'].'/resize/thumb7.jpg'; 
+                     }   
+                     
+          } 
+         
          $str.='<table id="table-'.$k.'" style="display: table;" class="slidetoggle describe startclosed">
         <thead class="media-item-info" id="media-head">
         <tr valign="top">
