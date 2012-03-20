@@ -113,15 +113,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <div class="footer">
     <div class="container">
         <img src="/images/demo/index_bottom.png" border="0" usemap="#Map2" >
@@ -133,6 +124,6 @@
         </map>
     </div>
 </div>
-  
+
   </body>
 </html>
