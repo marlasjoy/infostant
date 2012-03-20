@@ -1299,6 +1299,10 @@
 
       function view()
       {
+          if($this->info['username']!=$_COOKIE['userlogin'])
+          {
+              header("Location:".homeinfo);
+          }
         
          if(isset($this->info['function']))
          {

@@ -105,7 +105,7 @@
             <p>
             <label for=""></label>
               <input class="css3button" type="submit" value="Register">
-               <input class="buttonblue" type="submit" value="Login">
+               <input class="buttonblue" type="button" onclick="location.href='<?=homeinfo?>/login'" value="Login">
             </p>
 
         </form>
