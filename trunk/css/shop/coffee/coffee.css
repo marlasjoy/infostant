@@ -1,9 +1,0 @@
-/* Coffee Page */
-header #login a:hover, .dk_container a.dk_toggle:hover { color: #81583b }
-header #color { background-color: #81583b; } 
-header #color h2 { background-image: url(../../../images/shop/coffee/hd-coffee.png); }
-#main { margin-bottom: 55px; }
-#main h3 { color: #81583b; }
-section#three a.black1 { margin-top: 28px; }
-section#three #social ul { margin-bottom: 50px; }
-.d-220x160:nth-child(2n+1) { margin-right: 0; }

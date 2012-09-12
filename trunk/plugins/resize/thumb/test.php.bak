@@ -1,8 +1,0 @@
-<?
-require_once '../ThumbLib.inc.php';
-
-$thumb = PhpThumbFactory::create('test.jpg');
-$thumb->Resize(200, 400, true);
-$thumb->show();
-
-?>
